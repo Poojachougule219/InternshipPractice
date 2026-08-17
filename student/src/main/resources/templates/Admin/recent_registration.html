@@ -1,0 +1,686 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Recent Registrations</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/Admin/users.css?v=7}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<div class="content-container">
+
+
+    <!-- ================= SUCCESS MESSAGE ================= -->
+
+    <div th:if="${success}"
+         class="alert-message success-message">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span th:text="${success}"></span>
+
+    </div>
+
+
+    <!-- ================= ERROR MESSAGE ================= -->
+
+    <div th:if="${error}"
+         class="alert-message error-message">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <span th:text="${error}"></span>
+
+    </div>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="page-header">
+
+        <div class="title-section">
+
+            <h1>
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Recent Registrations
+
+            </h1>
+
+            <p>
+
+                Recently registered users and students.
+
+            </p>
+
+        </div>
+
+
+        <div class="header-buttons">
+
+
+            <!-- DASHBOARD -->
+
+            <a th:href="@{/admin/dashboard}"
+               class="btn dashboard-btn">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <!-- ADD USER -->
+
+            <a th:href="@{/register}"
+               class="btn add-btn">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Add User
+
+            </a>
+
+
+            <!-- EXPORT -->
+
+            <a th:href="@{/admin/recent-registration/export}"
+               class="btn print-btn">
+
+                <i class="fa-solid fa-file-export"></i>
+
+                Export
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SEARCH & SORT ================= -->
+
+    <div class="table-card">
+
+        <form th:action="@{/admin/recent}"
+              method="get">
+
+            <div class="filter-section">
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <input type="text"
+                           name="keyword"
+                           placeholder="Search User..."
+                           th:value="${keyword}">
+
+                    <i class="fa-solid fa-search"></i>
+
+                </div>
+
+
+                <!-- SORT FIELD -->
+
+                <div class="filter-box">
+
+                    <select name="sortField">
+
+                        <option value="id"
+                                th:selected="${sortField == 'id'}">
+
+                            ID
+
+                        </option>
+
+
+                        <option value="name"
+                                th:selected="${sortField == 'name'}">
+
+                            Name
+
+                        </option>
+
+
+                        <option value="email"
+                                th:selected="${sortField == 'email'}">
+
+                            Email
+
+                        </option>
+
+
+                        <option value="createdDate"
+                                th:selected="${sortField == 'createdDate'}">
+
+                            Registered Date
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SORT DIRECTION -->
+
+                <div class="filter-box">
+
+                    <select name="sortDir">
+
+                        <option value="desc"
+                                th:selected="${sortDir == 'desc'}">
+
+                            Latest First
+
+                        </option>
+
+
+                        <option value="asc"
+                                th:selected="${sortDir == 'asc'}">
+
+                            Oldest First
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SEARCH BUTTON -->
+
+                <button type="submit"
+                        class="btn export-btn">
+
+                    <i class="fa-solid fa-filter"></i>
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- ================= TABLE ================= -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Role</th>
+
+                <th>Department</th>
+
+                <th>City</th>
+
+                <th>Registered On</th>
+
+                <th>Status</th>
+
+                <th class="text-center">Actions</th>
+
+            </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+            <!-- ================= EMPTY DATA ================= -->
+
+            <tr th:if="${students == null or students.content.isEmpty()}">
+
+                <td colspan="9"
+                    class="empty">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    No recent registrations found.
+
+                </td>
+
+            </tr>
+
+
+            <!-- ================= REGISTRATION ROWS ================= -->
+
+            <tr th:if="${students != null}"
+                th:each="student, studentStat : ${students.content}">
+
+
+                <!-- ================= SERIAL NUMBER ================= -->
+
+                <td th:text="${students.number * students.size + studentStat.index + 1}">
+                </td>
+
+
+                <!-- ================= NAME ================= -->
+
+                <td th:text="${student.name}">
+                </td>
+
+
+                <!-- ================= EMAIL ================= -->
+
+                <td th:text="${student.email}">
+                </td>
+
+
+                <!-- ================= ROLE ================= -->
+
+                <td>
+
+
+                    <!-- ADMIN -->
+
+                    <span th:if="${student.role != null
+                                  and student.role.name == 'ROLE_ADMIN'}"
+                          class="role-admin">
+
+                        <i class="fa-solid fa-user-shield"></i>
+
+                        Admin
+
+                    </span>
+
+
+                    <!-- STUDENT -->
+
+                    <span th:if="${student.role != null
+                                  and student.role.name == 'ROLE_STUDENT'}"
+                          class="role-student">
+
+                        <i class="fa-solid fa-user-graduate"></i>
+
+                        Student
+
+                    </span>
+
+
+                </td>
+
+
+                <!-- ================= DEPARTMENT ================= -->
+
+                <td th:text="${student.department}">
+                </td>
+
+
+                <!-- ================= CITY ================= -->
+
+                <td th:text="${student.city}">
+                </td>
+
+
+                <!-- ================= REGISTERED DATE ================= -->
+
+                <td th:text="${student.createdDate != null
+                    ? #temporals.format(student.createdDate,'dd-MM-yyyy HH:mm')
+                    : '-'}">
+
+                </td>
+
+
+                <!-- ================= STATUS ================= -->
+
+                <td>
+
+
+                    <!-- ACTIVE -->
+
+                    <span class="status-active"
+                          th:if="${student.status != null
+                                  and student.status.name() == 'ACTIVE'}">
+
+                        Active
+
+                    </span>
+
+
+                    <!-- INACTIVE -->
+
+                    <span class="status-inactive"
+                          th:if="${student.status != null
+                                  and student.status.name() != 'ACTIVE'}">
+
+                        Inactive
+
+                    </span>
+
+
+                </td>
+
+
+                <!-- ================= ACTIONS ================= -->
+
+                <td>
+
+                    <div class="action-buttons">
+
+
+                        <!-- ================= VIEW ================= -->
+
+                        <a th:href="@{/admin/user/view/{id}(id=${student.id})}"
+                           class="action-btn view-btn"
+                           title="View">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </a>
+
+
+                        <!-- ================= EDIT ================= -->
+
+                        <a href="javascript:void(0);"
+                           class="action-btn edit-btn"
+                           title="Edit"
+
+                           th:attr="data-name=${student.name},
+                                    data-email=${student.email},
+                                    data-role=${student.role != null ? student.role.name : ''}"
+
+                           onclick="showEditPopup(this); return false;">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                        </a>
+
+
+                        <!-- ================= DELETE ================= -->
+
+                        <a th:href="@{/admin/user/delete/{id}(id=${student.id})}"
+                           class="action-btn delete-btn"
+                           title="Delete"
+
+                           th:attr="data-name=${student.name},
+                                    data-email=${student.email},
+                                    data-role=${student.role != null ? student.role.name : ''}"
+
+                           onclick="return confirmUserDelete(this);">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </a>
+
+
+                    </div>
+
+                </td>
+
+
+            </tr>
+
+
+            </tbody>
+
+        </table>
+
+
+        <!-- ================= PAGINATION ================= -->
+
+        <div class="pagination"
+             th:if="${students != null and students.totalPages > 0}">
+
+
+            <!-- PREVIOUS -->
+
+            <a th:if="${students.hasPrevious()}"
+
+               th:href="@{/admin/recent(
+                    page=${students.number - 1},
+                    size=${size},
+                    keyword=${keyword},
+                    sortField=${sortField},
+                    sortDir=${sortDir}
+               )}">
+
+                <i class="fa-solid fa-angle-left"></i>
+
+                Previous
+
+            </a>
+
+
+            <!-- PAGE NUMBERS -->
+
+            <span th:each="i : ${#numbers.sequence(0, students.totalPages - 1)}">
+
+                <a th:href="@{/admin/recent(
+                        page=${i},
+                        size=${size},
+                        keyword=${keyword},
+                        sortField=${sortField},
+                        sortDir=${sortDir}
+                    )}"
+
+                   th:text="${i + 1}"
+
+                   th:classappend="${i == students.number} ? 'active-page'">
+
+                </a>
+
+            </span>
+
+
+            <!-- NEXT -->
+
+            <a th:if="${students.hasNext()}"
+
+               th:href="@{/admin/recent(
+                    page=${students.number + 1},
+                    size=${size},
+                    keyword=${keyword},
+                    sortField=${sortField},
+                    sortDir=${sortDir}
+               )}">
+
+                Next
+
+                <i class="fa-solid fa-angle-right"></i>
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   EDIT JAVASCRIPT POPUP
+===================================================== */
+
+function showEditPopup(button) {
+
+    const name =
+        button.getAttribute("data-name");
+
+    const email =
+        button.getAttribute("data-email");
+
+    const role =
+        button.getAttribute("data-role");
+
+
+    let message;
+
+
+    /*
+     * ADMIN
+     */
+
+    if (role === "ROLE_ADMIN") {
+
+        message =
+            "You cannot edit admin profile.";
+
+    }
+
+    /*
+     * STUDENT
+     */
+
+    else {
+
+        message =
+            "You cannot edit student profile.";
+
+    }
+
+
+    /*
+     * JavaScript alert popup
+     */
+
+    alert(
+
+        message +
+
+        "\n\n" +
+
+        "Name: " +
+        (name || "-") +
+
+        "\n" +
+
+        "Email: " +
+        (email || "-")
+
+    );
+
+}
+
+
+/* =====================================================
+   DELETE JAVASCRIPT POPUP
+===================================================== */
+
+function confirmUserDelete(button) {
+
+    const name =
+        button.getAttribute("data-name");
+
+    const email =
+        button.getAttribute("data-email");
+
+    const role =
+        button.getAttribute("data-role");
+
+
+    /*
+     * ================================================
+     * ADMIN CANNOT BE DELETED
+     * ================================================
+     */
+
+    if (role === "ROLE_ADMIN") {
+
+        alert(
+
+            "You cannot delete admin profile." +
+
+            "\n\n" +
+
+            "Name: " +
+            (name || "-") +
+
+            "\n" +
+
+            "Email: " +
+            (email || "-")
+
+        );
+
+
+        /*
+         * IMPORTANT:
+         *
+         * Returning false prevents the
+         * delete URL from opening.
+         *
+         * Therefore admin will NOT be deleted.
+         */
+
+        return false;
+
+    }
+
+
+    /*
+     * ================================================
+     * STUDENT DELETE CONFIRMATION
+     * ================================================
+     */
+
+    return confirm(
+
+        "Are you sure you want to delete this user?" +
+
+        "\n\n" +
+
+        "Name: " +
+        (name || "-") +
+
+        "\n" +
+
+        "Email: " +
+        (email || "-")
+
+    );
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

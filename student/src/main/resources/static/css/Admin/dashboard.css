@@ -1,0 +1,1221 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+} 
+ 
+ 
+html, 
+body { 
+    width: 100%; 
+    min-height: 100%; 
+} 
+ 
+ 
+body { 
+ 
+    font-family: "Segoe UI", Arial, sans-serif; 
+ 
+    background: #f1f5f9; 
+ 
+    color: #1e293b; 
+ 
+    overflow-x: hidden; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   MAIN CONTAINER 
+========================================== */ 
+ 
+.container { 
+ 
+    width: 100%; 
+ 
+    min-height: 100vh; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   SIDEBAR 
+========================================== */ 
+ 
+.sidebar { 
+ 
+    width: 250px; 
+ 
+    height: 100vh; 
+ 
+    position: fixed; 
+ 
+    left: 0; 
+ 
+    top: 0; 
+ 
+    background: #0b1220; 
+ 
+    color: white; 
+ 
+    padding: 25px 20px; 
+ 
+    z-index: 1100; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   LOGO 
+========================================== */ 
+ 
+.logo h2 { 
+ 
+    text-align: center; 
+ 
+    font-size: 24px; 
+ 
+    margin-bottom: 40px; 
+ 
+    font-weight: 700; 
+ 
+    color: #f8fafc; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   SIDEBAR MENU 
+========================================== */ 
+ 
+.menu { 
+ 
+    list-style: none; 
+ 
+    padding: 0; 
+ 
+    margin: 0; 
+ 
+} 
+ 
+ 
+.menu li { 
+ 
+    margin-bottom: 12px; 
+ 
+} 
+ 
+ 
+.menu a { 
+ 
+    display: flex; 
+ 
+    align-items: center; 
+ 
+    gap: 15px; 
+ 
+    padding: 14px 15px; 
+ 
+    color: #94a3b8; 
+ 
+    text-decoration: none; 
+ 
+    border-radius: 10px; 
+ 
+    transition: .3s; 
+ 
+} 
+ 
+ 
+.menu a:hover, 
+.menu .active a { 
+ 
+    background: #1e293b; 
+ 
+    color: white; 
+ 
+} 
+ 
+ 
+.menu i { 
+ 
+    width: 20px; 
+ 
+    min-width: 20px; 
+ 
+    font-size: 17px; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   SIDEBAR FOOTER 
+========================================== */ 
+ 
+.sidebar-footer { 
+ 
+    position: absolute; 
+ 
+    bottom: 30px; 
+ 
+    left: 20px; 
+ 
+    width: 210px; 
+ 
+    text-align: center; 
+ 
+    color: #64748b; 
+ 
+    font-size: 13px; 
+ 
+} 
+ 
+ 
+.sidebar-footer p { 
+ 
+    margin-bottom: 2px; 
+ 
+} 
+ 
+ 
+.sidebar-footer small { 
+ 
+    color: #475569; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   MAIN CONTENT 
+========================================== */ 
+ 
+.main-content { 
+ 
+    margin-left: 250px; 
+ 
+    width: calc(100% - 250px); 
+ 
+    min-height: 100vh; 
+ 
+    padding: 85px 35px 25px; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   HEADER 
+========================================== */ 
+ 
+.topbar { 
+ 
+    position: fixed; 
+ 
+    top: 0; 
+ 
+    left: 250px; 
+ 
+    width: calc(100% - 250px); 
+ 
+    height: 70px; 
+ 
+    background: 
+        linear-gradient( 
+            135deg, 
+            #111827, 
+            #1e293b 
+        ); 
+ 
+    padding: 0 30px; 
+ 
+    display: flex; 
+ 
+    justify-content: space-between; 
+ 
+    align-items: center; 
+ 
+    box-shadow: 
+        0 8px 20px rgba(15, 23, 42, .30); 
+ 
+    z-index: 1000; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   WELCOME 
+========================================== */ 
+ 
+.welcome h1 { 
+ 
+    font-size: 25px; 
+ 
+    color: #f8fafc; 
+ 
+} 
+ 
+ 
+.welcome span { 
+ 
+    color: #60a5fa; 
+ 
+} 
+ 
+ 
+.welcome p { 
+ 
+    color: #cbd5e1; 
+ 
+    font-size: 14px; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   HEADER RIGHT 
+========================================== */ 
+ 
+.header-right { 
+ 
+    display: flex; 
+ 
+    align-items: center; 
+ 
+    gap: 18px; 
+ 
+    height: 70px; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   NOTIFICATION 
+========================================== */ 
+ 
+.notification { 
+ 
+    width: 38px; 
+ 
+    height: 38px; 
+ 
+    border-radius: 50%; 
+ 
+    background: #f8fafc; 
+ 
+    display: flex; 
+ 
+    justify-content: center; 
+ 
+    align-items: center; 
+ 
+    cursor: pointer; 
+ 
+    transition: .25s; 
+ 
+    flex-shrink: 0; 
+ 
+} 
+ 
+ 
+.notification:hover { 
+ 
+    background: #ffffff; 
+ 
+    transform: translateY(-2px); 
+ 
+} 
+ 
+ 
+.notification i { 
+ 
+    color: #1e293b; 
+ 
+    font-size: 15px; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   USER MENU WRAPPER
+   MATCHES dashboard.html
+========================================== */ 
+ 
+.user-menu { 
+ 
+    position: relative; 
+ 
+    height: 70px; 
+ 
+    display: flex; 
+ 
+    align-items: center; 
+ 
+    z-index: 1200; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   PROFILE BUTTON
+   MATCHES dashboard.html
+========================================== */ 
+ 
+.profile-button { 
+ 
+    border: none; 
+ 
+    background: transparent; 
+ 
+    padding: 5px 8px; 
+ 
+    margin: 0; 
+ 
+    height: 60px; 
+ 
+    display: flex; 
+ 
+    align-items: center; 
+ 
+    gap: 10px; 
+ 
+    cursor: pointer; 
+ 
+    border-radius: 10px; 
+ 
+    font-family: inherit; 
+ 
+    transition: .25s ease; 
+ 
+} 
+ 
+ 
+.profile-button:hover { 
+ 
+    background: rgba(255, 255, 255, .08); 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   PROFILE TEXT
+   MATCHES dashboard.html
+========================================== */ 
+ 
+.profile-text { 
+ 
+    display: flex; 
+ 
+    flex-direction: column; 
+ 
+    align-items: flex-start; 
+ 
+    justify-content: center; 
+ 
+    gap: 2px; 
+ 
+    min-width: 90px; 
+ 
+    white-space: nowrap; 
+ 
+} 
+ 
+ 
+.profile-text h4 { 
+ 
+    color: #f8fafc; 
+ 
+    font-size: 15px; 
+ 
+    font-weight: 600; 
+ 
+    line-height: 1.2; 
+ 
+    margin: 0; 
+ 
+} 
+ 
+ 
+.profile-text small { 
+ 
+    color: #cbd5e1; 
+ 
+    font-size: 12px; 
+ 
+    line-height: 1.2; 
+ 
+    margin: 0; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   PROFILE IMAGE
+========================================== */ 
+ 
+.profile-img { 
+ 
+    width: 45px; 
+ 
+    height: 45px; 
+ 
+    min-width: 45px; 
+ 
+    border-radius: 50%; 
+ 
+    object-fit: cover; 
+ 
+    border: 2px solid #94a3b8; 
+ 
+    display: block; 
+ 
+    flex-shrink: 0; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   DROPDOWN ARROW
+========================================== */ 
+ 
+.profile-arrow { 
+ 
+    color: #cbd5e1; 
+ 
+    font-size: 12px; 
+ 
+    margin-left: 2px; 
+ 
+    transition: transform .25s ease; 
+ 
+    flex-shrink: 0; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   ROTATE ARROW
+========================================== */ 
+ 
+.user-menu .profile-dropdown.show + .nothing { 
+ 
+    transform: rotate(180deg); 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   PROFILE DROPDOWN
+   THIS IS THE ACTUAL MENU IN YOUR HTML
+========================================== */ 
+ 
+.user-menu .profile-dropdown { 
+ 
+    position: absolute; 
+ 
+    top: calc(100% - 2px); 
+ 
+    right: 0; 
+ 
+    width: 210px; 
+ 
+    background: #ffffff; 
+ 
+    border: 1px solid #e2e8f0; 
+ 
+    border-radius: 12px; 
+ 
+    box-shadow: 
+        0 12px 30px rgba(15, 23, 42, .22); 
+ 
+    padding: 8px; 
+ 
+    display: none; 
+ 
+    z-index: 2000; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   SHOW DROPDOWN
+   MATCHES JAVASCRIPT
+========================================== */ 
+ 
+.user-menu .profile-dropdown.show { 
+ 
+    display: block; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   DROPDOWN ITEM
+========================================== */ 
+ 
+.dropdown-item { 
+ 
+    width: 100%; 
+ 
+    display: flex; 
+ 
+    align-items: center; 
+ 
+    gap: 12px; 
+ 
+    padding: 11px 12px; 
+ 
+    border: none; 
+ 
+    background: transparent; 
+ 
+    border-radius: 8px; 
+ 
+    color: #334155; 
+ 
+    text-decoration: none; 
+ 
+    font-family: inherit; 
+ 
+    font-size: 14px; 
+ 
+    text-align: left; 
+ 
+    cursor: pointer; 
+ 
+    transition: .2s ease; 
+ 
+} 
+ 
+ 
+.dropdown-item:hover { 
+ 
+    background: #f1f5f9; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   DROPDOWN ICON
+========================================== */ 
+ 
+.dropdown-item i { 
+ 
+    width: 18px; 
+ 
+    min-width: 18px; 
+ 
+    font-size: 15px; 
+ 
+    color: #475569; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   DELETE PROFILE
+========================================== */ 
+ 
+.delete-item { 
+ 
+    color: #dc2626; 
+ 
+} 
+ 
+ 
+.delete-item i { 
+ 
+    color: #dc2626 !important; 
+ 
+} 
+ 
+ 
+.delete-item:hover { 
+ 
+    background: #fef2f2; 
+ 
+    color: #b91c1c; 
+ 
+} 
+ 
+ 
+.delete-item:hover i { 
+ 
+    color: #b91c1c !important; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   DROPDOWN SEPARATOR
+========================================== */ 
+ 
+.dropdown-divider { 
+ 
+    height: 1px; 
+ 
+    background: #e2e8f0; 
+ 
+    margin: 6px 4px; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   DASHBOARD CARDS
+   SMALL PROFESSIONAL SIZE
+========================================== */ 
+ 
+.cards { 
+ 
+    margin-top: 15px; 
+ 
+    display: grid; 
+ 
+    grid-template-columns: repeat(4, 1fr); 
+ 
+    gap: 18px; 
+ 
+} 
+ 
+ 
+.card-link { 
+ 
+    text-decoration: none; 
+ 
+    color: inherit; 
+ 
+    display: block; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CARD
+========================================== */ 
+ 
+.card { 
+ 
+    height: 88px; 
+ 
+    padding: 14px; 
+ 
+    border-radius: 13px; 
+ 
+    display: flex; 
+ 
+    align-items: center; 
+ 
+    gap: 13px; 
+ 
+    color: white; 
+ 
+    box-shadow: 
+        0 6px 15px rgba(15, 23, 42, .18); 
+ 
+    transition: 
+        transform .25s ease, 
+        box-shadow .25s ease; 
+ 
+    cursor: pointer; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CARD HOVER 
+========================================== */ 
+ 
+.card:hover { 
+ 
+    transform: translateY(-4px); 
+ 
+    box-shadow: 
+        0 10px 22px rgba(15, 23, 42, .27); 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CARD COLORS 
+========================================== */ 
+ 
+ 
+/* TOTAL USERS */ 
+ 
+.card-link:nth-child(1) .card { 
+ 
+    background: 
+        linear-gradient( 
+            135deg, 
+            #1e293b, 
+            #334155 
+        ); 
+ 
+} 
+ 
+ 
+/* TOTAL STUDENTS */ 
+ 
+.card-link:nth-child(2) .card { 
+ 
+    background: 
+        linear-gradient( 
+            135deg, 
+            #134e4a, 
+            #0f766e 
+        ); 
+ 
+} 
+ 
+ 
+/* TOTAL ADMINS */ 
+ 
+.card-link:nth-child(3) .card { 
+ 
+    background: 
+        linear-gradient( 
+            135deg, 
+            #312e81, 
+            #4338ca 
+        ); 
+ 
+} 
+ 
+ 
+/* RECENT REGISTRATIONS */ 
+ 
+.card-link:nth-child(4) .card { 
+ 
+    background: 
+        linear-gradient( 
+            135deg, 
+            #78350f, 
+            #92400e 
+        ); 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CARD ICON 
+========================================== */ 
+ 
+.card-icon { 
+ 
+    width: 44px; 
+ 
+    height: 44px; 
+ 
+    min-width: 44px; 
+ 
+    border-radius: 11px; 
+ 
+    background: rgba(255, 255, 255, .17); 
+ 
+    display: flex; 
+ 
+    justify-content: center; 
+ 
+    align-items: center; 
+ 
+} 
+ 
+ 
+.card-icon i { 
+ 
+    font-size: 20px; 
+ 
+    color: white; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CARD CONTENT 
+========================================== */ 
+ 
+.card-content h4 { 
+ 
+    color: #e2e8f0; 
+ 
+    font-size: 13px; 
+ 
+    font-weight: 500; 
+ 
+    margin-bottom: 2px; 
+ 
+    white-space: nowrap; 
+ 
+} 
+ 
+ 
+.card-content h2 { 
+ 
+    color: white; 
+ 
+    font-size: 23px; 
+ 
+    font-weight: 700; 
+ 
+    line-height: 1; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CHART SECTION 
+========================================== */ 
+ 
+.charts-container { 
+ 
+    margin-top: 25px; 
+ 
+    display: grid; 
+ 
+    grid-template-columns: repeat(2, 380px); 
+ 
+    gap: 25px; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CHART CARD 
+========================================== */ 
+ 
+.chart-card { 
+ 
+    background: #ffffff; 
+ 
+    width: 380px; 
+ 
+    height: 300px; 
+ 
+    padding: 15px; 
+ 
+    border-radius: 15px; 
+ 
+    border: 1px solid #e2e8f0; 
+ 
+    box-shadow: 
+        0 6px 15px rgba(15, 23, 42, .08); 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CHART TITLE 
+========================================== */ 
+ 
+.chart-card h3 { 
+ 
+    text-align: center; 
+ 
+    color: #334155; 
+ 
+    font-size: 16px; 
+ 
+    font-weight: 600; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   CHART BOX 
+========================================== */ 
+ 
+.chart-box { 
+ 
+    height: 260px; 
+ 
+    display: flex; 
+ 
+    justify-content: center; 
+ 
+    align-items: center; 
+ 
+} 
+ 
+ 
+.chart-box canvas { 
+ 
+    max-height: 280px !important; 
+ 
+    max-width: 280px !important; 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   RESPONSIVE 
+========================================== */ 
+ 
+@media (max-width: 1200px) { 
+ 
+    .cards { 
+ 
+        grid-template-columns: repeat(2, 1fr); 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   TABLET 
+========================================== */ 
+ 
+@media (max-width: 900px) { 
+ 
+    .sidebar { 
+ 
+        display: none; 
+ 
+    } 
+ 
+ 
+    .topbar { 
+ 
+        left: 0; 
+ 
+        width: 100%; 
+ 
+    } 
+ 
+ 
+    .main-content { 
+ 
+        margin-left: 0; 
+ 
+        width: 100%; 
+ 
+        padding: 85px 15px 15px; 
+ 
+    } 
+ 
+ 
+    .cards { 
+ 
+        grid-template-columns: 1fr; 
+ 
+    } 
+ 
+ 
+    .charts-container { 
+ 
+        grid-template-columns: 1fr; 
+ 
+    } 
+ 
+ 
+    .chart-card { 
+ 
+        width: 100%; 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   MOBILE 
+========================================== */ 
+ 
+@media (max-width: 600px) { 
+ 
+    .topbar { 
+ 
+        padding: 0 15px; 
+ 
+    } 
+ 
+ 
+    .welcome h1 { 
+ 
+        font-size: 19px; 
+ 
+    } 
+ 
+ 
+    .welcome p { 
+ 
+        display: none; 
+ 
+    } 
+ 
+ 
+    .profile-text { 
+ 
+        display: none; 
+ 
+    } 
+ 
+ 
+    .profile-arrow { 
+ 
+        display: none; 
+ 
+    } 
+ 
+ 
+    .profile-img { 
+ 
+        width: 40px; 
+ 
+        height: 40px; 
+ 
+        min-width: 40px; 
+ 
+    } 
+ 
+ 
+    .header-right { 
+ 
+        gap: 10px; 
+ 
+    } 
+ 
+ 
+    /* MOBILE DROPDOWN */ 
+ 
+    .user-menu .profile-dropdown { 
+ 
+        right: -5px; 
+ 
+        width: 200px; 
+ 
+    } 
+ 
+ 
+    .cards { 
+ 
+        grid-template-columns: 1fr; 
+ 
+        gap: 15px; 
+ 
+    } 
+ 
+ 
+    .card { 
+ 
+        height: 85px; 
+ 
+        padding: 13px; 
+ 
+    } 
+ 
+ 
+    .card-icon { 
+ 
+        width: 42px; 
+ 
+        height: 42px; 
+ 
+        min-width: 42px; 
+ 
+    } 
+ 
+ 
+    .card-icon i { 
+ 
+        font-size: 19px; 
+ 
+    } 
+ 
+ 
+    .card-content h4 { 
+ 
+        font-size: 13px; 
+ 
+    } 
+ 
+ 
+    .card-content h2 { 
+ 
+        font-size: 22px; 
+ 
+    } 
+ 
+ 
+    .charts-container { 
+ 
+        margin-top: 20px; 
+ 
+        gap: 18px; 
+ 
+    } 
+ 
+ 
+    .chart-card { 
+ 
+        width: 100%; 
+ 
+        height: 300px; 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ========================================== 
+   VERY SMALL MOBILE 
+========================================== */ 
+ 
+@media (max-width: 400px) { 
+ 
+    .welcome h1 { 
+ 
+        font-size: 17px; 
+ 
+    } 
+ 
+ 
+    .card { 
+ 
+        height: 82px; 
+ 
+        padding: 12px; 
+ 
+    } 
+ 
+ 
+    .card-icon { 
+ 
+        width: 40px; 
+ 
+        height: 40px; 
+ 
+        min-width: 40px; 
+ 
+    } 
+ 
+ 
+    .card-icon i { 
+ 
+        font-size: 18px; 
+ 
+    } 
+ 
+ 
+    .card-content h4 { 
+ 
+        font-size: 12px; 
+ 
+    } 
+ 
+ 
+    .card-content h2 { 
+ 
+        font-size: 21px; 
+ 
+    } 
+ 
+ 
+    .user-menu .profile-dropdown { 
+ 
+        right: -10px; 
+ 
+        width: 190px; 
+ 
+    } 
+ 
+}

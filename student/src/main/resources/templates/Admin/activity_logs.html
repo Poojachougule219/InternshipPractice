@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Activity Logs</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/Admin/activity_logs.css?v=2}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<div class="content-container">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="page-header">
+
+
+        <div class="title-section">
+
+            <h1>
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                Activity Logs
+
+            </h1>
+
+            <p>
+                Monitor system activities and user actions.
+            </p>
+
+        </div>
+
+
+
+        <div class="header-buttons">
+
+
+            <!-- DASHBOARD -->
+
+            <a th:href="@{/admin/dashboard}"
+               class="btn dashboard-btn">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+
+
+            <!-- EXPORT -->
+
+			<a th:href="@{/api/audit-logs/export(
+			        search=${search},
+			        action=${action},
+			        role=${role},
+			        fromDate=${fromDate},
+			        toDate=${toDate}
+			    )}"
+			   class="btn export-btn">
+
+			    <i class="fa-solid fa-file-export"></i>
+
+			    Export
+
+			</a>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SEARCH / FILTER CARD
+    ====================================================== -->
+
+    <div class="table-card filter-card">
+
+
+        <form th:action="@{/admin/activity-logs}"
+              method="get">
+
+
+            <div class="filter-section">
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <input type="text"
+                           name="search"
+                           placeholder="Search Activity..."
+                           th:value="${search}">
+
+                    <i class="fa-solid fa-search"></i>
+
+                </div>
+
+
+
+                <!-- ACTION FILTER -->
+
+                <div class="filter-box">
+
+                    <select name="action">
+
+
+                        <option value="">
+                            All Actions
+                        </option>
+
+
+                        <option value="LOGIN"
+                                th:selected="${action == 'LOGIN'}">
+                            Login
+                        </option>
+
+
+                        <option value="LOGOUT"
+                                th:selected="${action == 'LOGOUT'}">
+                            Logout
+                        </option>
+
+
+                        <option value="REGISTRATION"
+                                th:selected="${action == 'REGISTRATION'}">
+                            Registration
+                        </option>
+
+
+                        <option value="CREATE"
+                                th:selected="${action == 'CREATE'}">
+                            Create
+                        </option>
+
+
+                        <option value="UPDATE"
+                                th:selected="${action == 'UPDATE'}">
+                            Update
+                        </option>
+
+
+                        <option value="DELETE"
+                                th:selected="${action == 'DELETE'}">
+                            Delete
+                        </option>
+
+
+                        <option value="PASSWORD_CHANGE"
+                                th:selected="${action == 'PASSWORD_CHANGE'}">
+                            Password Change
+                        </option>
+
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ROLE FILTER -->
+
+                <div class="filter-box">
+
+                    <select name="role">
+
+
+                        <option value="">
+                            All Roles
+                        </option>
+
+
+                        <option value="ROLE_ADMIN"
+                                th:selected="${role == 'ROLE_ADMIN'}">
+                            Admin
+                        </option>
+
+
+                        <option value="ROLE_STUDENT"
+                                th:selected="${role == 'ROLE_STUDENT'}">
+                            Student
+                        </option>
+
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- SEARCH BUTTON -->
+
+                <button type="submit"
+                        class="btn search-btn">
+
+                    <i class="fa-solid fa-filter"></i>
+
+                    Search
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ACTIVITY TABLE CARD
+    ====================================================== -->
+
+    <div class="table-card activity-card">
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <!-- =================================================
+                     TABLE HEADER
+                ================================================== -->
+
+                <thead>
+
+                    <tr>
+
+
+                        <!-- ID -->
+
+                        <th class="col-id">
+                            ID
+                        </th>
+
+
+                        <!-- ACTION -->
+
+                        <th class="col-action">
+                            Action
+                        </th>
+
+
+                        <!-- CREATED AT -->
+
+                        <th class="col-created">
+                            Created At
+                        </th>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <th class="col-description">
+                            Description
+                        </th>
+
+
+                        <!-- ENTITY ID -->
+
+                        <th class="col-entity-id">
+                            Entity ID
+                        </th>
+
+
+                        <!-- ENTITY NAME -->
+
+                        <th class="col-entity-name">
+                            Entity Name
+                        </th>
+
+
+                        <!-- IP ADDRESS -->
+
+                        <th class="col-ip">
+                            IP Address
+                        </th>
+
+
+                        <!-- ROLE -->
+
+                        <th class="col-role">
+                            Role
+                        </th>
+
+
+                        <!-- USERNAME -->
+
+                        <th class="col-username">
+                            Username
+                        </th>
+
+
+                        <!-- STUDENT ID -->
+
+                        <th class="col-student-id">
+                            Student ID
+                        </th>
+
+
+                    </tr>
+
+                </thead>
+
+
+
+                <!-- =================================================
+                     TABLE BODY
+                ================================================== -->
+
+                <tbody>
+
+
+                    <!-- =================================================
+                         NO RECORDS
+                    ================================================== -->
+
+                    <tr th:if="${auditLogs == null or auditLogs.isEmpty()}">
+
+                        <td colspan="10"
+                            class="empty">
+
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+
+                            No activity records found
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ACTIVITY RECORDS
+                    ================================================== -->
+
+                    <tr th:each="log, stat : ${auditLogs}">
+
+
+                        <!-- =================================================
+                             ID
+                        ================================================== -->
+
+                        <td class="id-cell"
+                            th:text="${log.id}">
+
+                            1
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             ACTION
+                        ================================================== -->
+
+                        <td>
+
+
+                            <!-- LOGIN -->
+
+                            <span class="action-badge login"
+                                  th:if="${log.action == 'LOGIN'}">
+
+                                LOGIN
+
+                            </span>
+
+
+
+                            <!-- LOGOUT -->
+
+                            <span class="action-badge logout"
+                                  th:if="${log.action == 'LOGOUT'}">
+
+                                LOGOUT
+
+                            </span>
+
+
+
+                            <!-- CREATE -->
+
+                            <span class="action-badge create"
+                                  th:if="${log.action == 'CREATE'}">
+
+                                CREATE
+
+                            </span>
+
+
+
+                            <!-- REGISTRATION -->
+
+                            <span class="action-badge create"
+                                  th:if="${log.action == 'REGISTRATION'}">
+
+                                REGISTRATION
+
+                            </span>
+
+
+
+                            <!-- UPDATE -->
+
+                            <span class="action-badge update"
+                                  th:if="${log.action == 'UPDATE'}">
+
+                                UPDATE
+
+                            </span>
+
+
+
+                            <!-- DELETE -->
+
+                            <span class="action-badge delete"
+                                  th:if="${log.action == 'DELETE'}">
+
+                                DELETE
+
+                            </span>
+
+
+
+                            <!-- PASSWORD CHANGE -->
+
+                            <span class="action-badge password"
+                                  th:if="${log.action == 'PASSWORD_CHANGE'}">
+
+                                PASSWORD CHANGE
+
+                            </span>
+
+
+
+                            <!-- OTHER -->
+
+                            <span class="action-badge other"
+                                  th:if="${log.action != null
+                                  and log.action != 'LOGIN'
+                                  and log.action != 'LOGOUT'
+                                  and log.action != 'CREATE'
+                                  and log.action != 'REGISTRATION'
+                                  and log.action != 'UPDATE'
+                                  and log.action != 'DELETE'
+                                  and log.action != 'PASSWORD_CHANGE'}"
+                                  th:text="${log.action}">
+
+                                ACTION
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             CREATED AT
+                        ================================================== -->
+
+                        <td class="created-cell"
+                            th:text="${log.createdAt != null
+                            ? #temporals.format(
+                                log.createdAt,
+                                'dd MMM, hh:mm a'
+                              )
+                            : '-'}">
+
+                            13 Aug, 02:39 PM
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             DESCRIPTION
+                        ================================================== -->
+
+                        <td class="description-column"
+                            th:title="${log.description}"
+                            th:text="${log.description != null
+                            ? log.description
+                            : '-'}">
+
+                            Admin logged in successfully
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             ENTITY ID
+                        ================================================== -->
+
+                        <td class="entity-id-cell"
+                            th:text="${log.entityId != null
+                            ? log.entityId
+                            : '-'}">
+
+                            1
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             ENTITY NAME
+                        ================================================== -->
+
+                        <td class="entity-name-cell"
+                            th:title="${log.entityName}"
+                            th:text="${log.entityName != null
+                            ? log.entityName
+                            : '-'}">
+
+                            AUTH
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             IP ADDRESS
+                        ================================================== -->
+
+                        <td class="ip-cell"
+                            th:text="${log.ipAddress != null
+                            ? log.ipAddress
+                            : '-'}">
+
+                            127.0.0.1
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             ROLE
+                        ================================================== -->
+
+                        <td>
+
+
+                            <span class="role-badge"
+                                  th:text="${log.role != null
+                                  ? log.role
+                                  : '-'}">
+
+                                ROLE_ADMIN
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             USERNAME
+                        ================================================== -->
+
+                        <td class="username-cell"
+                            th:title="${log.username}"
+                            th:text="${log.username != null
+                            ? log.username
+                            : 'SYSTEM'}">
+
+                            admin@gmail.com
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             STUDENT ID
+                        ================================================== -->
+
+                        <td class="student-id-cell"
+                            th:text="${log.studentId != null
+                            ? log.studentId
+                            : '-'}">
+
+                            1
+
+                        </td>
+
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             PAGINATION
+        ====================================================== -->
+
+        <div class="pagination"
+             th:if="${totalPages != null and totalPages > 0}">
+
+
+            <!-- =================================================
+                 PREVIOUS
+            ================================================== -->
+
+            <a th:if="${currentPage != null and currentPage > 0}"
+               th:href="@{/admin/activity-logs(
+                   page=${currentPage - 1},
+                   size=${pageSize},
+                   search=${search},
+                   action=${action},
+                   role=${role}
+               )}">
+
+                <i class="fa-solid fa-angle-left"></i>
+
+                Previous
+
+            </a>
+
+
+
+            <!-- =================================================
+                 DISABLED PREVIOUS
+            ================================================== -->
+
+            <span class="disabled-page"
+                  th:if="${currentPage == null or currentPage == 0}">
+
+                <i class="fa-solid fa-angle-left"></i>
+
+                Previous
+
+            </span>
+
+
+
+            <!-- =================================================
+                 PAGE NUMBERS
+            ================================================== -->
+
+            <span class="page-numbers"
+                  th:each="i : ${#numbers.sequence(0,totalPages-1)}">
+
+
+                <a th:href="@{/admin/activity-logs(
+                    page=${i},
+                    size=${pageSize},
+                    search=${search},
+                    action=${action},
+                    role=${role}
+                )}"
+                   th:text="${i + 1}"
+                   th:classappend="${i == currentPage}
+                   ? ' active-page'">
+
+                    1
+
+                </a>
+
+
+            </span>
+
+
+
+            <!-- =================================================
+                 NEXT
+            ================================================== -->
+
+            <a th:if="${currentPage != null
+                    and totalPages != null
+                    and currentPage < totalPages - 1}"
+               th:href="@{/admin/activity-logs(
+                   page=${currentPage + 1},
+                   size=${pageSize},
+                   search=${search},
+                   action=${action},
+                   role=${role}
+               )}">
+
+                Next
+
+                <i class="fa-solid fa-angle-right"></i>
+
+            </a>
+
+
+
+            <!-- =================================================
+                 DISABLED NEXT
+            ================================================== -->
+
+            <span class="disabled-page"
+                  th:if="${currentPage == null
+                  or totalPages == null
+                  or currentPage >= totalPages - 1}">
+
+                Next
+
+                <i class="fa-solid fa-angle-right"></i>
+
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

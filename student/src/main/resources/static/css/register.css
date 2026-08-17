@@ -1,0 +1,313 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+body {
+
+	background: #f4f5f7;
+
+	display: flex;
+
+	justify-content: center;
+
+	align-items: center;
+
+	min-height: 100vh;
+
+	padding: 15px;
+
+}
+
+
+
+.container {
+
+	width: 100%;
+
+	display: flex;
+
+	justify-content: center;
+
+}
+
+
+
+
+.card {
+
+	width: 620px;
+
+	background: #ffffff;
+
+	padding: 20px 25px;
+
+	border-radius: 12px;
+
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+
+}
+
+
+
+
+
+.card h2 {
+
+	text-align: center;
+
+	color: #343a40;
+
+	font-size: 23px;
+
+	font-weight: 600;
+
+	margin-bottom: 15px;
+
+}
+
+
+
+.card h2 i {
+
+	margin-right: 7px;
+
+}
+
+
+
+
+
+form {
+
+	display: grid;
+
+	grid-template-columns: repeat(2, 1fr);
+
+	gap: 12px 18px;
+
+}
+
+
+
+
+
+.form-group {
+
+	margin-bottom: 0;
+
+}
+
+
+
+
+
+label {
+
+	display: block;
+
+	color: #343a40;
+
+	font-size: 13px;
+
+	font-weight: 600;
+
+	margin-bottom: 4px;
+
+}
+
+
+
+label i {
+
+	margin-right: 5px;
+
+}
+
+
+
+
+
+input,
+select {
+
+	width: 100%;
+
+	padding: 8px 10px;
+
+	border: 1px solid #ced4da;
+
+	border-radius: 6px;
+
+	font-size: 13px;
+
+	outline: none;
+
+}
+
+
+
+
+
+input:focus,
+select:focus {
+
+	border-color: #343a40;
+
+	box-shadow: 0 0 4px rgba(52, 58, 64, 0.2);
+
+}
+
+
+
+
+
+.btn-register {
+
+	grid-column: 1 / -1;
+
+	width: 150px;
+
+	padding: 9px 20px;
+
+	margin: 8px auto 0;
+
+	background: #343a40;
+
+	color: white;
+
+	border: none;
+
+	border-radius: 6px;
+
+	font-size: 14px;
+
+	font-weight: 600;
+
+	cursor: pointer;
+
+	transition: 0.3s;
+
+	display: flex;
+
+	justify-content: center;
+
+	align-items: center;
+
+	gap: 6px;
+
+}
+
+
+.btn-register:hover {
+
+	background: #212529;
+
+}
+
+
+
+
+.login-link {
+
+	grid-column: 1 / -1;
+
+	text-align: center;
+
+	margin-top: 3px;
+
+	color: #6c757d;
+
+	font-size: 13px;
+
+}
+
+
+
+
+.login-link a {
+
+	color: #343a40;
+
+	font-weight: 600;
+
+	text-decoration: none;
+
+}
+
+
+
+
+.login-link a:hover {
+
+	text-decoration: underline;
+
+}
+
+
+
+
+
+.error-message {
+
+	background: #f8d7da;
+
+	color: #842029;
+
+	padding: 7px;
+
+	border-radius: 5px;
+
+	text-align: center;
+
+	margin-bottom: 12px;
+
+	font-size: 13px;
+
+}
+
+
+
+
+
+.success-message {
+
+	background: #d1e7dd;
+
+	color: #0f5132;
+
+	padding: 7px;
+
+	border-radius: 5px;
+
+	text-align: center;
+
+	margin-bottom: 12px;
+
+	font-size: 13px;
+
+}
+
+
+
+
+
+@media(max-width:650px) {
+
+	.card {
+
+		width: 100%;
+
+	}
+
+
+	form {
+
+		grid-template-columns: 1fr;
+
+	}
+
+}

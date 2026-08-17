@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>All Students</title>
+
+
+	<link rel="stylesheet" th:href="@{/css/Admin/users.css?v=3}">
+
+
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+
+<body>
+
+
+	<div class="content-container">
+
+
+
+		<!-- ================= HEADER ================= -->
+
+
+		<div class="page-header">
+
+
+			<div class="title-section">
+
+
+				<h1>
+
+					<i class="fa-solid fa-user-graduate"></i>
+
+					All Students
+
+				</h1>
+
+
+				<p>
+
+					View and manage all registered students.
+
+				</p>
+
+
+			</div>
+
+
+
+
+			<div class="header-buttons">
+
+
+				<a th:href="@{/admin/dashboard}" class="btn dashboard-btn">
+
+					<i class="fa-solid fa-house"></i>
+
+					Dashboard
+
+				</a>
+
+
+
+
+				<a th:href="@{/register}" class="btn add-btn">
+
+					<i class="fa-solid fa-user-plus"></i>
+
+					Add Student
+
+				</a>
+
+
+
+
+				<a th:href="@{/admin/students/export}" class="btn print-btn">
+
+					<i class="fa-solid fa-file-export"></i>
+
+					Export
+
+				</a>
+
+
+			</div>
+
+
+		</div>
+
+
+
+
+
+		<!-- ================= SEARCH ================= -->
+
+
+		<div class="table-card">
+
+
+			<form th:action="@{/admin/students-list}" method="get">
+
+
+				<div class="filter-section">
+
+
+					<div class="search-box">
+
+
+						<input type="text"
+							   name="keyword"
+							   placeholder="Search Student..."
+							   th:value="${keyword}">
+
+
+						<i class="fa-solid fa-search"></i>
+
+
+					</div>
+
+
+
+
+
+					<div class="filter-box">
+
+
+						<select name="sortField">
+
+
+							<option value="id" th:selected="${sortField=='id'}">
+
+								ID
+
+							</option>
+
+
+							<option value="name" th:selected="${sortField=='name'}">
+
+								Name
+
+							</option>
+
+
+							<option value="email" th:selected="${sortField=='email'}">
+
+								Email
+
+							</option>
+
+
+							<option value="department" th:selected="${sortField=='department'}">
+
+								Department
+
+							</option>
+
+
+							<option value="city" th:selected="${sortField=='city'}">
+
+								City
+
+							</option>
+
+
+							<option value="createdDate" th:selected="${sortField=='createdDate'}">
+
+								Created Date
+
+							</option>
+
+
+						</select>
+
+
+					</div>
+
+
+
+
+
+					<div class="filter-box">
+
+
+						<select name="sortDir">
+
+
+							<option value="asc" th:selected="${sortDir=='asc'}">
+
+								Ascending
+
+							</option>
+
+
+							<option value="desc" th:selected="${sortDir=='desc'}">
+
+								Descending
+
+							</option>
+
+
+						</select>
+
+
+					</div>
+
+
+
+
+
+					<button type="submit" class="btn export-btn">
+
+
+						<i class="fa-solid fa-filter"></i>
+
+						Search
+
+
+					</button>
+
+
+
+				</div>
+
+
+			</form>
+
+
+		</div>
+
+
+
+
+
+		<!-- ================= TABLE ================= -->
+
+
+		<div class="table-card">
+
+
+			<table>
+
+
+				<thead>
+
+
+					<tr>
+
+
+						<th>
+
+							<a th:href="@{/admin/students-list(
+page=0,
+size=${size},
+keyword=${keyword},
+sortField='id',
+sortDir=${sortDir=='asc'?'desc':'asc'})}">
+
+								ID
+
+							</a>
+
+						</th>
+
+
+
+
+						<th>
+
+							<a th:href="@{/admin/students-list(
+page=0,
+size=${size},
+keyword=${keyword},
+sortField='name',
+sortDir=${sortDir=='asc'?'desc':'asc'})}">
+
+								Name
+
+							</a>
+
+						</th>
+
+
+
+
+						<th>
+
+							<a th:href="@{/admin/students-list(
+page=0,
+size=${size},
+keyword=${keyword},
+sortField='email',
+sortDir=${sortDir=='asc'?'desc':'asc'})}">
+
+								Email
+
+							</a>
+
+						</th>
+
+
+
+
+						<th>
+
+							Role
+
+						</th>
+
+
+
+
+						<th>
+
+							<a th:href="@{/admin/students-list(
+page=0,
+size=${size},
+keyword=${keyword},
+sortField='department',
+sortDir=${sortDir=='asc'?'desc':'asc'})}">
+
+								Department
+
+							</a>
+
+						</th>
+
+
+
+
+						<th>
+
+							<a th:href="@{/admin/students-list(
+page=0,
+size=${size},
+keyword=${keyword},
+sortField='city',
+sortDir=${sortDir=='asc'?'desc':'asc'})}">
+
+								City
+
+							</a>
+
+						</th>
+
+
+
+
+						<th>
+
+							Status
+
+						</th>
+
+
+
+
+						<th class="text-center">
+
+							Actions
+
+						</th>
+
+
+
+					</tr>
+
+
+				</thead>
+
+
+				<tbody>
+
+
+					<!-- Empty Data -->
+
+					<tr th:if="${students == null or students.content.isEmpty()}">
+
+						<td colspan="8" class="empty">
+
+
+							<i class="fa-solid fa-user-slash"></i>
+
+
+							No students found.
+
+
+						</td>
+
+
+					</tr>
+
+
+
+
+
+					<!-- Student List -->
+
+
+					<tr th:each="student, studentStat : ${students.content}">
+
+
+						<!-- Serial Number -->
+
+						<td th:text="${students.number * students.size + studentStat.index + 1}">
+
+						</td>
+
+
+
+
+						<!-- Name -->
+
+						<td th:text="${student.name}">
+
+						</td>
+
+
+
+
+						<!-- Email -->
+
+						<td th:text="${student.email}">
+
+						</td>
+
+
+
+
+						<!-- Role -->
+
+
+						<td>
+
+
+							<span class="role-student">
+
+
+								<i class="fa-solid fa-user-graduate"></i>
+
+
+								Student
+
+
+							</span>
+
+
+						</td>
+
+
+
+
+
+						<!-- Department -->
+
+
+						<td th:text="${student.department}">
+
+						</td>
+
+
+
+
+
+						<!-- City -->
+
+
+						<td th:text="${student.city}">
+
+						</td>
+
+
+
+
+
+						<!-- Status -->
+
+
+						<td>
+
+
+							<span class="status-active"
+								  th:if="${student.status != null
+								  and student.status.name() == 'ACTIVE'}">
+
+
+								Active
+
+
+							</span>
+
+
+
+							<span class="status-inactive"
+								  th:if="${student.status != null
+								  and student.status.name() != 'ACTIVE'}">
+
+
+								Inactive
+
+
+							</span>
+
+
+						</td>
+
+
+
+
+
+						<!-- =================================================
+						     ACTIONS
+						     VIEW + EDIT ICON + DELETE
+						================================================== -->
+
+
+						<td>
+
+
+							<div class="action-buttons">
+
+
+
+								<!-- ================= VIEW ================= -->
+
+
+								<a th:href="@{/admin/user/view/{id}(id=${student.id})}"
+								   class="action-btn view-btn"
+								   title="View">
+
+
+									<i class="fa-solid fa-eye"></i>
+
+
+								</a>
+
+
+
+
+
+								<!-- ================= EDIT ================= -->
+
+
+								<a href="javascript:void(0);"
+								   class="action-btn edit-btn"
+								   title="Edit"
+
+								   th:attr="data-name=${student.name},
+								            data-email=${student.email}"
+
+								   onclick="return confirmStudentEdit(this);">
+
+
+									<i class="fa-solid fa-pen"></i>
+
+
+								</a>
+
+
+
+
+
+								<!-- ================= DELETE ================= -->
+
+
+								<a th:href="@{/admin/user/delete/{id}(id=${student.id})}"
+
+								   class="action-btn delete-btn"
+
+								   title="Delete"
+
+								   th:attr="data-name=${student.name},
+								            data-email=${student.email}"
+
+								   onclick="return confirmStudentDelete(this);">
+
+
+									<i class="fa-solid fa-trash"></i>
+
+
+								</a>
+
+
+
+							</div>
+
+
+						</td>
+
+
+
+					</tr>
+
+
+
+				</tbody>
+
+
+			</table>
+
+
+
+
+
+			<!-- ================= PAGINATION ================= -->
+
+
+			<div class="pagination"
+				 th:if="${students != null and students.totalPages > 1}">
+
+
+
+				<!-- Previous -->
+
+
+				<a th:if="${students.hasPrevious()}"
+
+				   th:href="@{/admin/students-list(
+page=${students.number-1},
+size=${size},
+keyword=${keyword},
+sortField=${sortField},
+sortDir=${sortDir})}">
+
+
+					<i class="fa-solid fa-angle-left"></i>
+
+					Previous
+
+
+				</a>
+
+
+
+
+
+				<!-- Page Numbers -->
+
+
+				<span th:each="i : ${#numbers.sequence(0, students.totalPages-1)}">
+
+
+					<a th:href="@{/admin/students-list(
+page=${i},
+size=${size},
+keyword=${keyword},
+sortField=${sortField},
+sortDir=${sortDir})}"
+
+					   th:text="${i+1}"
+
+					   th:classappend="${i==students.number} ? 'active-page'">
+
+
+					</a>
+
+
+				</span>
+
+
+
+
+
+				<!-- Next -->
+
+
+				<a th:if="${students.hasNext()}"
+
+				   th:href="@{/admin/students-list(
+page=${students.number+1},
+size=${size},
+keyword=${keyword},
+sortField=${sortField},
+sortDir=${sortDir})}">
+
+
+					Next
+
+					<i class="fa-solid fa-angle-right"></i>
+
+
+				</a>
+
+
+
+			</div>
+
+
+
+
+
+		</div>
+
+
+	</div>
+
+
+
+	<script>
+
+
+		// =====================================================
+		// STUDENT EDIT PROTECTION
+		// Admin CANNOT edit student profile
+		// =====================================================
+
+		function confirmStudentEdit(button) {
+
+
+			const name =
+				button.getAttribute("data-name");
+
+
+			const email =
+				button.getAttribute("data-email");
+
+
+			alert(
+
+				"You cannot edit student profile.\n\n" +
+
+				"Name: " + name +
+
+				"\nEmail: " + email
+
+			);
+
+
+			return false;
+
+		}
+
+
+
+		// =====================================================
+		// STUDENT DELETE CONFIRMATION
+		// Admin CAN delete student
+		// =====================================================
+
+		function confirmStudentDelete(button) {
+
+
+			const name =
+				button.getAttribute("data-name");
+
+
+			const email =
+				button.getAttribute("data-email");
+
+
+			return confirm(
+
+				"Are you sure you want to delete this student?\n\n" +
+
+				"Name: " + name +
+
+				"\nEmail: " + email
+
+			);
+
+		}
+
+
+	</script>
+
+
+</body>
+
+
+</html>

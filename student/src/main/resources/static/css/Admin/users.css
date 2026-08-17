@@ -1,0 +1,1405 @@
+/* ===========================
+   GOOGLE FONT
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+/* ===========================
+   RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+/* ===========================
+   HTML & BODY
+=========================== */
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    background:#eef2f7;
+    color:#1e293b;
+}
+
+
+/* ===========================
+   MAIN CONTAINER
+=========================== */
+
+.content-container{
+    width:97%;
+    height:96vh;
+    margin:10px auto;
+    background:#ffffff;
+    border-radius:18px;
+    padding:18px;
+    box-shadow:0 10px 30px rgba(15,23,42,.10);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+
+/* ===========================
+   PAGE HEADER
+=========================== */
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+    flex-shrink:0;
+}
+
+
+/* ===========================
+   TITLE
+=========================== */
+
+.title-section h1{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:28px;
+    font-weight:700;
+    color:#16213e;
+}
+
+.title-section h1 i{
+    color:#16213e;
+}
+
+.title-section p{
+    margin-top:4px;
+    font-size:13px;
+    color:#64748b;
+}
+
+
+/* ===========================
+   HEADER BUTTONS
+=========================== */
+
+.header-buttons{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+
+/* ===========================
+   COMMON BUTTON
+=========================== */
+
+.btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:10px 18px;
+
+    border:none;
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:600;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+
+/* Dashboard */
+
+.dashboard-btn{
+    background:#1e293b;
+}
+
+.dashboard-btn:hover{
+    background:#0f172a;
+}
+
+
+/* Add User */
+
+.add-btn{
+    background:#15803d;
+}
+
+.add-btn:hover{
+    background:#166534;
+}
+
+
+/* Print */
+
+.print-btn{
+    background:#475569;
+}
+
+.print-btn:hover{
+    background:#334155;
+}
+
+
+/* ===========================
+   SEARCH BUTTON
+=========================== */
+
+.export-btn{
+    background:#334155;
+    color:#ffffff;
+    border:none;
+    height:36px;
+    padding:0 18px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.export-btn:hover{
+    background:#1d4ed8;
+    color:#ffffff;
+}
+
+
+/* ===========================
+   TABLE CARD
+=========================== */
+
+.table-card{
+    background:#ffffff;
+    border-radius:14px;
+    padding:15px;
+    margin-top:12px;
+    box-shadow:0 8px 22px rgba(0,0,0,.06);
+}
+
+.table-card:last-child{
+    flex:1;
+    overflow:auto;
+}
+
+
+/* ===========================
+   SEARCH & FILTER SECTION
+=========================== */
+
+.filter-section{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:10px;
+    flex-wrap:nowrap;
+}
+
+
+/* ===========================
+   SEARCH BOX
+=========================== */
+
+.search-box{
+
+    position:relative;
+
+    width:260px;
+
+}
+
+
+.search-box input{
+
+    width:100%;
+
+    height:42px;
+
+    padding:0 40px 0 15px;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+
+.search-box input:focus{
+
+    border-color:#1e293b;
+
+}
+
+
+.search-box i{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#64748b;
+
+    pointer-events:none;
+
+}
+
+
+/* ===========================
+   FILTER DROPDOWN
+=========================== */
+
+.filter-box select{
+    height:36px;
+    min-width:130px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    outline:none;
+    background:#fff;
+    font-size:13px;
+    color:#334155;
+    cursor:pointer;
+    font-family:'Poppins',sans-serif;
+}
+
+.filter-box select:focus{
+    border-color:#1e293b;
+}
+
+
+/* ===========================
+   TABLE
+=========================== */
+
+.table-card table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table-card thead{
+    background:#1e293b;
+}
+
+.table-card th{
+    color:#fff;
+    padding:10px 12px;
+    text-align:left;
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.table-card th a{
+    color:#fff;
+    text-decoration:none;
+}
+
+.table-card th a:hover{
+    text-decoration:underline;
+}
+
+.table-card td{
+    padding:10px 12px;
+    font-size:13px;
+    color:#334155;
+    vertical-align:middle;
+}
+
+.table-card tbody tr{
+    border-bottom:1px solid #e5e7eb;
+    transition:.3s;
+}
+
+.table-card tbody tr:hover{
+    background:#f8fafc;
+}
+
+
+/* ===========================
+   ROLE BADGES
+=========================== */
+
+.role-admin{
+    display:inline-block;
+    background:#fee2e2;
+    color:#dc2626;
+    padding:4px 10px;
+    border-radius:14px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.role-student{
+    display:inline-block;
+    background:#dcfce7;
+    color:#15803d;
+    padding:4px 10px;
+    border-radius:14px;
+    font-size:11px;
+    font-weight:700;
+}
+
+
+/* ===========================
+   STATUS BADGES
+=========================== */
+
+.status-active{
+    display:inline-block;
+    background:#dcfce7;
+    color:#15803d;
+    padding:4px 10px;
+    border-radius:14px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.status-inactive{
+    display:inline-block;
+    background:#fee2e2;
+    color:#b91c1c;
+    padding:4px 10px;
+    border-radius:14px;
+    font-size:11px;
+    font-weight:600;
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    z-index:10;
+
+}
+
+
+.action-btn{
+
+    width:30px;
+    height:30px;
+
+    border-radius:8px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    transition:.25s ease;
+
+    font-size:13px;
+
+    padding:0;
+
+    margin:0;
+
+    border:none;
+
+    outline:none;
+
+    font-family:'Poppins',sans-serif;
+
+    cursor:pointer;
+
+    position:relative;
+
+    z-index:20;
+
+    pointer-events:auto !important;
+
+}
+
+
+/* View */
+
+.view-btn{
+    background:#e0f2fe;
+    color:#0284c7;
+}
+
+.view-btn:hover{
+    background:#0284c7;
+    color:#fff;
+}
+
+
+/* Edit */
+
+.edit-btn{
+    background:#fef3c7;
+    color:#d97706;
+    cursor:pointer;
+}
+
+.edit-btn:hover{
+    background:#d97706;
+    color:#fff;
+}
+
+
+/* Delete */
+
+.delete-btn{
+    background:#fee2e2;
+    color:#dc2626;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
+    color:#fff;
+}
+
+
+/* Make action buttons definitely clickable */
+
+.action-buttons button{
+    pointer-events:auto !important;
+    cursor:pointer !important;
+}
+
+.action-buttons a{
+    pointer-events:auto !important;
+    cursor:pointer !important;
+}
+
+
+/* ===========================
+   PAGINATION
+=========================== */
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    margin-top:12px;
+    flex-wrap:wrap;
+}
+
+.pagination a{
+    min-width:32px;
+    height:32px;
+    padding:0 10px;
+    border:1px solid #e2e8f0;
+    border-radius:8px;
+    background:#ffffff;
+    color:#334155;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.pagination a:hover{
+    background:#1e293b;
+    color:#ffffff;
+}
+
+.pagination .active-page{
+    background:#1e293b;
+    color:#ffffff;
+    border-color:#1e293b;
+}
+
+
+/* ===========================
+   SUMMARY CARDS
+=========================== */
+
+.summary-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.summary-card{
+    background:#ffffff;
+    border-radius:14px;
+    padding:16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.summary-card:hover{
+    transform:translateY(-3px);
+}
+
+.summary-icon{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.total-icon{
+    background:#e0f2fe;
+    color:#0284c7;
+}
+
+.active-icon{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.recent-icon{
+    background:#fef3c7;
+    color:#d97706;
+}
+
+.summary-content h3{
+    font-size:22px;
+    font-weight:700;
+    color:#1e293b;
+}
+
+.summary-content p{
+    font-size:12px;
+    color:#64748b;
+}
+
+
+/* ===========================
+   USER SUMMARY
+=========================== */
+
+.user-summary{
+    background:#ffffff;
+    padding:14px 18px;
+    border-radius:12px;
+    box-shadow:0 6px 16px rgba(0,0,0,.05);
+    margin-bottom:15px;
+    color:#334155;
+    font-size:14px;
+}
+
+.user-summary strong{
+    color:#1e293b;
+}
+
+.user-summary i{
+    color:#1e293b;
+    margin-right:6px;
+}
+
+
+/* ===========================
+   EMPTY TABLE
+=========================== */
+
+.empty{
+    text-align:center;
+    padding:30px !important;
+    color:#64748b !important;
+    font-size:14px !important;
+}
+
+.empty i{
+    display:block;
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+
+/* ===========================
+   ALERTS
+=========================== */
+
+.alert{
+    padding:12px 16px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:13px;
+    font-weight:500;
+}
+
+.alert-success{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.alert-danger{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+
+/* ===========================
+   FORM CONTROLS
+=========================== */
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-size:13px;
+    font-weight:600;
+    color:#334155;
+}
+
+.form-control{
+    width:100%;
+    height:38px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    outline:none;
+    font-size:13px;
+    font-family:'Poppins',sans-serif;
+}
+
+.form-control:focus{
+    border-color:#1e293b;
+    box-shadow:0 0 0 3px rgba(30,41,59,.08);
+}
+
+
+/* ===========================
+   TEXT ALIGNMENT
+=========================== */
+
+.text-center{
+    text-align:center;
+}
+
+
+/* ===========================
+   MODAL DESIGN
+=========================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-content{
+    width:420px;
+    max-width:95%;
+    background:#ffffff;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 20px 45px rgba(0,0,0,.20);
+}
+
+.modal-title{
+    font-size:18px;
+    font-weight:700;
+    color:#1e293b;
+    margin-bottom:15px;
+}
+
+.close-modal{
+    float:right;
+    font-size:22px;
+    color:#64748b;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.close-modal:hover{
+    color:#dc2626;
+}
+
+
+/* =====================================================
+   CUSTOM POPUP MODAL
+   USED BY USERS.HTML
+===================================================== */
+
+#editRestrictionModal,
+#deleteConfirmationModal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(15,23,42,.55);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+}
+
+
+/* Popup box */
+
+#editRestrictionModal > div,
+#deleteConfirmationModal > div{
+
+    width:420px;
+
+    max-width:90%;
+
+    background:#ffffff;
+
+    border-radius:14px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+
+    overflow:hidden;
+
+}
+
+
+/* Popup buttons */
+
+#editRestrictionModal button,
+#deleteConfirmationModal button{
+
+    font-family:'Poppins',sans-serif;
+
+    cursor:pointer;
+
+    pointer-events:auto !important;
+
+}
+
+
+/* Popup close button */
+
+#editRestrictionModal button:hover,
+#deleteConfirmationModal button:hover{
+
+    opacity:.9;
+
+}
+
+
+/* =====================================================
+   CUSTOM SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+    width:7px;
+    height:7px;
+}
+
+::-webkit-scrollbar-track{
+    background:#e2e8f0;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#94a3b8;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#64748b;
+}
+
+
+/* ===========================
+   RESPONSIVE (TABLET)
+=========================== */
+
+@media(max-width:992px){
+
+    html,
+    body{
+        overflow:auto;
+    }
+
+    .content-container{
+        height:auto;
+        min-height:100vh;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .header-buttons{
+        width:100%;
+        justify-content:flex-start;
+        flex-wrap:wrap;
+    }
+
+    .filter-section{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search-box{
+        width:100%;
+    }
+
+    .filter-box{
+        flex:0 0 auto;
+    }
+
+
+    .filter-box select{
+        width:130px;
+        height:36px;
+        font-size:13px;
+    }
+
+    .table-card{
+        overflow-x:auto;
+    }
+
+    .table-card table{
+        min-width:900px;
+    }
+
+    .summary-container{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* ===========================
+   RESPONSIVE (MOBILE)
+=========================== */
+
+@media(max-width:576px){
+
+    .content-container{
+        width:100%;
+        margin:0;
+        border-radius:0;
+        padding:12px;
+    }
+
+    .title-section h1{
+        font-size:22px;
+    }
+
+    .title-section p{
+        font-size:12px;
+    }
+
+    .header-buttons{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .table-card{
+        padding:12px;
+    }
+
+    .table-card th,
+    .table-card td{
+        padding:8px;
+        font-size:12px;
+    }
+
+    .pagination{
+        gap:5px;
+    }
+
+    .pagination a{
+        min-width:30px;
+        height:30px;
+        font-size:11px;
+    }
+
+    .summary-card{
+        padding:14px;
+    }
+
+    .summary-icon{
+        width:42px;
+        height:42px;
+        font-size:18px;
+    }
+
+    .summary-content h3{
+        font-size:18px;
+    }
+
+    /* Popup mobile */
+
+    #editRestrictionModal > div,
+    #deleteConfirmationModal > div{
+
+        width:90%;
+
+    }
+
+}
+
+
+/* ===========================
+   SINGLE PAGE LAYOUT FIX
+=========================== */
+
+.content-container{
+    display:flex;
+    flex-direction:column;
+}
+
+.table-card:first-of-type{
+    flex-shrink:0;
+}
+
+.table-card:last-of-type{
+    flex:1;
+    overflow:auto;
+}
+
+.table-card table{
+    width:100%;
+}
+
+.table-card tbody tr:last-child{
+    border-bottom:none;
+}
+
+
+/* ===========================
+   HTML COMPATIBILITY FIXES
+=========================== */
+
+/* Table Links */
+
+.table-card th a{
+    color:#ffffff;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.table-card th a:hover{
+    color:#dbeafe;
+}
+
+
+/* Empty Message */
+
+.no-data,
+.empty{
+    text-align:center;
+    padding:30px !important;
+    color:#64748b;
+    font-size:14px;
+    font-weight:500;
+}
+
+.no-data i,
+.empty i{
+    display:block;
+    font-size:34px;
+    margin-bottom:10px;
+    color:#94a3b8;
+}
+
+
+/* ===========================
+   TABLE ROW EFFECT
+=========================== */
+
+.table-card tbody tr{
+    transition:all .25s ease;
+}
+
+.table-card tbody tr:hover{
+    background:#f8fafc;
+    transform:scale(1.002);
+}
+
+
+/* ===========================
+   BUTTON ANIMATION
+=========================== */
+
+.btn,
+.action-btn{
+    transition:all .25s ease;
+}
+
+.btn:hover,
+.action-btn:hover{
+    transform:translateY(-2px);
+}
+
+
+/* ===========================
+   ICON SPACING
+=========================== */
+
+.btn i{
+    margin-right:4px;
+}
+
+.action-btn i{
+    font-size:13px;
+
+    pointer-events:none;
+}
+
+
+/* ===========================
+   TABLE ALIGNMENT
+=========================== */
+
+table{
+    border-spacing:0;
+}
+
+th,
+td{
+    vertical-align:middle;
+}
+
+th:last-child,
+td:last-child{
+    text-align:center;
+}
+
+
+/* ===========================
+   PAGE LAYOUT
+=========================== */
+
+.page-header,
+.filter-section,
+.pagination{
+    flex-shrink:0;
+}
+
+.table-card{
+    flex-shrink:0;
+}
+
+.table-card:last-child{
+    flex:1;
+}
+
+
+/* ===========================
+   REMOVE EXTRA SPACE
+=========================== */
+
+.page-header{
+    padding-bottom:5px;
+}
+
+.table-card + .table-card{
+    margin-top:10px;
+}
+
+.pagination{
+    padding-top:10px;
+}
+
+
+/* ===========================
+   FOCUS EFFECT
+=========================== */
+
+input:focus,
+select:focus,
+button:focus,
+a:focus{
+    outline:none;
+}
+
+
+/* ===========================
+   PRINT
+=========================== */
+
+@media print{
+
+    body{
+        background:#ffffff;
+    }
+
+    .header-buttons,
+    .filter-section,
+    .pagination{
+        display:none;
+    }
+
+    .content-container{
+        width:100%;
+        height:auto;
+        margin:0;
+        padding:0;
+        box-shadow:none;
+        border-radius:0;
+    }
+
+    .table-card{
+        box-shadow:none;
+        border:1px solid #ddd;
+    }
+
+    #editRestrictionModal,
+    #deleteConfirmationModal{
+        display:none !important;
+    }
+
+}
+
+
+/* ===========================
+   DESKTOP HEIGHT FIX
+=========================== */
+
+@media (min-width:992px){
+
+    body{
+        overflow:hidden;
+    }
+
+    .content-container{
+        height:96vh;
+    }
+
+    .table-card:last-child{
+        overflow:auto;
+    }
+
+}
+
+
+/* ===========================
+   FINAL POLISH
+=========================== */
+
+*{
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+a{
+    text-decoration:none;
+}
+
+button{
+    font-family:'Poppins',sans-serif;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+table{
+    width:100%;
+}
+
+
+/* =====================================================
+   ALERT MESSAGES
+===================================================== */
+
+.alert-message {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 18px;
+
+    margin-bottom: 18px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+/* SUCCESS */
+
+.success-message {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    border: 1px solid #86efac;
+
+}
+
+
+/* ERROR */
+
+.error-message {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    border: 1px solid #fca5a5;
+
+}
+
+
+/* =====================================================
+   FINAL ACTION BUTTON CLICK FIX
+===================================================== */
+
+.action-buttons,
+.action-buttons *{
+
+    pointer-events:auto;
+
+}
+
+
+.action-buttons{
+
+    position:relative;
+
+    z-index:100;
+
+}
+
+
+.action-buttons .action-btn{
+
+    position:relative;
+
+    z-index:101;
+
+    cursor:pointer !important;
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+}
+
+
+.action-buttons .action-btn i{
+
+    pointer-events:none;
+
+}
+
+
+/* Buttons should not inherit browser appearance */
+
+.action-buttons button.action-btn{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    background-clip:padding-box;
+
+}
+
+
+/* =====================================================
+   FINAL POPUP LAYER
+===================================================== */
+
+#editRestrictionModal,
+#deleteConfirmationModal{
+
+    pointer-events:auto;
+
+}
+
+
+#editRestrictionModal > div,
+#deleteConfirmationModal > div{
+
+    position:relative;
+
+    z-index:100000;
+
+}
+
+
+/* Popup buttons */
+
+#editRestrictionModal button,
+#deleteConfirmationModal button{
+
+    pointer-events:auto !important;
+
+    position:relative;
+
+    z-index:100001;
+
+}
