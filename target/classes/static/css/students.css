@@ -1,0 +1,626 @@
+/* =========================================
+        STUDENT PORTAL PROFESSIONAL UI
+========================================= */
+
+
+/* ---------- GLOBAL ---------- */
+
+*{
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+
+body{
+
+    margin:0;
+
+    background:#f8fafc;
+
+    color:#1e293b;
+
+}
+
+
+
+/* =========================================
+            PAGE HEADER
+========================================= */
+
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:28px 45px 15px;
+
+}
+
+
+
+.page-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+
+.page-title i{
+
+    font-size:34px;
+
+    color:#475569;
+
+}
+
+
+
+.page-title h1{
+
+    margin:0;
+
+    font-size:32px;
+
+    font-weight:700;
+
+    color:#1e293b;
+
+}
+
+
+
+.page-subtitle{
+
+    margin-top:6px;
+
+    font-size:15px;
+
+    color:#64748b;
+
+}
+
+
+
+/* =========================================
+            ADD STUDENT BUTTON
+========================================= */
+
+
+.add-student{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+	background:#059669;
+
+    color:white !important;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    text-decoration:none !important;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    box-shadow:0 4px 12px rgba(37,99,235,.25);
+
+    transition:.3s;
+
+}
+
+
+
+.add-student i{
+
+    font-size:16px;
+
+}
+
+
+
+.add-student:hover{
+
+	background:#1e293b;
+	   color:#ffffff !important;
+
+	   transform:translateY(-2px);
+
+}
+
+
+
+/* =========================================
+          SEARCH FILTER SECTION
+========================================= */
+
+
+.search-box{
+
+    margin:15px 45px 25px;
+
+    padding:18px 22px;
+
+    background:white;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    box-shadow:0 5px 20px rgba(15,23,42,.06);
+
+}
+
+
+
+/* Search Input */
+
+
+.search-input{
+
+    height:44px;
+
+    width:300px;
+
+    display:flex;
+
+    align-items:center;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
+
+
+
+.search-input i{
+
+    width:42px;
+
+    text-align:center;
+
+    color:#64748b;
+
+}
+
+
+
+.search-input input{
+
+    border:none;
+
+    outline:none;
+
+    height:100%;
+
+    width:100%;
+
+    font-size:15px;
+
+}
+
+
+
+/* Dropdown */
+
+
+.filter-select{
+
+    height:44px;
+
+    width:190px;
+
+    padding:0 12px;
+
+    border-radius:10px;
+
+    border:1px solid #cbd5e1;
+
+    background:white;
+
+    color:#334155;
+
+    font-size:15px;
+
+}
+
+
+
+.filter-select:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+}
+
+
+
+/* =========================================
+              SEARCH BUTTON
+========================================= */
+
+
+.search-btn{
+
+    height:44px;
+
+    width:105px;
+
+    border:none;
+
+    border-radius:10px;
+
+	background:#475569;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    transition:.3s;
+
+}
+
+
+
+.search-btn:hover{
+
+		background:#334155;
+
+	    color:white;
+
+	    transform:translateY(-2px);
+
+}
+
+
+
+/* =========================================
+              TABLE DESIGN
+========================================= */
+
+
+.table-container{
+
+    margin:0 45px;
+
+    background:white;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 25px rgba(15,23,42,.08);
+
+}
+
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+thead{
+
+    background:#f8fafc;
+
+}
+
+
+
+thead th{
+
+    padding:18px 20px;
+
+    text-align:left;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#334155;
+
+    border-bottom:1px solid #e2e8f0;
+
+}
+
+
+
+tbody td{
+
+    padding:17px 20px;
+
+    font-size:15px;
+
+    color:#475569;
+
+    border-bottom:1px solid #f1f5f9;
+
+}
+
+
+
+tbody tr{
+
+    transition:.2s;
+
+}
+
+
+
+tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+/* =========================================
+              STATUS COLUMN
+========================================= */
+
+
+.status-column{
+
+    text-align:center;
+
+}
+
+
+
+tbody td:nth-child(6){
+
+    background:#fafafa;
+
+}
+
+
+
+tbody tr:hover td:nth-child(6){
+
+    background:#f1f5f9;
+
+}
+
+
+
+/* =========================================
+            STATUS BADGES
+========================================= */
+
+.status{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:95px;
+    padding:6px 14px;
+
+    border-radius:50px;
+
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.3px;
+
+}
+
+/* ACTIVE */
+
+.status.active{
+
+    background:#ecfdf5;
+    color:#047857;
+    border:1px solid #a7f3d0;
+
+}
+
+/* INACTIVE */
+
+.status.inactive{
+
+    background:#fff7ed;
+    color:#c2410c;
+    border:1px solid #fed7aa;
+
+}
+
+/* =========================================
+              ACTION BUTTONS
+========================================= */
+
+
+.action-btn{
+
+    width:34px;
+
+    height:34px;
+
+    border:none;
+
+    border-radius:8px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    margin-right:8px;
+
+    transition:.2s;
+
+}
+
+
+
+.edit-btn{
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+}
+
+
+
+.delete-btn{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+
+
+.action-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* =========================================
+              PAGINATION
+========================================= */
+
+.pagination-text{
+
+    margin:25px 45px;
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+
+/* ==========================
+      FIXED PAGINATION
+========================== */
+
+.pagination-footer{
+    position: fixed;
+    bottom: 0;
+    left: 280px;
+    right: 0;
+
+    height: 70px;
+
+    background: #fff;
+    border-top: 1px solid #E2E8F0;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 30px;
+
+    z-index: 9999;
+
+    box-shadow: 0 -4px 15px rgba(0,0,0,.08);
+}
+
+.pagination-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination{
+    margin: 0;
+}
+
+.main{
+    padding-bottom: 90px !important;
+}
+
+
+
+/* =========================================
+              RESPONSIVE
+========================================= */
+
+
+@media(max-width:1000px){
+
+
+.search-box{
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.search-input,
+.filter-select{
+
+    width:100%;
+
+}
+
+
+
+.search-btn{
+
+    width:120px;
+
+}
+
+
+
+.table-container{
+
+    overflow-x:auto;
+
+}
+
+
+}
+
+

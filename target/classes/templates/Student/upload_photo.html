@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Upload Profile Photo</title>
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/Student/profile.css}">
+
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        body {
+            background: #F1F5F9;
+        }
+
+
+        .upload-page {
+
+            width: 500px;
+
+            margin: 80px auto;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .upload-title {
+
+            text-align: center;
+
+            font-size: 28px;
+
+            color: #1E293B;
+
+            margin-bottom: 10px;
+        }
+
+
+        .upload-subtitle {
+
+            text-align: center;
+
+            color: #64748B;
+
+            margin-bottom: 30px;
+        }
+
+
+        .file-box {
+
+            background: #F8FAFC;
+
+            border: 1px solid #E2E8F0;
+
+            padding: 25px;
+
+            border-radius: 15px;
+        }
+
+
+        .file-box label {
+
+            display: block;
+
+            font-weight: 600;
+
+            color: #475569;
+
+            margin-bottom: 10px;
+        }
+
+
+        input[type="file"] {
+
+            width: 100%;
+        }
+
+
+        .upload-buttons {
+
+            margin-top: 30px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="upload-page">
+
+
+    <h1 class="upload-title">
+
+        <i class="fa-solid fa-camera"></i>
+
+        Upload Profile Photo
+
+    </h1>
+
+
+    <p class="upload-subtitle">
+
+        Update your profile picture
+
+    </p>
+
+
+    <form th:action="@{/student/upload-photo}"
+          method="post"
+          enctype="multipart/form-data">
+
+
+        <div class="file-box">
+
+
+            <label>
+
+                Choose Image
+
+            </label>
+
+
+            <input type="file"
+                   name="profilePhotoFile"
+                   accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                   required>
+
+
+        </div>
+
+
+        <div class="upload-buttons">
+
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                <i class="fa-solid fa-upload"></i>
+
+                Upload Photo
+
+            </button>
+
+
+            <a th:href="@{/student/profile}"
+               class="btn btn-secondary">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back
+
+            </a>
+
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>

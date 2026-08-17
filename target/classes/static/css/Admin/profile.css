@@ -1,0 +1,449 @@
+/*==================================================
+        ADMIN PROFILE CSS
+==================================================*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+
+body{
+
+    background:#eef2f7;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:10px;
+
+}
+
+
+
+
+.container{
+
+    width:100%;
+
+    max-width:950px;
+
+}
+
+
+
+
+
+.profile-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+
+
+
+
+/* Cover */
+
+
+.cover-section{
+
+    height:75px;
+
+    background:linear-gradient(
+        135deg,
+        #334155,
+        #64748b
+    );
+
+}
+
+
+
+
+
+
+/* Profile Image */
+
+
+.profile-image{
+
+    width:95px;
+
+    height:95px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:4px solid white;
+
+    margin-top:-48px;
+
+    background:white;
+
+    box-shadow:0 5px 12px rgba(0,0,0,.2);
+
+}
+
+
+
+
+
+.text-center{
+
+    text-align:center;
+
+}
+
+
+
+
+h2{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    color:#1e293b;
+
+}
+
+
+
+
+
+
+/* Information */
+
+
+.info-card{
+
+    width:92%;
+
+    margin:15px auto;
+
+    padding:18px;
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+}
+
+
+
+
+
+.info-card h4{
+
+    font-size:22px;
+
+    color:#1e293b;
+
+}
+
+
+
+
+
+.info-card i{
+
+    color:#475569;
+
+}
+
+
+
+
+
+.info-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+
+
+
+
+.info-item:last-child{
+
+    border-bottom:none;
+
+}
+
+
+
+
+.info-item strong{
+
+    color:#475569;
+
+}
+
+
+
+
+
+.info-item span{
+
+    color:#111827;
+
+    font-weight:500;
+
+}
+
+
+
+
+
+
+
+/* Status */
+
+
+.badge{
+
+    padding:6px 18px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+}
+
+
+
+
+
+.bg-success{
+
+    background:#dcfce7!important;
+
+    color:#15803d;
+
+}
+
+
+
+
+
+
+
+/* Buttons */
+
+
+.button-section{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:15px;
+
+}
+
+
+
+
+.btn{
+
+    border:none;
+
+    border-radius:25px;
+
+    padding:9px 18px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+    color:white;
+
+}
+
+
+
+
+
+/* Dashboard */
+
+
+.dashboard-btn{
+
+    background:#475569;
+
+}
+
+
+
+
+
+.dashboard-btn:hover{
+
+    background:#334155;
+
+}
+
+
+
+
+
+/* Update */
+
+
+.btn-edit{
+
+    background:#2563eb;
+
+}
+
+
+
+
+
+.btn-edit:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+
+
+/* Upload */
+
+
+.btn-primary{
+
+    background:#16a34a;
+
+}
+
+
+
+
+
+.btn-primary:hover{
+
+    background:#15803d;
+
+}
+
+
+
+
+
+/* Change Password */
+
+
+.btn-warning{
+
+    background:#f59e0b;
+
+}
+
+
+
+
+
+.btn-warning:hover{
+
+    background:#d97706;
+
+}
+
+
+
+
+
+
+
+@media(max-width:768px){
+
+
+body{
+
+    align-items:flex-start;
+
+}
+
+
+
+.button-section{
+
+    flex-direction:column;
+
+}
+
+
+
+.btn{
+
+    width:90%;
+
+}
+
+
+
+.info-item{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:5px;
+
+}
+
+
+
+}

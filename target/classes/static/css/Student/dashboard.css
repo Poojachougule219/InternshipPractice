@@ -1,0 +1,1322 @@
+/* =========================================================
+   STUDENT DASHBOARD CSS
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 245px;
+    height: 100vh;
+
+    background: #0f172a;
+
+    padding: 26px 16px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-right: 1px solid #1e293b;
+
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    padding: 5px 13px 26px;
+
+    border-bottom: 1px solid #263449;
+}
+
+.logo h2 {
+    color: #f8fafc;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    letter-spacing: 0.1px;
+}
+
+
+/* =========================================================
+   SIDEBAR MENU
+   ========================================================= */
+
+.menu {
+    list-style: none;
+
+    padding: 0;
+    margin: 27px 0 0;
+}
+
+.menu li {
+    margin-bottom: 6px;
+}
+
+.menu li a {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    gap: 14px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.menu li a i {
+    width: 20px;
+
+    text-align: center;
+
+    font-size: 15px;
+}
+
+.menu li a:hover {
+    background: #1b2638;
+
+    color: #f8fafc;
+}
+
+
+/* =========================================================
+   ACTIVE MENU
+   ========================================================= */
+
+.menu li.active a {
+    background: #1d2a3d;
+
+    color: #60a5fa;
+
+    font-weight: 600;
+
+    box-shadow: inset 3px 0 0 #60a5fa;
+}
+
+.menu li.active a i {
+    color: #60a5fa;
+}
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+    margin-top: auto;
+
+    padding: 18px 8px 3px;
+
+    text-align: center;
+
+    border-top: 1px solid #263449;
+}
+
+.sidebar-footer p {
+    color: #64748b;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+.sidebar-footer small {
+    color: #475569;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    margin-left: 245px;
+
+    width: calc(100% - 245px);
+
+    min-height: 100vh;
+
+    background: #f1f5f9;
+
+    padding: 0;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   TOP HEADER
+   SAME COMPACT STYLE AS ADMIN DASHBOARD
+   ========================================================= */
+
+.topbar {
+    width: 100%;
+
+    height: 83px;
+
+    margin: 0;
+
+    padding: 8px 30px;
+
+    background: #172235;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border: 1px solid #26364d;
+
+    border-top: none;
+
+    border-radius: 0 0 14px 14px;
+
+    box-shadow:
+        0 6px 16px rgba(15, 23, 42, 0.14);
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   WELCOME SECTION
+   ========================================================= */
+
+.welcome {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    min-width: 0;
+}
+
+.welcome h1 {
+    color: #f8fafc;
+
+    font-size: 29px;
+
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    white-space: nowrap;
+}
+
+.welcome h1 span {
+    color: #60a5fa;
+}
+
+.welcome p {
+    margin-top: 3px;
+
+    color: #a8b4c7;
+
+    font-size: 13px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   HEADER RIGHT
+   ========================================================= */
+
+.header-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   NOTIFICATION
+   ========================================================= */
+
+.notification {
+    width: 43px;
+    height: 43px;
+
+    min-width: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #202d41;
+
+    border: 1px solid #3a4a60;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.notification:hover {
+    background: #29384c;
+
+    border-color: #506177;
+}
+
+
+/* =========================================================
+   USER INFO
+   ========================================================= */
+
+.user-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   PROFILE AVATAR
+   ========================================================= */
+
+.profile-avatar {
+    width: 48px;
+    height: 48px;
+
+    min-width: 48px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: #263449;
+
+    border: 2px solid #60a5fa;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   USER DETAILS
+   ========================================================= */
+
+.user-details {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    min-width: 65px;
+}
+
+.user-details h4 {
+    color: #f8fafc;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    margin: 0;
+}
+
+.user-details small {
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS CONTAINER
+   ========================================================= */
+
+.dashboard-cards {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+
+    padding: 20px 30px 0 30px;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   COMMON DASHBOARD CARD
+   ========================================================= */
+
+.dashboard-card {
+    width: 100%;
+
+    height: 136px;
+
+    padding: 20px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 6px 16px rgba(15, 23, 42, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(15, 23, 42, 0.14);
+}
+
+
+/* =========================================================
+   CARD 1 - MY PROFILE
+   LIGHT PROFESSIONAL BLUE
+   ========================================================= */
+
+.dashboard-card:nth-child(1) {
+    background: #eaf2ff;
+
+    border: 1px solid #d4e3fa;
+}
+
+
+/* =========================================================
+   CARD 2 - DEPARTMENT
+   LIGHT PROFESSIONAL TEAL
+   ========================================================= */
+
+.dashboard-card:nth-child(2) {
+    background: #e8f7f3;
+
+    border: 1px solid #cdebe3;
+}
+
+
+/* =========================================================
+   CARD 3 - ACCOUNT STATUS
+   LIGHT PROFESSIONAL WARM
+   ========================================================= */
+
+.dashboard-card:nth-child(3) {
+    background: #fff4df;
+
+    border: 1px solid #f4dfb8;
+}
+
+
+/* =========================================================
+   CARD 4 - JOINED DATE
+   LIGHT PROFESSIONAL PURPLE
+   ========================================================= */
+
+.dashboard-card:nth-child(4) {
+    background: #f3edff;
+
+    border: 1px solid #e2d5fa;
+}
+
+
+/* =========================================================
+   CARD ICON
+   ========================================================= */
+
+.card-icon {
+    width: 62px;
+    height: 62px;
+
+    min-width: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   PROFILE ICON
+   ========================================================= */
+
+.dashboard-card:nth-child(1) .card-icon {
+    background: #d5e5ff;
+
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   DEPARTMENT ICON
+   ========================================================= */
+
+.dashboard-card:nth-child(2) .card-icon {
+    background: #d1f3e6;
+
+    color: #059669;
+}
+
+
+/* =========================================================
+   ACCOUNT STATUS ICON
+   ========================================================= */
+
+.dashboard-card:nth-child(3) .card-icon {
+    background: #ffe7bf;
+
+    color: #ea580c;
+}
+
+
+/* =========================================================
+   JOINED DATE ICON
+   ========================================================= */
+
+.dashboard-card:nth-child(4) .card-icon {
+    background: #e7d9ff;
+
+    color: #7c3aed;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.card-content {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.card-content h4 {
+    margin-bottom: 5px;
+
+    color: #475569;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   CARD VALUE
+   ========================================================= */
+
+.card-content h2 {
+    color: #172235;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    white-space: nowrap;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   PROFILE VALUE
+   ========================================================= */
+
+.dashboard-card:nth-child(1) .card-content h2 {
+    color: #172235;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   DEPARTMENT VALUE
+   ========================================================= */
+
+.dashboard-card:nth-child(2) .card-content h2 {
+    color: #172235;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   ACCOUNT STATUS VALUE
+   ========================================================= */
+
+.dashboard-card:nth-child(3) .card-content h2 {
+    color: #c56a08;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   JOINED DATE VALUE
+   ========================================================= */
+
+.dashboard-card:nth-child(4) .card-content h2 {
+    color: #172235;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   DEPARTMENT / DATE TEXT
+   ========================================================= */
+
+.department-text {
+    font-size: 20px !important;
+
+    font-weight: 600 !important;
+
+    white-space: nowrap;
+
+    color: #172235 !important;
+}
+
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .sidebar {
+        width: 225px;
+    }
+
+    .main-content {
+        margin-left: 225px;
+
+        width: calc(100% - 225px);
+    }
+
+    .topbar {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .dashboard-card {
+        padding: 20px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main-content {
+        margin-left: 210px;
+
+        width: calc(100% - 210px);
+    }
+
+    .topbar {
+        height: 83px;
+
+        padding: 8px 20px;
+    }
+
+    .welcome h1 {
+        font-size: 25px;
+    }
+
+    .dashboard-cards {
+        padding: 20px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: auto;
+
+        padding: 18px;
+    }
+
+    .logo {
+        padding-bottom: 18px;
+    }
+
+    .menu {
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 5px;
+
+        margin-top: 16px;
+    }
+
+    .menu li {
+        margin-bottom: 0;
+    }
+
+    .menu li a {
+        padding: 10px 11px;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+
+    /* MAIN */
+
+    .main-content {
+        margin-left: 0;
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 15px;
+
+        background: #f1f5f9;
+    }
+
+
+    /* HEADER */
+
+    .topbar {
+        width: 100%;
+
+        height: auto;
+
+        min-height: 83px;
+
+        padding: 14px 18px;
+
+        margin: 0 0 20px 0;
+
+        border-radius: 12px;
+
+        flex-direction: row;
+
+        align-items: center;
+    }
+
+    .welcome h1 {
+        font-size: 22px;
+    }
+
+    .welcome p {
+        font-size: 12px;
+    }
+
+    .header-right {
+        gap: 10px;
+    }
+
+    .notification {
+        width: 40px;
+        height: 40px;
+
+        min-width: 40px;
+
+        font-size: 16px;
+    }
+
+    .profile-avatar {
+        width: 43px;
+        height: 43px;
+
+        min-width: 43px;
+    }
+
+    .user-details {
+        display: none;
+    }
+
+
+    /* CARDS */
+
+    .dashboard-cards {
+        width: 100%;
+
+        padding: 0;
+
+        margin: 0;
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+    .dashboard-card {
+        height: 110px;
+
+        min-height: 110px;
+
+        padding: 17px 18px;
+
+        border-radius: 13px;
+    }
+
+    .card-icon {
+        width: 54px;
+        height: 54px;
+
+        min-width: 54px;
+
+        font-size: 20px;
+    }
+
+    .card-content h4 {
+        font-size: 13px;
+
+        margin-bottom: 4px;
+    }
+
+    .card-content h2,
+    .department-text {
+        font-size: 18px !important;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .topbar {
+        padding: 13px 14px;
+    }
+
+    .welcome h1 {
+        font-size: 19px;
+    }
+
+    .welcome p {
+        font-size: 11px;
+    }
+
+    .header-right {
+        gap: 7px;
+    }
+
+    .notification {
+        width: 37px;
+        height: 37px;
+
+        min-width: 37px;
+    }
+
+    .profile-avatar {
+        width: 40px;
+        height: 40px;
+
+        min-width: 40px;
+    }
+
+    .dashboard-card {
+        height: 105px;
+
+        min-height: 105px;
+
+        padding: 15px;
+    }
+
+    .card-icon {
+        width: 50px;
+        height: 50px;
+
+        min-width: 50px;
+    }
+
+    .card-content h4 {
+        font-size: 12px;
+    }
+
+    .card-content h2,
+    .department-text {
+        font-size: 17px !important;
+    }
+}
+
+
+
+/* =========================================================
+   STUDENT INFORMATION SECTION
+========================================================= */
+
+.student-info-section {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 24px;
+
+    margin-top: 28px;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* =========================================================
+   INFORMATION CARD
+========================================================= */
+
+.info-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    min-height: 210px;
+
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
+
+    transition: all 0.25s ease;
+
+}
+
+
+.info-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.10);
+
+}
+
+
+/* =========================================================
+   INFORMATION CARD HEADER
+========================================================= */
+
+.info-card-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+}
+
+
+.info-card-header h3 {
+
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    color: #1e293b;
+
+}
+
+
+.info-card-header p {
+
+    margin: 6px 0 0;
+
+    font-size: 13px;
+
+    color: #64748b;
+
+}
+
+
+/* =========================================================
+   COMPLETION PERCENTAGE
+========================================================= */
+
+.completion-percentage {
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #2563eb;
+
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.progress-container {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+}
+
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 12px;
+
+    background: #e2e8f0;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+
+.progress-fill {
+
+    height: 100%;
+
+    width: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+
+}
+
+
+/* =========================================================
+   PROFILE COMPLETION STATUS
+========================================================= */
+
+.completion-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 20px;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #16a34a;
+
+}
+
+
+.completion-status i {
+
+    font-size: 17px;
+
+}
+
+
+/* =========================================================
+   ACTIVITY HEADER ICON
+========================================================= */
+
+.activity-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #ede9fe;
+
+    color: #7c3aed;
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================================
+   ACTIVITY LIST
+========================================================= */
+
+.activity-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+}
+
+
+/* =========================================================
+   ACTIVITY ITEM
+========================================================= */
+
+.activity-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   ACTIVITY CHECK ICON
+========================================================= */
+
+.activity-check {
+
+    width: 30px;
+
+    height: 30px;
+
+    min-width: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dcfce7;
+
+    color: #16a34a;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   ACTIVITY DETAILS
+========================================================= */
+
+.activity-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+}
+
+
+.activity-details span {
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #334155;
+
+}
+
+
+.activity-details small {
+
+    font-size: 12px;
+
+    color: #94a3b8;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .student-info-section {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .info-card {
+
+        padding: 20px;
+
+    }
+
+
+    .info-card-header h3 {
+
+        font-size: 17px;
+
+    }
+
+
+    .completion-percentage {
+
+        font-size: 20px;
+
+    }
+
+}

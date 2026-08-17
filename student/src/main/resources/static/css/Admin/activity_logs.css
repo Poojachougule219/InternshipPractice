@@ -1,0 +1,1341 @@
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HTML + BODY
+========================================================= */
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background: #f1f5f9;
+
+    color: #1e293b;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.content-container {
+
+    width: 100%;
+    height: 100vh;
+
+    padding: 8px 16px 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+
+    width: 100%;
+
+    height: 88px;
+    min-height: 88px;
+
+    padding: 14px 22px;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    border: 1px solid #e2e8f0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.title-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.title-section h1 {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #0f172a;
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+    line-height: 1.1;
+}
+
+
+.title-section h1 i {
+
+    color: #475569;
+
+    font-size: 24px;
+}
+
+
+.title-section p {
+
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   HEADER BUTTONS
+========================================================= */
+
+.header-buttons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+/* =========================================================
+   COMMON BUTTON
+========================================================= */
+
+.btn {
+
+    height: 40px;
+
+    padding: 0 16px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================================
+   DASHBOARD BUTTON
+========================================================= */
+
+.dashboard-btn {
+
+    background: #1e293b;
+
+    color: #ffffff;
+}
+
+
+.dashboard-btn:hover {
+
+    background: #0f172a;
+}
+
+
+/* =========================================================
+   EXPORT BUTTON
+========================================================= */
+
+.export-btn {
+
+    background: #475569;
+
+    color: #ffffff;
+}
+
+
+.export-btn:hover {
+
+    background: #334155;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.table-card {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.05);
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   FILTER CARD
+========================================================= */
+
+.filter-card {
+
+    height: 76px;
+
+    min-height: 76px;
+
+    margin-top: 10px;
+
+    padding: 10px 16px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   FILTER SECTION
+========================================================= */
+
+.filter-section {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.search-box {
+
+    position: relative;
+
+    width: 400px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+}
+
+
+.search-box input {
+
+    width: 100%;
+
+    height: 100%;
+
+    padding: 0 45px 0 16px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.search-box input:focus {
+
+    border-color: #64748b;
+}
+
+
+.search-box input::placeholder {
+
+    color: #64748b;
+}
+
+
+.search-box i {
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 16px;
+
+    transform: translateY(-50%);
+
+    color: #64748b;
+
+    font-size: 18px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FILTER BOX
+========================================================= */
+
+.filter-box {
+
+    width: 190px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+}
+
+
+.filter-box select {
+
+    width: 100%;
+
+    height: 100%;
+
+    padding: 0 13px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+.filter-box select:focus {
+
+    border-color: #64748b;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+.search-btn {
+
+    height: 48px;
+
+    padding: 0 19px;
+
+    background: #334155;
+
+    color: #ffffff;
+
+    border: none;
+
+    border-radius: 8px;
+
+    flex-shrink: 0;
+}
+
+
+.search-btn:hover {
+
+    background: #1e293b;
+}
+
+
+/* =========================================================
+   GAP BETWEEN FILTER AND TABLE
+========================================================= */
+
+.filter-card + .activity-card {
+
+    margin-top: 14px;
+}
+
+
+/* =========================================================
+   ACTIVITY CARD
+========================================================= */
+
+.activity-card {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 0 0 6px;
+}
+
+
+/* =========================================================
+   TABLE CONTAINER
+========================================================= */
+
+.table-container {
+
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+table {
+
+    width: 100%;
+
+    height: auto;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+thead {
+
+    height: 43px;
+}
+
+
+thead tr {
+
+    height: 43px;
+}
+
+
+thead th {
+
+    height: 43px;
+
+    padding: 0 9px;
+
+    background: #1e293b;
+
+    color: #ffffff;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    border: none;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+========================================================= */
+
+.col-id {
+
+    width: 4%;
+}
+
+
+.col-action {
+
+    width: 10%;
+}
+
+
+.col-created {
+
+    width: 13%;
+}
+
+
+.col-description {
+
+    width: 23%;
+}
+
+
+.col-entity-id {
+
+    width: 7%;
+}
+
+
+.col-entity-name {
+
+    width: 9%;
+}
+
+
+.col-ip {
+
+    width: 10%;
+}
+
+
+.col-role {
+
+    width: 10%;
+}
+
+
+.col-username {
+
+    width: 10%;
+}
+
+
+.col-student-id {
+
+    width: 7%;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+tbody tr {
+
+    height: 49px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    transition: background 0.15s ease;
+}
+
+
+tbody tr:hover {
+
+    background: #f8fafc;
+}
+
+
+tbody td {
+
+    height: 49px;
+
+    padding: 5px 9px;
+
+    color: #334155;
+
+    font-size: 12px;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   ID
+========================================================= */
+
+.id-cell {
+
+    text-align: center;
+
+    font-weight: 600;
+
+    color: #334155;
+}
+
+
+/* =========================================================
+   CREATED AT
+========================================================= */
+
+.created-cell {
+
+    color: #475569 !important;
+
+    font-size: 11.5px !important;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description-column {
+
+    color: #64748b !important;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ENTITY ID
+========================================================= */
+
+.entity-id-cell {
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ENTITY NAME
+========================================================= */
+
+.entity-name-cell {
+
+    font-weight: 600;
+
+    color: #475569 !important;
+}
+
+
+/* =========================================================
+   IP ADDRESS
+========================================================= */
+
+.ip-cell {
+
+    font-family: Consolas, monospace;
+
+    font-size: 11.5px !important;
+
+    color: #475569 !important;
+}
+
+
+/* =========================================================
+   USERNAME
+========================================================= */
+
+.username-cell {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-weight: 600;
+
+    color: #0f172a !important;
+}
+
+
+/* =========================================================
+   STUDENT ID
+========================================================= */
+
+.student-id-cell {
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ACTION BADGE
+========================================================= */
+
+.action-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 25px;
+
+    padding: 3px 8px;
+
+    border-radius: 14px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    max-width: 100%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.action-badge.login {
+
+    background: #f3e8ff;
+
+    color: #7e22ce;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.action-badge.logout {
+
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+
+/* =========================================================
+   CREATE
+========================================================= */
+
+.action-badge.create {
+
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+
+/* =========================================================
+   UPDATE
+========================================================= */
+
+.action-badge.update {
+
+    background: #fef3c7;
+
+    color: #a16207;
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+.action-badge.delete {
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+}
+
+
+/* =========================================================
+   PASSWORD CHANGE
+========================================================= */
+
+.action-badge.password {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+
+/* =========================================================
+   OTHER
+========================================================= */
+
+.action-badge.other {
+
+    background: #e2e8f0;
+
+    color: #475569;
+}
+
+
+/* =========================================================
+   ROLE BADGE
+========================================================= */
+
+.role-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    max-width: 100%;
+
+    min-height: 25px;
+
+    padding: 3px 7px;
+
+    border-radius: 14px;
+
+    background: #e2e8f0;
+
+    color: #334155;
+
+    font-size: 9.5px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   EMPTY RECORDS
+========================================================= */
+
+.empty {
+
+    height: 130px;
+
+    text-align: center !important;
+
+    color: #64748b !important;
+
+    font-size: 14px !important;
+}
+
+
+.empty i {
+
+    margin-right: 8px;
+
+    color: #94a3b8;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.pagination {
+
+    height: 52px;
+
+    min-height: 52px;
+
+    margin-top: 8px;
+
+    padding: 5px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+
+    border-top: 1px solid #e2e8f0;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   PAGE NUMBER WRAPPER
+========================================================= */
+
+.page-numbers {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+/* =========================================================
+   PAGINATION LINKS
+========================================================= */
+
+.pagination a {
+
+    min-width: 34px;
+
+    height: 34px;
+
+    padding: 0 9px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================================
+   PREVIOUS / NEXT
+========================================================= */
+
+.pagination > a {
+
+    min-width: 90px;
+}
+
+
+/* =========================================================
+   PAGINATION HOVER
+========================================================= */
+
+.pagination a:hover {
+
+    background: #f1f5f9;
+
+    border-color: #94a3b8;
+
+    color: #0f172a;
+}
+
+
+/* =========================================================
+   ACTIVE PAGE
+========================================================= */
+
+.pagination a.active-page {
+
+    background: #1e293b;
+
+    border-color: #1e293b;
+
+    color: #ffffff;
+}
+
+
+.pagination a.active-page:hover {
+
+    background: #1e293b;
+
+    border-color: #1e293b;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DISABLED PAGINATION
+========================================================= */
+
+.disabled-page {
+
+    min-width: 90px;
+
+    height: 34px;
+
+    padding: 0 9px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 6px;
+
+    background: #f8fafc;
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   DESKTOP HEIGHT OPTIMIZATION
+========================================================= */
+
+@media (min-width: 1200px) {
+
+    .content-container {
+
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
+
+    .page-header {
+
+        height: 84px;
+
+        min-height: 84px;
+    }
+
+
+    .filter-card {
+
+        height: 72px;
+
+        min-height: 72px;
+    }
+
+
+    thead,
+    thead tr,
+    thead th {
+
+        height: 41px;
+    }
+
+
+    tbody tr,
+    tbody td {
+
+        height: 46px;
+    }
+
+
+    .pagination {
+
+        height: 50px;
+
+        min-height: 50px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    html,
+    body {
+
+        overflow-y: auto;
+    }
+
+
+    .content-container {
+
+        height: auto;
+
+        min-height: 100vh;
+
+        overflow: visible;
+    }
+
+
+    .filter-section {
+
+        flex-wrap: wrap;
+    }
+
+
+    .filter-card {
+
+        height: auto;
+
+        min-height: 72px;
+    }
+
+
+    .table-card {
+
+        overflow-x: auto;
+    }
+
+
+    .activity-card {
+
+        overflow-x: auto;
+    }
+
+
+    table {
+
+        min-width: 1150px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .content-container {
+
+        height: auto;
+
+        min-height: 100vh;
+
+        padding: 0 10px 12px;
+
+        overflow-y: auto;
+    }
+
+
+    .page-header {
+
+        height: auto;
+
+        min-height: 100px;
+
+        padding: 15px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+
+    .title-section h1 {
+
+        font-size: 23px;
+    }
+
+
+    .header-buttons {
+
+        width: 100%;
+    }
+
+
+    .header-buttons .btn {
+
+        flex: 1;
+    }
+
+
+    .filter-card {
+
+        height: auto;
+
+        min-height: auto;
+
+        padding: 12px;
+    }
+
+
+    .filter-section {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .search-box,
+    .filter-box,
+    .search-btn {
+
+        width: 100%;
+    }
+
+
+    .filter-card + .activity-card {
+
+        margin-top: 12px;
+    }
+
+
+    .activity-card {
+
+        overflow-x: auto;
+    }
+
+
+    .table-container {
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+    }
+
+
+    table {
+
+        min-width: 1150px;
+    }
+
+
+    .pagination {
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        height: auto;
+
+        min-height: 52px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .title-section h1 {
+
+        font-size: 21px;
+    }
+
+
+    .title-section h1 i {
+
+        font-size: 20px;
+    }
+
+
+    .header-buttons {
+
+        flex-direction: column;
+    }
+
+
+    .header-buttons .btn {
+
+        width: 100%;
+    }
+
+
+    .pagination {
+
+        gap: 4px;
+    }
+
+
+    .pagination a {
+
+        min-width: 32px;
+
+        height: 32px;
+
+        padding: 0 7px;
+    }
+
+
+    .pagination > a,
+    .disabled-page {
+
+        min-width: 80px;
+    }
+}

@@ -1,0 +1,303 @@
+/* ================================
+   STUDENT PROFILE PAGE - SINGLE SCREEN
+================================ */
+
+body{
+    background:#f8fafc;
+    font-family:'Poppins',sans-serif;
+    height:100vh;
+    overflow:hidden;
+}
+
+
+/* Main Container */
+
+.container{
+	min-height:100vh;
+	    display:flex;
+	    align-items:center;
+	    justify-content:center;
+	    padding:20px;
+}
+
+
+/* Profile Card */
+
+.profile-card{
+
+    width:850px;
+    max-height:95vh;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+
+    border:1px solid #e2e8f0;
+
+}
+
+
+
+/* Cover */
+
+.cover-section{
+
+    height:130px;
+
+    background:linear-gradient(
+        135deg,
+        #334155,
+        #64748b
+    );
+
+}
+
+
+
+/* Profile Image */
+
+.profile-image{
+
+    width:120px;
+
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:5px solid white;
+
+    margin-top:-60px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+
+}
+
+
+
+/* Name Section */
+
+.text-center.mt-3{
+
+    margin-top:10px!important;
+
+}
+
+
+h2{
+
+    font-size:26px;
+
+    margin-bottom:5px;
+
+    color:#1e293b;
+
+}
+
+
+.email{
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+}
+
+
+
+/* Information Card */
+
+.info-card{
+
+    margin:15px 30px;
+
+    padding:15px 25px;
+
+    border-radius:15px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+}
+
+
+.info-card h4{
+
+    font-size:18px;
+
+    margin-bottom:5px;
+
+}
+
+
+.info-card hr{
+
+    margin:8px 0;
+
+}
+
+
+
+/* Info Rows */
+
+.info-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:8px 0;
+
+    border-bottom:1px solid #e5e7eb;
+
+    font-size:14px;
+
+}
+
+
+.info-item:last-child{
+
+    border:none;
+
+}
+
+
+.info-item strong{
+
+    color:#475569;
+
+}
+
+
+.info-item span{
+
+    color:#0f172a;
+
+}
+
+
+
+/* Status */
+
+.badge{
+
+    padding:5px 15px;
+
+    border-radius:15px;
+
+}
+
+
+
+/* Buttons */
+
+.text-center.mt-4.mb-4{
+
+    margin-top:10px!important;
+
+    margin-bottom:15px!important;
+
+}
+
+
+.btn{
+
+    padding:9px 16px;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    margin:3px;
+
+    font-weight:600;
+
+}
+
+
+
+/* Edit */
+
+.btn-edit{
+
+    background:#334155;
+
+    color:white;
+
+}
+
+
+.btn-edit:hover{
+
+    background:#0f172a;
+
+    color:white;
+
+}
+
+
+
+/* Upload */
+
+.btn-primary{
+
+    background:#2563eb;
+
+    border:none;
+
+}
+
+
+.btn-primary:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+/* Change Password */
+
+.btn-warning{
+
+    background:#d97706!important;
+
+    border:none;
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    body{
+
+        overflow:auto;
+
+    }
+
+
+    .container{
+
+        height:auto;
+
+        padding:20px;
+
+    }
+
+
+    .profile-card{
+
+        width:100%;
+
+    }
+
+}
