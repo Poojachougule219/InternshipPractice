@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Edit Profile</title>
@@ -23,229 +24,278 @@
 
 <div class="container">
 
-    <!-- Header -->
-    <div class="edit-header">
+    <!-- =====================================================
+         EDIT PROFILE CARD
+         ===================================================== -->
+    <div class="edit-profile-card">
 
-        <h2>
-            <i class="bi bi-person-gear"></i>
-            Edit Profile
-        </h2>
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+        <div class="edit-header">
 
-        <p>
-            Update your personal information
-        </p>
+            <h2>
+                <i class="bi bi-person-gear"></i>
+                Edit Profile
+            </h2>
 
-    </div>
+            <p>
+                Update your personal information
+            </p>
 
+        </div>
 
-    <!-- Success Message -->
-    <div th:if="${success}"
-         class="alert alert-success alert-dismissible fade show">
 
-        <i class="bi bi-check-circle"></i>
-        <span th:text="${success}"></span>
+        <!-- =================================================
+             SUCCESS MESSAGE
+             Appears below header, not at the top of page
+             ================================================= -->
+        <div th:if="${success}"
+             class="alert alert-success alert-dismissible fade show profile-alert"
+             role="alert">
 
-        <button type="button"
-                class="btn-close"
-                data-bs-dismiss="alert">
-        </button>
+            <i class="bi bi-check-circle"></i>
 
-    </div>
+            <span th:text="${success}">
+                Profile updated successfully.
+            </span>
 
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close">
+            </button>
 
-    <!-- Error Message -->
-    <div th:if="${error}"
-         class="alert alert-danger alert-dismissible fade show">
+        </div>
 
-        <i class="bi bi-exclamation-triangle"></i>
-        <span th:text="${error}"></span>
 
-        <button type="button"
-                class="btn-close"
-                data-bs-dismiss="alert">
-        </button>
+        <!-- =================================================
+             ERROR MESSAGE
+             ================================================= -->
+        <div th:if="${error}"
+             class="alert alert-danger alert-dismissible fade show profile-alert"
+             role="alert">
 
-    </div>
+            <i class="bi bi-exclamation-triangle"></i>
 
+            <span th:text="${error}">
+                Something went wrong.
+            </span>
 
-    <!-- Form -->
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close">
+            </button>
 
-    <form th:action="@{/admin/update-profile}"
-          th:object="${admin}"
-          method="post"
-          enctype="multipart/form-data">
+        </div>
 
 
-        <div class="form-body">
+        <!-- =================================================
+             FORM
+             ================================================= -->
+        <form th:action="@{/admin/update-profile}"
+              th:object="${admin}"
+              method="post"
+              enctype="multipart/form-data">
 
-            <div class="row">
 
+            <!-- =================================================
+                 FORM BODY
+                 ================================================= -->
+            <div class="form-body">
 
-                <!-- Name -->
+                <div class="row">
 
-                <div class="col-md-6 mb-3">
 
-                    <label for="name">
-                        Name
-                    </label>
+                    <!-- ==============================
+                         NAME
+                         ============================== -->
+                    <div class="col-md-6 mb-3">
 
-                    <input type="text"
-                           id="name"
-                           class="form-control"
-                           th:field="*{name}"
-                           required>
+                        <label for="name">
+                            Name
+                        </label>
 
-                </div>
+                        <input type="text"
+                               id="name"
+                               class="form-control"
+                               th:field="*{name}"
+                               required>
 
+                    </div>
 
-                <!-- Age -->
 
-                <div class="col-md-6 mb-3">
+                    <!-- ==============================
+                         AGE
+                         ============================== -->
+                    <div class="col-md-6 mb-3">
 
-                    <label for="age">
-                        Age
-                    </label>
+                        <label for="age">
+                            Age
+                        </label>
 
-                    <input type="number"
-                           id="age"
-                           class="form-control"
-                           th:field="*{age}"
-                           required>
+                        <input type="number"
+                               id="age"
+                               class="form-control"
+                               th:field="*{age}"
+                               required>
 
-                </div>
+                    </div>
 
 
-                <!-- Email -->
+                    <!-- ==============================
+                         EMAIL
+                         ============================== -->
+                    <div class="col-md-6 mb-3">
 
-                <div class="col-md-6 mb-3">
+                        <label for="email">
+                            Email
+                        </label>
 
-                    <label for="email">
-                        Email
-                    </label>
+                        <input type="email"
+                               id="email"
+                               class="form-control"
+                               th:field="*{email}"
+                               readonly>
 
-                    <input type="email"
-                           id="email"
-                           class="form-control"
-                           th:field="*{email}"
-                           readonly>
+                    </div>
 
-                </div>
 
+                    <!-- ==============================
+                         CONTACT
+                         ============================== -->
+                    <div class="col-md-6 mb-3">
 
-                <!-- Contact -->
+                        <label for="contactNo">
+                            Contact Number
+                        </label>
 
-                <div class="col-md-6 mb-3">
+                        <input type="text"
+                               id="contactNo"
+                               class="form-control"
+                               th:field="*{contactNo}"
+                               required>
 
-                    <label for="contactNo">
-                        Contact Number
-                    </label>
+                    </div>
 
-                    <input type="text"
-                           id="contactNo"
-                           class="form-control"
-                           th:field="*{contactNo}"
-                           required>
 
-                </div>
+                    <!-- ==============================
+                         DEPARTMENT
+                         ============================== -->
+                    <div class="col-md-6 mb-3">
 
+                        <label for="department">
+                            Department
+                        </label>
 
-                <!-- Department -->
+                        <input type="text"
+                               id="department"
+                               class="form-control"
+                               th:field="*{department}"
+                               required>
 
-                <div class="col-md-6 mb-3">
+                    </div>
 
-                    <label for="department">
-                        Department
-                    </label>
 
-                    <input type="text"
-                           id="department"
-                           class="form-control"
-                           th:field="*{department}"
-                           required>
+                    <!-- ==============================
+                         CITY
+                         ============================== -->
+                    <div class="col-md-6 mb-3">
 
-                </div>
+                        <label for="city">
+                            City
+                        </label>
 
+                        <input type="text"
+                               id="city"
+                               class="form-control"
+                               th:field="*{city}"
+                               required>
 
-                <!-- City -->
+                    </div>
 
-                <div class="col-md-6 mb-3">
 
-                    <label for="city">
-                        City
-                    </label>
+                    <!-- ==============================
+                         ADDRESS
+                         ============================== -->
+                    <div class="col-md-6 mb-3">
 
-                    <input type="text"
-                           id="city"
-                           class="form-control"
-                           th:field="*{city}"
-                           required>
+                        <label for="address">
+                            Address
+                        </label>
 
-                </div>
+                        <textarea id="address"
+                                  class="form-control"
+                                  rows="3"
+                                  th:field="*{address}"
+                                  required></textarea>
 
+                    </div>
 
-                <!-- Address -->
 
-                <div class="col-md-6 mb-3">
+                    <!-- ==============================
+                         PROFILE PHOTO
+                         ============================== -->
+                    <div class="col-md-6 mb-3">
 
-                    <label for="address">
-                        Address
-                    </label>
+                        <label for="profilePhoto">
 
-                    <textarea id="address"
-                              class="form-control"
-                              rows="3"
-                              th:field="*{address}"
-                              required></textarea>
+                            <i class="bi bi-camera"></i>
 
-                </div>
+                            Profile Photo
 
+                        </label>
 
-                <!-- Profile Photo -->
 
-                <div class="col-md-6 mb-3">
+                        <!--
+                            IMPORTANT:
 
-                    <label for="profileImage">
+                            AdminPageController expects:
 
-                        <i class="bi bi-camera"></i>
+                            @RequestParam(
+                                value = "profilePhoto",
+                                required = false
+                            )
 
-                        Profile Photo
+                            Therefore the input name must be:
+                            profilePhoto
+                        -->
 
-                    </label>
+                        <input type="file"
+                               id="profilePhoto"
+                               class="form-control"
+                               name="profilePhoto"
+                               accept="image/jpeg,image/jpg,image/png">
 
-                    <!-- IMPORTANT:
-                         name must be profileImage
-                         because controller uses @RequestParam("profileImage")
-                    -->
 
-                    <input type="file"
-                           id="profileImage"
-                           class="form-control"
-                           name="profileImage"
-                           accept="image/jpeg,image/jpg,image/png">
+                        <small class="text-muted">
 
-                    <small class="text-muted">
+                            JPG, JPEG or PNG only.
+                            Maximum size 5 MB.
 
-                        JPG, JPEG or PNG only.
-                        Maximum size 5 MB.
+                        </small>
 
-                    </small>
 
-                    <!-- Current Photo -->
+                        <!-- ==============================
+                             CURRENT PROFILE PHOTO
+                             ============================== -->
 
-                    <div class="mt-3"
-                         th:if="${admin.profilePhoto != null and !admin.profilePhoto.isEmpty()}">
+                        <div class="current-photo"
+                             th:if="${admin.profilePhoto != null and admin.profilePhoto.length > 0}">
 
-                        <p class="mb-2">
-                            Current Profile Photo:
-                        </p>
+                            <p class="current-photo-title">
 
-                        <img th:src="${admin.profilePhoto}"
-                             alt="Profile Photo"
-                             style="width:100px;
-                                    height:100px;
-                                    object-fit:cover;
-                                    border-radius:50%;
-                                    border:2px solid #ddd;">
+                                Current Profile Photo:
+
+                            </p>
+
+
+                            <img th:src="@{/admin/profile-photo}"
+                                 alt="Profile Photo"
+                                 class="current-profile-image">
+
+                        </div>
 
                     </div>
 
@@ -253,60 +303,89 @@
 
             </div>
 
-        </div>
+
+            <!-- =================================================
+                 BUTTON AREA
+                 ================================================= -->
+            <div class="button-area">
 
 
-        <!-- Buttons -->
+                <!-- DASHBOARD -->
 
-        <div class="button-area">
+                <a th:href="@{/admin/dashboard}"
+                   class="btn dashboard-btn">
 
+                    <i class="bi bi-speedometer2"></i>
 
-            <!-- Dashboard -->
+                    Dashboard
 
-            <a th:href="@{/admin/dashboard}"
-               class="btn dashboard-btn">
-
-                <i class="bi bi-speedometer2"></i>
-
-                Dashboard
-
-            </a>
+                </a>
 
 
-            <!-- Save -->
+                <!-- SAVE -->
 
-            <button type="submit"
-                    class="btn save-btn">
+                <button type="submit"
+                        class="btn save-btn">
 
-                <i class="bi bi-check-circle"></i>
+                    <i class="bi bi-check-circle"></i>
 
-                Save Changes
+                    Save Changes
 
-            </button>
-
-
-            <!-- Cancel -->
-
-            <a th:href="@{/admin/profile}"
-               class="btn cancel-btn">
-
-                <i class="bi bi-x-circle"></i>
-
-                Cancel
-
-            </a>
+                </button>
 
 
-        </div>
+                <!-- CANCEL -->
 
+                <a th:href="@{/admin/profile}"
+                   class="btn cancel-btn">
 
-    </form>
+                    <i class="bi bi-x-circle"></i>
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 
 
+<!-- =====================================================
+     BOOTSTRAP JS
+     ===================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
+
+
+<!-- =====================================================
+     AUTO HIDE SUCCESS / ERROR MESSAGE
+     ===================================================== -->
+
+<script>
+
+    setTimeout(function () {
+
+        const alerts =
+            document.querySelectorAll('.profile-alert');
+
+        alerts.forEach(function (alert) {
+
+            const bsAlert =
+                bootstrap.Alert.getOrCreateInstance(alert);
+
+            bsAlert.close();
+
+        });
+
+    }, 4000);
+
+</script>
+
 
 </body>
 

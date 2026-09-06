@@ -51,16 +51,15 @@ th:href="@{/css/Admin/profile.css?v=20}">
     <div class="text-center">
 
 
-        <img th:if="${admin.profilePhoto != null}"
-             th:src="@{'/uploads/Profile/Admin photos/' + ${admin.profilePhoto}}"
-             class="profile-image"
-             alt="Admin">
+		<img th:if="${admin.profilePhoto != null and admin.profilePhoto.length > 0}"
+		     th:src="@{/admin/profile-photo}"
+		     class="profile-img"
+		     alt="Admin">
 
-
-        <img th:unless="${admin.profilePhoto != null}"
-             th:src="@{/img/default-profile.png}"
-             class="profile-image"
-             alt="Admin">
+		<img th:unless="${admin.profilePhoto != null and admin.profilePhoto.length > 0}"
+		     th:src="@{/img/default-profile.png}"
+		     class="profile-img"
+		     alt="Admin">
 
 
     </div>

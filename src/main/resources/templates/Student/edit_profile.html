@@ -10,13 +10,11 @@
 
     <title>Edit Profile</title>
 
-
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-
-    <!-- Custom CSS -->
+    <!-- CSS -->
     <link rel="stylesheet"
           th:href="@{/css/Student/edit_profile.css}">
 
@@ -25,65 +23,99 @@
 
 <body>
 
+<div class="edit-profile-container">
 
-<div class="row justify-content-center w-100">
-
-
-    <div class="col-lg-5 col-md-6 col-sm-8">
+    <div class="edit-profile-card">
 
 
-        <div class="card shadow-lg border-0 rounded-4">
+        <!-- =========================================
+             HEADER
+        ========================================== -->
 
+        <div class="edit-profile-header">
 
-            <!-- ===================================== -->
-            <!-- HEADER -->
-            <!-- ===================================== -->
+            <!-- PROFILE IMAGE -->
 
-            <div class="card-header text-white text-center">
+            <div class="profile-image-container">
 
-                <h2>
-                    Edit Profile
-                </h2>
+                <img th:if="${student.profilePhoto != null and student.profilePhoto.length > 0}"
+                     th:src="@{/student/profile-photo}"
+                     class="edit-profile-image"
+                     alt="Profile">
+
+                <img th:unless="${student.profilePhoto != null and student.profilePhoto.length > 0}"
+                     th:src="@{/images/default-profile.png}"
+                     class="edit-profile-image"
+                     alt="Profile">
 
             </div>
 
 
-            <!-- ===================================== -->
-            <!-- BODY -->
-            <!-- ===================================== -->
+            <h2>Edit Profile</h2>
 
-            <div class="card-body">
+        </div>
 
 
-                <!--
-                IMPORTANT:
-                multipart/form-data is required
-                for profile photo upload.
-                -->
 
-                <form th:action="@{/student/update-profile}"
-                      th:object="${student}"
-                      method="post"
-                      enctype="multipart/form-data">
+        <!-- =========================================
+             BODY
+        ========================================== -->
+
+        <div class="edit-profile-body">
 
 
-                    <!-- ================================= -->
-                    <!-- FULL NAME -->
-                    <!-- ================================= -->
+            <!-- SUCCESS MESSAGE -->
 
-                    <div class="mb-3">
+            <div th:if="${success}"
+                 class="alert alert-success message">
 
-                        <label for="name"
-                               class="form-label">
+                <span th:text="${success}">
+                    Profile updated successfully
+                </span>
 
+            </div>
+
+
+            <!-- ERROR MESSAGE -->
+
+            <div th:if="${error}"
+                 class="alert alert-danger message">
+
+                <span th:text="${error}">
+                    Error
+                </span>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 FORM
+            ====================================== -->
+
+            <form th:action="@{/student/update-profile}"
+                  th:object="${student}"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="edit-profile-form">
+
+
+                <!-- =================================
+                     ROW 1
+                ================================== -->
+
+                <div class="form-row">
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
                             Full Name
-
                         </label>
-
 
                         <input type="text"
                                id="name"
-                               class="form-control"
                                th:field="*{name}"
                                maxlength="100"
                                required>
@@ -91,46 +123,41 @@
                     </div>
 
 
-                    <!-- ================================= -->
                     <!-- EMAIL -->
-                    <!-- ================================= -->
 
-                    <div class="mb-3">
+                    <div class="form-group">
 
-                        <label for="email"
-                               class="form-label">
-
+                        <label for="email">
                             Email
-
                         </label>
-
 
                         <input type="email"
                                id="email"
-                               class="form-control"
                                th:field="*{email}"
                                readonly>
 
                     </div>
 
+                </div>
 
-                    <!-- ================================= -->
+
+
+                <!-- =================================
+                     ROW 2
+                ================================== -->
+
+                <div class="form-row">
+
                     <!-- AGE -->
-                    <!-- ================================= -->
 
-                    <div class="mb-3">
+                    <div class="form-group">
 
-                        <label for="age"
-                               class="form-label">
-
+                        <label for="age">
                             Age
-
                         </label>
-
 
                         <input type="number"
                                id="age"
-                               class="form-control"
                                th:field="*{age}"
                                min="18"
                                max="60"
@@ -139,47 +166,42 @@
                     </div>
 
 
-                    <!-- ================================= -->
                     <!-- DEPARTMENT -->
-                    <!-- ================================= -->
 
-                    <div class="mb-3">
+                    <div class="form-group">
 
-                        <label for="department"
-                               class="form-label">
-
+                        <label for="department">
                             Department
-
                         </label>
-
 
                         <input type="text"
                                id="department"
-                               class="form-control"
                                th:field="*{department}"
                                maxlength="100"
                                required>
 
                     </div>
 
+                </div>
 
-                    <!-- ================================= -->
-                    <!-- CONTACT NUMBER -->
-                    <!-- ================================= -->
 
-                    <div class="mb-3">
 
-                        <label for="contactNo"
-                               class="form-label">
+                <!-- =================================
+                     ROW 3
+                ================================== -->
 
+                <div class="form-row">
+
+                    <!-- CONTACT -->
+
+                    <div class="form-group">
+
+                        <label for="contactNo">
                             Contact Number
-
                         </label>
-
 
                         <input type="text"
                                id="contactNo"
-                               class="form-control"
                                th:field="*{contactNo}"
                                maxlength="10"
                                pattern="[0-9]{10}"
@@ -189,134 +211,105 @@
                     </div>
 
 
-                    <!-- ================================= -->
                     <!-- CITY -->
-                    <!-- ================================= -->
 
-                    <div class="mb-3">
+                    <div class="form-group">
 
-                        <label for="city"
-                               class="form-label">
-
+                        <label for="city">
                             City
-
                         </label>
-
 
                         <input type="text"
                                id="city"
-                               class="form-control"
                                th:field="*{city}"
                                maxlength="100"
                                required>
 
                     </div>
 
-
-                    <!-- ================================= -->
-                    <!-- ADDRESS -->
-                    <!-- ================================= -->
-
-                    <div class="mb-3">
-
-                        <label for="address"
-                               class="form-label">
-
-                            Address
-
-                        </label>
+                </div>
 
 
-                        <textarea id="address"
-                                  class="form-control"
-                                  rows="2"
-                                  th:field="*{address}"
-                                  maxlength="255"
-                                  required></textarea>
 
-                    </div>
+                <!-- =================================
+                     ADDRESS
+                ================================== -->
 
+                <div class="form-group full-width">
 
-                    <!-- ================================= -->
-                    <!-- PROFILE PHOTO -->
-                    <!-- ================================= -->
+                    <label for="address">
+                        Address
+                    </label>
 
-                    <div class="mb-3">
+                    <textarea id="address"
+                              th:field="*{address}"
+                              maxlength="255"
+                              required></textarea>
 
-                        <label for="profilePhotoFile"
-                               class="form-label">
-
-                            Profile Photo
-
-                        </label>
+                </div>
 
 
-                        <!-- IMPORTANT:
-                             Do NOT use name="profilePhoto"
-                             because Student.profilePhoto is String.
-                        -->
 
-                        <input type="file"
-                               id="profilePhotoFile"
-                               name="profilePhotoFile"
-                               class="form-control"
-                               accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+                <!-- =================================
+                     PROFILE PHOTO
+                ================================== -->
 
+                <div class="form-group full-width">
 
-                        <small class="text-muted">
+                    <label for="profilePhotoFile">
+                        Profile Photo
+                    </label>
 
-                            JPG, JPEG or PNG only.
-                            Maximum size: 5 MB.
+                    <input type="file"
+                           id="profilePhotoFile"
+                           name="profilePhotoFile"
+                           accept=".jpg,.jpeg,.png,image/jpeg,image/png">
 
-                        </small>
+                    <small class="photo-help">
+                        JPG, JPEG or PNG only. Maximum size: 5 MB.
+                    </small>
 
-                    </div>
-
-
-                    <!-- ================================= -->
-                    <!-- BUTTONS -->
-                    <!-- ================================= -->
-
-                    <div class="text-center mt-4">
+                </div>
 
 
-                        <button type="submit"
-                                class="btn btn-primary px-4">
 
-                            Update Profile
+                <!-- =================================
+                     BUTTONS
+                ================================== -->
 
-                        </button>
+                <div class="button-area">
 
+                    <button type="submit"
+                            class="update-btn">
 
-                        <a th:href="@{/student/profile}"
-                           class="btn btn-secondary px-4">
+                        Update Profile
 
-                            Cancel
-
-                        </a>
-
-
-                        <a th:href="@{/student/dashboard}"
-                           class="btn btn-dark px-4">
-
-                            Dashboard
-
-                        </a>
-
-                    </div>
+                    </button>
 
 
-                </form>
+                    <a th:href="@{/student/profile}"
+                       class="cancel-btn">
+
+                        Cancel
+
+                    </a>
 
 
-            </div>
+                    <a th:href="@{/student/dashboard}"
+                       class="dashboard-btn">
 
+                        Dashboard
+
+                    </a>
+
+                </div>
+
+
+            </form>
 
         </div>
 
-
     </div>
-
 
 </div>
 

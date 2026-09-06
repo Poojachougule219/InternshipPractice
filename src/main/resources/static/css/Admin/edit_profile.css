@@ -1,0 +1,455 @@
+/* =========================================================
+   ADMIN EDIT PROFILE
+   Compact Professional ERP Theme
+   ========================================================= */
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 30px 20px;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   EDIT PROFILE CARD
+   ========================================================= */
+
+.edit-profile-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 6px 20px rgba(15, 23, 42, 0.09);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.edit-header {
+    background: #1e293b;
+    color: #ffffff;
+
+    padding: 18px 25px;
+
+    text-align: center;
+}
+
+.edit-header h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+.edit-header h2 i {
+    margin-right: 7px;
+}
+
+.edit-header p {
+    margin: 4px 0 0;
+
+    font-size: 13px;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   SUCCESS / ERROR MESSAGE
+   ========================================================= */
+
+.profile-alert {
+    margin: 12px 25px 0;
+
+    padding: 8px 40px 8px 12px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+}
+
+.profile-alert i {
+    margin-right: 5px;
+}
+
+
+/* =========================================================
+   FORM BODY
+   ========================================================= */
+
+.form-body {
+    padding: 20px 28px 8px;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.form-body label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #334155;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.form-control {
+    width: 100%;
+
+    min-height: 38px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    padding: 7px 10px;
+
+    font-size: 13px;
+
+    color: #1e293b;
+
+    background: #ffffff;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+   ========================================================= */
+
+.form-control:focus {
+    border-color: #64748b;
+
+    box-shadow:
+        0 0 0 2px rgba(100, 116, 139, 0.12);
+
+    outline: none;
+}
+
+
+/* =========================================================
+   READONLY EMAIL
+   ========================================================= */
+
+.form-control[readonly] {
+    background: #f8fafc;
+
+    color: #64748b;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+textarea.form-control {
+    min-height: 65px;
+
+    height: 65px;
+
+    resize: none;
+}
+
+
+/* =========================================================
+   BOOTSTRAP COLUMN SPACING
+   ========================================================= */
+
+.form-body .mb-3 {
+    margin-bottom: 12px !important;
+}
+
+
+/* =========================================================
+   CURRENT PHOTO
+   ========================================================= */
+
+.current-photo {
+    margin-top: 8px;
+}
+
+.current-photo-title {
+    margin-bottom: 5px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #475569;
+}
+
+.current-profile-image {
+    width: 70px;
+
+    height: 70px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 2px solid #e2e8f0;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.10);
+}
+
+
+/* =========================================================
+   FILE INPUT
+   ========================================================= */
+
+input[type="file"] {
+    font-size: 12px;
+}
+
+.form-control[type="file"] {
+    padding: 6px 8px;
+}
+
+
+/* =========================================================
+   SMALL TEXT
+   ========================================================= */
+
+.text-muted {
+    font-size: 11px !important;
+
+    display: block;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   BUTTON AREA
+   ========================================================= */
+
+.button-area {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 5px 28px 20px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   COMMON BUTTON
+   ========================================================= */
+
+.button-area .btn {
+    min-width: 125px;
+
+    height: 37px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard-btn {
+    background: #475569;
+
+    color: #ffffff;
+
+    border: none;
+}
+
+.dashboard-btn:hover {
+    background: #334155;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SAVE
+   ========================================================= */
+
+.save-btn {
+    background: #0f766e;
+
+    color: #ffffff;
+
+    border: none;
+}
+
+.save-btn:hover {
+    background: #115e59;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CANCEL
+   ========================================================= */
+
+.cancel-btn {
+    background: #64748b;
+
+    color: #ffffff;
+
+    border: none;
+}
+
+.cancel-btn:hover {
+    background: #475569;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 30px 12px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .edit-header {
+        padding: 16px 20px;
+    }
+
+    .edit-header h2 {
+        font-size: 20px;
+    }
+
+    .form-body {
+        padding: 18px 20px 5px;
+    }
+
+    .button-area {
+        padding: 5px 20px 18px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+    body {
+        padding: 30px 10px;
+    }
+
+    .edit-header h2 {
+        font-size: 19px;
+    }
+
+    .edit-header p {
+        font-size: 12px;
+    }
+
+    .form-body {
+        padding: 16px 15px 5px;
+    }
+
+    .button-area {
+        flex-direction: column;
+
+        padding: 5px 15px 16px;
+    }
+
+    .button-area .btn {
+        width: 100%;
+    }
+
+    .profile-alert {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}

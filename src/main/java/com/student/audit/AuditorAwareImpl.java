@@ -10,15 +10,14 @@ import org.springframework.stereotype.Component;
 
 import com.student.security.CustomUserDetails;
 
-
-
 @Component
 public class AuditorAwareImpl implements AuditorAware<Long> {
 
     @Override
     public Optional<Long> getCurrentAuditor() {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null
                 || !authentication.isAuthenticated()
@@ -30,7 +29,10 @@ public class AuditorAwareImpl implements AuditorAware<Long> {
         Object principal = authentication.getPrincipal();
 
         if (principal instanceof CustomUserDetails customUserDetails) {
-            return Optional.of(customUserDetails.getStudent().getRole().getId());
+
+            return Optional.of(
+                    customUserDetails.getStudent().getId()
+            );
         }
 
         return Optional.empty();

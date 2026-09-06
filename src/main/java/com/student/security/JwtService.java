@@ -1,66 +1,118 @@
 package com.student.security;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-
-import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
 
-    // Secret key (must be at least 32 bytes)
-	private static final String SECRET_KEY =
-	        "12345678901234567890123456789012";
-    
+    // =====================================================
+    // SECRET KEY
+    // =====================================================
 
-	private Key getSignKey() {
+    private static final String SECRET_KEY =
+            "12345678901234567890123456789012";
 
-	    return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
-	}
-	
-	
-    
-    // Generate JWT Token
+
+    // =====================================================
+    // GET SIGNING KEY
+    // =====================================================
+
+    private Key getSignKey() {
+
+        return Keys.hmacShaKeyFor(
+                SECRET_KEY.getBytes(StandardCharsets.UTF_8)
+        );
+    }
+
+
+    // =====================================================
+    // GENERATE JWT TOKEN
+    // =====================================================
+
     public String generateToken(String email) {
 
         return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // 30 minutes
-                .signWith(getSignKey(), SignatureAlgorithm.HS256)
+
+                .subject(email)
+
+                .issuedAt(new Date())
+
+                .expiration(
+                        new Date(
+                                System.currentTimeMillis()
+                                + 1000L * 60 * 30
+                        )
+                )
+
+                .signWith(getSignKey())
+
                 .compact();
     }
 
-    // Extract Email
+
+    // =====================================================
+    // EXTRACT USERNAME / EMAIL
+    // =====================================================
+
     public String extractUsername(String token) {
-        return extractClaims(token).getSubject();
+
+        return extractClaims(token)
+                .getSubject();
     }
 
-    
-    public boolean isTokenValid(String token, String email) {
 
-        Claims claims = extractClaims(token);
+    // =====================================================
+    // CHECK TOKEN VALID
+    // =====================================================
 
-        return claims.getSubject().equals(email)
-                && !claims.getExpiration().before(new Date());
+    public boolean isTokenValid(
+            String token,
+            String email) {
+
+        try {
+
+            Claims claims =
+                    extractClaims(token);
+
+            return claims
+                    .getSubject()
+                    .equals(email)
+
+                    && !claims
+                            .getExpiration()
+                            .before(new Date());
+
+        } catch (Exception e) {
+
+            return false;
+        }
     }
 
-    
-    // Extract Claims
+
+    // =====================================================
+    // EXTRACT CLAIMS
+    // =====================================================
+
     private Claims extractClaims(String token) {
 
-        return Jwts.parserBuilder()
-                .setSigningKey(getSignKey())
+        return Jwts.parser()
+
+                .verifyWith(
+                        (javax.crypto.SecretKey) getSignKey()
+                )
+
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+
+                .parseSignedClaims(token)
+
+                .getPayload();
     }
 }

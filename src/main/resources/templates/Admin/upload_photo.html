@@ -30,14 +30,15 @@
 
 
         <!-- CURRENT PROFILE PHOTO -->
-
         <div class="preview">
 
-            <img th:if="${admin.profilePhoto != null and !admin.profilePhoto.isEmpty()}"
-                 th:src="@{${admin.profilePhoto}}"
+            <!-- EXISTING PROFILE PHOTO -->
+            <img th:if="${admin.profilePhoto != null and admin.profilePhoto.length > 0}"
+                 th:src="@{/admin/profile-photo}"
                  alt="Profile Photo">
 
-            <img th:unless="${admin.profilePhoto != null and !admin.profilePhoto.isEmpty()}"
+            <!-- DEFAULT PROFILE PHOTO -->
+            <img th:unless="${admin.profilePhoto != null and admin.profilePhoto.length > 0}"
                  th:src="@{/img/default-profile.png}"
                  alt="Default Profile">
 
@@ -45,7 +46,6 @@
 
 
         <!-- UPLOAD FORM -->
-
         <form th:action="@{/admin/upload-photo}"
               method="post"
               enctype="multipart/form-data">
@@ -61,25 +61,18 @@
                 JPG, JPEG or PNG only. Maximum size 5 MB.
             </small>
 
-
             <button type="submit">
-
                 <i class="bi bi-upload"></i>
-
                 Upload Photo
-
             </button>
 
         </form>
 
 
         <!-- BACK -->
-
         <a th:href="@{/admin/profile}"
            class="back-btn">
-
             Back to Profile
-
         </a>
 
     </div>

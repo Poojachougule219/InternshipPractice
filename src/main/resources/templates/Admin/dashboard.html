@@ -1,968 +1,1143 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Dashboard</title>
+	<title>Admin Dashboard</title>
 
-    <link rel="stylesheet" th:href="@{/css/Admin/dashboard.css?v=4}">
+	<link rel="stylesheet" th:href="@{/css/Admin/dashboard.css?v=4}">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
+
 
 
 <body>
 
 
-    <div class="container">
+
+	<div class="container">
 
 
-        <!-- =====================================================
+
+		<!-- =====================================================
              SIDEBAR
         ====================================================== -->
 
-        <aside class="sidebar">
+		<aside class="sidebar">
 
 
-            <div class="logo">
 
-                <h2>Admin Portal</h2>
+			<div class="logo">
 
-            </div>
+				<h2>Admin Portal</h2>
 
+			</div>
 
-            <ul class="menu">
 
 
-                <!-- DASHBOARD -->
+			<ul class="menu">
 
-                <li class="active">
 
-                    <a th:href="@{/admin/dashboard}">
 
-                        <i class="fa-solid fa-house"></i>
+				<!-- DASHBOARD -->
 
-                        <span>Dashboard</span>
+				<li class="active">
 
-                    </a>
+					<a th:href="@{/admin/dashboard}">
 
-                </li>
+						<i class="fa-solid fa-house"></i>
 
+						<span>Dashboard</span>
 
-                <!-- VIEW PROFILE -->
+					</a>
 
-                <li>
+				</li>
 
-                    <a th:href="@{/admin/profile}">
 
-                        <i class="fa-solid fa-user"></i>
 
-                        <span>View Profile</span>
+				<!-- VIEW PROFILE -->
 
-                    </a>
+				<li>
 
-                </li>
+					<a th:href="@{/admin/profile}">
 
+						<i class="fa-solid fa-user"></i>
 
-                <!-- EDIT PROFILE -->
+						<span>View Profile</span>
 
-                <li>
+					</a>
 
-                    <a th:href="@{/admin/edit-profile}">
+				</li>
 
-                        <i class="fa-solid fa-user-pen"></i>
 
-                        <span>Edit Profile</span>
 
-                    </a>
+				<!-- EDIT PROFILE -->
 
-                </li>
+				<li>
 
+					<a th:href="@{/admin/edit-profile}">
 
-                <!-- MANAGE STUDENTS -->
+						<i class="fa-solid fa-user-pen"></i>
 
-                <li>
+						<span>Edit Profile</span>
 
-                    <a th:href="@{/admin/students}">
+					</a>
 
-                        <i class="fa fa-user-graduate"></i>
+				</li>
 
-                        <span>Manage Students</span>
 
-                    </a>
 
-                </li>
+				<!-- MANAGE STUDENTS -->
 
+				<li>
 
-                <!-- ACTIVITY LOGS -->
+					<a th:href="@{/admin/students}">
 
-                <li>
+						<i class="fa fa-user-graduate"></i>
 
-                    <a th:href="@{/admin/activity-logs}">
+						<span>Manage Students</span>
 
-                        <i class="fa-solid fa-clock-rotate-left"></i>
+					</a>
 
-                        <span>Activity Logs</span>
+				</li>
 
-                    </a>
 
-                </li>
 
+				<!-- ACTIVITY LOGS -->
 
-                <!-- CHANGE PASSWORD -->
+				<li>
 
-                <li>
+					<a th:href="@{/admin/activity-logs}">
 
-                    <a th:href="@{/admin/change-password}">
+						<i class="fa-solid fa-clock-rotate-left"></i>
 
-                        <i class="fa-solid fa-key"></i>
+						<span>Activity Logs</span>
 
-                        <span>Change Password</span>
+					</a>
 
-                    </a>
+				</li>
 
-                </li>
 
 
-                <!-- LOGOUT -->
+				<!-- AI ASSISTANT -->
+				<li>
+					<a th:href="@{/admin/ai-assistant}">
+						<i class="fa-solid fa-robot"></i>
+						<span>AI Assistant</span>
+					</a>
+				</li>
 
-                <li>
 
-                    <a th:href="@{/logout}">
 
-                        <i class="fa-solid fa-right-from-bracket"></i>
+				<!-- CHANGE PASSWORD -->
 
-                        <span>Logout</span>
+				<li>
 
-                    </a>
+					<a th:href="@{/admin/change-password}">
 
-                </li>
+						<i class="fa-solid fa-key"></i>
 
+						<span>Change Password</span>
 
-            </ul>
+					</a>
 
+				</li>
 
-            <!-- SIDEBAR FOOTER -->
 
-            <div class="sidebar-footer">
 
-                <p>
-                    Student Management System
-                </p>
+				<!-- LOGOUT -->
 
-                <small>
-                    Admin Panel v1.0
-                </small>
+				<li>
 
-            </div>
+					<a th:href="@{/logout}">
 
+						<i class="fa-solid fa-right-from-bracket"></i>
 
-        </aside>
+						<span>Logout</span>
 
+					</a>
 
-        <!-- =====================================================
+				</li>
+
+
+
+			</ul>
+
+
+
+			<!-- SIDEBAR FOOTER -->
+
+			<div class="sidebar-footer">
+
+				<p>
+
+					Student Management System
+
+				</p>
+
+				<small>
+
+					Admin Panel v1.0
+
+				</small>
+
+			</div>
+
+
+
+		</aside>
+
+
+
+		<!-- =====================================================
              MAIN CONTENT
         ====================================================== -->
 
-        <main class="main-content">
+		<main class="main-content">
 
 
-            <!-- =================================================
+
+			<!-- =================================================
                  HEADER
             ================================================= -->
 
-            <header class="topbar">
-
-
-                <!-- WELCOME -->
-
-                <div class="welcome">
-
-                    <h1>
-
-                        Welcome,
-
-                        <span th:text="${admin.name}">
-                            Admin
-                        </span>
-
-                        👋
-
-                    </h1>
-
-
-                    <p>
-                        Welcome back !
-                    </p>
-
-                </div>
+			<header class="topbar">
 
 
 
-                <!-- =================================================
+				<!-- WELCOME -->
+
+				<div class="welcome">
+
+					<h1>
+
+						Welcome,
+
+						<span th:text="${admin.name}">
+
+							Admin
+
+						</span>
+
+						👋
+
+					</h1>
+
+
+
+					<p>
+
+						Welcome back !
+
+					</p>
+
+				</div>
+
+
+
+
+
+				<!-- =================================================
                      HEADER RIGHT
                 ================================================= -->
 
-                <div class="header-right">
-
-
-                    <!-- NOTIFICATION -->
-
-                    <div class="notification">
-
-                        <i class="fa-regular fa-bell"></i>
-
-                    </div>
+				<div class="header-right">
 
 
 
-                    <!-- =================================================
+					<!-- NOTIFICATION -->
+
+					<div class="notification">
+
+						<i class="fa-regular fa-bell"></i>
+
+					</div>
+
+
+
+
+
+					<!-- =================================================
                          ADMIN PROFILE DROPDOWN
                     ================================================= -->
 
-                    <div class="user-menu">
-
-
-                        <!-- PROFILE BUTTON -->
-
-                        <button type="button"
-                                class="profile-button"
-                                onclick="toggleProfileDropdown()">
-
-
-                            <!-- ADMIN PROFILE PHOTO -->
-
-                            <img th:if="${admin.profilePhoto != null}"
-                                 th:src="@{'/uploads/Profile/Admin photos/' + ${admin.profilePhoto}}"
-                                 class="profile-img"
-                                 alt="Admin">
-
-
-                            <!-- DEFAULT PROFILE PHOTO -->
-
-                            <img th:unless="${admin.profilePhoto != null}"
-                                 th:src="@{/img/default-profile.png}"
-                                 class="profile-img"
-                                 alt="Admin">
-
-
-                            <!-- ADMIN NAME -->
-
-                            <div class="profile-text">
-
-                                <h4 th:text="${admin.name}">
-                                    Admin
-                                </h4>
-
-
-                                <small>
-                                    Administrator
-                                </small>
-
-                            </div>
-
-
-                            <!-- DROPDOWN ARROW -->
-
-                            <i class="fa-solid fa-chevron-down profile-arrow"></i>
-
-
-                        </button>
+					<div class="user-menu">
 
 
 
-                        <!-- =================================================
+						<!-- PROFILE BUTTON -->
+
+						<button type="button" class="profile-button" onclick="toggleProfileDropdown()">
+
+
+
+							<!-- =================================================
+                                 ADMIN PROFILE PHOTO
+                                 UPDATED: profilePhoto is byte[]
+                            ================================================= -->
+
+							<!-- UPLOADED PROFILE PHOTO -->
+
+							<img th:if="${admin.profilePhoto != null and admin.profilePhoto.length > 0}"
+								th:src="@{/admin/profile-photo}" class="profile-img" alt="Admin">
+
+
+
+							<!-- DEFAULT PROFILE PHOTO -->
+
+							<img th:if="${admin.profilePhoto == null or admin.profilePhoto.length == 0}"
+								th:src="@{/img/default-profile.png}" class="profile-img" alt="Admin">
+
+
+
+							<!-- ADMIN NAME -->
+
+							<div class="profile-text">
+
+								<h4 th:text="${admin.name}">
+
+									Admin
+
+								</h4>
+
+
+
+								<small>
+
+									Administrator
+
+								</small>
+
+							</div>
+
+
+
+							<!-- DROPDOWN ARROW -->
+
+							<i class="fa-solid fa-chevron-down profile-arrow"></i>
+
+
+
+						</button>
+
+
+
+
+
+						<!-- =================================================
                              PROFILE DROPDOWN MENU
                         ================================================= -->
 
-                        <div id="profileDropdown"
-                             class="profile-dropdown">
-
-
-                            <!-- VIEW PROFILE -->
-
-                            <a th:href="@{/admin/profile}"
-                               class="dropdown-item">
-
-                                <i class="fa-solid fa-user"></i>
-
-                                <span>
-                                    View Profile
-                                </span>
-
-                            </a>
-
-
-                            <!-- LOGOUT -->
-
-                            <a th:href="@{/logout}"
-                               class="dropdown-item">
-
-                                <i class="fa-solid fa-right-from-bracket"></i>
-
-                                <span>
-                                    Logout
-                                </span>
-
-                            </a>
-
-
-                            <!-- DIVIDER -->
-
-                            <div class="dropdown-divider"></div>
-
-
-                            <!-- DELETE OWN PROFILE -->
-
-                            <button type="button"
-                                    class="dropdown-item delete-item"
-                                    onclick="confirmDeleteOwnProfile()">
-
-                                <i class="fa-solid fa-trash"></i>
-
-                                <span>
-                                    Delete Profile
-                                </span>
-
-                            </button>
-
-
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </header>
+						<div id="profileDropdown" class="profile-dropdown">
 
 
 
-            <!-- =================================================
+							<!-- VIEW PROFILE -->
+
+							<a th:href="@{/admin/profile}" class="dropdown-item">
+
+								<i class="fa-solid fa-user"></i>
+
+								<span>
+
+									View Profile
+
+								</span>
+
+							</a>
+
+
+
+							<!-- LOGOUT -->
+
+							<a th:href="@{/logout}" class="dropdown-item">
+
+								<i class="fa-solid fa-right-from-bracket"></i>
+
+								<span>
+
+									Logout
+
+								</span>
+
+							</a>
+
+
+
+							<!-- DIVIDER -->
+
+							<div class="dropdown-divider"></div>
+
+
+
+							<!-- DELETE OWN PROFILE -->
+
+							<button type="button" class="dropdown-item delete-item" onclick="confirmDeleteOwnProfile()">
+
+								<i class="fa-solid fa-trash"></i>
+
+								<span>
+
+									Delete Profile
+
+								</span>
+
+							</button>
+
+
+
+						</div>
+
+
+
+					</div>
+
+
+
+				</div>
+
+
+
+			</header>
+
+
+
+
+
+			<!-- =================================================
                  DASHBOARD CARDS
             ================================================= -->
 
-            <section class="cards">
+			<section class="cards">
 
 
-                <!-- =================================================
+
+				<!-- =================================================
                      TOTAL USERS
                 ================================================= -->
 
-                <a th:href="@{/admin/users}" class="card-link">
-
-
-                    <div class="card">
-
-
-                        <div class="card-icon blue">
-
-                            <i class="fa-solid fa-users"></i>
-
-                        </div>
-
-
-                        <div class="card-content">
-
-
-                            <h4>
-                                Total Users
-                            </h4>
-
-
-                            <h2 th:text="${totalUsers}">
-                                0
-                            </h2>
-
-
-                        </div>
-
-
-                    </div>
-
-
-                </a>
+				<a th:href="@{/admin/users}" class="card-link">
 
 
 
-                <!-- =================================================
+					<div class="card">
+
+
+
+						<div class="card-icon blue">
+
+							<i class="fa-solid fa-users"></i>
+
+						</div>
+
+
+
+						<div class="card-content">
+
+
+
+							<h4>
+
+								Total Users
+
+							</h4>
+
+
+
+							<h2 th:text="${totalUsers}">
+
+								0
+
+							</h2>
+
+
+
+						</div>
+
+
+
+					</div>
+
+
+
+				</a>
+
+
+
+
+
+				<!-- =================================================
                      TOTAL STUDENTS
                 ================================================= -->
 
-                <a th:href="@{/admin/students}" class="card-link">
-
-
-                    <div class="card">
-
-
-                        <div class="card-icon green">
-
-                            <i class="fa-solid fa-user-graduate"></i>
-
-                        </div>
-
-
-                        <div class="card-content">
-
-
-                            <h4>
-                                Total Students
-                            </h4>
-
-
-                            <h2 th:text="${totalStudents}">
-                                0
-                            </h2>
-
-
-                        </div>
-
-
-                    </div>
-
-
-                </a>
+				<a th:href="@{/admin/students}" class="card-link">
 
 
 
-                <!-- =================================================
+					<div class="card">
+
+
+
+						<div class="card-icon green">
+
+							<i class="fa-solid fa-user-graduate"></i>
+
+						</div>
+
+
+
+						<div class="card-content">
+
+
+
+							<h4>
+
+								Total Students
+
+							</h4>
+
+
+
+							<h2 th:text="${totalStudents}">
+
+								0
+
+							</h2>
+
+
+
+						</div>
+
+
+
+					</div>
+
+
+
+				</a>
+
+
+
+
+
+				<!-- =================================================
                      TOTAL ADMINS
                 ================================================= -->
 
-                <a th:href="@{/admin/admins}" class="card-link">
-
-
-                    <div class="card">
-
-
-                        <div class="card-icon purple">
-
-                            <i class="fa-solid fa-user-shield"></i>
-
-                        </div>
-
-
-                        <div class="card-content">
-
-
-                            <h4>
-                                Total Admins
-                            </h4>
-
-
-                            <h2 th:text="${totalAdmins}">
-                                0
-                            </h2>
-
-
-                        </div>
-
-
-                    </div>
-
-
-                </a>
+				<a th:href="@{/admin/admins}" class="card-link">
 
 
 
-                <!-- =================================================
+					<div class="card">
+
+
+
+						<div class="card-icon purple">
+
+							<i class="fa-solid fa-user-shield"></i>
+
+						</div>
+
+
+
+						<div class="card-content">
+
+
+
+							<h4>
+
+								Total Admins
+
+							</h4>
+
+
+
+							<h2 th:text="${totalAdmins}">
+
+								0
+
+							</h2>
+
+
+
+						</div>
+
+
+
+					</div>
+
+
+
+				</a>
+
+
+
+
+
+				<!-- =================================================
                      RECENT REGISTRATIONS
                 ================================================= -->
 
-                <a th:href="@{/admin/recent}" class="card-link">
-
-
-                    <div class="card">
-
-
-                        <div class="card-icon orange">
-
-                            <i class="fa-solid fa-user-plus"></i>
-
-                        </div>
-
-
-                        <div class="card-content">
-
-
-                            <h4>
-                                Recent Registrations
-                            </h4>
-
-
-                            <h2 th:text="${recentStudentCount}">
-                                0
-                            </h2>
-
-
-                        </div>
-
-
-                    </div>
-
-
-                </a>
-
-
-            </section>
+				<a th:href="@{/admin/recent}" class="card-link">
 
 
 
-            <!-- =================================================
+					<div class="card">
+
+
+
+						<div class="card-icon orange">
+
+							<i class="fa-solid fa-user-plus"></i>
+
+						</div>
+
+
+
+						<div class="card-content">
+
+
+
+							<h4>
+
+								Recent Registrations
+
+							</h4>
+
+
+
+							<h2 th:text="${recentStudentCount}">
+
+								0
+
+							</h2>
+
+
+
+						</div>
+
+
+
+					</div>
+
+
+
+				</a>
+
+
+
+			</section>
+
+
+
+
+
+			<!-- =================================================
                  CHARTS
             ================================================= -->
 
-            <section class="charts-container">
+			<section class="charts-container">
 
 
-                <!-- =================================================
+
+				<!-- =================================================
                      USERS BY DEPARTMENT
                      PIE CHART
                 ================================================= -->
 
-                <div class="chart-card">
-
-
-                    <h3>
-                        Users by Department
-                    </h3>
-
-
-                    <div class="chart-box">
-
-                        <canvas id="departmentChart"></canvas>
-
-                    </div>
-
-
-                </div>
+				<div class="chart-card">
 
 
 
-                <!-- =================================================
+					<h3>
+
+						Users by Department
+
+					</h3>
+
+
+
+					<div class="chart-box">
+
+						<canvas id="departmentChart"></canvas>
+
+					</div>
+
+
+
+				</div>
+
+
+
+
+
+				<!-- =================================================
                      USERS BY CITY
                      BAR CHART
                 ================================================= -->
 
-                <div class="chart-card">
-
-
-                    <h3>
-                        Users by City
-                    </h3>
-
-
-                    <div class="chart-box">
-
-                        <canvas id="cityChart"></canvas>
-
-                    </div>
-
-
-                </div>
-
-
-            </section>
-
-
-        </main>
-
-
-    </div>
+				<div class="chart-card">
 
 
 
-    <!-- =========================================================
+					<h3>
+
+						Users by City
+
+					</h3>
+
+
+
+					<div class="chart-box">
+
+						<canvas id="cityChart"></canvas>
+
+					</div>
+
+
+
+				</div>
+
+
+
+			</section>
+
+
+
+		</main>
+
+
+
+	</div>
+
+
+
+
+
+	<!-- =========================================================
          PROFILE DROPDOWN JAVASCRIPT
+
          ONLY NEW JAVASCRIPT
-    ========================================================= -->
+    ========================================================== -->
 
-    <script>
+	<script>
 
-        // =====================================================
-        // OPEN / CLOSE PROFILE DROPDOWN
-        // =====================================================
+		// =====================================================
+		// OPEN / CLOSE PROFILE DROPDOWN
+		// =====================================================
 
-        function toggleProfileDropdown() {
+		function toggleProfileDropdown() {
 
-            const dropdown =
-                document.getElementById("profileDropdown");
+			const dropdown =
+				document.getElementById("profileDropdown");
 
-            dropdown.classList.toggle("show");
+			dropdown.classList.toggle("show");
 
-        }
-
-
-        // =====================================================
-        // CLOSE DROPDOWN WHEN CLICKING OUTSIDE
-        // =====================================================
-
-        document.addEventListener("click", function (event) {
-
-            const userMenu =
-                document.querySelector(".user-menu");
-
-            const dropdown =
-                document.getElementById("profileDropdown");
-
-            if (!userMenu.contains(event.target)) {
-
-                dropdown.classList.remove("show");
-
-            }
-
-        });
+		}
 
 
-        // =====================================================
-        // DELETE OWN ADMIN PROFILE
-        // =====================================================
 
-        function confirmDeleteOwnProfile() {
+		// =====================================================
+		// CLOSE DROPDOWN WHEN CLICKING OUTSIDE
+		// =====================================================
 
-            const confirmed = window.confirm(
-                "Are you sure you want to delete your profile?"
-            );
+		document.addEventListener("click", function (event) {
+
+			const userMenu =
+				document.querySelector(".user-menu");
+
+			const dropdown =
+				document.getElementById("profileDropdown");
+
+			if (!userMenu.contains(event.target)) {
+
+				dropdown.classList.remove("show");
+
+			}
+
+		});
 
 
-            if (confirmed) {
 
-                window.location.href =
+		// =====================================================
+		// DELETE OWN ADMIN PROFILE
+		// =====================================================
+
+		function confirmDeleteOwnProfile() {
+
+			const confirmed = window.confirm(
+
+				"Are you sure you want to delete your profile?"
+
+			);
+
+
+
+			if (confirmed) {
+
+				window.location.href =
+
                     /*[[@{'/admin/user/delete/' + ${admin.id}}]]*/ "";
 
-            }
+			}
 
-        }
+		}
 
-    </script>
+	</script>
 
 
 
-    <!-- =========================================================
+
+
+	<!-- =========================================================
          CHART JAVASCRIPT
-    ========================================================= -->
+    ========================================================== -->
 
-    <script th:inline="javascript">
-
-
-        /*<![CDATA[*/
+	<script th:inline="javascript">
 
 
-        // =========================================================
-        // DEPARTMENT DATA
-        // =========================================================
 
-        const departmentData =
+		/*<![CDATA[*/
+
+
+
+		// =========================================================
+		// DEPARTMENT DATA
+		// =========================================================
+
+		const departmentData =
+
             /*[[${departmentData}]]*/[];
 
 
-        const departmentLabels = [];
 
-        const departmentValues = [];
+		const departmentLabels = [];
 
-
-        departmentData.forEach(function (item) {
-
-            departmentLabels.push(item[0]);
-
-            departmentValues.push(item[1]);
-
-        });
+		const departmentValues = [];
 
 
 
-        // =========================================================
-        // DEPARTMENT PIE CHART
-        // =========================================================
+		departmentData.forEach(function (item) {
 
-        new Chart(
+			departmentLabels.push(item[0]);
 
-            document.getElementById("departmentChart"),
+			departmentValues.push(item[1]);
 
-            {
-
-                type: "pie",
-
-                data: {
-
-                    labels: departmentLabels,
-
-                    datasets: [{
-
-                        label: "Users",
-
-                        data: departmentValues,
-
-                        backgroundColor: [
-
-                            "#6366F1",
-
-                            "#10B981",
-
-                            "#F59E0B",
-
-                            "#EF4444",
-
-                            "#8B5CF6",
-
-                            "#06B6D4",
-
-                            "#EC4899",
-
-                            "#84CC16"
-
-                        ],
-
-                        borderColor: "#ffffff",
-
-                        borderWidth: 2
-
-                    }]
-
-                },
-
-
-                options: {
-
-                    responsive: true,
-
-                    maintainAspectRatio: false,
-
-
-                    plugins: {
-
-                        legend: {
-
-                            position: "bottom",
-
-                            labels: {
-
-                                padding: 15,
-
-                                usePointStyle: true,
-
-                                pointStyle: "rect"
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        );
+		});
 
 
 
-        // =========================================================
-        // CITY DATA
-        // =========================================================
 
-        const cityData =
+
+		// =========================================================
+		// DEPARTMENT PIE CHART
+		// =========================================================
+
+		new Chart(
+
+			document.getElementById("departmentChart"),
+
+			{
+
+				type: "pie",
+
+				data: {
+
+					labels: departmentLabels,
+
+					datasets: [{
+
+						label: "Users",
+
+						data: departmentValues,
+
+						backgroundColor: [
+
+							"#6366F1",
+
+							"#10B981",
+
+							"#F59E0B",
+
+							"#EF4444",
+
+							"#8B5CF6",
+
+							"#06B6D4",
+
+							"#EC4899",
+
+							"#84CC16"
+
+						],
+
+						borderColor: "#ffffff",
+
+						borderWidth: 2
+
+					}]
+
+				},
+
+
+
+				options: {
+
+					responsive: true,
+
+					maintainAspectRatio: false,
+
+
+
+					plugins: {
+
+						legend: {
+
+							position: "bottom",
+
+							labels: {
+
+								padding: 15,
+
+								usePointStyle: true,
+
+								pointStyle: "rect"
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+		);
+
+
+
+
+
+		// =========================================================
+		// CITY DATA
+		// =========================================================
+
+		const cityData =
+
             /*[[${cityData}]]*/[];
 
 
-        const cityLabels = [];
 
-        const cityValues = [];
+		const cityLabels = [];
 
+		const cityValues = [];
 
-        cityData.forEach(function (item) {
 
-            cityLabels.push(item[0]);
 
-            cityValues.push(item[1]);
+		cityData.forEach(function (item) {
 
-        });
+			cityLabels.push(item[0]);
 
+			cityValues.push(item[1]);
 
+		});
 
-        // =========================================================
-        // CITY BAR CHART
-        // =========================================================
 
-        new Chart(
 
-            document.getElementById("cityChart"),
 
-            {
 
-                type: "bar",
+		// =========================================================
+		// CITY BAR CHART
+		// =========================================================
 
-                data: {
+		new Chart(
 
-                    labels: cityLabels,
+			document.getElementById("cityChart"),
 
-                    datasets: [{
+			{
 
-                        label: "Number of Users",
+				type: "bar",
 
-                        data: cityValues,
+				data: {
 
-                        backgroundColor: [
+					labels: cityLabels,
 
-                            "#3B82F6",
+					datasets: [{
 
-                            "#22C55E",
+						label: "Number of Users",
 
-                            "#EAB308",
+						data: cityValues,
 
-                            "#F97316",
+						backgroundColor: [
 
-                            "#A855F7",
+							"#3B82F6",
 
-                            "#14B8A6",
+							"#22C55E",
 
-                            "#EC4899",
+							"#EAB308",
 
-                            "#6366F1"
+							"#F97316",
 
-                        ],
+							"#A855F7",
 
-                        borderColor: [
+							"#14B8A6",
 
-                            "#2563EB",
+							"#EC4899",
 
-                            "#16A34A",
+							"#6366F1"
 
-                            "#CA8A04",
+						],
 
-                            "#EA580C",
+						borderColor: [
 
-                            "#9333EA",
+							"#2563EB",
 
-                            "#0F766E",
+							"#16A34A",
 
-                            "#DB2777",
+							"#CA8A04",
 
-                            "#4F46E5"
+							"#EA580C",
 
-                        ],
+							"#9333EA",
 
-                        borderWidth: 1,
+							"#0F766E",
 
-                        borderRadius: 6,
+							"#DB2777",
 
-                        barPercentage: 0.65,
+							"#4F46E5"
 
-                        categoryPercentage: 0.75
+						],
 
-                    }]
+						borderWidth: 1,
 
-                },
+						borderRadius: 6,
 
+						barPercentage: 0.65,
 
-                options: {
+						categoryPercentage: 0.75
 
-                    responsive: true,
+					}]
 
-                    maintainAspectRatio: false,
+				},
 
 
-                    scales: {
 
-                        x: {
+				options: {
 
-                            grid: {
+					responsive: true,
 
-                                display: false
+					maintainAspectRatio: false,
 
-                            },
 
-                            ticks: {
 
-                                font: {
+					scales: {
 
-                                    size: 12,
+						x: {
 
-                                    weight: "500"
+							grid: {
 
-                                }
+								display: false
 
-                            }
+							},
 
-                        },
+							ticks: {
 
+								font: {
 
-                        y: {
+									size: 12,
 
-                            beginAtZero: true,
+									weight: "500"
 
-                            ticks: {
+								}
 
-                                stepSize: 1,
+							}
 
-                                font: {
+						},
 
-                                    size: 12
 
-                                }
 
-                            },
+						y: {
 
-                            grid: {
+							beginAtZero: true,
 
-                                color:
-                                    "rgba(148, 163, 184, 0.20)"
+							ticks: {
 
-                            }
+								stepSize: 1,
 
-                        }
+								font: {
 
-                    },
+									size: 12
 
+								}
 
-                    plugins: {
+							},
 
-                        legend: {
+							grid: {
 
-                            display: false
+								color:
 
-                        },
+									"rgba(148, 163, 184, 0.20)"
 
+							}
 
-                        tooltip: {
+						}
 
-                            callbacks: {
+					},
 
-                                label: function (context) {
 
-                                    return " Users: "
-                                        + context.raw;
 
-                                }
+					plugins: {
 
-                            }
+						legend: {
 
-                        }
+							display: false
 
-                    }
+						},
 
-                }
 
-            }
 
-        );
+						tooltip: {
 
+							callbacks: {
 
-        /*]]>*/
+								label: function (context) {
 
+									return " Users: "
 
-    </script>
+										+ context.raw;
+
+								}
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+		);
+
+
+
+		/*]]>*/
+
+
+
+	</script>
+
 
 
 </body>

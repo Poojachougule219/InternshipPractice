@@ -41,6 +41,33 @@ public class AuthService {
 
     public LoginResponse login(LoginRequest request) {
 
+        if (request == null) {
+            throw new IllegalArgumentException(
+                    "Login request cannot be null"
+            );
+        }
+
+        if (request.getEmail() == null
+                || request.getEmail().isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "Email is required"
+            );
+        }
+
+        if (request.getPassword() == null
+                || request.getPassword().isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "Password is required"
+            );
+        }
+
+
+        // =================================================
+        // AUTHENTICATE USER
+        // =================================================
+
         Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
@@ -55,7 +82,8 @@ public class AuthService {
         // =================================================
 
         CustomUserDetails userDetails =
-                (CustomUserDetails) authentication.getPrincipal();
+                (CustomUserDetails)
+                        authentication.getPrincipal();
 
 
         // =================================================
@@ -84,9 +112,11 @@ public class AuthService {
 
         String role =
                 userDetails.getAuthorities()
-                        .iterator()
-                        .next()
-                        .getAuthority();
+                        .stream()
+                        .findFirst()
+                        .map(authority ->
+                                authority.getAuthority())
+                        .orElse("ROLE_STUDENT");
 
 
         // =================================================
@@ -175,6 +205,16 @@ public class AuthService {
     public LoginResponse refreshToken(
             RefreshTokenRequest request) {
 
+        if (request == null
+                || request.getRefreshToken() == null
+                || request.getRefreshToken().isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "Refresh token is required"
+            );
+        }
+
+
         // =================================================
         // FIND REFRESH TOKEN
         // =================================================
@@ -195,23 +235,54 @@ public class AuthService {
 
 
         // =================================================
+        // CHECK STUDENT
+        // =================================================
+
+        Student student =
+                refreshToken.getStudent();
+
+        if (student == null) {
+
+            throw new ResourceNotFoundException(
+                    "Student associated with refresh token not found"
+            );
+        }
+
+
+        // =================================================
+        // CHECK SOFT DELETE
+        // =================================================
+
+        if ("true".equalsIgnoreCase(
+                student.getIsDeleted())) {
+
+            throw new ResourceNotFoundException(
+                    "User account is deleted"
+            );
+        }
+
+
+        // =================================================
+        // CHECK ROLE
+        // =================================================
+
+        String role = "ROLE_STUDENT";
+
+        if (student.getRole() != null
+                && student.getRole().getName() != null) {
+
+            role = student.getRole().getName();
+        }
+
+
+        // =================================================
         // GENERATE NEW ACCESS TOKEN
         // =================================================
 
         String accessToken =
                 jwtService.generateToken(
-                        refreshToken.getStudent().getEmail()
+                        student.getEmail()
                 );
-
-
-        // =================================================
-        // GET ROLE
-        // =================================================
-
-        String role =
-                refreshToken.getStudent()
-                        .getRole()
-                        .getName();
 
 
         // =================================================
@@ -233,6 +304,14 @@ public class AuthService {
     public void logout(
             Long studentId,
             String ipAddress) {
+
+        if (studentId == null) {
+
+            throw new IllegalArgumentException(
+                    "Student ID is required"
+            );
+        }
+
 
         // =================================================
         // FIND ACTIVE USER

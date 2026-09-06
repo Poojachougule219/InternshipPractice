@@ -6,263 +6,428 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.student.entity.Student;
 import com.student.enums.StudentStatus;
 
-
+@Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
+    // =====================================================
+    // BASIC SEARCH
+    // =====================================================
+
+    List<Student> findByNameContainingIgnoreCase(
+            String name
+    );
+
+    List<Student> findByEmailContainingIgnoreCase(
+            String email
+    );
+
+    List<Student> findByDepartmentContainingIgnoreCase(
+            String department
+    );
+
+    List<Student> findByCityContainingIgnoreCase(
+            String city
+    );
+
+
+    // =====================================================
+    // LOGIN
+    // =====================================================
+
+    Student findByEmailAndPassword(
+            String email,
+            String password
+    );
+
+
+    // =====================================================
+    // EMAIL
+    // =====================================================
+
+    boolean existsByEmail(String email);
+
+    Optional<Student> findByEmail(
+            String email
+    );
+
+    Optional<Student> findByEmailAndIsDeleted(
+            String email,
+            String isDeleted
+    );
+
+
+    // =====================================================
+    // LOGIN
+    // EMAIL + STATUS + SOFT DELETE
+    // Used by CustomUserDetailsService
+    // =====================================================
 
     Optional<Student> findByEmailAndStatusAndIsDeleted(
             String email,
             StudentStatus status,
-            String isDeleted);
+            String isDeleted
+    );
 
 
-
-    Optional<Student> findByEmailAndIsDeleted(
-            String email,
-            String isDeleted);
-
-
-
-    boolean existsByEmailAndStatusAndIsDeleted(
-            String email,
-            StudentStatus status,
-            String isDeleted);
-
-
+    // =====================================================
+    // FIND BY ID + SOFT DELETE
+    // Used by AuthService
+    // =====================================================
 
     Optional<Student> findByIdAndIsDeleted(
             Long id,
-            String isDeleted);
+            String isDeleted
+    );
 
 
+    // =====================================================
+    // SEARCH + PAGINATION
+    // =====================================================
 
-
-    // ===============================
-    // STATUS + DELETE FILTER
-    // ===============================
-
-    List<Student> findByStatusAndIsDeleted(
-            StudentStatus status,
-            String isDeleted);
-
-
-    Page<Student> findByStatusAndIsDeleted(
-            StudentStatus status,
-            String isDeleted,
-            Pageable pageable);
-
-
-
-
-    // ===============================
-    // SEARCH
-    // ===============================
-
-    List<Student> findByNameContainingIgnoreCaseAndStatusAndIsDeleted(
+    Page<Student>
+    findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(
             String name,
-            StudentStatus status,
-            String isDeleted);
-
-
-
-    Page<Student> findByNameContainingIgnoreCaseAndStatusAndIsDeleted(
-            String name,
-            StudentStatus status,
-            String isDeleted,
-            Pageable pageable);
-
-
-
-    List<Student> findByEmailContainingIgnoreCaseAndStatusAndIsDeleted(
             String email,
-            StudentStatus status,
-            String isDeleted);
+            Pageable pageable
+    );
 
 
+    // =====================================================
+    // SEARCH + IS DELETED + PAGINATION
+    // =====================================================
 
-    List<Student> findByDepartmentContainingIgnoreCaseAndStatusAndIsDeleted(
-            String department,
-            StudentStatus status,
-            String isDeleted);
-
-
-
-    Page<Student> findByDepartmentContainingIgnoreCaseAndStatusAndIsDeleted(
-            String department,
-            StudentStatus status,
-            String isDeleted,
-            Pageable pageable);
-
-
-
-    List<Student> findByCityContainingIgnoreCaseAndStatusAndIsDeleted(
-            String city,
-            StudentStatus status,
-            String isDeleted);
-
-
-
-
-    // ===============================
-    // ROLE BASED SEARCH
-    // ===============================
-
-    Page<Student> findByRole_NameAndStatusAndIsDeleted(
-            String roleName,
-            StudentStatus status,
-            String isDeleted,
-            Pageable pageable);
-
-
-
-    List<Student> findByRole_NameAndStatusAndIsDeleted(
-            String roleName,
-            StudentStatus status,
-            String isDeleted);
-
-
-
-    Page<Student> findByRole_NameAndNameContainingIgnoreCaseAndStatusAndIsDeleted(
-            String roleName,
+    Page<Student>
+    findByIsDeletedAndNameContainingIgnoreCaseOrIsDeletedAndEmailContainingIgnoreCase(
+            String isDeleted1,
             String name,
-            StudentStatus status,
+            String isDeleted2,
+            String email,
+            Pageable pageable
+    );
+
+
+    // =====================================================
+    // IS DELETED
+    // =====================================================
+
+    Page<Student> findByIsDeleted(
             String isDeleted,
-            Pageable pageable);
+            Pageable pageable
+    );
+
+    List<Student> findByIsDeleted(
+            String isDeleted
+    );
+
+    List<Student> findByIsDeleted(
+            String isDeleted,
+            Sort sort
+    );
 
 
+    // =====================================================
+    // ROLE
+    // =====================================================
 
-    Page<Student> findByRole_NameAndDepartmentContainingIgnoreCaseAndStatusAndIsDeleted(
+    Page<Student> findByRole_Name(
             String roleName,
-            String department,
-            StudentStatus status,
-            String isDeleted,
-            Pageable pageable);
+            Pageable pageable
+    );
+
+    List<Student> findByRole_Name(
+            String roleName
+    );
 
 
+    // =====================================================
+    // ROLE + IS DELETED
+    // =====================================================
 
-
-    // ===============================
-    // COUNT
-    // ===============================
-
-    long countByStatusAndIsDeleted(
-            StudentStatus status,
-            String isDeleted);
-
-
-
-    long countByRole_NameAndStatusAndIsDeleted(
+    Page<Student> findByRole_NameAndIsDeleted(
             String roleName,
-            StudentStatus status,
-            String isDeleted);
-
-
-
-
-    // ===============================
-    // RECENT REGISTRATIONS
-    // ===============================
-
-    @Query("""
-            SELECT COUNT(s)
-            FROM Student s
-            WHERE s.status = com.student.enums.StudentStatus.ACTIVE
-            AND s.isDeleted = 'false'
-            AND s.createdDate >= :date
-            """)
-    long countRecentStudents(
-            @Param("date") LocalDateTime date);
-
-
-
-
-    List<Student> findTop10ByStatusAndIsDeletedOrderByCreatedDateDesc(
-            StudentStatus status,
-            String isDeleted);
-
-
-
-    Page<Student> findByStatusAndIsDeletedOrderByCreatedDateDesc(
-            StudentStatus status,
             String isDeleted,
-            Pageable pageable);
+            Pageable pageable
+    );
 
 
+    // =====================================================
+    // ROLE + IS DELETED + SEARCH
+    // =====================================================
+
+    Page<Student>
+    findByRole_NameAndIsDeletedAndNameContainingIgnoreCase(
+            String roleName,
+            String isDeleted,
+            String name,
+            Pageable pageable
+    );
 
 
-    // ===============================
-    // DASHBOARD CHARTS
-    // ===============================
+    // =====================================================
+    // COUNTS
+    // =====================================================
+
+    long countByRole_Name(
+            String roleName
+    );
+
+    long countByIsDeleted(
+            String isDeleted
+    );
+
+    long countByRole_NameAndIsDeleted(
+            String roleName,
+            String isDeleted
+    );
+
+
+    // =====================================================
+    // STATUS COUNTS
+    // =====================================================
+
+    long countByStatus(
+            StudentStatus status
+    );
+
+    long countByRole_NameAndStatus(
+            String roleName,
+            StudentStatus status
+    );
+
+
+    // =====================================================
+    // DEPARTMENT COUNT
+    // =====================================================
 
     @Query("""
             SELECT COUNT(DISTINCT s.department)
             FROM Student s
-            WHERE s.status = com.student.enums.StudentStatus.ACTIVE
-            AND s.isDeleted = 'false'
+            WHERE s.department IS NOT NULL
+            AND s.department <> ''
             """)
-    long countDistinctDepartments();
+    long countDistinctDepartment();
 
 
+    // =====================================================
+    // RECENT STUDENT COUNT
+    // =====================================================
 
+    long countByCreatedDateAfter(
+            LocalDateTime date
+    );
+
+
+    // =====================================================
+    // DASHBOARD
+    // STUDENTS BY DEPARTMENT
+    // =====================================================
 
     @Query("""
             SELECT s.department, COUNT(s)
             FROM Student s
-            WHERE s.status = com.student.enums.StudentStatus.ACTIVE
-            AND s.isDeleted = 'false'
+            WHERE s.department IS NOT NULL
+            AND s.department <> ''
             GROUP BY s.department
             """)
-    List<Object[]> getStudentCountByDepartment();
+    List<Object[]> countStudentsByDepartment();
 
 
-
+    // =====================================================
+    // DASHBOARD
+    // STUDENTS BY CITY
+    // =====================================================
 
     @Query("""
             SELECT s.city, COUNT(s)
             FROM Student s
-            WHERE s.status = com.student.enums.StudentStatus.ACTIVE
-            AND s.isDeleted = 'false'
+            WHERE s.city IS NOT NULL
+            AND s.city <> ''
             GROUP BY s.city
             """)
-    List<Object[]> getStudentCountByCity();
+    List<Object[]> countStudentsByCity();
 
 
+    // =====================================================
+    // USERS SEARCH
+    // NAME / EMAIL / DEPARTMENT / CITY
+    // =====================================================
+
+    @Query("""
+            SELECT s
+            FROM Student s
+            WHERE
+                LOWER(s.name) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.email) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.department) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.city) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+            """)
+    Page<Student> findByKeyword(
+            @Param("keyword") String keyword,
+            Pageable pageable
+    );
 
 
-    // ===============================
-    // ADMINS
-    // ===============================
+    // =====================================================
+    // USERS SEARCH + ROLE
+    // =====================================================
+
+    @Query("""
+            SELECT s
+            FROM Student s
+            WHERE
+                (
+                    LOWER(s.name) LIKE
+                        LOWER(CONCAT('%', :keyword, '%'))
+
+                    OR LOWER(s.email) LIKE
+                        LOWER(CONCAT('%', :keyword, '%'))
+
+                    OR LOWER(s.department) LIKE
+                        LOWER(CONCAT('%', :keyword, '%'))
+
+                    OR LOWER(s.city) LIKE
+                        LOWER(CONCAT('%', :keyword, '%'))
+                )
+                AND LOWER(s.role.name) = LOWER(:role)
+            """)
+    Page<Student> findByKeywordAndRole(
+            @Param("keyword") String keyword,
+            @Param("role") String role,
+            Pageable pageable
+    );
+
+
+    // =====================================================
+    // ADMIN SEARCH
+    // =====================================================
 
     @Query("""
             SELECT s
             FROM Student s
             WHERE s.role.name = 'ROLE_ADMIN'
-            AND s.isDeleted = 'false'
+            AND
+            (
+                LOWER(s.name) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.email) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.department) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.city) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+            )
             """)
-    List<Student> findAllAdmins();
+    Page<Student> findAdminsByKeyword(
+            @Param("keyword") String keyword,
+            Pageable pageable
+    );
 
 
+    // =====================================================
+    // STUDENT SEARCH
+    // =====================================================
 
-    List<Student> findByRole_NameAndIsDeleted(
-            String roleName,
-            String isDeleted);
-    
-    
-    
-    long countByIsDeleted(String isDeleted);
+    @Query("""
+            SELECT s
+            FROM Student s
+            WHERE s.role.name = 'ROLE_STUDENT'
+            AND
+            (
+                LOWER(s.name) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
 
-    long countByRole_NameAndIsDeleted(
-            String roleName,
-            String isDeleted);
-    
-    
-    Optional<Student> findByEmail(String email);
+                OR LOWER(s.email) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.department) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.city) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+            )
+            """)
+    Page<Student> findStudentsByKeyword(
+            @Param("keyword") String keyword,
+            Pageable pageable
+    );
+
+
+    // =====================================================
+    // RECENT STUDENTS
+    // PAGINATION
+    // =====================================================
+
+    @Query("""
+            SELECT s
+            FROM Student s
+            WHERE s.createdDate IS NOT NULL
+            ORDER BY s.createdDate DESC
+            """)
+    Page<Student> findRecentStudents(
+            Pageable pageable
+    );
+
+
+    // =====================================================
+    // RECENT STUDENTS
+    // SEARCH + PAGINATION
+    // =====================================================
+
+    @Query("""
+            SELECT s
+            FROM Student s
+            WHERE
+            (
+                LOWER(s.name) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.email) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.department) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+
+                OR LOWER(s.city) LIKE
+                    LOWER(CONCAT('%', :keyword, '%'))
+            )
+            AND s.createdDate IS NOT NULL
+            """)
+    Page<Student> findRecentStudentsByKeyword(
+            @Param("keyword") String keyword,
+            Pageable pageable
+    );
+
+
+    // =====================================================
+    // RECENT STUDENTS
+    // EXPORT
+    // =====================================================
+
+    @Query("""
+            SELECT s
+            FROM Student s
+            WHERE s.createdDate IS NOT NULL
+            ORDER BY s.createdDate DESC
+            """)
+    List<Student> findRecentStudents();
 
 }
