@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Contract Dashboard</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/Contract/dashboard.css}">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div class="header-left">
+
+        <div class="brand-icon">
+            <i class="fa-solid fa-file-contract"></i>
+        </div>
+
+        <div class="brand-text">
+
+            <span class="brand-title">
+                Legal Contract Management
+            </span>
+
+            <span class="brand-subtitle">
+                Contract Document Management System
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <div class="header-user">
+
+            <div class="user-avatar">
+
+                <img th:src="@{/contract/profile/photo}"
+                     alt="Profile Image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+                <i class="fa-solid fa-user"
+                   style="display:none;"></i>
+
+            </div>
+
+
+            <div class="user-details">
+
+                <span class="user-name"
+                      th:text="${username}">
+                    Contract Manager
+                </span>
+
+                <span class="user-role">
+                    Contract Manager
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit"
+                    class="header-logout"
+                    title="Logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</header>
+
+
+<aside class="sidebar">
+
+    <nav class="sidebar-nav">
+
+        <div class="nav-section">
+
+            <div class="nav-section-title">
+                MAIN MENU
+            </div>
+
+
+            <a th:href="@{/contract/dashboard}"
+               class="nav-item active">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a th:href="@{/contract/contracts}"
+               class="nav-item">
+
+                <i class="fa-solid fa-file-contract"></i>
+
+                <span>
+                    Contracts
+                </span>
+
+            </a>
+
+
+            <a th:href="@{/contract/contracts/add}"
+               class="nav-item">
+
+                <i class="fa-solid fa-file-circle-plus"></i>
+
+                <span>
+                    Add Contract
+                </span>
+
+            </a>
+
+
+            <!-- MODIFICATION REQUESTS -->
+
+            <a th:href="@{/contract/modifications}"
+               class="nav-item">
+
+                <i class="fa-solid fa-file-pen"></i>
+
+                <span>
+                    Modification Requests
+                </span>
+
+            </a>
+
+
+            <!-- NEW MODIFICATION -->
+
+            <a th:href="@{/contract/modifications/add}"
+               class="nav-item">
+
+                <i class="fa-solid fa-file-circle-plus"></i>
+
+                <span>
+                    New Modification
+                </span>
+
+            </a>
+
+
+            <div class="sidebar-divider"></div>
+
+
+            <a th:href="@{/contract/profile}"
+               class="nav-item">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+            <a th:href="@{/contract/settings}"
+               class="nav-item">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <form th:action="@{/logout}"
+              method="post">
+
+            <button type="submit"
+                    class="logout-item">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</aside>
+
+
+<main class="main-content">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Overview of your legal contract activities
+            </p>
+
+        </div>
+
+
+        <div class="date-display">
+
+            <i class="fa-regular fa-calendar"></i>
+
+            <span th:text="${formattedToday}">
+                05 Sep 2026
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- WELCOME CARD -->
+
+    <div class="welcome-card">
+
+        <div class="welcome-content">
+
+            <div class="welcome-icon">
+
+                <i class="fa-solid fa-hand-wave"></i>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+
+                    Welcome back,
+
+                    <span th:text="${username}">
+                        Contract Manager
+                    </span>
+
+                </h2>
+
+
+                <p>
+                    Manage your contracts, documents and approvals from one place.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a th:href="@{/contract/contracts/add}"
+           class="welcome-action">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add Contract
+
+        </a>
+
+    </div>
+
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats-grid">
+
+
+        <!-- TOTAL -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon total">
+
+                <i class="fa-solid fa-file-contract"></i>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Total Contracts
+                </span>
+
+
+                <strong class="stat-value"
+                        th:text="${contractCount}">
+                    0
+                </strong>
+
+
+                <span class="stat-description">
+                    All contracts
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DRAFT -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon draft">
+
+                <i class="fa-solid fa-file"></i>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Draft
+                </span>
+
+
+                <strong class="stat-value"
+                        th:text="${draftCount}">
+                    0
+                </strong>
+
+
+                <span class="stat-description">
+                    Draft contracts
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACTIVE -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon active">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Active
+                </span>
+
+
+                <strong class="stat-value"
+                        th:text="${activeCount}">
+                    0
+                </strong>
+
+
+                <span class="stat-description">
+                    Active contracts
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPIRING -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon warning">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Expiring Soon
+                </span>
+
+
+                <strong class="stat-value"
+                        th:text="${expiringSoonCount}">
+                    0
+                </strong>
+
+
+                <span class="stat-description">
+                    Within 30 days
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPIRED -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon expired">
+
+                <i class="fa-solid fa-circle-xmark"></i>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Expired
+                </span>
+
+
+                <strong class="stat-value"
+                        th:text="${expiredCount}">
+                    0
+                </strong>
+
+
+                <span class="stat-description">
+                    Expired contracts
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CHARTS -->
+
+    <div class="charts-grid">
+
+
+        <!-- ACTIVITY CHART -->
+
+        <div class="dashboard-card chart-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Contract Activity
+                    </h3>
+
+                    <p>
+                        Contracts created over the last six months
+                    </p>
+
+                </div>
+
+
+                <div class="card-header-icon">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas id="activityChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STATUS CHART -->
+
+        <div class="dashboard-card chart-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Contract Status
+                    </h3>
+
+                    <p>
+                        Current contract distribution
+                    </p>
+
+                </div>
+
+
+                <div class="card-header-icon">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-chart-container">
+
+                <canvas id="statusChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ATTENTION + EXPIRATION -->
+
+    <div class="two-column-grid">
+
+
+        <!-- REQUIRES ATTENTION -->
+
+        <div class="dashboard-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Requires Attention
+                    </h3>
+
+                    <p>
+                        Contracts that need your attention
+                    </p>
+
+                </div>
+
+
+                <a th:href="@{/contract/contracts}"
+                   class="view-all">
+
+                    View All
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="attention-list"
+                 th:if="${attentionContracts != null and !#lists.isEmpty(attentionContracts)}">
+
+
+                <div class="attention-row"
+                     th:each="contract : ${attentionContracts}">
+
+
+                    <div class="attention-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div class="attention-info">
+
+                        <strong th:text="${contract.title}">
+                            Contract Name
+                        </strong>
+
+
+                        <span th:text="${contract.contractType}">
+                            Contract Type
+                        </span>
+
+                    </div>
+
+
+                    <div class="attention-status">
+
+
+                        <span class="status-badge warning"
+                              th:if="${contract.status == 'DRAFT'}">
+
+                            Draft
+
+                        </span>
+
+
+                        <span class="status-badge warning"
+                              th:if="${contract.status != 'DRAFT'}">
+
+                            Expiring Soon
+
+                        </span>
+
+                    </div>
+
+
+                    <a th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+                       class="row-action">
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="empty-state"
+                 th:if="${attentionContracts == null or #lists.isEmpty(attentionContracts)}">
+
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+
+                <strong>
+                    No attention required
+                </strong>
+
+
+                <span>
+                    Everything looks good.
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- UPCOMING EXPIRATIONS -->
+
+        <div class="dashboard-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Upcoming Expirations
+                    </h3>
+
+                    <p>
+                        Contracts expiring within 90 days
+                    </p>
+
+                </div>
+
+
+                <a th:href="@{/contract/contracts}"
+                   class="view-all">
+
+                    View All
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="expiration-list"
+                 th:if="${upcomingContracts != null and !#lists.isEmpty(upcomingContracts)}">
+
+
+                <div class="expiration-row"
+                     th:each="contract : ${upcomingContracts}">
+
+
+                    <div class="expiration-date">
+
+                        <strong th:text="${#temporals.format(contract.endDate, 'dd')}">
+                            05
+                        </strong>
+
+
+                        <span th:text="${#temporals.format(contract.endDate, 'MMM')}">
+                            SEP
+                        </span>
+
+                    </div>
+
+
+                    <div class="expiration-info">
+
+                        <strong th:text="${contract.title}">
+                            Contract Name
+                        </strong>
+
+
+                        <span th:text="${contract.contractType}">
+                            Contract Type
+                        </span>
+
+                    </div>
+
+
+                    <div class="days-left">
+
+                        <span>
+                            Upcoming
+                        </span>
+
+                    </div>
+
+
+                    <a th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+                       class="row-action">
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="empty-state"
+                 th:if="${upcomingContracts == null or #lists.isEmpty(upcomingContracts)}">
+
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                </div>
+
+
+                <strong>
+                    No upcoming expirations
+                </strong>
+
+
+                <span>
+                    No contracts are expiring soon.
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- BOTTOM GRID -->
+
+    <div class="bottom-grid">
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="dashboard-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Quick Actions
+                    </h3>
+
+                    <p>
+                        Common contract management actions
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <!-- ADD CONTRACT -->
+
+                <a th:href="@{/contract/contracts/add}"
+                   class="quick-action">
+
+
+                    <div class="quick-action-icon">
+
+                        <i class="fa-solid fa-file-circle-plus"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Add New Contract
+                        </strong>
+
+                        <span>
+                            Create a new contract
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+
+
+                <!-- VIEW CONTRACTS -->
+
+                <a th:href="@{/contract/contracts}"
+                   class="quick-action">
+
+
+                    <div class="quick-action-icon">
+
+                        <i class="fa-solid fa-folder-open"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            View Contracts
+                        </strong>
+
+                        <span>
+                            Manage existing contracts
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+
+
+                <!-- NEW MODIFICATION -->
+
+                <a th:href="@{/contract/modifications/add}"
+                   class="quick-action">
+
+
+                    <div class="quick-action-icon">
+
+                        <i class="fa-solid fa-file-pen"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            New Modification
+                        </strong>
+
+                        <span>
+                            Submit a contract modification request
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+
+
+                <!-- MODIFICATION REQUESTS -->
+
+                <a th:href="@{/contract/modifications}"
+                   class="quick-action">
+
+
+                    <div class="quick-action-icon">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Modification Requests
+                        </strong>
+
+                        <span>
+                            View submitted modification requests
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+
+
+                <!-- MY PROFILE -->
+
+                <a th:href="@{/contract/profile}"
+                   class="quick-action">
+
+
+                    <div class="quick-action-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            My Profile
+                        </strong>
+
+                        <span>
+                            Manage your profile
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CONTRACT OVERVIEW -->
+
+        <div class="dashboard-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Contract Overview
+                    </h3>
+
+                    <p>
+                        Current contract status summary
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="overview-list">
+
+
+                <div class="overview-row">
+
+                    <span class="overview-label">
+
+                        <span class="overview-dot total-dot"></span>
+
+                        Total Contracts
+
+                    </span>
+
+
+                    <strong th:text="${contractCount}">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <div class="overview-row">
+
+                    <span class="overview-label">
+
+                        <span class="overview-dot draft-dot"></span>
+
+                        Draft
+
+                    </span>
+
+
+                    <strong th:text="${draftCount}">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <div class="overview-row">
+
+                    <span class="overview-label">
+
+                        <span class="overview-dot active-dot"></span>
+
+                        Active
+
+                    </span>
+
+
+                    <strong th:text="${activeCount}">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <div class="overview-row">
+
+                    <span class="overview-label">
+
+                        <span class="overview-dot warning-dot"></span>
+
+                        Expiring Soon
+
+                    </span>
+
+
+                    <strong th:text="${expiringSoonCount}">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <div class="overview-row">
+
+                    <span class="overview-label">
+
+                        <span class="overview-dot expired-dot"></span>
+
+                        Expired
+
+                    </span>
+
+
+                    <strong th:text="${expiredCount}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    const activityLabels =
+        /*[[${activityLabels}]]*/ [];
+
+    const activityValues =
+        /*[[${activityValues}]]*/ [];
+
+    const contractTypeLabels =
+        /*[[${contractTypeLabels}]]*/ [];
+
+    const contractTypeValues =
+        /*[[${contractTypeValues}]]*/ [];
+
+    const terminatedCount =
+        /*[[${terminatedCount}]]*/ 0;
+
+    const draftCount =
+        /*[[${draftCount}]]*/ 0;
+
+    const activeCount =
+        /*[[${activeCount}]]*/ 0;
+
+    const expiredCount =
+        /*[[${expiredCount}]]*/ 0;
+
+
+
+    // ========================================================
+    // ACTIVITY CHART
+    // ========================================================
+
+    const activityCanvas =
+        document.getElementById("activityChart");
+
+
+    if (activityCanvas) {
+
+        new Chart(
+            activityCanvas,
+            {
+
+                type: "line",
+
+                data: {
+
+                    labels: activityLabels,
+
+                    datasets: [
+
+                        {
+
+                            label: "Contracts Created",
+
+                            data: activityValues,
+
+                            borderWidth: 2,
+
+                            tension: 0.35,
+
+                            fill: false,
+
+                            pointRadius: 3,
+
+                            pointHoverRadius: 5
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+
+                    plugins: {
+
+                        legend: {
+
+                            display: false
+
+                        }
+
+                    },
+
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            ticks: {
+
+                                precision: 0
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    // ========================================================
+    // STATUS CHART
+    // ========================================================
+
+    const statusCanvas =
+        document.getElementById("statusChart");
+
+
+    if (statusCanvas) {
+
+        new Chart(
+            statusCanvas,
+            {
+
+                type: "doughnut",
+
+
+                data: {
+
+                    labels: [
+
+                        "Draft",
+
+                        "Active",
+
+                        "Expired",
+
+                        "Terminated"
+
+                    ],
+
+
+                    datasets: [
+
+                        {
+
+                            data: [
+
+                                draftCount,
+
+                                activeCount,
+
+                                expiredCount,
+
+                                terminatedCount
+
+                            ],
+
+                            borderWidth: 2
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    cutout: "65%",
+
+
+                    plugins: {
+
+                        legend: {
+
+                            position: "bottom"
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /*]]>*/
+
+</script>
+
+
+</body>
+
+</html>

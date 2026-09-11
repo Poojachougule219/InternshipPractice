@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Audit Logs | Admin Dashboard</title>
+
+<link rel="stylesheet"
+      th:href="@{/css/Admin/audit-logs.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<!-- =====================================================
+     AUDIT LOGS SECTION
+====================================================== -->
+
+<div class="audit-section">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="section-header">
+
+
+        <!-- PAGE TITLE -->
+
+        <div class="section-title">
+
+            <h1>Audit Logs</h1>
+
+            <p>
+                Track user activities and system changes.
+            </p>
+
+        </div>
+
+
+        <!-- DASHBOARD BUTTON -->
+
+        <div class="header-actions">
+
+            <a th:href="@{/admin/dashboard}"
+               class="dashboard-btn">
+
+                <span class="btn-icon">⌂</span>
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         TABLE
+    ================================================== -->
+
+    <div class="table-container">
+
+
+        <table>
+
+
+            <!-- =================================================
+                 TABLE HEADER
+            ================================================== -->
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>User</th>
+
+                    <th>Action</th>
+
+                    <th>Entity</th>
+
+                    <th>Entity ID</th>
+
+                    <th>Description</th>
+
+                    <th>IP Address</th>
+
+                    <th>Created At</th>
+
+                </tr>
+
+            </thead>
+
+
+            <!-- =================================================
+                 TABLE BODY
+            ================================================== -->
+
+            <tbody>
+
+
+                <tr th:each="log : ${auditLogs}">
+
+
+                    <!-- ID -->
+
+                    <td th:text="${log.id}">
+
+                        1
+
+                    </td>
+
+
+                    <!-- USER -->
+
+                    <td class="username-cell"
+                        th:text="${log.user != null
+                        ? log.user.username
+                        : 'N/A'}">
+
+                        admin
+
+                    </td>
+
+
+                    <!-- ACTION -->
+
+                    <td>
+
+                        <span class="action-badge"
+
+                              th:classappend="${log.action != null
+                              ? ' action-' + log.action.toLowerCase()
+                              : ' action-other'}"
+
+                              th:text="${log.action != null
+                              ? log.action
+                              : 'N/A'}">
+
+                            LOGIN
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- ENTITY -->
+
+                    <td>
+
+                        <span class="entity-badge"
+
+                              th:classappend="${log.entityName != null
+                              ? ' entity-' + log.entityName.toLowerCase().replace(' ', '-')
+                              : ' entity-other'}"
+
+                              th:text="${log.entityName != null
+                              ? log.entityName
+                              : 'N/A'}">
+
+                            User
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- ENTITY ID -->
+
+                    <td th:text="${log.entityId != null
+                        ? log.entityId
+                        : 'N/A'}">
+
+                        1
+
+                    </td>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <td class="description-cell">
+
+
+                        <!-- LOGIN -->
+
+                        <span th:if="${log.action == 'LOGIN'
+                            and log.user != null}">
+
+                            User
+
+                            <strong class="description-username"
+                                    th:text="${log.user.username}">
+
+                                admin
+
+                            </strong>
+
+                            logged into the system
+
+                        </span>
+
+
+                        <!-- LOGOUT -->
+
+                        <span th:if="${log.action == 'LOGOUT'
+                            and log.user != null}">
+
+                            User
+
+                            <strong class="description-username"
+                                    th:text="${log.user.username}">
+
+                                admin
+
+                            </strong>
+
+                            logged out of the system
+
+                        </span>
+
+
+                        <!-- REGISTER -->
+
+                        <span th:if="${log.action == 'REGISTER'
+                            and log.user != null}">
+
+                            New user
+
+                            <strong class="description-username"
+                                    th:text="${log.user.username}">
+
+                                pooja
+
+                            </strong>
+
+                            registered
+
+                        </span>
+
+
+                        <!-- OTHER ACTIONS -->
+
+                        <span th:if="${log.action != 'LOGIN'
+                            and log.action != 'LOGOUT'
+                            and log.action != 'REGISTER'}"
+
+                              th:text="${log.description != null
+                              ? log.description
+                              : 'N/A'}">
+
+                            Contract updated
+
+                        </span>
+
+
+                        <!-- FALLBACK -->
+
+                        <span th:if="${log.user == null
+                            and log.description != null}"
+
+                              th:text="${log.description}">
+
+                            System activity
+
+                        </span>
+
+
+                    </td>
+
+
+                    <!-- IP ADDRESS -->
+
+                    <td th:text="${log.ipAddress != null
+                        ? log.ipAddress
+                        : 'N/A'}">
+
+                        127.0.0.1
+
+                    </td>
+
+
+                    <!-- CREATED AT -->
+
+                    <td th:text="${log.createdAt != null
+                        ? #temporals.format(log.createdAt,
+                        'dd-MM-yyyy HH:mm:ss')
+                        : 'N/A'}">
+
+                        31-08-2026 11:30:00
+
+                    </td>
+
+
+                </tr>
+
+
+                <!-- =================================================
+                     NO RECORDS
+                ================================================== -->
+
+                <tr th:if="${auditLogs == null
+                    or #lists.isEmpty(auditLogs)}">
+
+                    <td colspan="8"
+                        class="no-records">
+
+                        No audit logs found.
+
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

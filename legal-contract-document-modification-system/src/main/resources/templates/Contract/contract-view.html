@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>View Contract</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Contract/contract-view.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+
+<div class="top-actions">
+
+    <a th:href="@{/contract/contracts}"
+       class="top-back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Contracts
+
+    </a>
+
+</div>
+
+<div class="main-card">
+
+    <div class="section-header">
+
+        <div class="section-header-left">
+
+            <div class="section-icon">
+
+                <i class="fa-solid fa-file-contract"></i>
+
+            </div>
+
+            <div>
+
+                <h2>Contract Information</h2>
+
+                <p>
+                    Complete details of this contract
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="status-wrapper">
+
+            <span class="status-badge active"
+                  th:if="${contract.status != null and #strings.equalsIgnoreCase(contract.status, 'ACTIVE')}">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                ACTIVE
+
+            </span>
+
+            <span class="status-badge draft"
+                  th:if="${contract.status != null and #strings.equalsIgnoreCase(contract.status, 'DRAFT')}">
+
+                <i class="fa-solid fa-pen"></i>
+
+                DRAFT
+
+            </span>
+
+            <span class="status-badge expired"
+                  th:if="${contract.status != null and #strings.equalsIgnoreCase(contract.status, 'EXPIRED')}">
+
+                <i class="fa-solid fa-clock"></i>
+
+                EXPIRED
+
+            </span>
+
+            <span class="status-badge terminated"
+                  th:if="${contract.status != null and #strings.equalsIgnoreCase(contract.status, 'TERMINATED')}">
+
+                <i class="fa-solid fa-ban"></i>
+
+                TERMINATED
+
+            </span>
+
+            <span class="status-badge default-status"
+                  th:if="${contract.status == null or
+                  (!#strings.equalsIgnoreCase(contract.status, 'ACTIVE')
+                  and !#strings.equalsIgnoreCase(contract.status, 'DRAFT')
+                  and !#strings.equalsIgnoreCase(contract.status, 'EXPIRED')
+                  and !#strings.equalsIgnoreCase(contract.status, 'TERMINATED'))}"
+                  th:text="${contract.status != null ? contract.status : 'N/A'}">
+
+                N/A
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="information-grid">
+
+        <div class="info-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-hashtag"></i>
+
+                Contract ID
+
+            </div>
+
+            <div class="info-value"
+                 th:text="${contract.id}">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-file-signature"></i>
+
+                Contract Number
+
+            </div>
+
+            <div class="info-value"
+                 th:text="${contract.contractNumber}">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-heading"></i>
+
+                Contract Title
+
+            </div>
+
+            <div class="info-value"
+                 th:text="${contract.title}">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                Contract Type
+
+            </div>
+
+            <div class="info-value"
+                 th:text="${contract.contractType}">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-calendar-plus"></i>
+
+                Start Date
+
+            </div>
+
+            <div class="info-value"
+                 th:text="${contract.startDate != null
+                 ? #temporals.format(contract.startDate, 'dd MMM yyyy')
+                 : 'N/A'}">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+                End Date
+
+            </div>
+
+            <div class="info-value"
+                 th:text="${contract.endDate != null
+                 ? #temporals.format(contract.endDate, 'dd MMM yyyy')
+                 : 'N/A'}">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-user"></i>
+
+                Created By
+
+            </div>
+
+            <div class="info-value"
+                 th:text="${contract.createdBy != null
+                 ? contract.createdBy
+                 : 'N/A'}">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                Created At
+
+            </div>
+
+            <div class="info-value"
+                 th:text="${contract.createdAt != null
+                 ? #temporals.format(contract.createdAt, 'dd MMM yyyy, HH:mm')
+                 : 'N/A'}">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="info-item description-item">
+
+            <div class="info-label">
+
+                <i class="fa-solid fa-align-left"></i>
+
+                Description
+
+            </div>
+
+            <div class="description-value"
+                 th:text="${contract.description != null
+                 and !#strings.isEmpty(contract.description)
+                 ? contract.description
+                 : 'No description available.'}">
+
+                No description available.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="document-section">
+
+        <div class="document-header">
+
+            <div class="document-title">
+
+                <div class="document-section-icon">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>Documents</h3>
+
+                    <p>
+                        Documents associated with this contract
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="document-header-actions">
+
+                <span class="document-count"
+                      th:text="${documents != null ? documents.size() : 0}">
+
+                    0
+
+                </span>
+
+                <a th:href="@{/contract/documents/{id}(id=${contract.id})}"
+                   class="view-all-documents">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    View All Documents
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="document-card"
+             th:if="${documents != null and !documents.isEmpty()}">
+
+            <div th:each="document : ${documents}"
+                 class="document-row">
+
+                <div class="file-icon">
+
+                    <i class="fa-solid fa-file-pdf"
+                       th:if="${document.fileType != null
+                       and (#strings.equalsIgnoreCase(document.fileType, 'PDF')
+                       or #strings.equalsIgnoreCase(document.fileType, 'application/pdf'))}">
+                    </i>
+
+                    <i class="fa-solid fa-file-word"
+                       th:if="${document.fileType != null
+                       and (#strings.equalsIgnoreCase(document.fileType, 'DOC')
+                       or #strings.equalsIgnoreCase(document.fileType, 'DOCX')
+                       or #strings.equalsIgnoreCase(document.fileType, 'application/msword')
+                       or #strings.equalsIgnoreCase(document.fileType, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))}">
+                    </i>
+
+                    <i class="fa-solid fa-file"
+                       th:if="${document.fileType == null
+                       or (!#strings.equalsIgnoreCase(document.fileType, 'PDF')
+                       and !#strings.equalsIgnoreCase(document.fileType, 'application/pdf')
+                       and !#strings.equalsIgnoreCase(document.fileType, 'DOC')
+                       and !#strings.equalsIgnoreCase(document.fileType, 'DOCX')
+                       and !#strings.equalsIgnoreCase(document.fileType, 'application/msword')
+                       and !#strings.equalsIgnoreCase(document.fileType, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))}">
+                    </i>
+
+                </div>
+
+                <div class="document-info">
+
+                    <div class="document-name"
+                         th:text="${document.documentName != null
+                         ? document.documentName
+                         : document.fileName}">
+
+                        Document
+
+                    </div>
+
+                    <div class="document-meta">
+
+                        <span th:if="${document.fileName != null}"
+                              th:text="${document.fileName}">
+
+                            FILE
+
+                        </span>
+
+                        <span th:if="${document.fileType != null}">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            <span th:text="${document.fileType}">
+                                FILE
+                            </span>
+
+                        </span>
+
+                        <span th:if="${document.uploadedAt != null}">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            <span th:text="${#temporals.format(
+                                document.uploadedAt,
+                                'dd MMM yyyy, HH:mm')}">
+
+                                -
+
+                            </span>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="document-actions">
+
+                    <a th:href="@{/contract/documents/details/{id}(id=${document.id})}"
+                       class="document-action view-document">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                        View
+
+                    </a>
+
+                    <a th:href="@{/contract/documents/download/{id}(id=${document.id})}"
+                       class="document-action download-document">
+
+                        <i class="fa-solid fa-download"></i>
+
+                        Download
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="no-document"
+             th:if="${documents == null or documents.isEmpty()}">
+
+            <i class="fa-regular fa-folder-open"></i>
+
+            <span>
+                No document available for this contract.
+            </span>
+
+            <a th:href="@{/contract/documents/upload/{id}(id=${contract.id})}"
+               class="upload-first-document">
+
+                <i class="fa-solid fa-upload"></i>
+
+                Upload Document
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="action-bar">
+
+        <a th:href="@{/contract/clauses/{id}(id=${contract.id})}"
+           class="clauses-btn">
+
+            <i class="fa-solid fa-list-check"></i>
+
+            Manage Clauses
+
+        </a>
+
+        <a th:href="@{/contract/documents/{id}(id=${contract.id})}"
+           class="documents-btn">
+
+            <i class="fa-solid fa-folder-open"></i>
+
+            Documents
+
+        </a>
+
+        <a th:href="@{/contract/modifications/add/{id}(id=${contract.id})}"
+           class="modification-btn">
+
+            <i class="fa-solid fa-pen-to-square"></i>
+
+            Request Modification
+
+        </a>
+
+        <a th:href="@{/contract/contracts}"
+           class="bottom-back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Contracts
+
+        </a>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

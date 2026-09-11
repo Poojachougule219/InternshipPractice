@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>View Approval</title>
+
+<link rel="stylesheet"
+      th:href="@{/css/Approval/approval-view.css}">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+<div class="view-header">
+
+<a th:href="@{/approval/approvals}"
+class="back-link"> <i class="fa-solid fa-arrow-left"></i>
+Back to Approval Requests </a>
+
+<div class="view-title-row">
+
+
+<div class="view-title">
+
+    <div class="view-title-icon">
+        <i class="fa-solid fa-clipboard-check"></i>
+    </div>
+
+    <div>
+
+        <h1>
+            Approval Request
+        </h1>
+
+        <p>
+            Review approval request details
+        </p>
+
+    </div>
+
+</div>
+
+<div>
+
+    <span class="large-status pending"
+          th:if="${approval.status == null or approval.status == 'PENDING'}">
+
+        <i class="fa-solid fa-clock"></i>
+        PENDING
+
+    </span>
+
+    <span class="large-status approved"
+          th:if="${approval.status == 'APPROVED'}">
+
+        <i class="fa-solid fa-circle-check"></i>
+        APPROVED
+
+    </span>
+
+    <span class="large-status rejected"
+          th:if="${approval.status == 'REJECTED'}">
+
+        <i class="fa-solid fa-circle-xmark"></i>
+        REJECTED
+
+    </span>
+
+    <span class="large-status other-status"
+          th:if="${approval.status != null and approval.status != 'PENDING' and approval.status != 'APPROVED' and approval.status != 'REJECTED'}"
+          th:text="${approval.status}">
+
+        STATUS
+
+    </span>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div class="view-grid">
+
+<div class="details-card">
+
+
+<div class="card-heading">
+
+    <div class="card-heading-icon">
+        <i class="fa-solid fa-file-contract"></i>
+    </div>
+
+    <div>
+
+        <h2>
+            Approval Information
+        </h2>
+
+        <p>
+            Details associated with this approval
+        </p>
+
+    </div>
+
+</div>
+
+<div class="details-list">
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            <i class="fa-solid fa-hashtag"></i>
+            Approval ID
+        </div>
+
+        <div class="detail-value"
+             th:text="${approval.id}">
+            1
+        </div>
+
+    </div>
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            <i class="fa-solid fa-file-contract"></i>
+            Contract Number
+        </div>
+
+        <div class="detail-value"
+             th:if="${approval.contract != null}"
+             th:text="${approval.contract.contractNumber}">
+            CTR-001
+        </div>
+
+        <div class="detail-value muted"
+             th:if="${approval.contract == null}">
+            Not Available
+        </div>
+
+    </div>
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            <i class="fa-solid fa-heading"></i>
+            Contract Title
+        </div>
+
+        <div class="detail-value"
+             th:if="${approval.contract != null}"
+             th:text="${approval.contract.title}">
+            Employment Agreement
+        </div>
+
+        <div class="detail-value muted"
+             th:if="${approval.contract == null}">
+            Not Available
+        </div>
+
+    </div>
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            <i class="fa-solid fa-layer-group"></i>
+            Modification Type
+        </div>
+
+        <div class="detail-value">
+
+            <span class="type-badge"
+                  th:if="${approval.modification == null or approval.modification.modificationType == null or approval.modification.modificationType == 'CONTRACT'}">
+
+                <i class="fa-solid fa-file-contract"></i>
+                Entire Contract
+
+            </span>
+
+            <span class="type-badge clause-type"
+                  th:if="${approval.modification != null and approval.modification.modificationType == 'CLAUSE'}">
+
+                <i class="fa-solid fa-list-check"></i>
+                Specific Clause
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="detail-row"
+         th:if="${approval.modification != null and approval.modification.clause != null}">
+
+        <div class="detail-label">
+
+            <i class="fa-solid fa-list-ol"></i>
+            Clause
+
+        </div>
+
+        <div class="detail-value">
+
+            <div class="view-clause">
+
+                <strong
+                    th:text="${approval.modification.clause.title}">
+                    Payment Terms
+                </strong>
+
+                <span
+                    th:text="${approval.modification.clause.clauseNumber}">
+                    1
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+
+            <i class="fa-solid fa-user"></i>
+            Requested By
+
+        </div>
+
+        <div class="detail-value"
+             th:if="${approval.modification != null and approval.modification.modifiedBy != null}"
+             th:text="${approval.modification.modifiedBy.username}">
+            admin
+        </div>
+
+        <div class="detail-value muted"
+             th:if="${approval.modification == null or approval.modification.modifiedBy == null}">
+            Not Available
+        </div>
+
+    </div>
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+
+            <i class="fa-solid fa-user-check"></i>
+            Approver
+
+        </div>
+
+        <div class="detail-value"
+             th:if="${approval.approver != null}"
+             th:text="${approval.approver.username}">
+            reviewer
+        </div>
+
+        <div class="detail-value muted"
+             th:if="${approval.approver == null}">
+            Not Available
+        </div>
+
+    </div>
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+
+            <i class="fa-solid fa-calendar-days"></i>
+            Submitted At
+
+        </div>
+
+        <div class="detail-value"
+             th:if="${approval.createdAt != null}"
+             th:text="${#temporals.format(approval.createdAt, 'dd MMMM yyyy, HH:mm')}">
+            08 September 2026, 11:00
+        </div>
+
+        <div class="detail-value muted"
+             th:if="${approval.createdAt == null}">
+            Not Available
+        </div>
+
+    </div>
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+
+            <i class="fa-solid fa-calendar-check"></i>
+            Approved At
+
+        </div>
+
+        <div class="detail-value"
+             th:if="${approval.approvedAt != null}"
+             th:text="${#temporals.format(approval.approvedAt, 'dd MMMM yyyy, HH:mm')}">
+            08 September 2026, 11:30
+        </div>
+
+        <div class="detail-value muted"
+             th:if="${approval.approvedAt == null}">
+            Not Available
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="details-card">
+
+
+<div class="card-heading">
+
+    <div class="card-heading-icon">
+        <i class="fa-solid fa-circle-info"></i>
+    </div>
+
+    <div>
+
+        <h2>
+            Approval Comments
+        </h2>
+
+        <p>
+            Comments provided during review
+        </p>
+
+    </div>
+
+</div>
+
+<div class="reason-display"
+     th:if="${approval.comments != null and !#strings.isEmpty(approval.comments)}"
+     th:text="${approval.comments}">
+    Approval comments
+</div>
+
+<div class="empty-detail"
+     th:if="${approval.comments == null or #strings.isEmpty(approval.comments)}">
+    No comments were provided.
+</div>
+
+
+</div>
+
+</div>
+
+<div class="content-card comparison-card">
+
+<div class="section-header">
+
+
+<div>
+
+    <h2>
+        Modification Comparison
+    </h2>
+
+    <p>
+        Compare the original value with the proposed modification
+    </p>
+
+</div>
+
+
+</div>
+
+<div class="comparison-grid">
+
+
+<div class="comparison-panel original-panel">
+
+    <div class="comparison-heading">
+
+        <div class="comparison-icon">
+            <i class="fa-solid fa-file-lines"></i>
+        </div>
+
+        <div>
+
+            <h3>
+                Original Value
+            </h3>
+
+            <span>
+                Current contract or clause content
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="content-display"
+         th:if="${approval.modification != null and approval.modification.oldContent != null and !#strings.isEmpty(approval.modification.oldContent)}"
+         th:text="${approval.modification.oldContent}">
+        Original content
+    </div>
+
+    <div class="empty-detail"
+         th:if="${approval.modification == null or approval.modification.oldContent == null or #strings.isEmpty(approval.modification.oldContent)}">
+        No original value provided.
+    </div>
+
+</div>
+
+<div class="comparison-panel proposed-panel">
+
+    <div class="comparison-heading">
+
+        <div class="comparison-icon">
+            <i class="fa-solid fa-file-pen"></i>
+        </div>
+
+        <div>
+
+            <h3>
+                Proposed Modification
+            </h3>
+
+            <span>
+                Requested replacement content
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="content-display"
+         th:if="${approval.modification != null and approval.modification.newContent != null and !#strings.isEmpty(approval.modification.newContent)}"
+         th:text="${approval.modification.newContent}">
+        Proposed content
+    </div>
+
+    <div class="empty-detail"
+         th:if="${approval.modification == null or approval.modification.newContent == null or #strings.isEmpty(approval.modification.newContent)}">
+        No proposed modification provided.
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div class="bottom-actions">
+
+<a th:href="@{/approval/approvals}"
+class="back-button">
+
+
+<i class="fa-solid fa-arrow-left"></i>
+Back to Requests
+
+
+</a>
+
+<a th:if="${approval.contract != null}"
+th:href="@{/contract/contracts/view/{id}(id=${approval.contract.id})}"
+class="secondary-button">
+
+
+<i class="fa-solid fa-file-contract"></i>
+View Contract
+
+
+</a>
+
+<a th:href="@{/approval/edit/{id}(id=${approval.id})}"
+class="secondary-button">
+
+
+<i class="fa-solid fa-pen"></i>
+Edit Approval
+
+
+</a>
+
+<a th:href="@{/approval/delete/{id}(id=${approval.id})}"
+class="delete-button"
+onclick="return confirm('Are you sure you want to delete this approval request?');">
+
+
+<i class="fa-solid fa-trash"></i>
+Delete Request
+
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

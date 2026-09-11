@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Documents</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/User/documents.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<div class="top-bar">
+
+    <a th:href="@{/user/dashboard}" class="back-button">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Dashboard
+
+    </a>
+
+</div>
+
+<div class="content-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+
+                <i class="fa-solid fa-folder"></i>
+
+                Documents
+
+            </h2>
+
+            <p>
+
+                Documents associated with your account
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="empty-state"
+         th:if="${documents == null or #lists.isEmpty(documents)}">
+
+        <div class="empty-icon">
+
+            <i class="fa-solid fa-file-lines"></i>
+
+        </div>
+
+        <h3>No Documents Available</h3>
+
+        <p>
+
+            There are currently no documents associated with your account.
+
+        </p>
+
+    </div>
+
+    <div class="documents-grid"
+         th:if="${documents != null and !#lists.isEmpty(documents)}">
+
+        <div class="document-card"
+             th:each="document : ${documents}">
+
+            <div class="document-icon">
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+            </div>
+
+            <div class="document-details">
+
+                <h3 th:text="${document.fileName}">
+
+                    Document Name
+
+                </h3>
+
+                <p th:if="${document.fileType != null}"
+                   th:text="${document.fileType}">
+
+                    Document Type
+
+                </p>
+
+                <div class="document-meta">
+
+                    <span th:if="${document.id != null}">
+
+                        <i class="fa-solid fa-hashtag"></i>
+
+                        <span th:text="${document.id}">1</span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="document-action">
+
+                <a th:href="@{'/contract/documents/view/' + ${document.id}}"
+                   class="view-button">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                    View
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

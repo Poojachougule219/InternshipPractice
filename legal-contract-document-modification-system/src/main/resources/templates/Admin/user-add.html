@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<title th:text="${user.id == null ? 'Add User' : 'Edit User'}">
+		User
+	</title>
+
+	<!-- User Add / Edit CSS -->
+	<link rel="stylesheet" th:href="@{/css/Admin/user-add.css}">
+
+
+</head>
+
+<body>
+
+	<div class="form-page">
+
+
+		<div class="form-card">
+
+			<!-- =================================================
+         HEADER
+    ================================================== -->
+			<div class="form-header">
+
+				<div class="header-text">
+					<h1 th:text="${user.id == null
+                    ? 'Add New User'
+                    : 'Edit User'}">
+						Add New User
+					</h1>
+
+					<p th:text="${user.id == null
+                    ? 'Create a new system user'
+                    : 'Update user information and role'}">
+						Create a new system user
+					</p>
+				</div>
+
+				<a th:href="@{/admin/users}" class="back-btn">
+					<span>←</span>
+					Back
+				</a>
+
+			</div>
+
+
+			<!-- =================================================
+         ERROR MESSAGE
+    ================================================== -->
+			<div th:if="${error}" class="alert error-alert" th:text="${error}">
+			</div>
+
+
+			<!-- =================================================
+         ADD USER FORM
+    ================================================== -->
+			<form th:if="${user.id == null}" th:action="@{/admin/users/save}" th:object="${user}" method="post">
+
+				<div class="form-grid">
+
+					<!-- FULL NAME -->
+					<div class="form-group">
+
+						<label for="fullName">
+							Full Name
+						</label>
+
+						<input type="text" id="fullName" th:field="*{fullName}" placeholder="Enter full name" required>
+
+					</div>
+
+
+					<!-- USERNAME -->
+					<div class="form-group">
+
+						<label for="username">
+							Username
+						</label>
+
+						<input type="text" id="username" th:field="*{username}" placeholder="Enter username" required>
+
+					</div>
+
+
+					<!-- EMAIL -->
+					<div class="form-group">
+
+						<label for="email">
+							Email
+						</label>
+
+						<input type="email" id="email" th:field="*{email}" placeholder="Enter email address" required>
+
+					</div>
+
+
+					<!-- PASSWORD -->
+					<div class="form-group">
+
+						<label for="password">
+							Password
+						</label>
+
+						<input type="password" id="password" th:field="*{password}" placeholder="Enter password"
+							required>
+
+					</div>
+
+
+					<!-- ROLE -->
+					<div class="form-group">
+
+						<label for="roleName">
+							Role
+						</label>
+
+						<select id="roleName" name="roleName" required>
+
+							<option value="">
+								Select Role
+							</option>
+
+							<option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}">
+								ROLE_USER
+							</option>
+
+						</select>
+
+					</div>
+
+
+					<!-- STATUS -->
+					<div class="form-group">
+
+						<label for="status">
+							Status
+						</label>
+
+						<select id="status" th:field="*{status}">
+
+							<option value="ACTIVE">
+								ACTIVE
+							</option>
+
+							<option value="INACTIVE">
+								INACTIVE
+							</option>
+
+						</select>
+
+					</div>
+
+				</div>
+
+
+				<!-- BUTTONS -->
+				<div class="form-actions">
+
+
+					<button type="submit" class="save-btn">
+						Create User
+					</button>
+
+					<a th:href="@{/admin/users}" class="cancel-btn">
+						Cancel
+					</a>
+
+
+
+				</div>
+
+			</form>
+
+
+			<!-- =================================================
+         EDIT USER FORM
+    ================================================== -->
+			<form th:if="${user.id != null}" th:action="@{/admin/users/update/{id}(id=${user.id})}" th:object="${user}"
+				method="post">
+
+				<div class="form-grid">
+
+					<!-- FULL NAME -->
+					<div class="form-group">
+
+						<label for="editFullName">
+							Full Name
+						</label>
+
+						<input type="text" id="editFullName" th:field="*{fullName}" required>
+
+					</div>
+
+
+					<!-- USERNAME -->
+					<div class="form-group">
+
+						<label for="editUsername">
+							Username
+						</label>
+
+						<input type="text" id="editUsername" th:field="*{username}" required>
+
+					</div>
+
+
+					<!-- EMAIL -->
+					<div class="form-group">
+
+						<label for="editEmail">
+							Email
+						</label>
+
+						<input type="email" id="editEmail" th:field="*{email}" required>
+
+					</div>
+
+
+					<!-- PASSWORD -->
+					<div class="form-group">
+
+						<label for="editPassword">
+							New Password
+						</label>
+
+						<input type="password" id="editPassword" th:field="*{password}"
+							placeholder="Leave blank to keep current password">
+
+						<small>
+							Leave blank if you do not want to change the password.
+						</small>
+
+					</div>
+
+
+					<!-- ROLE -->
+					<div class="form-group">
+
+						<label for="editRole">
+							Role
+						</label>
+
+						<select id="editRole" name="roleName" required>
+
+							<option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"
+								th:selected="${user.role != null
+                                and user.role.name == role.name}">
+								ROLE_USER
+							</option>
+
+						</select>
+
+					</div>
+
+
+					<!-- STATUS -->
+					<div class="form-group">
+
+						<label for="editStatus">
+							Status
+						</label>
+
+						<select id="editStatus" th:field="*{status}">
+
+							<option value="ACTIVE">
+								ACTIVE
+							</option>
+
+							<option value="INACTIVE">
+								INACTIVE
+							</option>
+
+						</select>
+
+					</div>
+
+				</div>
+
+
+				<!-- BUTTONS -->
+				<div class="form-actions">
+
+
+					<button type="submit" class="save-btn">
+						Update User
+					</button>
+
+					<a th:href="@{/admin/users}" class="cancel-btn">
+						Cancel
+					</a>
+
+
+
+				</div>
+
+			</form>
+
+		</div>
+
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Approvals</title>
+
+<link rel="stylesheet"
+      th:href="@{/css/Admin/approvals.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<!-- =====================================================
+     APPROVALS SECTION
+====================================================== -->
+
+<div class="approvals-section">
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <h1>Approvals</h1>
+
+            <p>
+                Manage contract modification approvals
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             HEADER ACTIONS
+        ================================================== -->
+
+        <div class="header-actions">
+
+            <a th:href="@{/admin/approvals/add}"
+               class="btn add-btn">
+
+                <span class="btn-icon">+</span>
+
+                Create Approval
+
+            </a>
+
+
+            <a th:href="@{/admin/dashboard}"
+               class="btn dashboard-btn">
+
+                <span class="btn-icon">⌂</span>
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SUCCESS MESSAGE
+    ================================================== -->
+
+    <div th:if="${successMessage}"
+         class="success-message"
+         th:text="${successMessage}">
+
+        Approval updated successfully.
+
+    </div>
+
+
+    <!-- =================================================
+         TABLE
+    ================================================== -->
+
+    <div class="table-wrapper">
+
+        <table class="approvals-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Contract</th>
+
+                    <th>Modification</th>
+
+                    <th>Approver</th>
+
+                    <th>Status</th>
+
+                    <th>Comments</th>
+
+                    <th>Approved At</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <!-- =================================================
+                     APPROVAL ROW
+                ================================================== -->
+
+                <tr th:each="approval : ${approvals}">
+
+                    <!-- ID -->
+
+                    <td th:text="${approval.id}">
+                        1
+                    </td>
+
+
+                    <!-- CONTRACT -->
+
+                    <td th:text="${approval.contract != null
+                                  ? approval.contract.title
+                                  : 'N/A'}">
+
+                        Employment Agreement
+
+                    </td>
+
+
+                    <!-- MODIFICATION -->
+
+                    <td th:text="${approval.modification != null
+                                  ? approval.modification.id
+                                  : 'N/A'}">
+
+                        1
+
+                    </td>
+
+
+                    <!-- APPROVER -->
+
+                    <td th:text="${approval.approver != null
+                                  ? approval.approver.username
+                                  : 'N/A'}">
+
+                        lawyer01
+
+                    </td>
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        <span class="status"
+
+                              th:classappend="${
+                                  approval.status == 'APPROVED'
+                                  ? ' status-approved'
+                                  : approval.status == 'REJECTED'
+                                  ? ' status-rejected'
+                                  : ' status-pending'
+                              }"
+
+                              th:text="${approval.status}">
+
+                            PENDING
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- COMMENTS -->
+
+                    <td th:text="${approval.comments != null
+                                  and !#strings.isEmpty(approval.comments)
+                                  ? approval.comments
+                                  : 'N/A'}">
+
+                        Waiting for review
+
+                    </td>
+
+
+                    <!-- APPROVED AT -->
+
+                    <td th:text="${approval.approvedAt != null
+                                  ? #temporals.format(
+                                        approval.approvedAt,
+                                        'dd-MM-yyyy HH:mm'
+                                    )
+                                  : 'N/A'}">
+
+                        N/A
+
+                    </td>
+
+
+                    <!-- =================================================
+                         ACTION
+                    ================================================== -->
+
+                    <td class="action-cell">
+
+                        <!-- -----------------------------------------
+                             PENDING
+                             SHOW APPROVE + REJECT
+                        ------------------------------------------ -->
+
+                        <div th:if="${approval.status == 'PENDING'}"
+                             class="approval-actions">
+
+                            <form th:action="@{/admin/approvals/{id}/approve(id=${approval.id})}"
+                                  method="post">
+
+                                <button type="submit"
+                                        class="action-btn approve-btn">
+
+                                    ✓ Approve
+
+                                </button>
+
+                            </form>
+
+
+                            <form th:action="@{/admin/approvals/{id}/reject(id=${approval.id})}"
+                                  method="post">
+
+                                <button type="submit"
+                                        class="action-btn reject-btn">
+
+                                    ✕ Reject
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- -----------------------------------------
+                             APPROVED
+                             NO BUTTONS
+                        ------------------------------------------ -->
+
+                        <span th:if="${approval.status == 'APPROVED'}"
+                              class="action-completed approved-text">
+
+                            ✓ Approved
+
+                        </span>
+
+
+                        <!-- -----------------------------------------
+                             REJECTED
+                             NO BUTTONS
+                        ------------------------------------------ -->
+
+                        <span th:if="${approval.status == 'REJECTED'}"
+                              class="action-completed rejected-text">
+
+                            ✕ Rejected
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     NO APPROVALS
+                ================================================== -->
+
+                <tr th:if="${approvals == null or #lists.isEmpty(approvals)}">
+
+                    <td colspan="8"
+                        class="empty-message">
+
+                        No approvals found.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

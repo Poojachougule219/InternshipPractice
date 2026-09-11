@@ -1,0 +1,728 @@
+/* =========================================================
+RESET
+========================================================= */
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+/* =========================================================
+BODY
+========================================================= */
+
+body {
+
+
+margin: 0;
+
+min-height: 100vh;
+
+font-family: Arial, Helvetica, sans-serif;
+
+background: #f1f5f9;
+
+color: #1e293b;
+
+
+}
+
+/* =========================================================
+PAGE CONTAINER
+========================================================= */
+
+.page-container {
+
+
+width: 95%;
+
+max-width: 1400px;
+
+margin: 35px auto;
+
+
+}
+
+/* =========================================================
+AUDIT SECTION
+========================================================= */
+
+.audit-section {
+
+
+background: #ffffff;
+
+border-radius: 12px;
+
+padding: 25px;
+
+box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+
+}
+
+/* =========================================================
+SECTION HEADER
+========================================================= */
+
+.section-header {
+
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+margin-bottom: 22px;
+
+padding-bottom: 18px;
+
+border-bottom: 1px solid #e2e8f0;
+
+
+}
+
+/* =========================================================
+PAGE HEADER
+========================================================= */
+
+.section-title h1 {
+
+
+margin: 0 0 8px 0;
+
+font-size: 28px;
+
+color: #0f172a;
+
+
+}
+
+.section-title p {
+
+
+margin: 0;
+
+color: #64748b;
+
+font-size: 14px;
+
+
+}
+
+/* =========================================================
+HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+
+
+display: flex;
+
+align-items: center;
+
+gap: 10px;
+
+
+}
+
+/* =========================================================
+DASHBOARD BUTTON
+========================================================= */
+
+.dashboard-btn {
+
+
+display: inline-flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 7px;
+
+padding: 10px 16px;
+
+background: #334155;
+
+color: #ffffff;
+
+border-radius: 7px;
+
+text-decoration: none;
+
+font-size: 13px;
+
+font-weight: 600;
+
+transition: 0.2s ease;
+
+
+}
+
+.dashboard-btn:hover {
+
+
+background: #1e293b;
+
+transform: translateY(-1px);
+
+
+}
+
+/* =========================================================
+BUTTON ICON
+========================================================= */
+
+.btn-icon {
+
+
+font-size: 17px;
+
+line-height: 1;
+
+
+}
+
+/* =========================================================
+TABLE CONTAINER
+========================================================= */
+
+.table-container {
+
+
+background: white;
+
+border-radius: 10px;
+
+box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+overflow-x: auto;
+
+
+}
+
+/* =========================================================
+TABLE
+========================================================= */
+
+table {
+
+
+width: 100%;
+
+border-collapse: collapse;
+
+min-width: 1050px;
+
+
+}
+
+/* =========================================================
+TABLE HEADER
+========================================================= */
+
+thead {
+
+
+background: #e2e8f0;
+
+
+}
+
+th {
+
+
+padding: 14px 15px;
+
+text-align: left;
+
+font-size: 13px;
+
+color: #334155;
+
+font-weight: 700;
+
+border-bottom: 1px solid #cbd5e1;
+
+white-space: nowrap;
+
+
+}
+
+/* =========================================================
+TABLE DATA
+========================================================= */
+
+td {
+
+
+padding: 14px 15px;
+
+border-bottom: 1px solid #e2e8f0;
+
+font-size: 13px;
+
+color: #475569;
+
+vertical-align: middle;
+
+
+}
+
+tbody tr:hover {
+
+
+background: #f8fafc;
+
+
+}
+
+tbody tr:last-child td {
+
+
+border-bottom: none;
+
+
+}
+
+/* =========================================================
+USERNAME
+========================================================= */
+
+.username-cell {
+
+
+font-weight: 600;
+
+color: #0f172a;
+
+
+}
+
+/* =========================================================
+ACTION BADGES
+========================================================= */
+
+.action-badge {
+
+
+display: inline-block;
+
+padding: 6px 11px;
+
+border-radius: 20px;
+
+font-size: 11px;
+
+font-weight: 700;
+
+letter-spacing: 0.3px;
+
+text-transform: uppercase;
+
+
+}
+
+/* =========================================================
+LOGIN
+========================================================= */
+
+.action-login {
+
+
+background: #dcfce7;
+
+color: #166534;
+
+
+}
+
+/* =========================================================
+LOGOUT
+========================================================= */
+
+.action-logout {
+
+
+background: #fee2e2;
+
+color: #991b1b;
+
+
+}
+
+/* =========================================================
+REGISTER
+========================================================= */
+
+.action-register {
+
+
+background: #dbeafe;
+
+color: #1e40af;
+
+
+}
+
+/* =========================================================
+CREATE
+========================================================= */
+
+.action-create {
+
+
+background: #ede9fe;
+
+color: #6d28d9;
+
+
+}
+
+/* =========================================================
+UPDATE
+========================================================= */
+
+.action-update {
+
+
+background: #fef3c7;
+
+color: #92400e;
+
+
+}
+
+/* =========================================================
+DELETE
+========================================================= */
+
+.action-delete {
+
+
+background: #fecaca;
+
+color: #b91c1c;
+
+
+}
+
+/* =========================================================
+APPROVE
+========================================================= */
+
+.action-approve {
+
+
+background: #d1fae5;
+
+color: #047857;
+
+
+}
+
+/* =========================================================
+REJECT
+========================================================= */
+
+.action-reject {
+
+
+background: #ffe4e6;
+
+color: #be123c;
+
+
+}
+
+/* =========================================================
+OTHER ACTION
+========================================================= */
+
+.action-other {
+
+
+background: #e2e8f0;
+
+color: #475569;
+
+
+}
+
+/* =========================================================
+ENTITY BADGES
+========================================================= */
+
+.entity-badge {
+
+display: inline-block;
+
+padding: 6px 12px;
+
+border-radius: 20px;
+
+font-size: 11px;
+
+font-weight: 700;
+
+text-transform: uppercase;
+
+
+}
+
+/* =========================================================
+ADMIN
+========================================================= */
+
+.entity-admin {
+
+
+background: #fee2e2;
+
+color: #991b1b;
+
+border: 1px solid #fecaca;
+
+
+}
+
+/* =========================================================
+USER
+========================================================= */
+
+.entity-user {
+
+
+background: #dbeafe;
+
+color: #1d4ed8;
+
+border: 1px solid #bfdbfe;
+
+
+}
+
+/* =========================================================
+REVIEWER
+========================================================= */
+
+.entity-reviewer {
+
+
+background: #ede9fe;
+
+color: #6d28d9;
+
+border: 1px solid #ddd6fe;
+
+
+}
+
+/* =========================================================
+CONTRACT
+========================================================= */
+
+.entity-contract {
+
+
+background: #fef3c7;
+
+color: #92400e;
+
+border: 1px solid #fde68a;
+
+
+}
+
+/* =========================================================
+DOCUMENT
+========================================================= */
+
+.entity-document {
+
+
+background: #e0f2fe;
+
+color: #0369a1;
+
+border: 1px solid #bae6fd;
+
+
+}
+
+/* =========================================================
+APPROVAL
+========================================================= */
+
+.entity-approval {
+
+
+background: #dcfce7;
+
+color: #166534;
+
+border: 1px solid #bbf7d0;
+
+
+}
+
+/* =========================================================
+MODIFICATION
+========================================================= */
+
+.entity-modification {
+
+
+background: #f3e8ff;
+
+color: #7e22ce;
+
+border: 1px solid #e9d5ff;
+
+
+}
+
+/* =========================================================
+AUDIT LOG
+========================================================= */
+
+.entity-auditlog,
+
+.entity-audit-log {
+
+
+background: #f1f5f9;
+
+color: #475569;
+
+border: 1px solid #cbd5e1;
+
+
+}
+
+/* =========================================================
+OTHER ENTITY
+========================================================= */
+
+.entity-other {
+
+
+background: #e2e8f0;
+
+color: #475569;
+
+border: 1px solid #cbd5e1;
+
+
+}
+
+/* =========================================================
+DESCRIPTION
+========================================================= */
+
+.description-cell {
+
+
+max-width: 300px;
+
+line-height: 1.6;
+
+
+}
+
+/* =========================================================
+DESCRIPTION USERNAME
+========================================================= */
+
+.description-username {
+
+
+display: inline-block;
+
+padding: 3px 8px;
+
+margin: 0 3px;
+
+border-radius: 5px;
+
+background: #e0e7ff;
+
+color: #3730a3;
+
+font-weight: 700;
+
+font-size: 12px;
+
+
+}
+
+/* =========================================================
+NO RECORDS
+========================================================= */
+
+.no-records {
+
+
+text-align: center;
+
+padding: 30px;
+
+color: #64748b;
+
+font-size: 14px;
+
+
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+
+.page-container {
+
+    width: 94%;
+
+    margin: 20px auto;
+
+}
+
+
+.section-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+}
+
+
+.header-actions {
+
+    width: 100%;
+
+}
+
+
+.dashboard-btn {
+
+    width: 100%;
+
+}
+
+
+.audit-section {
+
+    padding: 16px;
+
+}
+
+
+}

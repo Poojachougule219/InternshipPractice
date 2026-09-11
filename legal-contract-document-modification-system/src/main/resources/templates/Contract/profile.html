@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>My Profile</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Contract/profile.css}">
+
+</head>
+
+<body>
+
+<main class="main-content">
+
+<!-- =====================================================
+     PAGE HEADER
+     ===================================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1>My Profile</h1>
+
+        <p>
+            Manage your profile and account information.
+        </p>
+
+    </div>
+
+    <a th:href="@{/contract/dashboard}"
+       class="back-button">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Dashboard
+
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     SUCCESS MESSAGE
+     ===================================================== -->
+
+<div th:if="${successMessage}"
+     class="alert-message success-message">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span th:text="${successMessage}">
+        Profile photo uploaded successfully!
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     ERROR MESSAGE
+     ===================================================== -->
+
+<div th:if="${errorMessage}"
+     class="alert-message error-message">
+
+    <i class="fa-solid fa-circle-exclamation"></i>
+
+    <span th:text="${errorMessage}">
+        Unable to upload profile photo.
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     PROFILE CARD
+     ===================================================== -->
+
+<div class="profile-card">
+
+
+    <!-- =================================================
+         PROFILE PHOTO
+         ================================================= -->
+
+    <section class="profile-photo-section">
+
+        <div class="profile-photo">
+
+            <!-- Existing uploaded photo -->
+
+            <img id="profileImage"
+                 th:if="${user != null && user.profilePhoto != null}"
+                 th:src="@{/contract/profile/photo}"
+                 alt="Profile Photo">
+
+
+            <!-- Default avatar -->
+
+            <div id="defaultAvatar"
+                 class="default-avatar"
+                 th:style="${user != null && user.profilePhoto != null}
+                 ? 'display:none'
+                 : 'display:flex'">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+        </div>
+
+
+        <!-- Username -->
+
+        <h2 th:text="${user != null ? user.username : username}">
+            Contract Manager
+        </h2>
+
+
+        <!-- Role -->
+
+        <span class="role-badge">
+            Contract Manager
+        </span>
+
+    </section>
+
+
+
+    <!-- =================================================
+         BASIC INFORMATION
+         ================================================= -->
+
+    <section class="basic-section">
+
+        <div class="section-heading">
+
+            <div class="heading-icon">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+            </div>
+
+            <div>
+
+                <h2>Basic Information</h2>
+
+                <p>Your account details</p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="info-grid">
+
+
+            <!-- USERNAME -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Username
+
+                </span>
+
+                <strong th:text="${user != null ? user.username : username}">
+                    Contract Manager
+                </strong>
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    Email
+
+                </span>
+
+                <strong th:text="${user != null ? user.email : 'Not available'}">
+                    Not available
+                </strong>
+
+            </div>
+
+
+
+            <!-- ROLE -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                    Role
+
+                </span>
+
+                <strong>
+                    Contract Manager
+                </strong>
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Status
+
+                </span>
+
+                <strong class="status-active">
+
+                    <span></span>
+
+                    Active
+
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PROFILE ACTIONS
+         ================================================= -->
+
+    <div class="profile-actions">
+
+
+        <!-- =============================================
+             UPLOAD PHOTO
+             ============================================= -->
+
+        <form th:action="@{/contract/profile/upload-photo}"
+              method="post"
+              enctype="multipart/form-data"
+              id="photoForm">
+
+            <label for="photoUpload"
+                   class="action-button upload-action">
+
+                <i class="fa-solid fa-camera"></i>
+
+                Upload Photo
+
+            </label>
+
+
+            <input type="file"
+                   id="photoUpload"
+                   name="photo"
+                   accept="image/*"
+                   hidden>
+
+        </form>
+
+
+		<a th:href="@{/contract/profile/edit}"
+		   class="action-button edit-action">
+		    <i class="fa-solid fa-user-pen"></i>
+		    Edit Profile
+		</a>
+		
+
+        <!-- =============================================
+             CHANGE PASSWORD
+             ============================================= -->
+
+        <a th:href="@{/contract/change-password}"
+           class="action-button secondary">
+
+            <i class="fa-solid fa-key"></i>
+
+            Change Password
+
+        </a>
+
+
+
+        <!-- =============================================
+             DASHBOARD
+             ============================================= -->
+
+        <a th:href="@{/contract/dashboard}"
+           class="action-button primary">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Go to Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+
+</main>
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+    const photoUpload =
+        document.getElementById("photoUpload");
+
+    const photoForm =
+        document.getElementById("photoForm");
+
+
+    photoUpload.addEventListener("change", function () {
+
+        const file = this.files[0];
+
+        if (!file) {
+            return;
+        }
+
+
+        /* =====================================================
+           CHECK FILE TYPE
+           ===================================================== */
+
+        if (!file.type.startsWith("image/")) {
+
+            alert("Please select a valid image file.");
+
+            this.value = "";
+
+            return;
+        }
+
+
+        /* =====================================================
+           CHECK FILE SIZE
+           Maximum 5 MB
+           ===================================================== */
+
+        const maxSize =
+            5 * 1024 * 1024;
+
+        if (file.size > maxSize) {
+
+            alert("Photo size must be less than 5 MB.");
+
+            this.value = "";
+
+            return;
+        }
+
+
+        /* =====================================================
+           SUBMIT FORM
+           ===================================================== */
+
+        photoForm.submit();
+
+    });
+
+</script>
+
+</body>
+
+</html>

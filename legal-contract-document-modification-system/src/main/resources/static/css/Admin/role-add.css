@@ -1,0 +1,448 @@
+/* =========================================================
+ROLE ADD PAGE
+
+Professional Admin Theme
+========================================================= */
+
+/* =========================================================
+RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+/* =========================================================
+BODY
+========================================================= */
+
+html,
+body {
+width: 100%;
+min-height: 100%;
+font-family: "Segoe UI", Arial, sans-serif;
+background: #f1f5f9;
+color: #1e293b;
+}
+
+/* =========================================================
+PAGE CONTAINER
+========================================================= */
+
+.form-page {
+width: 100%;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding: 55px 25px 60px;
+}
+
+/* =========================================================
+FORM CARD
+========================================================= */
+
+.form-card {
+width: 100%;
+max-width: 900px;
+background: #ffffff;
+border: 1px solid #e2e8f0;
+border-radius: 12px;
+box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+overflow: hidden;
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.form-header {
+width: 100%;
+min-height: 105px;
+padding: 24px 30px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: #1e293b;
+border-bottom: 1px solid #334155;
+}
+
+/* =========================================================
+HEADER TEXT
+========================================================= */
+
+.header-text {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.header-text h1 {
+margin: 0;
+font-size: 25px;
+font-weight: 600;
+color: #f8fafc;
+letter-spacing: 0.2px;
+}
+
+.header-text p {
+margin: 0;
+font-size: 14px;
+font-weight: 400;
+color: #cbd5e1;
+}
+
+/* =========================================================
+BACK BUTTON
+========================================================= */
+
+.back-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+min-width: 95px;
+height: 40px;
+padding: 0 17px;
+background: #475569;
+color: #f8fafc;
+border: 1px solid #64748b;
+border-radius: 7px;
+text-decoration: none;
+font-size: 14px;
+font-weight: 500;
+transition: all 0.2s ease;
+}
+
+.back-btn span {
+font-size: 18px;
+line-height: 1;
+}
+
+.back-btn:hover {
+background: #64748b;
+border-color: #94a3b8;
+color: #ffffff;
+transform: translateY(-1px);
+box-shadow: 0 4px 10px rgba(15, 23, 42, 0.18);
+}
+
+/* =========================================================
+ALERT
+========================================================= */
+
+.alert {
+margin: 22px 30px 0;
+padding: 12px 16px;
+border-radius: 7px;
+font-size: 14px;
+font-weight: 500;
+}
+
+.error-alert {
+background: #fef2f2;
+color: #991b1b;
+border: 1px solid #fecaca;
+}
+
+/* =========================================================
+FORM
+========================================================= */
+
+form {
+padding: 30px;
+}
+
+/* =========================================================
+FORM GRID
+========================================================= */
+
+.form-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+column-gap: 28px;
+row-gap: 22px;
+}
+
+/* =========================================================
+FORM GROUP
+========================================================= */
+
+.form-group {
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+/* =========================================================
+LABEL
+========================================================= */
+
+.form-group label {
+margin-bottom: 8px;
+font-size: 14px;
+font-weight: 600;
+color: #334155;
+}
+
+/* =========================================================
+INPUT + SELECT
+========================================================= */
+
+.form-group input,
+.form-group select {
+width: 100%;
+height: 43px;
+padding: 0 13px;
+background: #ffffff;
+border: 1px solid #cbd5e1;
+border-radius: 6px;
+color: #1e293b;
+font-family: "Segoe UI", Arial, sans-serif;
+font-size: 14px;
+outline: none;
+transition: all 0.2s ease;
+}
+
+/* =========================================================
+PLACEHOLDER
+========================================================= */
+
+.form-group input::placeholder {
+color: #94a3b8;
+}
+
+/* =========================================================
+INPUT FOCUS
+========================================================= */
+
+.form-group input:focus,
+.form-group select:focus {
+border-color: #64748b;
+box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.12);
+}
+
+/* =========================================================
+SELECT
+========================================================= */
+
+.form-group select {
+cursor: pointer;
+}
+
+/* =========================================================
+SMALL HELP TEXT
+========================================================= */
+
+.form-group small {
+margin-top: 7px;
+color: #64748b;
+font-size: 12px;
+line-height: 1.4;
+}
+
+/* =========================================================
+FORM ACTIONS
+========================================================= */
+
+.form-actions {
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 14px;
+margin-top: 32px;
+padding-top: 25px;
+border-top: 1px solid #e2e8f0;
+}
+
+/* =========================================================
+COMMON BUTTON STYLE
+========================================================= */
+
+.save-btn,
+.cancel-btn {
+height: 42px;
+min-width: 125px;
+padding: 0 22px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+border-radius: 7px;
+font-family: "Segoe UI", Arial, sans-serif;
+font-size: 14px;
+font-weight: 600;
+text-decoration: none;
+cursor: pointer;
+transition: all 0.2s ease;
+}
+
+/* =========================================================
+SAVE / CREATE / UPDATE BUTTON
+========================================================= */
+
+.save-btn {
+background: #334155;
+color: #ffffff;
+border: 1px solid #334155;
+}
+
+.save-btn:hover {
+background: #1e293b;
+border-color: #1e293b;
+transform: translateY(-1px);
+box-shadow: 0 4px 10px rgba(15, 23, 42, 0.18);
+}
+
+/* =========================================================
+CANCEL BUTTON
+========================================================= */
+
+.cancel-btn {
+background: #e2e8f0;
+color: #334155;
+border: 1px solid #cbd5e1;
+}
+
+.cancel-btn:hover {
+background: #cbd5e1;
+color: #1e293b;
+border-color: #94a3b8;
+transform: translateY(-1px);
+box-shadow: 0 4px 10px rgba(15, 23, 42, 0.10);
+}
+
+/* =========================================================
+BUTTON ACTIVE
+========================================================= */
+
+.save-btn:active,
+.cancel-btn:active,
+.back-btn:active {
+transform: translateY(0);
+box-shadow: none;
+}
+
+/* =========================================================
+RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 750px) {
+
+```
+.form-page {
+    padding: 35px 18px 45px;
+}
+
+.form-header {
+    padding: 22px;
+}
+
+.form-grid {
+    grid-template-columns: 1fr;
+    row-gap: 18px;
+}
+
+form {
+    padding: 25px 22px;
+}
+
+.header-text h1 {
+    font-size: 22px;
+}
+
+.header-text p {
+    font-size: 13px;
+}
+```
+
+}
+
+/* =========================================================
+RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+```
+.form-page {
+    padding: 20px 12px 35px;
+}
+
+.form-card {
+    border-radius: 9px;
+}
+
+.form-header {
+    min-height: auto;
+    padding: 20px;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.header-text h1 {
+    font-size: 20px;
+}
+
+.header-text p {
+    font-size: 12px;
+}
+
+.back-btn {
+    min-width: 78px;
+    height: 36px;
+    padding: 0 12px;
+    font-size: 13px;
+}
+
+form {
+    padding: 22px 18px;
+}
+
+.form-actions {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 26px;
+    padding-top: 22px;
+}
+
+.save-btn,
+.cancel-btn {
+    min-width: 110px;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 13px;
+}
+```
+
+}
+
+/* =========================================================
+VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+
+.form-header {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.back-btn {
+    width: 100%;
+}
+
+.form-actions {
+    flex-direction: column;
+}
+
+.save-btn,
+.cancel-btn {
+    width: 100%;
+}
+
+
+}

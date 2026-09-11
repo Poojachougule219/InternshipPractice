@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>My Modifications | Legal Contract System</title>
+
+<link rel="stylesheet"
+      th:href="@{/css/User/modifications.css}">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<header class="page-header">
+
+    <div class="header-left">
+
+        <div class="header-icon">
+            <i class="fa-solid fa-pen-to-square"></i>
+        </div>
+
+        <div>
+            <h1>My Modifications</h1>
+
+            <p>
+                View your contract modification requests
+            </p>
+        </div>
+
+    </div>
+
+    <a th:href="@{/user/dashboard}"
+       class="back-button">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Dashboard
+
+    </a>
+
+</header>
+
+
+<div class="status-navigation">
+
+    <a th:href="@{/user/modifications}"
+       class="status-button"
+       th:classappend="${selectedStatus == null or selectedStatus == '' ? ' active' : ''}">
+
+        <i class="fa-solid fa-list"></i>
+
+        All
+
+    </a>
+
+    <a th:href="@{/user/modifications(status='PENDING')}"
+       class="status-button pending"
+       th:classappend="${selectedStatus != null and selectedStatus.toUpperCase() == 'PENDING' ? ' active' : ''}">
+
+        <i class="fa-solid fa-clock"></i>
+
+        Pending
+
+    </a>
+
+    <a th:href="@{/user/modifications(status='APPROVED')}"
+       class="status-button approved"
+       th:classappend="${selectedStatus != null and selectedStatus.toUpperCase() == 'APPROVED' ? ' active' : ''}">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        Approved
+
+    </a>
+
+    <a th:href="@{/user/modifications(status='REJECTED')}"
+       class="status-button rejected"
+       th:classappend="${selectedStatus != null and selectedStatus.toUpperCase() == 'REJECTED' ? ' active' : ''}">
+
+        <i class="fa-solid fa-circle-xmark"></i>
+
+        Rejected
+
+    </a>
+
+</div>
+
+
+<section class="content-card">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2
+                th:if="${selectedStatus == null or selectedStatus == ''}">
+                All Modifications
+            </h2>
+
+            <h2
+                th:if="${selectedStatus != null and selectedStatus.toUpperCase() == 'PENDING'}">
+                Pending Modifications
+            </h2>
+
+            <h2
+                th:if="${selectedStatus != null and selectedStatus.toUpperCase() == 'APPROVED'}">
+                Approved Modifications
+            </h2>
+
+            <h2
+                th:if="${selectedStatus != null and selectedStatus.toUpperCase() == 'REJECTED'}">
+                Rejected Modifications
+            </h2>
+
+            <p>
+                Your modification requests and their current status
+            </p>
+
+        </div>
+
+        <div class="count-box">
+
+            <span th:text="${modifications != null ? modifications.size() : 0}">
+                0
+            </span>
+
+            <small>Requests</small>
+
+        </div>
+
+    </div>
+
+
+    <div class="empty-state"
+         th:if="${modifications == null or modifications.isEmpty()}">
+
+        <div class="empty-icon">
+
+            <i class="fa-solid fa-file-circle-check"></i>
+
+        </div>
+
+        <h3>No modifications found</h3>
+
+        <p>
+            There are no modification requests for this status.
+        </p>
+
+    </div>
+
+
+    <div class="modification-list"
+         th:if="${modifications != null and !modifications.isEmpty()}">
+
+        <div class="modification-item"
+             th:each="modification : ${modifications}">
+
+            <div class="modification-icon">
+
+                <i class="fa-solid fa-file-signature"></i>
+
+            </div>
+
+            <div class="modification-info">
+
+                <strong>
+                    Modification Request
+                </strong>
+
+                <span>
+                    Request ID:
+                    <b th:text="${modification.id}">
+                        -
+                    </b>
+                </span>
+
+            </div>
+
+            <div class="modification-status">
+
+                <span th:text="${modification.status != null
+                    ? modification.status
+                    : 'UNKNOWN'}">
+                    PENDING
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+
+</body>
+
+</html>

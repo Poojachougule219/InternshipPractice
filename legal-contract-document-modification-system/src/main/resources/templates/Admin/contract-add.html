@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Add New Contract</title>
+
+<link rel="stylesheet"
+      th:href="@{/css/Admin/contract-add.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<!-- =====================================================
+     CONTRACT ADD SECTION
+====================================================== -->
+
+<div class="contract-add-section">
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <h1>Add New Contract</h1>
+
+            <p>
+                Create and register a new legal contract in the system
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FORM
+    ================================================== -->
+
+    <form id="contractForm"
+          class="contract-form">
+
+        <!-- CONTRACT NUMBER + CONTRACT TYPE -->
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="contractNumber">
+                    Contract Number
+                </label>
+
+                <input type="text"
+                       id="contractNumber"
+                       name="contractNumber"
+                       placeholder="Enter contract number"
+                       required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="contractType">
+                    Contract Type
+                </label>
+
+                <select id="contractType"
+                        name="contractType"
+                        required>
+
+                    <option value="">
+                        Select contract type
+                    </option>
+
+                    <option value="Employment">
+                        Employment
+                    </option>
+
+                    <option value="Service">
+                        Service
+                    </option>
+
+                    <option value="Business">
+                        Business
+                    </option>
+
+                    <option value="Vendor">
+                        Vendor
+                    </option>
+
+                    <option value="NDA">
+                        NDA
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTRACT TITLE -->
+
+        <div class="form-group">
+
+            <label for="title">
+                Contract Title
+            </label>
+
+            <input type="text"
+                   id="title"
+                   name="title"
+                   placeholder="Enter contract title"
+                   required>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="form-group">
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea id="description"
+                      name="description"
+                      rows="5"
+                      placeholder="Enter contract description"></textarea>
+
+        </div>
+
+
+        <!-- START DATE + END DATE -->
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="startDate">
+                    Start Date
+                </label>
+
+                <input type="date"
+                       id="startDate"
+                       name="startDate"
+                       required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="endDate">
+                    End Date
+                </label>
+
+                <input type="date"
+                       id="endDate"
+                       name="endDate">
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="form-group">
+
+            <label for="status">
+                Status
+            </label>
+
+            <select id="status"
+                    name="status"
+                    required>
+
+                <option value="ACTIVE">
+                    ACTIVE
+                </option>
+
+                <option value="INACTIVE">
+                    INACTIVE
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM ACTIONS
+        ================================================== -->
+
+        <div class="form-actions">
+
+            <button type="submit"
+                    class="btn save-btn">
+
+                <span class="btn-icon">✓</span>
+
+                Save Contract
+
+            </button>
+
+
+            <a th:href="@{/admin/contracts}"
+               class="btn cancel-btn">
+
+                <span class="btn-icon">✕</span>
+
+                Cancel
+
+            </a>
+
+
+            <a th:href="@{/admin/dashboard}"
+               class="btn dashboard-btn">
+
+                <span class="btn-icon">⌂</span>
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+
+        <!-- SUCCESS MESSAGE -->
+
+        <div id="successMessage"
+             class="message success-message">
+
+            Contract created successfully.
+
+        </div>
+
+
+        <!-- ERROR MESSAGE -->
+
+        <div id="errorMessage"
+             class="message error-message">
+
+            Unable to create contract. Please try again.
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</div>
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+document.getElementById("contractForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const form = event.target;
+
+    const contractData = {
+
+        contractNumber: document.getElementById("contractNumber").value.trim(),
+
+        title: document.getElementById("title").value.trim(),
+
+        description: document.getElementById("description").value.trim(),
+
+        contractType: document.getElementById("contractType").value,
+
+        status: document.getElementById("status").value,
+
+        startDate: document.getElementById("startDate").value,
+
+        endDate: document.getElementById("endDate").value || null
+
+    };
+
+
+    fetch("/api/contracts", {
+
+        method: "POST",
+
+        headers: {
+
+            "Content-Type": "application/json"
+
+        },
+
+        body: JSON.stringify(contractData)
+
+    })
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error("Failed to create contract");
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        document.getElementById("errorMessage").style.display = "none";
+
+        document.getElementById("successMessage").style.display = "block";
+
+        form.reset();
+
+        document.getElementById("status").value = "ACTIVE";
+
+
+        setTimeout(function() {
+
+            window.location.href = "/admin/contracts";
+
+        }, 1500);
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById("successMessage").style.display = "none";
+
+        document.getElementById("errorMessage").style.display = "block";
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

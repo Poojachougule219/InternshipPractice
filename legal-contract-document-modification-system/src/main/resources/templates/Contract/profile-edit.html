@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Edit Profile</title>
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+	<link rel="stylesheet" th:href="@{/css/Contract/profile-edit.css}">
+
+
+</head>
+
+<body>
+
+	<main class="main-content">
+
+
+		<div class="page-header">
+
+			<div>
+				<h1>
+					<i class="fa-solid fa-user-pen"></i>
+					Edit Profile
+				</h1>
+
+				<p>
+					Update your profile and account information.
+				</p>
+			</div>
+
+			<a th:href="@{/contract/profile}" class="back-button">
+
+				<i class="fa-solid fa-arrow-left"></i>
+				My Profile
+
+			</a>
+
+		</div>
+
+
+		<div th:if="${errorMessage}" class="alert-message error-message">
+
+			<i class="fa-solid fa-circle-exclamation"></i>
+
+			<span th:text="${errorMessage}">
+				Unable to update profile.
+			</span>
+
+		</div>
+
+
+		<div class="profile-edit-card">
+
+			<div class="edit-header">
+
+				<div class="edit-icon">
+					<i class="fa-solid fa-user-pen"></i>
+				</div>
+
+				<div>
+					<h2>Profile Information</h2>
+					<p>Update your personal account details</p>
+				</div>
+
+			</div>
+
+
+			<form th:action="@{/contract/profile/edit}" method="post" id="profileEditForm">
+
+				<div class="form-grid">
+
+					<div class="form-group">
+
+						<label for="fullName">
+							<i class="fa-solid fa-id-card"></i>
+							Full Name
+						</label>
+
+						<input type="text" id="fullName" name="fullName" th:value="${user.fullName}"
+							placeholder="Enter your full name" maxlength="100" required>
+
+					</div>
+
+
+					<div class="form-group">
+
+						<label for="email">
+							<i class="fa-solid fa-envelope"></i>
+							Email Address
+						</label>
+
+						<input type="email" id="email" name="email" th:value="${user.email}"
+							placeholder="Enter your email address" maxlength="150" required>
+
+					</div>
+
+
+					<div class="form-group">
+
+						<label for="username">
+							<i class="fa-solid fa-user"></i>
+							Username
+						</label>
+
+						<input type="text" id="username" th:value="${user.username}" readonly>
+
+						<small>
+							Username cannot be changed from this page.
+						</small>
+
+					</div>
+
+
+					<div class="form-group">
+
+						<label for="role">
+							<i class="fa-solid fa-user-shield"></i>
+							Role
+						</label>
+
+						<input type="text" id="role" value="Contract Manager" readonly>
+
+					</div>
+
+
+					<div class="form-group">
+
+						<label for="status">
+							<i class="fa-solid fa-circle-check"></i>
+							Account Status
+						</label>
+
+						<input type="text" id="status" th:value="${user.status}" readonly>
+
+					</div>
+
+				</div>
+
+
+				<div class="form-actions">
+
+					<button type="submit" class="action-button save-action">
+
+						<i class="fa-solid fa-floppy-disk"></i>
+						Save Changes
+
+					</button>
+
+					<a th:href="@{/contract/profile}" class="action-button cancel-action">
+
+						<i class="fa-solid fa-xmark"></i>
+						Cancel
+
+					</a>
+
+
+
+
+				</div>
+
+			</form>
+
+		</div>
+
+
+	</main>
+
+	<script>
+
+		const profileForm =
+			document.getElementById("profileEditForm");
+
+		profileForm.addEventListener("submit", function (event) {
+
+			const fullName =
+				document.getElementById("fullName").value.trim();
+
+			const email =
+				document.getElementById("email").value.trim();
+
+			if (fullName.length < 2) {
+
+				event.preventDefault();
+
+				alert("Full name must contain at least 2 characters.");
+
+				return;
+			}
+
+			if (!email) {
+
+				event.preventDefault();
+
+				alert("Email address is required.");
+
+				return;
+			}
+
+		});
+
+	</script>
+
+</body>
+
+</html>

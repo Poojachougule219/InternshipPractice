@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>My Profile</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+	<link rel="stylesheet" th:href="@{/css/Admin/profile.css}">
+
+</head>
+
+<body>
+
+	<div class="main-content">
+
+		<div class="page-header">
+
+			<div>
+				<h1>
+					<i class="fa-solid fa-user-circle"></i>
+					My Profile
+				</h1>
+
+				<p>
+					Manage your profile and account information.
+				</p>
+			</div>
+
+			<a th:href="@{/admin/dashboard}" class="back-btn">
+
+				<i class="fa-solid fa-arrow-left"></i>
+
+				Dashboard
+
+			</a>
+
+		</div>
+
+
+		<div th:if="${successMessage}" class="alert success-alert">
+
+			<i class="fa-solid fa-circle-check"></i>
+
+			<span th:text="${successMessage}">
+				Profile updated successfully.
+			</span>
+
+		</div>
+
+
+		<div th:if="${errorMessage}" class="alert error-alert">
+
+			<i class="fa-solid fa-circle-exclamation"></i>
+
+			<span th:text="${errorMessage}">
+				Unable to update profile.
+			</span>
+
+		</div>
+
+
+		<div class="profile-card">
+
+			<div class="profile-photo-section">
+
+				<div class="profile-photo-wrapper">
+
+					<img th:if="${user.profilePhoto != null}" th:src="@{'/admin/profile/photo/' + ${user.id}}"
+						alt="Profile Photo" class="profile-photo">
+
+					<div th:unless="${user.profilePhoto != null}" class="default-profile-photo">
+
+						<i class="fa-solid fa-user"></i>
+
+					</div>
+
+				</div>
+
+
+				<h2 th:text="${user.fullName}">
+					Administrator
+				</h2>
+
+				<p class="username">
+					@<span th:text="${user.username}">
+						admin
+					</span>
+				</p>
+
+				<span class="role-badge">
+
+					<i class="fa-solid fa-user-shield"></i>
+
+					Administrator
+
+				</span>
+
+			</div>
+
+
+			<div class="basic-section">
+
+				<div class="section-heading">
+
+					<div class="section-icon">
+
+						<i class="fa-solid fa-id-card"></i>
+
+					</div>
+
+					<div>
+
+						<h3>Basic Information</h3>
+
+						<p>Your account details</p>
+
+					</div>
+
+				</div>
+
+
+				<div class="info-grid">
+
+					<div class="info-box">
+
+						<div class="info-icon username-icon">
+
+							<i class="fa-solid fa-user"></i>
+
+						</div>
+
+						<div class="info-content">
+
+							<span class="info-label">
+								Username
+							</span>
+
+							<span class="info-value" th:text="${user.username}">
+								admin
+							</span>
+
+						</div>
+
+					</div>
+
+
+					<div class="info-box">
+
+						<div class="info-icon email-icon">
+
+							<i class="fa-solid fa-envelope"></i>
+
+						</div>
+
+						<div class="info-content">
+
+							<span class="info-label">
+								Email
+							</span>
+
+							<span class="info-value" th:text="${user.email}">
+								admin@example.com
+							</span>
+
+						</div>
+
+					</div>
+
+
+					<div class="info-box">
+
+						<div class="info-icon role-icon">
+
+							<i class="fa-solid fa-user-shield"></i>
+
+						</div>
+
+						<div class="info-content">
+
+							<span class="info-label">
+								Role
+							</span>
+
+							<span class="info-value">
+								Administrator
+							</span>
+
+						</div>
+
+					</div>
+
+
+					<div class="info-box">
+
+						<div class="info-icon status-icon">
+
+							<i class="fa-solid fa-circle-check"></i>
+
+						</div>
+
+						<div class="info-content">
+
+							<span class="info-label">
+								Status
+							</span>
+
+							<span class="info-value" th:text="${user.status}">
+								ACTIVE
+							</span>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<div class="profile-actions">
+
+					<form th:action="@{/admin/profile/upload-photo}" method="post" enctype="multipart/form-data"
+						id="photoForm">
+
+						<label for="photo" class="action-btn upload-btn">
+
+							<i class="fa-solid fa-camera"></i>
+
+							Upload Photo
+
+						</label>
+
+						<input type="file" id="photo" name="photo" accept="image/*" hidden>
+
+					</form>
+
+					<a th:href="@{/admin/profile/edit}" class="action-btn edit-profile-btn">
+
+
+						<i class="fa-solid fa-user-pen"></i>
+						Edit Profile
+
+
+					</a>
+
+
+					<a th:href="@{/admin/change-password}" class="action-btn password-btn">
+
+						<i class="fa-solid fa-key"></i>
+
+						Change Password
+
+					</a>
+
+
+					<a th:href="@{/admin/dashboard}" class="action-btn dashboard-btn">
+
+						<i class="fa-solid fa-gauge-high"></i>
+
+						Go to Dashboard
+
+					</a>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<script>
+
+		const photoInput =
+			document.getElementById("photo");
+
+		const photoForm =
+			document.getElementById("photoForm");
+
+
+		photoInput.addEventListener("change", function () {
+
+			const file = this.files[0];
+
+			if (!file) {
+				return;
+			}
+
+
+			if (!file.type.startsWith("image/")) {
+
+				alert("Please select a valid image file.");
+
+				this.value = "";
+
+				return;
+			}
+
+
+			const maxSize =
+				5 * 1024 * 1024;
+
+
+			if (file.size > maxSize) {
+
+				alert("Image size must be less than 5 MB.");
+
+				this.value = "";
+
+				return;
+			}
+
+
+			photoForm.submit();
+
+		});
+
+	</script>
+
+</body>
+
+</html>

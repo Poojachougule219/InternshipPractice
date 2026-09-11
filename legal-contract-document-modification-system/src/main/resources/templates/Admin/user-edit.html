@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<title>Edit User | Legal Contract System</title>
+
+	<!-- USER EDIT CSS -->
+	<link rel="stylesheet" th:href="@{/css/Admin/user-edit.css}">
+
+	<!-- FONT AWESOME -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+	<div class="content-container">
+
+
+		<!-- =====================================================
+     PAGE HEADER
+====================================================== -->
+
+		<div class="page-header">
+
+			<div class="header-buttons">
+
+				<a th:href="@{/admin/dashboard}" class="header-btn dashboard-btn">
+
+					<i class="fa-solid fa-house"></i>
+					Dashboard
+
+				</a>
+
+				<a th:href="@{/admin/users}" class="header-btn users-btn">
+
+					<i class="fa-solid fa-arrow-left"></i>
+					Back to Users
+
+				</a>
+
+			</div>
+
+		</div>
+
+
+		<!-- =====================================================
+     SUCCESS / ERROR MESSAGE
+     NOW APPEARS BETWEEN HEADER AND CARD
+====================================================== -->
+
+		<div th:if="${successMessage}" class="alert-message success-message">
+
+			<i class="fa-solid fa-circle-check"></i>
+
+			<span th:text="${successMessage}">
+				User updated successfully.
+			</span>
+
+		</div>
+
+
+		<div th:if="${errorMessage}" class="alert-message error-message">
+
+			<i class="fa-solid fa-circle-exclamation"></i>
+
+			<span th:text="${errorMessage}">
+				Unable to update user.
+			</span>
+
+		</div>
+
+
+		<!-- =====================================================
+     MAIN CARD
+====================================================== -->
+
+		<div class="view-card">
+
+			<!-- =================================================
+         CARD HEADER
+    ================================================== -->
+
+			<div class="card-header">
+
+				<div class="card-heading">
+
+					<div class="card-icon">
+
+						<i class="fa-solid fa-user-pen"></i>
+
+					</div>
+
+					<h2>Edit User</h2>
+
+				</div>
+
+			</div>
+
+
+			<!-- =================================================
+         EDIT USER FORM
+    ================================================== -->
+
+			<form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+
+				<div class="form-grid">
+
+					<!-- USER ID -->
+
+					<div class="form-group user-id-field">
+
+						<label>
+
+							<span class="label-icon">
+								<i class="fa-solid fa-hashtag"></i>
+							</span>
+
+							<span>User ID</span>
+
+						</label>
+
+						<div class="input-wrapper">
+
+							<input type="text" th:value="${user.id}" readonly>
+
+						</div>
+
+					</div>
+
+
+					<!-- FULL NAME -->
+
+					<div class="form-group full-name-field">
+
+						<label>
+
+							<span class="label-icon">
+								<i class="fa-solid fa-user"></i>
+							</span>
+
+							<span>Full Name</span>
+
+						</label>
+
+						<div class="input-wrapper">
+
+							<input type="text" th:field="*{fullName}" required>
+
+						</div>
+
+					</div>
+
+
+					<!-- USERNAME -->
+
+					<div class="form-group username-field">
+
+						<label>
+
+							<span class="label-icon">
+								<i class="fa-solid fa-at"></i>
+							</span>
+
+							<span>Username</span>
+
+						</label>
+
+						<div class="input-wrapper">
+
+							<input type="text" th:field="*{username}" required>
+
+						</div>
+
+					</div>
+
+
+					<!-- EMAIL -->
+
+					<div class="form-group email-field">
+
+						<label>
+
+							<span class="label-icon">
+								<i class="fa-solid fa-envelope"></i>
+							</span>
+
+							<span>Email Address</span>
+
+						</label>
+
+						<div class="input-wrapper">
+
+							<input type="email" th:field="*{email}" required>
+
+						</div>
+
+					</div>
+
+
+					<!-- ROLE -->
+
+					<div class="form-group role-field">
+
+						<label>
+
+							<span class="label-icon">
+								<i class="fa-solid fa-user-shield"></i>
+							</span>
+
+							<span>Role</span>
+
+						</label>
+
+						<div class="input-wrapper">
+
+							<select name="roleName">
+
+								<option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"
+									th:selected="${user.role != null and user.role.name == role.name}">
+								</option>
+
+							</select>
+
+						</div>
+
+					</div>
+
+
+					<!-- STATUS -->
+
+					<div class="form-group status-field">
+
+						<label>
+
+							<span class="label-icon">
+								<i class="fa-solid fa-circle-check"></i>
+							</span>
+
+							<span>Status</span>
+
+						</label>
+
+						<div class="input-wrapper">
+
+							<select th:field="*{status}">
+
+								<option value="ACTIVE">
+									ACTIVE
+								</option>
+
+								<option value="INACTIVE">
+									INACTIVE
+								</option>
+
+							</select>
+
+						</div>
+
+					</div>
+
+
+					<!-- CREATED AT -->
+
+					<div class="form-group created-field">
+
+						<label>
+
+							<span class="label-icon">
+								<i class="fa-solid fa-calendar-plus"></i>
+							</span>
+
+							<span>Created At</span>
+
+						</label>
+
+						<div class="input-wrapper">
+
+							<input type="text" th:value="${user.createdAt}" readonly>
+
+						</div>
+
+					</div>
+
+
+					<!-- UPDATED AT -->
+
+					<div class="form-group updated-field">
+
+						<label>
+
+							<span class="label-icon">
+								<i class="fa-solid fa-calendar-check"></i>
+							</span>
+
+							<span>Updated At</span>
+
+						</label>
+
+						<div class="input-wrapper">
+
+							<input type="text" th:value="${user.updatedAt}" readonly>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<!-- =================================================
+             ACTION BUTTONS
+        ================================================== -->
+
+				<div class="bottom-buttons">
+
+					<button type="submit" class="action-btn update-action">
+
+						<i class="fa-solid fa-check"></i>
+
+						<span>Update User</span>
+
+					</button>
+
+
+					<a th:href="@{/admin/users/view/{id}(id=${user.id})}" class="action-btn cancel-action">
+
+						<i class="fa-solid fa-xmark"></i>
+
+						<span>Cancel</span>
+
+					</a>
+
+
+
+				</div>
+
+			</form>
+
+		</div>
+
+
+	</div>
+
+</body>
+
+</html>

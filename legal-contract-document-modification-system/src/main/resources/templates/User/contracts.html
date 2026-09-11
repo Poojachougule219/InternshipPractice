@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>My Contracts</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/User/contracts.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<div class="top-bar">
+    <a th:href="@{/user/dashboard}" class="back-button">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Dashboard
+    </a>
+</div>
+
+<div class="content-section">
+
+    <div class="section-header">
+        <div>
+            <h2>
+                <i class="fa-solid fa-folder-open"></i>
+                Contracts
+            </h2>
+
+            <p>
+                Contracts associated with your account
+            </p>
+        </div>
+    </div>
+
+    <div class="empty-state"
+         th:if="${contracts == null or #lists.isEmpty(contracts)}">
+
+        <div class="empty-icon">
+            <i class="fa-solid fa-file-contract"></i>
+        </div>
+
+        <h3>No Contracts Available</h3>
+
+        <p>
+            There are currently no contracts associated with your account.
+        </p>
+
+    </div>
+
+    <div class="contracts-grid"
+         th:if="${contracts != null and !#lists.isEmpty(contracts)}">
+
+        <div class="contract-card"
+             th:each="contract : ${contracts}">
+
+            <div class="contract-icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+
+            <div class="contract-details">
+
+                <h3 th:text="${contract.title}">
+                    Contract Title
+                </h3>
+
+                <p th:if="${contract.description != null}"
+                   th:text="${contract.description}">
+                    Contract description
+                </p>
+
+                <div class="contract-meta">
+
+                    <span th:if="${contract.id != null}">
+                        <i class="fa-solid fa-hashtag"></i>
+                        <span th:text="${contract.id}">1</span>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="contract-action">
+
+                <a th:href="@{'/contract/contracts/view/' + ${contract.id}}"
+                   class="view-button">
+
+                    <i class="fa-solid fa-eye"></i>
+                    View
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

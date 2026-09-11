@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Role</title>
+
+<!-- Role Add CSS -->
+<link rel="stylesheet" th:href="@{/css/Admin/role-add.css}">
+
+
+</head>
+
+<body>
+
+
+<div class="form-page">
+
+    <div class="form-card">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="form-header">
+
+            <div class="header-text">
+
+                <h1>
+                    Add New Role
+                </h1>
+
+                <p>
+                    Create a new system role
+                </p>
+
+            </div>
+
+            <a th:href="@{/admin/roles}" class="back-btn">
+
+                <span>←</span>
+                Back
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             ERROR MESSAGE
+        ================================================== -->
+
+        <div th:if="${errorMessage}"
+             class="alert error-alert"
+             th:text="${errorMessage}">
+        </div>
+
+
+        <!-- =================================================
+             ADD ROLE FORM
+        ================================================== -->
+
+        <form th:action="@{/admin/roles/save}"
+              th:object="${role}"
+              method="post">
+
+            <div class="form-grid">
+
+                <!-- ROLE NAME -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Role Name
+                    </label>
+
+                    <input type="text"
+                           id="name"
+                           th:field="*{name}"
+                           placeholder="Enter role name"
+                           required>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <input type="text"
+                           id="description"
+                           th:field="*{description}"
+                           placeholder="Enter role description">
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 BUTTONS
+            ================================================== -->
+
+            <div class="form-actions">
+
+                <button type="submit" class="save-btn">
+                    Create Role
+                </button>
+
+                <a th:href="@{/admin/roles}" class="cancel-btn">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

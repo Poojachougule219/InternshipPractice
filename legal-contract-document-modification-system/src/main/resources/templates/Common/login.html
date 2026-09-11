@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+
+<title>Login | Legal Contract Document Modification System</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Common/login.css}">
+
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+
+<div class="login-card">
+
+    <!-- Left Legal Section -->
+    <section class="legal-section">
+
+        <div class="legal-content">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+
+            <h1>
+                Legal Contract<br>
+                <span>Document Modification</span>
+            </h1>
+
+            <p class="legal-description">
+                Manage contracts, clauses, documents and modification
+                requests through one secure platform.
+            </p>
+
+            <div class="legal-features">
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <div>
+                        <strong>Contract Management</strong>
+                        <span>Organize and manage legal contracts</span>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <div>
+                        <strong>Document Modification</strong>
+                        <span>Submit and track contract changes</span>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <strong>Secure Workflow</strong>
+                        <span>Review and approve modifications securely</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="legal-decoration decoration-one"></div>
+        <div class="legal-decoration decoration-two"></div>
+
+        <div class="document-illustration">
+
+            <div class="document-paper">
+
+                <div class="paper-top">
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="paper-title"></div>
+
+                <div class="paper-line long"></div>
+                <div class="paper-line medium"></div>
+                <div class="paper-line long"></div>
+
+                <div class="paper-section">
+                    <div class="paper-line short"></div>
+                    <div class="paper-line long"></div>
+                    <div class="paper-line medium"></div>
+                </div>
+
+                <div class="signature-area">
+                    <div class="signature-line"></div>
+                    <i class="fa-solid fa-pen"></i>
+                </div>
+
+            </div>
+
+            <div class="approval-stamp">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Right Login Section -->
+    <section class="login-section">
+
+        <div class="login-content">
+
+            <div class="login-heading">
+
+                <div class="small-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div>
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your account</p>
+                </div>
+
+            </div>
+
+
+            <!-- Error -->
+            <div th:if="${param.error}"
+                 class="message error-message">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <span>
+                    Invalid username or password.
+                </span>
+
+            </div>
+
+
+            <!-- Logout Message -->
+            <div th:if="${param.logout}"
+                 class="message success-message">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>
+                    You have been logged out successfully.
+                </span>
+
+            </div>
+
+
+            <!-- Login Form -->
+            <form th:action="@{/login}"
+                  method="post">
+
+
+                <!-- Username -->
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-user input-icon"></i>
+
+                        <input type="text"
+                               id="username"
+                               name="username"
+                               placeholder="Enter your username"
+                               required
+                               autofocus>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock input-icon"></i>
+
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               placeholder="Enter your password"
+                               required>
+
+                        <button type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                                aria-label="Show password">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Login Button -->
+                <button type="submit"
+                        class="login-button">
+
+                    <span>Login</span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <!-- Register -->
+            <div class="register-section">
+
+                <span>
+                    Don't have an account?
+                </span>
+
+                <a th:href="@{/register}">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <div class="security-note">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Your account and contract data are securely protected.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+</div>
+
+<script>
+
+const passwordInput =
+    document.getElementById("password");
+
+const passwordToggle =
+    document.getElementById("passwordToggle");
+
+passwordToggle.addEventListener("click", function () {
+
+    const icon =
+        this.querySelector("i");
+
+    if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+
+        this.setAttribute(
+            "aria-label",
+            "Hide password"
+        );
+
+    } else {
+
+        passwordInput.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+
+        this.setAttribute(
+            "aria-label",
+            "Show password"
+        );
+    }
+
+});
+
+</script>
+
+</body>
+</html>

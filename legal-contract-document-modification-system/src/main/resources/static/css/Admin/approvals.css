@@ -1,0 +1,499 @@
+/* =========================================================
+RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+/* =========================================================
+BODY
+========================================================= */
+
+body {
+font-family: "Segoe UI", Arial, sans-serif;
+background: #f1f5f9;
+color: #1e293b;
+min-height: 100vh;
+}
+
+/* =========================================================
+PAGE CONTAINER
+========================================================= */
+
+.page-container {
+width: 95%;
+max-width: 1400px;
+
+
+/* GAP FROM BROWSER TOP */
+margin: 45px auto 25px auto;
+
+
+}
+
+/* =========================================================
+APPROVALS SECTION
+========================================================= */
+
+.approvals-section {
+background: #ffffff;
+border-radius: 12px;
+padding: 25px;
+
+
+box-shadow:
+    0 3px 12px rgba(15, 23, 42, 0.08);
+
+
+}
+
+/* =========================================================
+SECTION HEADER
+========================================================= */
+
+.section-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+
+margin-bottom: 22px;
+padding-bottom: 18px;
+
+border-bottom: 1px solid #e2e8f0;
+
+}
+
+/* =========================================================
+SECTION TITLE
+========================================================= */
+
+.section-title h1 {
+font-size: 24px;
+font-weight: 700;
+color: #0f172a;
+margin-bottom: 4px;
+}
+
+.section-title p {
+font-size: 13px;
+color: #64748b;
+}
+
+/* =========================================================
+HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+/* =========================================================
+COMMON BUTTON
+========================================================= */
+
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+
+gap: 7px;
+
+padding: 10px 16px;
+
+border-radius: 7px;
+
+text-decoration: none;
+
+font-size: 13px;
+font-weight: 600;
+
+transition: all 0.2s ease;
+
+
+}
+
+/* =========================================================
+BUTTON ICON
+========================================================= */
+
+.btn-icon {
+font-size: 17px;
+line-height: 1;
+}
+
+/* =========================================================
+CREATE APPROVAL
+========================================================= */
+
+.add-btn {
+background: #0f766e;
+color: #ffffff;
+}
+
+.add-btn:hover {
+background: #115e59;
+transform: translateY(-1px);
+}
+
+/* =========================================================
+DASHBOARD
+========================================================= */
+
+.dashboard-btn {
+background: #334155;
+color: #ffffff;
+}
+
+.dashboard-btn:hover {
+background: #1e293b;
+transform: translateY(-1px);
+}
+
+/* =========================================================
+SUCCESS MESSAGE
+========================================================= */
+
+.success-message {
+margin-bottom: 18px;
+
+
+padding: 11px 14px;
+
+border-radius: 7px;
+
+background: #dcfce7;
+border: 1px solid #bbf7d0;
+
+color: #166534;
+
+font-size: 13px;
+font-weight: 600;
+
+
+}
+
+/* =========================================================
+TABLE WRAPPER
+========================================================= */
+
+.table-wrapper {
+width: 100%;
+overflow-x: auto;
+}
+
+/* =========================================================
+APPROVALS TABLE
+========================================================= */
+
+.approvals-table {
+width: 100%;
+min-width: 1100px;
+
+
+border-collapse: collapse;
+
+
+}
+
+/* =========================================================
+TABLE HEADER
+========================================================= */
+
+.approvals-table thead {
+background: #1e293b;
+color: #ffffff;
+}
+
+.approvals-table th {
+padding: 13px 12px;
+
+
+text-align: left;
+
+font-size: 13px;
+font-weight: 600;
+
+white-space: nowrap;
+
+
+}
+
+/* =========================================================
+TABLE BODY
+========================================================= */
+
+.approvals-table td {
+padding: 13px 12px;
+
+
+border-bottom: 1px solid #e2e8f0;
+
+font-size: 13px;
+
+color: #334155;
+
+vertical-align: middle;
+
+
+}
+
+/* =========================================================
+TABLE HOVER
+========================================================= */
+
+.approvals-table tbody tr:hover {
+background: #f8fafc;
+}
+
+/* =========================================================
+APPROVAL ID
+========================================================= */
+
+.approvals-table td:first-child {
+font-weight: 600;
+color: #475569;
+}
+
+/* =========================================================
+CONTRACT
+========================================================= */
+
+.approvals-table td:nth-child(2) {
+font-weight: 600;
+color: #1e293b;
+}
+
+/* =========================================================
+STATUS
+========================================================= */
+
+.status {
+display: inline-block;
+
+
+padding: 5px 10px;
+
+border-radius: 20px;
+
+font-size: 11px;
+font-weight: 700;
+
+white-space: nowrap;
+
+
+}
+
+/* =========================================================
+APPROVED STATUS
+========================================================= */
+
+.status-approved {
+background: #dcfce7;
+color: #166534;
+}
+
+/* =========================================================
+REJECTED STATUS
+========================================================= */
+
+.status-rejected {
+background: #fee2e2;
+color: #991b1b;
+}
+
+/* =========================================================
+PENDING STATUS
+========================================================= */
+
+.status-pending {
+background: #fef3c7;
+color: #92400e;
+}
+
+/* =========================================================
+ACTION CELL
+========================================================= */
+
+.action-cell {
+min-width: 170px;
+white-space: nowrap;
+}
+
+/* =========================================================
+APPROVAL ACTIONS
+========================================================= */
+
+.approval-actions {
+display: flex;
+align-items: center;
+gap: 7px;
+}
+
+/* =========================================================
+ACTION FORM
+========================================================= */
+
+.approval-actions form {
+margin: 0;
+padding: 0;
+}
+
+/* =========================================================
+ACTION BUTTON
+========================================================= */
+
+.action-btn {
+border: none;
+
+
+padding: 7px 10px;
+
+border-radius: 6px;
+
+font-family: "Segoe UI", Arial, sans-serif;
+
+font-size: 11px;
+font-weight: 700;
+
+cursor: pointer;
+
+transition: all 0.2s ease;
+
+
+}
+
+/* =========================================================
+APPROVE BUTTON
+========================================================= */
+
+.approve-btn {
+background: #dcfce7;
+color: #166534;
+}
+
+.approve-btn:hover {
+background: #bbf7d0;
+transform: translateY(-1px);
+}
+
+/* =========================================================
+REJECT BUTTON
+========================================================= */
+
+.reject-btn {
+background: #fee2e2;
+color: #991b1b;
+}
+
+.reject-btn:hover {
+background: #fecaca;
+transform: translateY(-1px);
+}
+
+/* =========================================================
+COMPLETED ACTION
+========================================================= */
+
+.action-completed {
+display: inline-flex;
+
+
+align-items: center;
+justify-content: center;
+
+padding: 7px 11px;
+
+border-radius: 6px;
+
+font-size: 11px;
+font-weight: 700;
+
+white-space: nowrap;
+
+
+}
+
+/* =========================================================
+APPROVED ACTION TEXT
+========================================================= */
+
+.approved-text {
+background: #dcfce7;
+color: #166534;
+}
+
+/* =========================================================
+REJECTED ACTION TEXT
+========================================================= */
+
+.rejected-text {
+background: #fee2e2;
+color: #991b1b;
+}
+
+/* =========================================================
+EMPTY MESSAGE
+========================================================= */
+
+.empty-message {
+text-align: center;
+
+
+padding: 35px;
+
+color: #64748b;
+
+font-size: 14px;
+
+
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+
+.page-container {
+    width: 94%;
+    margin: 25px auto 20px auto;
+}
+
+.section-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 15px;
+}
+
+.header-actions {
+    width: 100%;
+}
+
+.btn {
+    flex: 1;
+}
+
+.approvals-section {
+    padding: 16px;
+}
+
+.approval-actions {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.action-btn {
+    width: 100%;
+}
+
+
+}

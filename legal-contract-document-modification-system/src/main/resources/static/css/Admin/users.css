@@ -1,0 +1,524 @@
+/* =========================================================
+RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+/* =========================================================
+BODY
+========================================================= */
+
+body {
+font-family: "Segoe UI", Arial, sans-serif;
+background: #f1f5f9;
+color: #1e293b;
+min-height: 100vh;
+}
+
+/* =========================================================
+PAGE CONTAINER
+========================================================= */
+
+.page-container {
+width: 95%;
+max-width: 1400px;
+margin: 35px auto;
+}
+
+/* =========================================================
+USERS SECTION
+========================================================= */
+
+.users-section {
+background: #ffffff;
+
+
+border-radius: 12px;
+
+padding: 25px;
+
+box-shadow: 0 3px 12px rgba(15, 23, 42, 0.08);
+
+
+}
+
+/* =========================================================
+SECTION HEADER
+========================================================= */
+
+.section-header {
+display: flex;
+
+
+align-items: center;
+
+justify-content: space-between;
+
+margin-bottom: 22px;
+
+padding-bottom: 18px;
+
+border-bottom: 1px solid #e2e8f0;
+
+
+}
+
+/* =========================================================
+SECTION TITLE
+========================================================= */
+
+.section-title h1 {
+font-size: 24px;
+
+
+font-weight: 700;
+
+color: #0f172a;
+
+margin-bottom: 4px;
+
+
+}
+
+.section-title p {
+font-size: 13px;
+
+
+color: #64748b;
+
+
+}
+
+/* =========================================================
+HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+display: flex;
+
+
+align-items: center;
+
+gap: 10px;
+
+
+}
+
+/* =========================================================
+COMMON BUTTON
+========================================================= */
+
+.btn {
+display: inline-flex;
+
+
+align-items: center;
+
+justify-content: center;
+
+gap: 7px;
+
+padding: 10px 16px;
+
+border-radius: 7px;
+
+text-decoration: none;
+
+font-size: 13px;
+
+font-weight: 600;
+
+transition: all 0.2s ease;
+
+
+}
+
+/* =========================================================
+BUTTON ICON
+========================================================= */
+
+.btn-icon {
+font-size: 17px;
+
+
+line-height: 1;
+
+
+}
+
+/* =========================================================
+DASHBOARD BUTTON
+========================================================= */
+
+.dashboard-btn {
+background: #334155;
+
+
+color: #ffffff;
+
+
+}
+
+.dashboard-btn:hover {
+background: #1e293b;
+
+
+transform: translateY(-1px);
+
+
+}
+
+/* =========================================================
+ADD USER BUTTON
+========================================================= */
+
+.add-btn {
+background: #0f766e;
+
+
+color: #ffffff;
+
+
+}
+
+.add-btn:hover {
+background: #115e59;
+
+
+transform: translateY(-1px);
+
+
+}
+
+/* =========================================================
+TABLE WRAPPER
+========================================================= */
+
+.table-wrapper {
+width: 100%;
+
+
+overflow-x: auto;
+
+
+}
+
+/* =========================================================
+USERS TABLE
+========================================================= */
+
+.users-table {
+width: 100%;
+
+
+min-width: 950px;
+
+border-collapse: collapse;
+
+
+}
+
+/* =========================================================
+TABLE HEADER
+========================================================= */
+
+.users-table thead {
+background: #1e293b;
+
+
+color: #ffffff;
+
+
+}
+
+.users-table th {
+padding: 13px 12px;
+
+
+text-align: left;
+
+font-size: 13px;
+
+font-weight: 600;
+
+white-space: nowrap;
+
+
+}
+
+/* =========================================================
+TABLE BODY
+========================================================= */
+
+.users-table td {
+padding: 13px 12px;
+
+
+border-bottom: 1px solid #e2e8f0;
+
+font-size: 13px;
+
+color: #334155;
+
+vertical-align: middle;
+
+
+}
+
+/* =========================================================
+TABLE HOVER
+========================================================= */
+
+.users-table tbody tr:hover {
+background: #f8fafc;
+}
+
+/* =========================================================
+ROLE
+========================================================= */
+
+.role {
+font-size: 12px;
+
+
+font-weight: 600;
+
+color: #475569;
+
+
+}
+
+/* =========================================================
+STATUS
+========================================================= */
+
+.status {
+display: inline-block;
+
+
+padding: 5px 10px;
+
+border-radius: 20px;
+
+font-size: 11px;
+
+font-weight: 700;
+
+
+}
+
+/* ACTIVE */
+
+.status-active {
+background: #dcfce7;
+
+
+color: #166534;
+
+
+}
+
+/* INACTIVE */
+
+.status-inactive {
+background: #fef3c7;
+
+
+color: #92400e;
+
+
+}
+
+/* DELETED */
+
+.status-deleted {
+background: #fee2e2;
+
+
+color: #991b1b;
+
+
+}
+
+/* =========================================================
+ACTIONS
+========================================================= */
+
+.actions {
+display: flex;
+
+align-items: center;
+
+gap: 7px;
+
+
+}
+
+/* =========================================================
+ICON BUTTON
+========================================================= */
+
+.icon-btn {
+width: 34px;
+
+
+height: 34px;
+
+display: inline-flex;
+
+align-items: center;
+
+justify-content: center;
+
+border-radius: 6px;
+
+text-decoration: none;
+
+font-size: 15px;
+
+border: none;
+
+cursor: pointer;
+
+transition: all 0.2s ease;
+
+
+}
+
+/* =========================================================
+VIEW
+========================================================= */
+
+.view-btn {
+background: #e0f2fe;
+
+
+color: #0369a1;
+
+
+}
+
+.view-btn:hover {
+background: #bae6fd;
+
+
+transform: translateY(-1px);
+
+
+}
+
+/* =========================================================
+EDIT
+========================================================= */
+
+.edit-btn {
+background: #fef3c7;
+
+
+color: #b45309;
+
+
+}
+
+.edit-btn:hover {
+background: #fde68a;
+
+
+transform: translateY(-1px);
+
+
+}
+
+/* =========================================================
+DELETE
+========================================================= */
+
+.delete-btn {
+background: #fee2e2;
+
+
+color: #dc2626;
+
+
+}
+
+.delete-btn:hover {
+background: #fecaca;
+
+
+transform: translateY(-1px);
+
+
+}
+
+/* =========================================================
+DELETE FORM
+========================================================= */
+
+.delete-form {
+display: inline;
+
+
+margin: 0;
+
+padding: 0;
+
+
+}
+
+/* =========================================================
+EMPTY MESSAGE
+========================================================= */
+
+.empty-message {
+text-align: center;
+
+
+padding: 35px;
+
+color: #64748b;
+
+font-size: 14px;
+
+
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+
+.page-container {
+    width: 94%;
+
+    margin: 20px auto;
+}
+
+.section-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+}
+
+.header-actions {
+    width: 100%;
+}
+
+.btn {
+    flex: 1;
+}
+
+.users-section {
+    padding: 16px;
+}
+
+
+}

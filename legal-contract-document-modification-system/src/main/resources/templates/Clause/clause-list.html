@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Contract Clauses</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<!-- Clause List CSS -->
+<link rel="stylesheet"
+      th:href="@{/css/Clause/clause-list.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<!-- =====================================================
+     PAGE HEADER
+====================================================== -->
+
+<div class="page-header">
+
+    <div class="header-left">
+
+        <div class="header-icon">
+            <i class="fa-solid fa-file-contract"></i>
+        </div>
+
+        <div>
+
+            <h1>Contract Clauses</h1>
+
+            <p th:if="${contract != null}"
+               th:text="${contract.title}">
+                Contract Title
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="header-actions">
+
+        <!-- Correct Contract View URL -->
+        <a th:if="${contract != null}"
+           th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+           class="btn btn-secondary">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Contract
+
+        </a>
+
+        <a th:if="${contract != null}"
+           th:href="@{/contract/clauses/add/{id}(id=${contract.id})}"
+           class="btn btn-primary">
+
+            <i class="fa-solid fa-plus"></i>
+            Add Clause
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SUCCESS MESSAGE
+====================================================== -->
+
+<div class="alert alert-success"
+     th:if="${successMessage}">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span th:text="${successMessage}">
+        Success message
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     ERROR MESSAGE
+====================================================== -->
+
+<div class="alert alert-error"
+     th:if="${errorMessage}">
+
+    <i class="fa-solid fa-circle-exclamation"></i>
+
+    <span th:text="${errorMessage}">
+        Error message
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     CONTRACT SUMMARY
+====================================================== -->
+
+<div class="summary-card"
+     th:if="${contract != null}">
+
+    <div class="summary-item">
+
+        <div class="summary-icon">
+            <i class="fa-solid fa-hashtag"></i>
+        </div>
+
+        <div class="summary-content">
+
+            <span class="summary-label">
+                Contract ID
+            </span>
+
+            <span class="summary-value"
+                  th:text="${contract.id}">
+                1
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-item">
+
+        <div class="summary-icon">
+            <i class="fa-solid fa-file-signature"></i>
+        </div>
+
+        <div class="summary-content">
+
+            <span class="summary-label">
+                Contract Number
+            </span>
+
+            <span class="summary-value"
+                  th:text="${contract.contractNumber}">
+                CNT-001
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-item">
+
+        <div class="summary-icon">
+            <i class="fa-solid fa-list-ol"></i>
+        </div>
+
+        <div class="summary-content">
+
+            <span class="summary-label">
+                Total Clauses
+            </span>
+
+            <span class="summary-value"
+                  th:text="${clauses != null ? #lists.size(clauses) : 0}">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CLAUSES SECTION
+====================================================== -->
+
+<div class="content-card">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+                <i class="fa-solid fa-list-check"></i>
+                Clauses
+            </h2>
+
+            <p>
+                All clauses associated with this contract
+            </p>
+
+        </div>
+
+        <span class="clause-count"
+              th:text="${clauses != null ? #lists.size(clauses) : 0}">
+            0
+        </span>
+
+    </div>
+
+
+    <!-- =================================================
+         CLAUSE LIST
+    ================================================== -->
+
+    <div class="clause-list"
+         th:if="${clauses != null and !#lists.isEmpty(clauses)}">
+
+        <div class="clause-card"
+             th:each="clause, stat : ${clauses}">
+
+            <!-- Clause Order -->
+
+            <div class="clause-order">
+
+                <span th:text="${stat.count}">
+                    1
+                </span>
+
+            </div>
+
+
+            <!-- Clause Information -->
+
+            <div class="clause-information">
+
+                <div class="clause-title-row">
+
+                    <div>
+
+                        <h3 th:text="${clause.title}">
+                            Payment Terms
+                        </h3>
+
+                        <span class="clause-number"
+                              th:if="${clause.clauseNumber != null}"
+                              th:text="'Clause ' + ${clause.clauseNumber}">
+                            Clause 1
+                        </span>
+
+                    </div>
+
+                    <span class="status-badge"
+                          th:text="${clause.status != null ? clause.status : 'ACTIVE'}"
+                          th:classappend="${clause.status != null and clause.status.equalsIgnoreCase('ACTIVE')} ? ' status-active' : ' status-inactive'">
+                        ACTIVE
+                    </span>
+
+                </div>
+
+
+                <!-- Clause Content -->
+
+                <div class="clause-content"
+                     th:text="${clause.content}">
+                    Clause content will appear here.
+                </div>
+
+
+                <!-- Clause Type -->
+
+                <div class="clause-meta"
+                     th:if="${clause.clauseType != null and !clause.clauseType.isEmpty()}">
+
+                    <span>
+
+                        <i class="fa-solid fa-tag"></i>
+
+                        <strong>Type:</strong>
+
+                        <span th:text="${clause.clauseType}">
+                            General
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="clause-actions">
+
+                <a th:href="@{/contract/clauses/view/{id}(id=${clause.id})}"
+                   class="action-btn view-btn"
+                   title="View Clause">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </a>
+
+
+                <a th:href="@{/contract/clauses/edit/{id}(id=${clause.id})}"
+                   class="action-btn edit-btn"
+                   title="Edit Clause">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </a>
+
+
+                <a th:href="@{/contract/clauses/delete/{id}(id=${clause.id})}"
+                   class="action-btn delete-btn"
+                   title="Delete Clause"
+                   onclick="return confirm('Are you sure you want to delete this clause?');">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         NO CLAUSES
+    ================================================== -->
+
+    <div class="empty-state"
+         th:if="${clauses == null or #lists.isEmpty(clauses)}">
+
+        <div class="empty-icon">
+
+            <i class="fa-solid fa-file-circle-xmark"></i>
+
+        </div>
+
+        <h3>No Clauses Found</h3>
+
+        <p>
+            No clauses have been added to this contract yet.
+        </p>
+
+        <a th:if="${contract != null}"
+           th:href="@{/contract/clauses/add/{id}(id=${contract.id})}"
+           class="btn btn-primary">
+
+            <i class="fa-solid fa-plus"></i>
+            Add First Clause
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BOTTOM ACTION
+====================================================== -->
+
+<div class="bottom-actions"
+     th:if="${contract != null}">
+
+    <!-- Correct Contract View URL -->
+    <a th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+       class="back-link">
+
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Contract Details
+
+    </a>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

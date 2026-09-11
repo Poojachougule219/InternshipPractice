@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Document</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/Admin/document-add.css}">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- =====================================================
+         DOCUMENT ADD SECTION
+    ====================================================== -->
+
+    <div class="document-add-section">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h1>Upload Document</h1>
+
+                <p>
+                    Upload and register a contract document in the system
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM
+        ================================================== -->
+
+        <form th:action="@{/admin/documents/add}"
+              method="post"
+              enctype="multipart/form-data"
+              class="document-form">
+
+
+            <!-- =================================================
+                 DOCUMENT NAME + CONTRACT
+            ================================================= -->
+
+            <div class="form-row">
+
+                <!-- DOCUMENT NAME -->
+
+                <div class="form-group">
+
+                    <label for="documentName">
+                        Document Name
+                    </label>
+
+                    <input type="text"
+                           id="documentName"
+                           name="documentName"
+                           placeholder="Enter document name"
+                           required>
+
+                </div>
+
+
+                <!-- CONTRACT -->
+
+                <div class="form-group">
+
+                    <label for="contractId">
+                        Contract
+                    </label>
+
+                    <select id="contractId"
+                            name="contractId"
+                            required>
+
+                        <option value="">
+                            Select contract
+                        </option>
+
+                        <option th:each="contract : ${contracts}"
+                                th:value="${contract.id}"
+                                th:text="${contract.contractNumber + ' - ' + contract.title}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FILE
+            ================================================== -->
+
+            <div class="form-group">
+
+                <label for="file">
+                    Select Document
+                </label>
+
+                <div class="file-input-wrapper">
+
+                    <input type="file"
+                           id="file"
+                           name="file"
+                           accept=".pdf,.doc,.docx"
+                           required>
+
+                </div>
+
+                <small class="file-help">
+                    Supported formats: PDF, DOC, DOCX
+                </small>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATUS
+            ================================================== -->
+
+            <div class="form-group status-group">
+
+                <label for="status">
+                    Status
+                </label>
+
+                <select id="status"
+                        name="status"
+                        required>
+
+                    <option value="ACTIVE">
+                        ACTIVE
+                    </option>
+
+                    <option value="INACTIVE">
+                        INACTIVE
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 FORM ACTIONS
+            ================================================== -->
+
+            <div class="form-actions">
+
+                <button type="submit"
+                        class="btn upload-btn">
+
+                    <span class="btn-icon">↑</span>
+
+                    Upload Document
+
+                </button>
+
+
+                <a th:href="@{/admin/documents}"
+                   class="btn cancel-btn">
+
+                    <span class="btn-icon">✕</span>
+
+                    Cancel
+
+                </a>
+
+
+                <a th:href="@{/admin/dashboard}"
+                   class="btn dashboard-btn">
+
+                    <span class="btn-icon">⌂</span>
+
+                    Dashboard
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

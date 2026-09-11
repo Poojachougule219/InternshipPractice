@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Settings</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/Contract/settings.css}">
+
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div class="header-left">
+
+        <div class="brand-icon">
+
+            <i class="fa-solid fa-scale-balanced"></i>
+
+        </div>
+
+        <div class="brand-text">
+
+            <span class="brand-title">
+                Legal Contract System
+            </span>
+
+            <span class="brand-subtitle">
+                Contract Management
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <div class="header-user">
+
+            <div class="user-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+            <div class="user-details">
+
+                <span class="user-name"
+                      th:text="${username}">
+                    Contract Manager
+                </span>
+
+                <span class="user-role">
+                    Contract Manager
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <form th:action="@{/logout}"
+              method="post">
+
+            <button type="submit"
+                    class="header-logout"
+                    title="Logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</header>
+
+
+<aside class="sidebar">
+
+    <nav class="sidebar-nav">
+
+        <div class="nav-section">
+
+            <span class="nav-section-title">
+                MAIN
+            </span>
+
+
+            <a href="/contract/dashboard"
+               class="nav-item">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="/contract/contracts"
+               class="nav-item">
+
+                <i class="fa-solid fa-file-contract"></i>
+
+                <span>
+                    Contracts
+                </span>
+
+            </a>
+
+
+            <a href="/contract/contracts/add"
+               class="nav-item">
+
+                <i class="fa-solid fa-file-circle-plus"></i>
+
+                <span>
+                    Add New Contract
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-divider"></div>
+
+
+        <div class="nav-section">
+
+            <span class="nav-section-title">
+                ACCOUNT
+            </span>
+
+
+            <a href="/contract/profile"
+               class="nav-item">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+            <a href="/contract/settings"
+               class="nav-item active">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <form th:action="@{/logout}"
+              method="post">
+
+            <button type="submit"
+                    class="logout-item">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</aside>
+
+
+<main class="main-content">
+
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                Settings
+            </h1>
+
+            <p>
+                Manage your application preferences.
+            </p>
+
+        </div>
+
+
+        <a href="/contract/dashboard"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+
+    <div class="settings-container">
+
+
+        <section class="settings-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        General Settings
+                    </h3>
+
+                    <p>
+                        Configure your dashboard preferences.
+                    </p>
+
+                </div>
+
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-sliders"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+
+                            <i class="fa-solid fa-expand"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Compact Dashboard
+                            </strong>
+
+                            <span>
+                                Keep dashboard sections compact for easier viewing.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input type="checkbox"
+                               id="compactDashboard"
+                               checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Remember Search
+                            </strong>
+
+                            <span>
+                                Keep your contract search preference during this session.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input type="checkbox"
+                               id="rememberSearch">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+
+                            <i class="fa-solid fa-table-list"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Table View
+                            </strong>
+
+                            <span>
+                                Use the standard table layout for contract records.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="setting-value">
+                        Standard
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="settings-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Security
+                    </h3>
+
+                    <p>
+                        Account and security preferences.
+                    </p>
+
+                </div>
+
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Account Protection
+                            </strong>
+
+                            <span>
+                                Your account is protected by Spring Security.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="security-status">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Protected
+
+                    </span>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Session Security
+                            </strong>
+
+                            <span>
+                                Sign out when you finish using the system.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <form th:action="@{/logout}"
+                          method="post">
+
+                        <button type="submit"
+                                class="logout-btn">
+
+                            Logout
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <div class="settings-note">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <span>
+                Settings are applied to your current browser session.
+            </span>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script>
+
+    const compactDashboard =
+        document.getElementById("compactDashboard");
+
+    compactDashboard.addEventListener(
+        "change",
+        function () {
+
+            localStorage.setItem(
+                "compactDashboard",
+                this.checked
+            );
+
+        }
+    );
+
+
+    const rememberSearch =
+        document.getElementById("rememberSearch");
+
+    rememberSearch.addEventListener(
+        "change",
+        function () {
+
+            localStorage.setItem(
+                "rememberSearch",
+                this.checked
+            );
+
+        }
+    );
+
+
+    const savedCompact =
+        localStorage.getItem("compactDashboard");
+
+    if (savedCompact !== null) {
+
+        compactDashboard.checked =
+            savedCompact === "true";
+
+    }
+
+
+    const savedSearch =
+        localStorage.getItem("rememberSearch");
+
+    if (savedSearch !== null) {
+
+        rememberSearch.checked =
+            savedSearch === "true";
+
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/User/profile-edit.css}">
+
+</head>
+
+<body>
+
+<main class="main-content">
+
+    <div class="page-header">
+
+        <div>
+            <h1>Edit Profile</h1>
+
+            <p>
+                Update your personal account information.
+            </p>
+        </div>
+
+        <a th:href="@{/user/profile}"
+           class="back-button">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            My Profile
+
+        </a>
+
+    </div>
+
+
+    <div th:if="${successMessage}"
+         class="alert-message success-message">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span th:text="${successMessage}">
+            Profile updated successfully.
+        </span>
+
+    </div>
+
+
+    <div th:if="${errorMessage}"
+         class="alert-message error-message">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <span th:text="${errorMessage}">
+            Unable to update profile.
+        </span>
+
+    </div>
+
+
+    <div class="edit-card">
+
+        <section class="profile-heading">
+
+            <div class="profile-icon">
+
+                <i class="fa-solid fa-user-pen"></i>
+
+            </div>
+
+            <div>
+
+                <h2>Personal Information</h2>
+
+                <p>
+                    Update the information associated with your account.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <form th:action="@{/user/profile/update}"
+              method="post"
+              class="profile-form">
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="username">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Username
+
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-user input-icon"></i>
+
+                        <input type="text"
+                               id="username"
+                               th:value="${user.username}"
+                               readonly>
+
+                    </div>
+
+                    <span class="field-note">
+
+                        Username cannot be changed here.
+
+                    </span>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="fullName">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                        Full Name
+
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-id-card input-icon"></i>
+
+                        <input type="text"
+                               id="fullName"
+                               name="fullName"
+                               th:value="${user.fullName}"
+                               placeholder="Enter your full name"
+                               required
+                               maxlength="100">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        Email Address
+
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-envelope input-icon"></i>
+
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               th:value="${user.email}"
+                               placeholder="Enter your email address"
+                               required
+                               maxlength="150">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="role">
+
+                        <i class="fa-solid fa-user-shield"></i>
+
+                        Role
+
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-user-shield input-icon"></i>
+
+                        <input type="text"
+                               id="role"
+                               value="User"
+                               readonly>
+
+                    </div>
+
+                    <span class="field-note">
+
+                        Role is managed by the administrator.
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="security-note">
+
+                <div class="security-icon">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+                <div>
+
+                    <strong>Account Security</strong>
+
+                    <p>
+                        To change your password, use the Change Password option from your profile.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <a th:href="@{/user/profile}"
+                   class="action-button cancel-button">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Cancel
+
+                </a>
+
+
+                <button type="submit"
+                        class="action-button save-button">
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+</html>

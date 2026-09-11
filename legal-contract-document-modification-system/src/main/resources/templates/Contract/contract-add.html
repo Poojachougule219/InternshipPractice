@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add New Contract</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/Contract/contract-add.css}">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <div class="contract-add-section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h1>Add New Contract</h1>
+
+                <p>
+                    Create and register a new legal contract in the system
+                </p>
+
+            </div>
+
+        </div>
+
+        <form th:action="@{/contract/contracts/save}"
+              th:object="${contract}"
+              method="post"
+              class="contract-form">
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="contractNumber">
+                        Contract Number
+                    </label>
+
+                    <input type="text"
+                           id="contractNumber"
+                           th:field="*{contractNumber}"
+                           placeholder="Enter contract number"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="contractType">
+                        Contract Type
+                    </label>
+
+                    <select id="contractType"
+                            th:field="*{contractType}"
+                            required>
+
+                        <option value="">
+                            Select contract type
+                        </option>
+
+                        <option value="Employment">
+                            Employment
+                        </option>
+
+                        <option value="Service">
+                            Service
+                        </option>
+
+                        <option value="Business">
+                            Business
+                        </option>
+
+                        <option value="Vendor">
+                            Vendor
+                        </option>
+
+                        <option value="NDA">
+                            NDA
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="title">
+                    Contract Title
+                </label>
+
+                <input type="text"
+                       id="title"
+                       th:field="*{title}"
+                       placeholder="Enter contract title"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea id="description"
+                          th:field="*{description}"
+                          rows="5"
+                          placeholder="Enter contract description"></textarea>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="startDate">
+                        Start Date
+                    </label>
+
+                    <input type="date"
+                           id="startDate"
+                           th:field="*{startDate}"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="endDate">
+                        End Date
+                    </label>
+
+                    <input type="date"
+                           id="endDate"
+                           th:field="*{endDate}">
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="status">
+                    Status
+                </label>
+
+                <select id="status"
+                        th:field="*{status}"
+                        required>
+
+                    <option value="Draft">
+                        Draft
+                    </option>
+
+                    <option value="Active">
+                        Active
+                    </option>
+
+                    <option value="Expired">
+                        Expired
+                    </option>
+
+                    <option value="Terminated">
+                        Terminated
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button type="submit"
+                        class="btn save-btn">
+
+                    <span class="btn-icon">✓</span>
+                    Save Contract
+
+                </button>
+
+                <a th:href="@{/contract/contracts}"
+                   class="btn cancel-btn">
+
+                    <span class="btn-icon">✕</span>
+                    Cancel
+
+                </a>
+
+                <a th:href="@{/contract/dashboard}"
+                   class="btn dashboard-btn">
+
+                    <span class="btn-icon">⌂</span>
+                    Dashboard
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>User Dashboard | Legal Contract System</title>
+
+<link rel="stylesheet"
+      th:href="@{/css/User/dashboard.css}">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-scale-balanced"></i>
+        </div>
+
+        <div class="logo-text">
+            <span>Legal Contract</span>
+            <span>System</span>
+        </div>
+
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <a th:href="@{/user/dashboard}"
+           class="menu-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a th:href="@{/user/contracts}"
+           class="menu-item">
+            <i class="fa-solid fa-file-contract"></i>
+            <span>My Contracts</span>
+        </a>
+
+        <a th:href="@{/user/documents}"
+           class="menu-item">
+            <i class="fa-solid fa-folder-open"></i>
+            <span>Documents</span>
+        </a>
+
+        <a th:href="@{/user/profile}"
+           class="menu-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="sidebar-user">
+
+            <div class="user-avatar">
+
+                <img th:if="${user != null and user.profilePhoto != null}"
+                     th:src="@{'/user/profile/photo/' + ${user.id}}"
+                     alt="Profile Photo">
+
+                <div th:unless="${user != null and user.profilePhoto != null}"
+                     class="default-avatar">
+
+                    <span th:text="${user != null and user.fullName != null and !user.fullName.isEmpty()
+                        ? user.fullName.substring(0,1).toUpperCase()
+                        : 'U'}">
+                        U
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="sidebar-user-info">
+
+                <div class="sidebar-user-name"
+                     th:text="${user != null and user.fullName != null
+                     ? user.fullName
+                     : 'User'}">
+                    User
+                </div>
+
+                <div class="sidebar-user-role">
+                    User
+                </div>
+
+            </div>
+
+        </div>
+
+        <form th:action="@{/logout}"
+              method="post">
+
+            <button type="submit"
+                    class="logout-button">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</aside>
+
+<main class="main-content">
+
+    <header class="top-header">
+
+        <div class="header-title">
+
+            <h1>User Dashboard</h1>
+
+            <p>Manage your contracts and documents.</p>
+
+        </div>
+
+        <div class="header-user">
+
+            <div class="header-user-avatar">
+
+                <img th:if="${user != null and user.profilePhoto != null}"
+                     th:src="@{'/user/profile/photo/' + ${user.id}}"
+                     alt="Profile Photo">
+
+                <div th:unless="${user != null and user.profilePhoto != null}"
+                     class="header-default-avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+            </div>
+
+            <div class="header-user-details">
+
+                <span class="header-user-name"
+                      th:text="${user != null and user.fullName != null
+                      ? user.fullName
+                      : 'User'}">
+                    User
+                </span>
+
+                <span class="header-user-role">
+                    User
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <section class="content-area">
+
+        <div class="welcome-card">
+
+            <div class="welcome-icon">
+				<i class="fa-solid fa-hand-sparkles"></i>
+            </div>
+
+            <div class="welcome-content">
+
+                <h2>
+                    Welcome,
+                    <span th:text="${user != null and user.fullName != null
+                    ? user.fullName
+                    : 'User'}">
+                        User
+                    </span>
+                </h2>
+
+                <p>
+                    Access your contracts, documents and account information from your dashboard.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>Overview</h2>
+
+                <p>Your account summary</p>
+
+            </div>
+
+        </div>
+
+        <div class="stats-grid">
+
+            <a th:href="@{/user/contracts}"
+               class="stat-card">
+
+                <div class="stat-icon contracts-icon">
+                    <i class="fa-solid fa-file-contract"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span class="stat-label">
+                        My Contracts
+                    </span>
+
+                    <strong th:text="${contractCount != null ? contractCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right stat-arrow"></i>
+
+            </a>
+
+            <a th:href="@{/user/documents}"
+               class="stat-card">
+
+                <div class="stat-icon documents-icon">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span class="stat-label">
+                        My Documents
+                    </span>
+
+                    <strong th:text="${documentCount != null ? documentCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right stat-arrow"></i>
+
+            </a>
+
+            <a th:href="@{/user/modifications(status='PENDING')}"
+               class="stat-card">
+
+                <div class="stat-icon pending-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span class="stat-label">
+                        Pending Modifications
+                    </span>
+
+                    <strong th:text="${pendingCount != null ? pendingCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right stat-arrow"></i>
+
+            </a>
+
+            <a th:href="@{/user/modifications(status='APPROVED')}"
+               class="stat-card">
+
+                <div class="stat-icon approved-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span class="stat-label">
+                        Approved Modifications
+                    </span>
+
+                    <strong th:text="${approvedCount != null ? approvedCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right stat-arrow"></i>
+
+            </a>
+
+            <a th:href="@{/user/modifications(status='REJECTED')}"
+               class="stat-card">
+
+                <div class="stat-icon rejected-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span class="stat-label">
+                        Rejected Modifications
+                    </span>
+
+                    <strong th:text="${rejectedCount != null ? rejectedCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right stat-arrow"></i>
+
+            </a>
+
+        </div>
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>Quick Access</h3>
+
+                        <p>Frequently used sections</p>
+
+                    </div>
+
+                    <div class="card-header-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+
+                </div>
+
+                <div class="quick-actions">
+
+                    <a th:href="@{/user/contracts}"
+                       class="quick-action">
+
+                        <div class="quick-action-icon contract-action">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+
+                        <div class="quick-action-text">
+
+                            <strong>My Contracts</strong>
+
+                            <span>View your contracts</span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+                    <a th:href="@{/user/documents}"
+                       class="quick-action">
+
+                        <div class="quick-action-icon document-action">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+
+                        <div class="quick-action-text">
+
+                            <strong>Documents</strong>
+
+                            <span>View your documents</span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+                    <a th:href="@{/user/profile}"
+                       class="quick-action">
+
+                        <div class="quick-action-icon profile-action">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div class="quick-action-text">
+
+                            <strong>My Profile</strong>
+
+                            <span>Manage your account</span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="dashboard-card account-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>Account Information</h3>
+
+                        <p>Your account details</p>
+
+                    </div>
+
+                    <div class="card-header-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+                <div class="account-details">
+
+                    <div class="account-row">
+
+                        <div class="account-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Full Name</span>
+
+                            <strong th:text="${user != null and user.fullName != null
+                            ? user.fullName
+                            : 'User'}">
+                                User
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="account-row">
+
+                        <div class="account-icon">
+                            <i class="fa-solid fa-at"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Username</span>
+
+                            <strong th:text="${user != null
+                            ? user.username
+                            : '-'}">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="account-row">
+
+                        <div class="account-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Email</span>
+
+                            <strong th:text="${user != null
+                            ? user.email
+                            : '-'}">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="account-row">
+
+                        <div class="account-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Role</span>
+
+                            <strong>User</strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+</div>
+
+</body>
+
+</html>

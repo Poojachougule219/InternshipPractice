@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Roles</title>
+
+<link rel="stylesheet"
+      th:href="@{/css/Admin/roles.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<!-- =====================================================
+     ROLES SECTION
+====================================================== -->
+
+<div class="roles-section">
+
+    <!-- =================================================
+         ROLES HEADER
+    ================================================== -->
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <h1>Roles</h1>
+
+            <p>
+                View and manage registered roles
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             HEADER BUTTONS
+        ================================================== -->
+
+        <div class="header-actions">
+
+            <!-- ADD NEW ROLE -->
+
+            <a th:href="@{/admin/roles/add}"
+               class="btn add-btn">
+
+                <span class="btn-icon">+</span>
+
+                Add New Role
+
+            </a>
+
+
+            <!-- DASHBOARD -->
+
+            <a th:href="@{/admin/dashboard}"
+               class="btn dashboard-btn">
+
+                <span class="btn-icon">⌂</span>
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SUCCESS MESSAGE
+    ================================================== -->
+
+    <div class="message success-message"
+         th:if="${successMessage}"
+         th:text="${successMessage}">
+
+        Role operation successful.
+
+    </div>
+
+
+    <!-- =================================================
+         ERROR MESSAGE
+    ================================================== -->
+
+    <div class="message error-message"
+         th:if="${errorMessage}"
+         th:text="${errorMessage}">
+
+        Unable to complete role operation.
+
+    </div>
+
+
+    <!-- =================================================
+         TABLE
+    ================================================== -->
+
+    <div class="table-wrapper">
+
+        <table class="roles-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Role Name</th>
+
+                    <th>Description</th>
+
+                    <th>Users</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <!-- =================================================
+                     ROLE ROW
+                ================================================== -->
+
+                <tr th:each="role : ${roles}">
+
+                    <!-- ID -->
+
+                    <td th:text="${role.id}">
+                        1
+                    </td>
+
+
+                    <!-- ROLE NAME -->
+
+                    <td>
+
+                        <span class="role-name"
+                              th:text="${role.name}">
+
+                            ROLE_ADMIN
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <td th:text="${role.description != null
+                                  ? role.description
+                                  : '-'}">
+
+                        Administrator role
+
+                    </td>
+
+
+                    <!-- USERS -->
+
+                    <td>
+
+                        <span class="user-count"
+                              th:text="${roleUserCounts[role.id] != null
+                                        ? roleUserCounts[role.id]
+                                        : 0}">
+
+                            0
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- =================================================
+                         ACTIONS
+                    ================================================== -->
+
+                    <td>
+
+                        <div class="actions">
+
+                            <!-- VIEW -->
+
+                            <a th:href="@{/admin/roles/view/{id}(id=${role.id})}"
+                               class="icon-btn view-btn"
+                               title="View Role"
+                               aria-label="View Role">
+
+                                👁
+
+                            </a>
+
+
+                            <!-- EDIT -->
+
+                            <a th:href="@{/admin/roles/edit/{id}(id=${role.id})}"
+                               class="icon-btn edit-btn"
+                               title="Edit Role"
+                               aria-label="Edit Role">
+
+                                ✎
+
+                            </a>
+
+
+                            <!-- DELETE -->
+
+                            <form th:action="@{/admin/roles/delete/{id}(id=${role.id})}"
+                                  method="post"
+                                  class="delete-form"
+                                  onsubmit="return confirm('Are you sure you want to delete this role?');">
+
+                                <button type="submit"
+                                        class="icon-btn delete-btn"
+                                        title="Delete Role"
+                                        aria-label="Delete Role">
+
+                                    🗑
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     NO ROLES
+                ================================================== -->
+
+                <tr th:if="${#lists.isEmpty(roles)}">
+
+                    <td colspan="5"
+                        class="empty-message">
+
+                        No roles found.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- =====================================================
+     MESSAGE AUTO HIDE
+====================================================== -->
+
+<script>
+
+    setTimeout(function () {
+
+        const messages =
+            document.querySelectorAll('.message');
+
+        messages.forEach(function (message) {
+
+            message.style.opacity = '0';
+
+            setTimeout(function () {
+
+                message.remove();
+
+            }, 300);
+
+        });
+
+    }, 3000);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,863 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+font-family: "Segoe UI", Arial, sans-serif;
+background: #f1f5f9;
+color: #1e293b;
+min-height: 100vh;
+}
+
+.page-container {
+width: 100%;
+min-height: 100vh;
+padding: 45px 28px 12px;
+}
+
+.page-header {
+margin-bottom: 18px;
+}
+
+.header-content {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 20px;
+}
+
+.header-title {
+display: flex;
+align-items: center;
+gap: 13px;
+}
+
+.header-icon {
+width: 42px;
+height: 42px;
+border-radius: 10px;
+background: #0f766e;
+color: #ffffff;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+flex-shrink: 0;
+}
+
+.header-title h1 {
+font-size: 22px;
+font-weight: 700;
+color: #1e293b;
+margin-bottom: 3px;
+}
+
+.header-title p {
+font-size: 12px;
+color: #64748b;
+}
+
+.header-actions {
+display: flex;
+align-items: center;
+gap: 9px;
+}
+
+.add-button,
+.back-button {
+text-decoration: none;
+border-radius: 7px;
+padding: 8px 13px;
+font-size: 11px;
+font-weight: 600;
+display: inline-flex;
+align-items: center;
+gap: 7px;
+transition: 0.2s ease;
+white-space: nowrap;
+}
+
+.add-button {
+background: #0f766e;
+color: #ffffff;
+}
+
+.add-button:hover {
+background: #115e59;
+}
+
+.back-button {
+background: #334155;
+color: #ffffff;
+}
+
+.back-button:hover {
+background: #1e293b;
+}
+
+.summary-card {
+width: 100%;
+max-width: 300px;
+background: #ffffff;
+border: 1px solid #e2e8f0;
+border-radius: 10px;
+padding: 12px 15px;
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 16px;
+box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.summary-icon {
+width: 36px;
+height: 36px;
+border-radius: 8px;
+background: #ccfbf1;
+color: #0f766e;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 15px;
+flex-shrink: 0;
+}
+
+.summary-content {
+display: flex;
+flex-direction: column;
+gap: 2px;
+}
+
+.summary-content span {
+font-size: 10px;
+color: #64748b;
+}
+
+.summary-content strong {
+font-size: 19px;
+color: #1e293b;
+}
+
+.content-card {
+width: 100%;
+background: #ffffff;
+border: 1px solid #e2e8f0;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.section-header {
+padding: 15px 18px;
+border-bottom: 1px solid #e2e8f0;
+}
+
+.section-header h2 {
+font-size: 15px;
+font-weight: 700;
+color: #1e293b;
+margin-bottom: 3px;
+}
+
+.section-header p {
+font-size: 11px;
+color: #64748b;
+}
+
+.table-wrapper {
+width: 100%;
+overflow-x: hidden;
+overflow-y: hidden;
+}
+
+.approval-table {
+width: 100%;
+max-width: 100%;
+border-collapse: collapse;
+border-spacing: 0;
+table-layout: fixed;
+}
+
+.approval-table thead {
+background: #f8fafc;
+}
+
+.approval-table th {
+height: 40px;
+padding: 8px 6px;
+text-align: left;
+vertical-align: middle;
+font-size: 8px;
+font-weight: 700;
+color: #475569;
+border-bottom: 1px solid #e2e8f0;
+white-space: normal;
+overflow: hidden;
+overflow-wrap: break-word;
+}
+
+.approval-table td {
+height: 50px;
+padding: 7px 6px;
+text-align: left;
+vertical-align: middle;
+font-size: 8px;
+color: #334155;
+border-bottom: 1px solid #f1f5f9;
+overflow: hidden;
+overflow-wrap: break-word;
+word-break: normal;
+}
+
+.approval-table tbody tr {
+transition: 0.15s ease;
+}
+
+.approval-table tbody tr:hover {
+background: #f8fafc;
+}
+
+.approval-table th:nth-child(1),
+.approval-table td:nth-child(1) {
+width: 4%;
+}
+
+.approval-table th:nth-child(2),
+.approval-table td:nth-child(2) {
+width: 15%;
+}
+
+.approval-table th:nth-child(3),
+.approval-table td:nth-child(3) {
+width: 8%;
+}
+
+.approval-table th:nth-child(4),
+.approval-table td:nth-child(4) {
+width: 10%;
+}
+
+.approval-table th:nth-child(5),
+.approval-table td:nth-child(5) {
+width: 8%;
+}
+
+.approval-table th:nth-child(6),
+.approval-table td:nth-child(6) {
+width: 12%;
+}
+
+.approval-table th:nth-child(7),
+.approval-table td:nth-child(7) {
+width: 11%;
+}
+
+.approval-table th:nth-child(8),
+.approval-table td:nth-child(8) {
+width: 12%;
+}
+
+.approval-table th:nth-child(9),
+.approval-table td:nth-child(9) {
+width: 7%;
+}
+
+.approval-table th:nth-child(10),
+.approval-table td:nth-child(10) {
+width: 13%;
+}
+
+.number-cell {
+text-align: center !important;
+color: #64748b !important;
+font-weight: 600;
+}
+
+.contract-cell {
+width: 100%;
+min-width: 0;
+overflow: hidden;
+}
+
+.contract-cell strong {
+display: block;
+width: 100%;
+color: #1e293b;
+font-size: 8px;
+font-weight: 700;
+margin-bottom: 2px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.contract-cell span {
+display: block;
+width: 100%;
+color: #64748b;
+font-size: 7px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.clause-cell {
+width: 100%;
+min-width: 0;
+color: #475569 !important;
+overflow: hidden;
+}
+
+.clause-cell span {
+display: block;
+width: 100%;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.user-cell {
+width: 100%;
+min-width: 0;
+overflow: hidden;
+white-space: nowrap;
+vertical-align: middle !important;
+}
+
+.user-icon {
+width: 21px;
+height: 21px;
+min-width: 21px;
+border-radius: 50%;
+background: #e2e8f0;
+color: #475569;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-size: 8px;
+vertical-align: middle;
+margin-right: 5px;
+}
+
+.requested-user {
+display: inline-block !important;
+width: calc(100% - 31px);
+max-width: calc(100% - 31px);
+min-width: 0;
+color: #0f172a !important;
+font-size: 10px !important;
+font-weight: 700 !important;
+line-height: 21px;
+vertical-align: middle;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+visibility: visible !important;
+opacity: 1 !important;
+}
+
+.type-badge,
+.status-badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 3px;
+border-radius: 20px;
+padding: 3px 5px;
+font-size: 7px;
+font-weight: 700;
+white-space: nowrap;
+text-align: center;
+max-width: 100%;
+}
+
+.type-badge {
+background: #f1f5f9;
+color: #475569;
+}
+
+.clause-type {
+background: #f3e8ff;
+color: #7e22ce;
+}
+
+.contract-type {
+background: #e2e8f0;
+color: #334155;
+}
+
+.status-badge.pending {
+background: #fef3c7;
+color: #92400e;
+}
+
+.status-badge.approved {
+background: #dcfce7;
+color: #166534;
+}
+
+.status-badge.rejected {
+background: #fee2e2;
+color: #b91c1c;
+}
+
+.date-cell {
+width: 100%;
+min-width: 0;
+white-space: nowrap;
+color: #64748b !important;
+overflow: hidden !important;
+text-overflow: ellipsis;
+}
+
+.action-buttons {
+display: flex;
+align-items: center;
+justify-content: flex-start;
+gap: 4px;
+width: 100%;
+min-width: 0;
+height: 100%;
+flex-wrap: nowrap;
+overflow: visible;
+}
+
+.action-button {
+width: 24px;
+height: 24px;
+min-width: 24px;
+max-width: 24px;
+border-radius: 5px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+font-size: 8px;
+transition: 0.2s ease;
+flex: 0 0 24px;
+}
+
+.action-button.view {
+background: #e2e8f0;
+color: #334155;
+}
+
+.action-button.view:hover {
+background: #cbd5e1;
+}
+
+.action-button.edit {
+background: #ccfbf1;
+color: #0f766e;
+}
+
+.action-button.edit:hover {
+background: #99f6e4;
+}
+
+.action-button.delete {
+background: #fee2e2;
+color: #b91c1c;
+}
+
+.action-button.delete:hover {
+background: #fecaca;
+}
+
+.approval-table th:nth-child(10) {
+text-align: right;
+padding-right: 12px;
+}
+
+.approval-table td:nth-child(10) {
+text-align: right;
+padding-right: 8px;
+}
+
+.approval-actions {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 4px;
+width: 100%;
+min-width: 0;
+height: 100%;
+flex-wrap: nowrap;
+overflow: visible;
+}
+
+.approval-form {
+width: auto;
+margin: 0;
+padding: 0;
+display: block;
+flex: 0 0 auto;
+}
+
+.approval-button {
+width: 53px;
+min-width: 53px;
+max-width: 53px;
+height: 25px;
+border: none;
+border-radius: 5px;
+padding: 4px 3px;
+font-family: "Segoe UI", Arial, sans-serif;
+font-size: 7px;
+font-weight: 700;
+line-height: 1.2;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 3px;
+cursor: pointer;
+white-space: nowrap;
+transition: 0.2s ease;
+flex: 0 0 53px;
+}
+
+.approve-button {
+background: #475569;
+color: #ffffff;
+}
+
+.approve-button:hover {
+background: #334155;
+}
+
+.reject-button {
+background: #7c3f46;
+color: #ffffff;
+}
+
+.reject-button:hover {
+background: #642f36;
+}
+
+.approval-completed {
+font-size: 8px;
+font-weight: 700;
+text-align: right;
+line-height: 1.3;
+padding: 4px 0;
+white-space: nowrap;
+}
+
+.approval-completed.approved {
+color: #475569;
+}
+
+.approval-completed.rejected {
+color: #7c3f46;
+}
+
+.empty-state {
+text-align: center;
+padding: 50px 20px;
+}
+
+.empty-icon {
+width: 52px;
+height: 52px;
+margin: 0 auto 12px;
+border-radius: 50%;
+background: #f1f5f9;
+color: #64748b;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+}
+
+.empty-state h3 {
+font-size: 15px;
+color: #334155;
+margin-bottom: 5px;
+}
+
+.empty-state p {
+font-size: 11px;
+color: #64748b;
+}
+
+.bottom-actions {
+display: flex;
+justify-content: flex-start;
+margin-top: 12px;
+}
+
+@media (min-width: 1400px) {
+
+
+.approval-table th {
+    font-size: 9px;
+    padding: 8px 7px;
+}
+
+.approval-table td {
+    font-size: 9px;
+    padding: 8px 7px;
+}
+
+.contract-cell strong {
+    font-size: 9px;
+}
+
+.contract-cell span {
+    font-size: 8px;
+}
+
+.requested-user {
+    font-size: 10px !important;
+    color: #0f172a !important;
+}
+
+.type-badge,
+.status-badge {
+    font-size: 8px;
+}
+
+.action-button {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    max-width: 25px;
+    flex-basis: 25px;
+}
+
+.approval-table th:nth-child(10) {
+    text-align: left;
+    padding-left: 90px;
+    padding-right: 6px;
+}
+.approval-table td:nth-child(10) {
+    padding-right: 10px;
+}
+
+.approval-button {
+    width: 55px;
+    min-width: 55px;
+    max-width: 55px;
+    flex-basis: 55px;
+}
+
+
+}
+
+@media (max-width: 1100px) {
+
+
+.page-container {
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.approval-table th {
+    padding: 7px 4px;
+    font-size: 7px;
+}
+
+.approval-table td {
+    padding: 6px 4px;
+    font-size: 7px;
+}
+
+.action-buttons {
+    gap: 3px;
+    justify-content: flex-start;
+}
+
+.action-button {
+    width: 21px;
+    height: 21px;
+    min-width: 21px;
+    max-width: 21px;
+    flex-basis: 21px;
+    font-size: 7px;
+}
+
+.approval-table th:nth-child(10) {
+    text-align: right;
+    padding-right: 7px;
+}
+
+.approval-table td:nth-child(10) {
+    text-align: right;
+    padding-right: 5px;
+}
+
+.approval-actions {
+    gap: 3px;
+    justify-content: flex-end;
+    overflow: visible;
+}
+
+.approval-button {
+    width: 47px;
+    min-width: 47px;
+    max-width: 47px;
+    height: 22px;
+    font-size: 6px;
+    padding: 4px 2px;
+    flex-basis: 47px;
+}
+
+.user-cell {
+    gap: 4px;
+}
+
+.user-icon {
+    width: 19px;
+    height: 19px;
+    min-width: 19px;
+    margin-right: 4px;
+    font-size: 7px;
+}
+
+.requested-user {
+    width: calc(100% - 27px);
+    max-width: calc(100% - 27px);
+    font-size: 9px !important;
+    color: #0f172a !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.contract-cell strong {
+    font-size: 7px;
+}
+
+.contract-cell span {
+    font-size: 6px;
+}
+
+.type-badge,
+.status-badge {
+    font-size: 6px;
+    padding: 3px 4px;
+}
+
+
+}
+
+@media (max-width: 800px) {
+
+
+.page-container {
+    padding: 25px 15px 12px;
+}
+
+.header-content {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.header-actions {
+    width: 100%;
+}
+
+.header-actions a {
+    flex: 1;
+    justify-content: center;
+}
+
+.summary-card {
+    max-width: 100%;
+}
+
+.approval-table th {
+    height: 34px;
+    padding: 5px 2px;
+    font-size: 6px;
+}
+
+.approval-table td {
+    height: 43px;
+    padding: 5px 2px;
+    font-size: 6px;
+}
+
+.action-buttons {
+    gap: 2px;
+    justify-content: flex-start;
+}
+
+.action-button {
+    width: 19px;
+    height: 19px;
+    min-width: 19px;
+    max-width: 19px;
+    flex-basis: 19px;
+    font-size: 6px;
+}
+
+.approval-table th:nth-child(10) {
+    text-align: right;
+    padding-right: 4px;
+}
+
+.approval-table td:nth-child(10) {
+    text-align: right;
+    padding-right: 3px;
+}
+
+.approval-actions {
+    gap: 2px;
+    justify-content: flex-end;
+    overflow: visible;
+}
+
+.approval-button {
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    height: 20px;
+    font-size: 5px;
+    padding: 3px 1px;
+    flex-basis: 40px;
+}
+
+.type-badge,
+.status-badge {
+    font-size: 5px;
+    padding: 3px 2px;
+}
+
+.user-cell {
+    gap: 3px;
+}
+
+.user-icon {
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
+    margin-right: 3px;
+    font-size: 6px;
+}
+
+.requested-user {
+    width: calc(100% - 23px);
+    max-width: calc(100% - 23px);
+    font-size: 8px !important;
+    color: #0f172a !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.contract-cell strong {
+    font-size: 6px;
+}
+
+.contract-cell span {
+    font-size: 5px;
+}
+
+.approval-completed {
+    font-size: 6px;
+    text-align: right;
+}
+
+
+}

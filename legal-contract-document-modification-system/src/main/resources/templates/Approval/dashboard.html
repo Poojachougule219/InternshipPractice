@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Approval Requests</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Approval/dashboard.css}">
+
+</head>
+
+<body>
+
+<header class="top-header">
+
+
+<div class="header-left">
+
+    <div class="brand-icon">
+        <i class="fa-solid fa-file-contract"></i>
+    </div>
+
+    <div class="brand-text">
+
+        <span class="brand-title">
+            Legal Contract Management
+        </span>
+
+        <span class="brand-subtitle">
+            Contract Document Management System
+        </span>
+
+    </div>
+
+</div>
+
+<div class="header-right">
+
+    <div class="header-user">
+
+        <div class="user-avatar">
+
+            <img th:src="@{/contract/profile/photo}"
+                 alt="Profile Image"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+            <i class="fa-solid fa-user"
+               style="display:none;"></i>
+
+        </div>
+
+        <div class="user-details">
+
+            <span class="user-name"
+                  th:text="${username}">
+                Contract Manager
+            </span>
+
+            <span class="user-role">
+                Contract Manager
+            </span>
+
+        </div>
+
+    </div>
+
+    <form th:action="@{/logout}"
+          method="post">
+
+        <button type="submit"
+                class="header-logout"
+                title="Logout">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+        </button>
+
+    </form>
+
+</div>
+
+
+</header>
+
+<aside class="sidebar">
+
+<nav class="sidebar-nav">
+
+
+<div class="nav-section">
+
+    <div class="nav-section-title">
+        MAIN MENU
+    </div>
+
+    <a th:href="@{/approval/dashboard}"
+       class="nav-item active">
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        <span>
+            Dashboard
+        </span>
+
+    </a>
+
+    <a th:href="@{/contract/contracts}"
+       class="nav-item">
+
+        <i class="fa-solid fa-file-contract"></i>
+
+        <span>
+            Contracts
+        </span>
+
+    </a>
+
+    <a th:href="@{/contract/contracts/add}"
+       class="nav-item">
+
+        <i class="fa-solid fa-file-circle-plus"></i>
+
+        <span>
+            Add Contract
+        </span>
+
+    </a>
+
+    <a th:href="@{/contract/modifications}"
+       class="nav-item">
+
+        <i class="fa-solid fa-file-pen"></i>
+
+        <span>
+            Modification Requests
+        </span>
+
+    </a>
+
+    <a th:href="@{/contract/modifications/add}"
+       class="nav-item">
+
+        <i class="fa-solid fa-file-circle-plus"></i>
+
+        <span>
+            New Modification
+        </span>
+
+    </a>
+
+    <a th:href="@{/approval/my-approvals}"
+       class="nav-item">
+
+        <i class="fa-solid fa-clipboard-check"></i>
+
+        <span>
+            Approval Requests
+        </span>
+
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <a th:href="@{/contract/profile}"
+       class="nav-item">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>
+            My Profile
+        </span>
+
+    </a>
+
+    <a th:href="@{/contract/settings}"
+       class="nav-item">
+
+        <i class="fa-solid fa-gear"></i>
+
+        <span>
+            Settings
+        </span>
+
+    </a>
+
+</div>
+
+
+</nav>
+
+<div class="sidebar-bottom">
+
+
+<form th:action="@{/logout}"
+      method="post">
+
+    <button type="submit"
+            class="logout-item">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        <span>
+            Logout
+        </span>
+
+    </button>
+
+</form>
+
+
+</div>
+
+</aside>
+
+<main class="main-content">
+
+<div class="page-header">
+
+
+<div>
+
+    <h1>
+        Approval Requests
+    </h1>
+
+    <p>
+        Review and manage contract modification approval requests
+    </p>
+
+</div>
+
+<div class="date-display">
+
+    <i class="fa-regular fa-calendar"></i>
+
+    <span th:text="${formattedToday}">
+        09 September 2026
+    </span>
+
+</div>
+
+
+</div>
+
+<div class="welcome-card">
+
+
+<div class="welcome-content">
+
+    <div class="welcome-icon">
+
+        <i class="fa-solid fa-clipboard-check"></i>
+
+    </div>
+
+    <div>
+
+        <h2>
+            Approval Requests
+        </h2>
+
+        <p>
+            Review submitted contract modification requests and approve or reject them.
+        </p>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<div class="stats-grid">
+
+
+<a th:href="@{/approval/approvals}"
+   class="stat-card stat-card-link">
+
+    <div class="stat-icon total">
+
+        <i class="fa-solid fa-clipboard-list"></i>
+
+    </div>
+
+    <div class="stat-content">
+
+        <span class="stat-label">
+            Total Approvals
+        </span>
+
+        <strong class="stat-value"
+                th:text="${totalApprovals}">
+            0
+        </strong>
+
+        <span class="stat-description">
+            All approval requests
+        </span>
+
+    </div>
+
+</a>
+
+<a th:href="@{/approval/pending}"
+   class="stat-card stat-card-link">
+
+    <div class="stat-icon pending">
+
+        <i class="fa-solid fa-clock"></i>
+
+    </div>
+
+    <div class="stat-content">
+
+        <span class="stat-label">
+            Pending
+        </span>
+
+        <strong class="stat-value"
+                th:text="${pendingCount}">
+            0
+        </strong>
+
+        <span class="stat-description">
+            Awaiting review
+        </span>
+
+    </div>
+
+</a>
+
+<a th:href="@{/approval/approved}"
+   class="stat-card stat-card-link">
+
+    <div class="stat-icon approved">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+    </div>
+
+    <div class="stat-content">
+
+        <span class="stat-label">
+            Approved
+        </span>
+
+        <strong class="stat-value"
+                th:text="${approvedCount}">
+            0
+        </strong>
+
+        <span class="stat-description">
+            Approved requests
+        </span>
+
+    </div>
+
+</a>
+
+<a th:href="@{/approval/rejected}"
+   class="stat-card stat-card-link">
+
+    <div class="stat-icon rejected">
+
+        <i class="fa-solid fa-circle-xmark"></i>
+
+    </div>
+
+    <div class="stat-content">
+
+        <span class="stat-label">
+            Rejected
+        </span>
+
+        <strong class="stat-value"
+                th:text="${rejectedCount}">
+            0
+        </strong>
+
+        <span class="stat-description">
+            Rejected requests
+        </span>
+
+    </div>
+
+</a>
+
+<a th:href="@{/approval/my-approvals}"
+   class="stat-card stat-card-link">
+
+    <div class="stat-icon mine">
+
+        <i class="fa-solid fa-user-check"></i>
+
+    </div>
+
+    <div class="stat-content">
+
+        <span class="stat-label">
+            My Approvals
+        </span>
+
+        <strong class="stat-value"
+                th:text="${myApprovalCount}">
+            0
+        </strong>
+
+        <span class="stat-description">
+            Assigned to me
+        </span>
+
+    </div>
+
+</a>
+
+
+</div>
+
+<div class="dashboard-card">
+
+
+<div class="card-header">
+
+    <div>
+
+        <h3>
+            Pending Approval Requests
+        </h3>
+
+        <p>
+            Review contract modification requests submitted for approval
+        </p>
+
+    </div>
+
+    <a th:href="@{/approval/pending}"
+       class="view-all">
+
+        View All
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+    </a>
+
+</div>
+
+<div class="attention-list"
+     th:if="${pendingApprovals != null and !#lists.isEmpty(pendingApprovals)}">
+
+    <div class="attention-row"
+         th:each="approval : ${pendingApprovals}">
+
+        <div class="attention-icon">
+
+            <i class="fa-solid fa-file-signature"></i>
+
+        </div>
+
+        <div class="attention-info">
+
+            <strong>
+
+                <span th:if="${approval.contract != null}"
+                      th:text="${approval.contract.contractNumber != null ? approval.contract.contractNumber + ' - ' + approval.contract.title : approval.contract.title}">
+                    Contract
+                </span>
+
+                <span th:if="${approval.contract == null}">
+                    Contract Not Available
+                </span>
+
+            </strong>
+
+            <span>
+
+                <span th:if="${approval.modification != null and approval.modification.clause != null}"
+                      th:text="${approval.modification.clause.title}">
+                    Clause
+                </span>
+
+                <span th:if="${approval.modification != null and approval.modification.clause == null}">
+                    Entire Contract
+                </span>
+
+            </span>
+
+        </div>
+
+        <div class="attention-status">
+
+            <span class="status-badge warning"
+                  th:if="${approval.status != null and approval.status.equalsIgnoreCase('PENDING')}">
+
+                Pending
+
+            </span>
+
+            <span class="status-badge success"
+                  th:if="${approval.status != null and approval.status.equalsIgnoreCase('APPROVED')}">
+
+                Approved
+
+            </span>
+
+            <span class="status-badge danger"
+                  th:if="${approval.status != null and approval.status.equalsIgnoreCase('REJECTED')}">
+
+                Rejected
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="empty-state"
+     th:if="${pendingApprovals == null or #lists.isEmpty(pendingApprovals)}">
+
+    <div class="empty-icon">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+    </div>
+
+    <strong>
+        No approval requests
+    </strong>
+
+    <span>
+        There are currently no contract modification requests waiting for approval.
+    </span>
+
+</div>
+
+
+</div>
+
+<div class="charts-grid">
+
+
+<div class="dashboard-card chart-card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>
+                Approval Activity
+            </h3>
+
+            <p>
+                Approval requests by month
+            </p>
+
+        </div>
+
+        <div class="card-header-icon">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+        </div>
+
+    </div>
+
+    <div class="chart-container">
+
+        <canvas id="approvalActivityChart"></canvas>
+
+    </div>
+
+</div>
+
+<div class="dashboard-card chart-card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>
+                Approval Status
+            </h3>
+
+            <p>
+                Current approval distribution
+            </p>
+
+        </div>
+
+        <div class="card-header-icon">
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+        </div>
+
+    </div>
+
+    <div class="status-chart-container">
+
+        <canvas id="approvalStatusChart"></canvas>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<div class="bottom-grid">
+
+
+<div class="dashboard-card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>
+                Quick Actions
+            </h3>
+
+            <p>
+                Common approval management actions
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="quick-actions">
+
+        <a th:href="@{/approval/pending}"
+           class="quick-action">
+
+            <div class="quick-action-icon pending-action">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Pending Approvals
+                </strong>
+
+                <span>
+                    Review pending requests
+                </span>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </a>
+
+        <a th:href="@{/approval/approved}"
+           class="quick-action">
+
+            <div class="quick-action-icon approved-action">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Approved Requests
+                </strong>
+
+                <span>
+                    View approved requests
+                </span>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </a>
+
+        <a th:href="@{/approval/rejected}"
+           class="quick-action">
+
+            <div class="quick-action-icon rejected-action">
+
+                <i class="fa-solid fa-circle-xmark"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Rejected Requests
+                </strong>
+
+                <span>
+                    View rejected requests
+                </span>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </a>
+
+        <a th:href="@{/approval/my-approvals}"
+           class="quick-action">
+
+            <div class="quick-action-icon mine-action">
+
+                <i class="fa-solid fa-user-check"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    My Approvals
+                </strong>
+
+                <span>
+                    View approvals assigned to me
+                </span>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="dashboard-card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>
+                Approval Overview
+            </h3>
+
+            <p>
+                Current approval status summary
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="overview-list">
+
+        <div class="overview-row">
+
+            <div class="overview-label">
+
+                <span class="overview-dot total-dot"></span>
+
+                Total Approvals
+
+            </div>
+
+            <strong th:text="${totalApprovals}">
+                0
+            </strong>
+
+        </div>
+
+        <div class="overview-row">
+
+            <div class="overview-label">
+
+                <span class="overview-dot warning-dot"></span>
+
+                Pending
+
+            </div>
+
+            <strong th:text="${pendingCount}">
+                0
+            </strong>
+
+        </div>
+
+        <div class="overview-row">
+
+            <div class="overview-label">
+
+                <span class="overview-dot active-dot"></span>
+
+                Approved
+
+            </div>
+
+            <strong th:text="${approvedCount}">
+                0
+            </strong>
+
+        </div>
+
+        <div class="overview-row">
+
+            <div class="overview-label">
+
+                <span class="overview-dot expired-dot"></span>
+
+                Rejected
+
+            </div>
+
+            <strong th:text="${rejectedCount}">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script th:inline="javascript">
+
+    const activityLabels =
+        /*[[${activityLabels}]]*/ [];
+
+    const activityValues =
+        /*[[${activityValues}]]*/ [];
+
+    const pendingActivityValues =
+        /*[[${pendingActivityValues}]]*/ [];
+
+    const approvedActivityValues =
+        /*[[${approvedActivityValues}]]*/ [];
+
+    const rejectedActivityValues =
+        /*[[${rejectedActivityValues}]]*/ [];
+
+    const approvalStatusLabels =
+        /*[[${approvalStatusLabels}]]*/ [];
+
+    const approvalStatusValues =
+        /*[[${approvalStatusValues}]]*/ [];
+
+    const activityCanvas =
+        document.getElementById("approvalActivityChart");
+
+    if (activityCanvas) {
+
+        new Chart(activityCanvas, {
+
+            type: "line",
+
+            data: {
+
+                labels: activityLabels,
+
+                datasets: [
+
+                    {
+                        label: "Total",
+                        data: activityValues,
+                        tension: 0.35,
+                        borderWidth: 2,
+                        fill: false
+                    },
+
+                    {
+                        label: "Pending",
+                        data: pendingActivityValues,
+                        tension: 0.35,
+                        borderWidth: 2,
+                        fill: false
+                    },
+
+                    {
+                        label: "Approved",
+                        data: approvedActivityValues,
+                        tension: 0.35,
+                        borderWidth: 2,
+                        fill: false
+                    },
+
+                    {
+                        label: "Rejected",
+                        data: rejectedActivityValues,
+                        tension: 0.35,
+                        borderWidth: 2,
+                        fill: false
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: true
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+                            precision: 0
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+    const statusCanvas =
+        document.getElementById("approvalStatusChart");
+
+    if (statusCanvas) {
+
+        new Chart(statusCanvas, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: approvalStatusLabels,
+
+                datasets: [
+
+                    {
+                        data: approvalStatusValues,
+                        borderWidth: 1
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        position: "bottom"
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contracts</title>
+
+<link rel="stylesheet" th:href="@{/css/Admin/contracts.css}">
+
+
+</head>
+
+<body>
+
+
+<div class="page-container">
+
+    <!-- =====================================================
+         CONTRACTS SECTION
+    ====================================================== -->
+
+    <div class="contracts-section">
+
+        <!-- =================================================
+             CONTRACTS HEADER
+        ================================================== -->
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h1>Contracts</h1>
+
+                <p>
+                    View and manage legal contracts in the system
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 BUTTONS
+            ================================================== -->
+
+            <div class="header-actions">
+				
+				<a th:href="@{/admin/contracts/add}"
+				       class="btn add-btn">
+				        <span class="btn-icon">+</span>
+				        Add New Contract
+				    </a>
+
+
+                <!-- DASHBOARD -->
+
+                <a th:href="@{/admin/dashboard}"
+                   class="btn dashboard-btn">
+
+                    <span class="btn-icon">⌂</span>
+
+                    Dashboard
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="table-wrapper">
+
+            <table class="contracts-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Contract Name</th>
+
+                        <th>Contract Type</th>
+
+                        <th>Status</th>
+
+                        <th>Created At</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <!-- =================================================
+                         CONTRACT ROWS
+                    ================================================== -->
+
+                    <tr th:each="contract : ${contracts}">
+
+                        <!-- ID -->
+
+                        <td th:text="${contract.id}">
+                            1
+                        </td>
+
+
+                        <!-- CONTRACT NAME -->
+
+                        <td th:text="${contract.title}">
+                            Employment Agreement
+                        </td>
+
+
+                        <!-- CONTRACT TYPE -->
+
+                        <td th:text="${contract.contractType}">
+                            Employment
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            <span class="status"
+                                  th:classappend="${contract.status == 'ACTIVE'
+                                  ? ' status-active'
+                                  : contract.status == 'INACTIVE'
+                                  ? ' status-inactive'
+                                  : ' status-other'}"
+                                  th:text="${contract.status}">
+
+                                ACTIVE
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- CREATED AT -->
+
+                        <td th:text="${contract.createdAt != null
+                            ? #temporals.format(contract.createdAt, 'dd-MM-yyyy HH:mm')
+                            : '-'}">
+
+                            31-08-2026 09:26
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         NO CONTRACTS
+                    ================================================== -->
+
+                    <tr th:if="${contracts == null or #lists.isEmpty(contracts)}">
+
+                        <td colspan="5"
+                            class="empty-message">
+
+                            No contracts found.
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

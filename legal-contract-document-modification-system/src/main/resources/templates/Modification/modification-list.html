@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Modification Requests</title>
+
+	<link rel="stylesheet" href="/css/Modification/modification-list.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+	<div class="page-container">
+
+		<div class="page-header">
+
+
+			<div class="header-content">
+
+				<div class="header-title">
+
+					<div class="header-icon">
+
+						<i class="fa-solid fa-pen-to-square"></i>
+
+					</div>
+
+					<div>
+
+						<h1>Modification Requests</h1>
+
+						<p>Review and manage contract modification requests</p>
+
+					</div>
+
+				</div>
+
+				<div class="header-actions">
+
+					<a href="/contract/modifications/add" class="add-button">
+						<i class="fa-solid fa-plus"></i>
+						New Modification
+					</a>
+					<a href="/contract/contracts" class="back-button">
+						<i class="fa-solid fa-arrow-left"></i>
+						Back to Contracts
+					</a>
+
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<div class="summary-card">
+
+
+			<div class="summary-icon">
+
+				<i class="fa-solid fa-file-signature"></i>
+
+			</div>
+
+			<div>
+
+				<span>Total Requests</span>
+
+				<strong th:text="${modifications != null ? modifications.size() : 0}">0</strong>
+
+			</div>
+
+
+		</div>
+
+		<div class="content-card">
+
+
+			<div class="section-header">
+
+				<div>
+
+					<h2>All Modification Requests</h2>
+
+					<p>Requests submitted for contract or clause changes</p>
+
+				</div>
+
+			</div>
+
+			<div th:if="${modifications == null or #lists.isEmpty(modifications)}" class="empty-state">
+
+				<div class="empty-icon">
+
+					<i class="fa-regular fa-file-lines"></i>
+
+				</div>
+
+				<h3>No Modification Requests</h3>
+
+				<p>There are currently no modification requests.</p>
+
+				<a href="/contract/modifications/add" class="empty-button">
+
+					<i class="fa-solid fa-plus"></i>
+
+					Create Modification Request
+
+				</a>
+
+			</div>
+
+			<div th:if="${modifications != null and !#lists.isEmpty(modifications)}" class="table-wrapper">
+
+				<table class="modification-table">
+
+					<thead>
+
+						<tr>
+
+							<th>#</th>
+
+							<th>Contract</th>
+
+							<th>Modification Type</th>
+
+							<th>Clause</th>
+
+							<th>Reason</th>
+
+							<th>Status</th>
+
+							<th>Modified By</th>
+
+							<th>Date</th>
+
+							<th>Actions</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+
+						<tr th:each="modification, stat : ${modifications}">
+
+							<td class="number-cell" th:text="${stat.count}">
+
+								1
+
+							</td>
+
+							<td>
+
+								<div class="contract-cell" th:if="${modification.contract != null}">
+
+									<strong th:text="${modification.contract.contractNumber}">
+
+										CTR-001
+
+									</strong>
+
+									<span th:text="${modification.contract.title}">
+
+										Employment Agreement
+
+									</span>
+
+								</div>
+
+								<span th:if="${modification.contract == null}" class="not-available">
+
+									Not Available
+
+								</span>
+
+							</td>
+
+							<td>
+
+								<span class="type-badge" th:if="${modification.clause == null}">
+
+									<i class="fa-solid fa-file-contract"></i>
+
+									Entire Contract
+
+								</span>
+
+								<span class="type-badge clause-type" th:if="${modification.clause != null}">
+
+									<i class="fa-solid fa-list-check"></i>
+
+									Specific Clause
+
+								</span>
+
+							</td>
+
+							<td>
+
+								<div th:if="${modification.clause != null}" class="clause-cell">
+
+									<strong th:text="${modification.clause.title}">
+
+										Payment Terms
+
+									</strong>
+
+									<span th:text="${modification.clause.clauseNumber}">
+
+										1
+
+									</span>
+
+								</div>
+
+								<span th:if="${modification.clause == null}" class="not-applicable">
+
+									Not Applicable
+
+								</span>
+
+							</td>
+
+							<td>
+
+								<div class="reason-cell"
+									th:if="${modification.reason != null and !#strings.isEmpty(modification.reason)}"
+									th:text="${modification.reason}">
+
+									Update required
+
+								</div>
+
+								<span th:if="${modification.reason == null or #strings.isEmpty(modification.reason)}"
+									class="not-available">
+
+									No reason provided
+
+								</span>
+
+							</td>
+
+							<td>
+
+								<span class="status-badge pending"
+									th:if="${modification.status == null or modification.status == 'PENDING'}">
+
+									<i class="fa-solid fa-clock"></i>
+
+									PENDING
+
+								</span>
+
+								<span class="status-badge approved" th:if="${modification.status == 'APPROVED'}">
+
+									<i class="fa-solid fa-circle-check"></i>
+
+									APPROVED
+
+								</span>
+
+								<span class="status-badge rejected" th:if="${modification.status == 'REJECTED'}">
+
+									<i class="fa-solid fa-circle-xmark"></i>
+
+									REJECTED
+
+								</span>
+
+								<span class="status-badge other-status"
+									th:if="${modification.status != null and modification.status != 'PENDING' and modification.status != 'APPROVED' and modification.status != 'REJECTED'}"
+									th:text="${modification.status}">
+
+									STATUS
+
+								</span>
+
+							</td>
+
+							<td>
+
+								<div class="user-cell" th:if="${modification.modifiedBy != null}">
+
+									<div class="user-icon">
+
+										<i class="fa-solid fa-user"></i>
+
+									</div>
+
+									<span th:text="${modification.modifiedBy.username}">
+
+										admin
+
+									</span>
+
+								</div>
+
+								<span th:if="${modification.modifiedBy == null}" class="not-available">
+
+									Not Available
+
+								</span>
+
+							</td>
+
+							<td>
+
+								<span class="date-cell" th:if="${modification.modifiedAt != null}"
+									th:text="${#temporals.format(modification.modifiedAt, 'dd MMM yyyy, HH:mm')}">
+
+									08 Sep 2026, 11:00
+
+								</span>
+
+								<span th:if="${modification.modifiedAt == null}" class="not-available">
+
+									-
+
+								</span>
+
+							</td>
+
+							<td>
+
+								<div class="action-buttons">
+
+									<a th:href="@{/contract/modifications/view/{id}(id=${modification.id})}"
+										class="action-button view" title="View">
+
+										<i class="fa-solid fa-eye"></i>
+
+									</a>
+
+									<a th:href="@{/contract/modifications/edit/{id}(id=${modification.id})}"
+										class="action-button edit" title="Edit">
+
+										<i class="fa-solid fa-pen-to-square"></i>
+
+									</a>
+
+									<a th:href="@{/contract/modifications/delete/{id}(id=${modification.id})}"
+										class="action-button delete" title="Delete"
+										onclick="return confirm('Are you sure you want to delete this modification request?');">
+
+										<i class="fa-solid fa-trash"></i>
+
+									</a>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+
+			</div>
+
+
+		</div>
+
+		<div class="bottom-actions">
+
+
+			<a href="/contract/contracts" class="back-button">
+
+				<i class="fa-solid fa-arrow-left"></i>
+
+				Back to Contracts
+
+			</a>
+
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>View Version</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/Version/version-view.css}">
+
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+
+    <div class="top-actions">
+
+        <a th:if="${document != null}"
+           th:href="@{/contract/versions/document/{id}(id=${document.id})}"
+           class="top-back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Version History
+
+        </a>
+
+    </div>
+
+
+    <div class="main-card">
+
+
+        <div class="section-header">
+
+            <div class="section-header-left">
+
+                <div class="section-icon">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>Version Information</h2>
+
+                    <p>
+                        Complete details of this document version
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-wrapper">
+
+                <span class="status-badge current"
+                      th:if="${version.status != null and #strings.equalsIgnoreCase(version.status, 'CURRENT')}">
+
+                    <i class="fa-solid fa-circle-check"></i>
+                    CURRENT
+
+                </span>
+
+
+                <span class="status-badge previous"
+                      th:if="${version.status != null and #strings.equalsIgnoreCase(version.status, 'PREVIOUS')}">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    PREVIOUS
+
+                </span>
+
+
+                <span class="status-badge default-status"
+                      th:if="${version.status == null or
+                      (!#strings.equalsIgnoreCase(version.status, 'CURRENT')
+                      and !#strings.equalsIgnoreCase(version.status, 'PREVIOUS'))}"
+
+                      th:text="${version.status != null ? version.status : 'N/A'}">
+
+                    N/A
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="information-grid">
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-hashtag"></i>
+                    Version ID
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${version.id}">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-code-branch"></i>
+                    Version Number
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${version.versionNumber != null
+                     ? 'v' + version.versionNumber
+                     : 'N/A'}">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-file"></i>
+                    Document
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${document != null
+                     ? document.documentName
+                     : 'N/A'}">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+                    File Name
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${document != null
+                     ? document.fileName
+                     : 'N/A'}">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-file-signature"></i>
+                    Contract Number
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${contract != null
+                     ? contract.contractNumber
+                     : 'N/A'}">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-user"></i>
+                    Created By
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${version.createdBy != null
+                     ? version.createdBy.username
+                     : 'N/A'}">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Created At
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${version.createdAt != null
+                     ? #temporals.format(version.createdAt, 'dd MMM yyyy, HH:mm')
+                     : 'N/A'}">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-file-circle-check"></i>
+                    Status
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${version.status != null
+                     ? version.status
+                     : 'N/A'}">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item description-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-align-left"></i>
+                    Change Description
+
+                </div>
+
+                <div class="description-value"
+                     th:text="${version.changeDescription != null
+                     and !#strings.isEmpty(version.changeDescription)
+                     ? version.changeDescription
+                     : 'No change description available.'}">
+
+                    No change description available.
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="document-section">
+
+
+            <div class="document-header">
+
+                <div class="document-title">
+
+                    <div class="document-section-icon">
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>Version Document</h3>
+
+                        <p>
+                            Document associated with this version
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="document-card"
+                 th:if="${document != null}">
+
+                <div class="document-row">
+
+
+                    <div class="file-icon">
+
+                        <i class="fa-solid fa-file-pdf"
+                           th:if="${document.fileType != null
+                           and (#strings.equalsIgnoreCase(document.fileType, 'PDF')
+                           or #strings.equalsIgnoreCase(document.fileType, 'application/pdf'))}">
+                        </i>
+
+                        <i class="fa-solid fa-file-word"
+                           th:if="${document.fileType != null
+                           and (#strings.equalsIgnoreCase(document.fileType, 'DOC')
+                           or #strings.equalsIgnoreCase(document.fileType, 'DOCX')
+                           or #strings.equalsIgnoreCase(document.fileType, 'application/msword')
+                           or #strings.equalsIgnoreCase(document.fileType, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))}">
+                        </i>
+
+                        <i class="fa-solid fa-file"
+                           th:if="${document.fileType == null
+                           or (!#strings.equalsIgnoreCase(document.fileType, 'PDF')
+                           and !#strings.equalsIgnoreCase(document.fileType, 'application/pdf')
+                           and !#strings.equalsIgnoreCase(document.fileType, 'DOC')
+                           and !#strings.equalsIgnoreCase(document.fileType, 'DOCX')
+                           and !#strings.equalsIgnoreCase(document.fileType, 'application/msword')
+                           and !#strings.equalsIgnoreCase(document.fileType, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))}">
+                        </i>
+
+                    </div>
+
+
+                    <div class="document-info">
+
+                        <div class="document-name"
+                             th:text="${document.documentName != null
+                             ? document.documentName
+                             : document.fileName}">
+
+                            Document
+
+                        </div>
+
+
+                        <div class="document-meta">
+
+                            <span th:if="${document.fileName != null}"
+                                  th:text="${document.fileName}">
+
+                                FILE
+
+                            </span>
+
+
+                            <span th:if="${document.fileType != null}">
+
+                                <i class="fa-solid fa-circle"></i>
+
+                                <span th:text="${document.fileType}">
+                                    FILE
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="document-actions">
+
+                        <a th:href="@{/contract/documents/details/{id}(id=${document.id})}"
+                           class="document-action view-document">
+
+                            <i class="fa-solid fa-eye"></i>
+                            View
+
+                        </a>
+
+
+                        <a th:href="@{/contract/documents/download/{id}(id=${document.id})}"
+                           class="document-action download-document">
+
+                            <i class="fa-solid fa-download"></i>
+                            Download
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="no-document"
+                 th:if="${document == null}">
+
+                <i class="fa-regular fa-folder-open"></i>
+
+                <span>
+                    No document available for this version.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="action-bar">
+
+
+            <a th:if="${document != null}"
+               th:href="@{/contract/versions/document/{id}(id=${document.id})}"
+               class="history-btn">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                Version History
+
+            </a>
+
+
+            <a th:if="${contract != null}"
+               th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+               class="contract-btn">
+
+                <i class="fa-solid fa-file-contract"></i>
+                Contract Details
+
+            </a>
+
+
+            <a th:href="@{/contract/contracts}"
+               class="bottom-back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Contracts
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

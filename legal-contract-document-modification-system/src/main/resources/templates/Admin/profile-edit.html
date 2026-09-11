@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Edit Profile</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Admin/profile-edit.css}">
+
+
+</head>
+
+<body>
+
+<div class="main-content">
+
+
+<div class="page-header">
+
+    <div>
+        <h1>
+            <i class="fa-solid fa-user-pen"></i>
+            Edit Profile
+        </h1>
+
+        <p>
+            Update your personal account information.
+        </p>
+    </div>
+
+    <a th:href="@{/admin/profile}"
+       class="back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+        My Profile
+
+    </a>
+
+</div>
+
+
+<div th:if="${errorMessage}"
+     class="alert error-alert">
+
+    <i class="fa-solid fa-circle-exclamation"></i>
+
+    <span th:text="${errorMessage}">
+        Unable to update profile.
+    </span>
+
+</div>
+
+
+<div class="profile-edit-card">
+
+    <div class="card-header">
+
+        <div class="header-icon">
+            <i class="fa-solid fa-id-card"></i>
+        </div>
+
+        <div>
+            <h2>Profile Information</h2>
+
+            <p>
+                Update your name and email address.
+            </p>
+        </div>
+
+    </div>
+
+
+    <form th:action="@{/admin/profile/edit}"
+          method="post"
+          class="profile-form">
+
+
+        <div class="form-group">
+
+            <label for="fullName">
+                <i class="fa-solid fa-user"></i>
+                Full Name
+            </label>
+
+            <input type="text"
+                   id="fullName"
+                   name="fullName"
+                   th:value="${user.fullName}"
+                   placeholder="Enter your full name"
+                   maxlength="100"
+                   required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="username">
+                <i class="fa-solid fa-at"></i>
+                Username
+            </label>
+
+            <input type="text"
+                   id="username"
+                   th:value="${user.username}"
+                   readonly>
+
+            <small>
+                Username cannot be changed from this page.
+            </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="email">
+                <i class="fa-solid fa-envelope"></i>
+                Email Address
+            </label>
+
+            <input type="email"
+                   id="email"
+                   name="email"
+                   th:value="${user.email}"
+                   placeholder="Enter your email address"
+                   maxlength="150"
+                   required>
+
+        </div>
+
+
+        <div class="account-info">
+
+            <div class="account-info-title">
+                <i class="fa-solid fa-shield-halved"></i>
+                Account Information
+            </div>
+
+
+            <div class="account-grid">
+
+                <div class="account-item">
+
+                    <span class="account-label">
+                        Role
+                    </span>
+
+                    <span class="account-value role-value">
+
+                        <i class="fa-solid fa-user-shield"></i>
+
+                        <span th:text="${user.role.name}">
+                            ROLE_ADMIN
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+                <div class="account-item">
+
+                    <span class="account-label">
+                        Status
+                    </span>
+
+                    <span class="account-value status-value">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span th:text="${user.status}">
+                            ACTIVE
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <a th:href="@{/admin/profile}"
+               class="cancel-btn">
+
+                <i class="fa-solid fa-xmark"></i>
+                Cancel
+
+            </a>
+
+
+            <button type="submit"
+                    class="save-btn">
+
+                <i class="fa-solid fa-check"></i>
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</div>
+
+<script>
+
+    const form =
+        document.querySelector(".profile-form");
+
+    const fullName =
+        document.getElementById("fullName");
+
+    const email =
+        document.getElementById("email");
+
+
+    form.addEventListener("submit", function(event) {
+
+        const nameValue =
+            fullName.value.trim();
+
+        const emailValue =
+            email.value.trim();
+
+
+        if (nameValue.length < 2) {
+
+            event.preventDefault();
+
+            alert("Full name must contain at least 2 characters.");
+
+            fullName.focus();
+
+            return;
+        }
+
+
+        if (!emailValue) {
+
+            event.preventDefault();
+
+            alert("Email address is required.");
+
+            email.focus();
+
+            return;
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

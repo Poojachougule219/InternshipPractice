@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>User Information | Legal Contract System</title>
+
+	<link rel="stylesheet" th:href="@{/css/Admin/user-view.css}">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+	<div class="content-container">
+
+		<!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+		<div class="page-header">
+
+			<div></div>
+
+			<div class="header-buttons">
+
+				<a th:href="@{/admin/dashboard}" class="header-btn dashboard-btn">
+
+					<i class="fa-solid fa-house"></i>
+					Dashboard
+
+				</a>
+
+				<a th:href="@{/admin/users}" class="header-btn users-btn">
+
+					<i class="fa-solid fa-arrow-left"></i>
+					Back to Users
+
+				</a>
+
+			</div>
+
+		</div>
+
+
+		<!-- =====================================================
+         USER INFORMATION CARD
+    ====================================================== -->
+
+		<div class="view-card">
+
+
+			<!-- =================================================
+             CARD HEADER
+        ================================================== -->
+
+			<div class="card-header">
+
+				<div class="card-heading">
+
+					<div class="card-icon">
+						<i class="fa-solid fa-id-card"></i>
+					</div>
+
+					<h2>User Information</h2>
+
+				</div>
+
+			</div>
+
+
+			<!-- =================================================
+             USER INFORMATION
+        ================================================== -->
+
+			<div class="form-grid">
+
+
+				<!-- USER ID -->
+
+				<div class="form-group user-id-field">
+
+					<label>
+						<span class="label-icon">
+							<i class="fa-solid fa-hashtag"></i>
+						</span>
+
+						<span>User ID</span>
+					</label>
+
+					<div class="input-wrapper">
+
+						<input type="text" th:value="${user.id}" readonly>
+
+					</div>
+
+				</div>
+
+
+				<!-- FULL NAME -->
+
+				<div class="form-group full-name-field">
+
+					<label>
+						<span class="label-icon">
+							<i class="fa-solid fa-user"></i>
+						</span>
+
+						<span>Full Name</span>
+					</label>
+
+					<div class="input-wrapper">
+
+						<input type="text" th:value="${user.fullName}" readonly>
+
+					</div>
+
+				</div>
+
+
+				<!-- USERNAME -->
+
+				<div class="form-group username-field">
+
+					<label>
+						<span class="label-icon">
+							<i class="fa-solid fa-at"></i>
+						</span>
+
+						<span>Username</span>
+					</label>
+
+					<div class="input-wrapper">
+
+						<input type="text" th:value="${user.username}" readonly>
+
+					</div>
+
+				</div>
+
+
+				<!-- EMAIL -->
+
+				<div class="form-group email-field">
+
+					<label>
+						<span class="label-icon">
+							<i class="fa-solid fa-envelope"></i>
+						</span>
+
+						<span>Email Address</span>
+					</label>
+
+					<div class="input-wrapper">
+
+						<input type="email" th:value="${user.email}" readonly>
+
+					</div>
+
+				</div>
+
+
+				<!-- ROLE -->
+
+				<div class="form-group role-field">
+
+					<label>
+						<span class="label-icon">
+							<i class="fa-solid fa-user-shield"></i>
+						</span>
+
+						<span>Role</span>
+					</label>
+
+					<div class="input-wrapper">
+
+						<input type="text" th:value="${user.role != null ? user.role.name : 'No Role'}" readonly>
+
+					</div>
+
+				</div>
+
+
+				<!-- STATUS -->
+
+				<div class="form-group status-field">
+
+					<label>
+						<span class="label-icon">
+							<i class="fa-solid fa-circle-check"></i>
+						</span>
+
+						<span>Status</span>
+					</label>
+
+					<div class="input-wrapper">
+
+						<input type="text" th:value="${user.status}" readonly>
+
+					</div>
+
+				</div>
+
+
+				<!-- CREATED AT -->
+
+				<div class="form-group created-field">
+
+					<label>
+						<span class="label-icon">
+							<i class="fa-solid fa-calendar-plus"></i>
+						</span>
+
+						<span>Created At</span>
+					</label>
+
+					<div class="input-wrapper">
+
+						<input type="text" th:value="${user.createdAt}" readonly>
+
+					</div>
+
+				</div>
+
+
+				<!-- UPDATED AT -->
+
+				<div class="form-group updated-field">
+
+					<label>
+						<span class="label-icon">
+							<i class="fa-solid fa-calendar-check"></i>
+						</span>
+
+						<span>Updated At</span>
+					</label>
+
+					<div class="input-wrapper">
+
+						<input type="text" th:value="${user.updatedAt}" readonly>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+			<!-- =================================================
+             ACTION BUTTONS
+        ================================================== -->
+
+			<div class="bottom-buttons">
+
+				<a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="action-btn edit-action">
+
+					<i class="fa-solid fa-pen"></i>
+
+					<span>Edit User</span>
+
+					<a th:href="@{/admin/users}" class="action-btn back-action">
+
+						<i class="fa-solid fa-arrow-left"></i>
+
+						<span>Back</span>
+
+					</a>
+
+
+
+
+				</a>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

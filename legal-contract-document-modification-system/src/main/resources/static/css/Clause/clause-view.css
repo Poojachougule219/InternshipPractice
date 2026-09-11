@@ -1,0 +1,466 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* =====================================================
+   PAGE CONTAINER
+===================================================== */
+
+.page-container {
+    width: 85%;
+    max-width: 800px;
+    height: 100vh;
+    margin: 0 auto;
+    padding-top: 12px;
+    padding-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =====================================================
+   HEADER ACTIONS
+===================================================== */
+
+.header-actions {
+    width: 100%;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 6px;
+}
+
+/* =====================================================
+   BACK TO CLAUSES BUTTON
+===================================================== */
+
+.header-actions .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 11px;
+    background: #e2e8f0;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    min-width: auto;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.header-actions .btn-secondary:hover {
+    background: #cbd5e1;
+    color: #0f172a;
+    transform: translateY(-1px);
+}
+
+.header-actions .btn-secondary i {
+    font-size: 11px;
+}
+
+/* =====================================================
+   ERROR MESSAGE
+===================================================== */
+
+.alert {
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 7px 10px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+}
+
+.alert-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+.alert-error i {
+    color: #dc2626;
+}
+
+/* =====================================================
+   MAIN VIEW CARD
+===================================================== */
+
+.form-card {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+}
+
+/* =====================================================
+   CLAUSE INFORMATION HEADER
+===================================================== */
+
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 9px;
+    padding: 9px 14px;
+    background: #1e293b;
+    border-radius: 8px;
+}
+
+.form-header-icon {
+    display: none;
+}
+
+.form-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.form-header p {
+    font-size: 10px;
+    color: #cbd5e1;
+}
+
+/* =====================================================
+   CONTRACT INFORMATION
+===================================================== */
+
+.contract-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: 11px;
+    margin-bottom: 8px;
+    padding: 0 5px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.info-label {
+    margin-bottom: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.info-label i {
+    margin-right: 5px;
+    color: #0f766e;
+}
+
+.info-value {
+    width: 100%;
+    min-height: 32px;
+    padding: 6px 9px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =====================================================
+   FORM SECTION
+===================================================== */
+
+.form-section {
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.section-title i {
+    color: #0f766e;
+    font-size: 11px;
+}
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7px;
+    min-width: 0;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.form-group label {
+    margin-bottom: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* =====================================================
+   VIEW VALUE
+===================================================== */
+
+.view-value {
+    width: 100%;
+    min-height: 32px;
+    padding: 6px 9px 6px 30px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.view-value i {
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0f766e;
+    font-size: 11px;
+}
+
+.view-value span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =====================================================
+   CLAUSE CONTENT
+===================================================== */
+
+.content-value {
+    width: 100%;
+    height: 72px;
+    min-height: 72px;
+    padding: 7px 9px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-value i {
+    color: #0f766e;
+}
+
+/* =====================================================
+   FORM ACTIONS
+===================================================== */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1px;
+    padding-top: 8px;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 115px;
+    padding: 7px 13px;
+    border-radius: 7px;
+    text-decoration: none;
+    border: none;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn i {
+    font-size: 12px;
+}
+
+/* =====================================================
+   EDIT
+===================================================== */
+
+.btn-edit {
+    background: #0f766e;
+    color: #ffffff;
+}
+
+.btn-edit:hover {
+    background: #115e59;
+    transform: translateY(-1px);
+}
+
+/* =====================================================
+   BACK / CANCEL
+===================================================== */
+
+.btn-cancel {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.btn-cancel:hover {
+    background: #cbd5e1;
+    color: #0f172a;
+    transform: translateY(-1px);
+}
+
+/* =====================================================
+   BOTTOM NOTE
+===================================================== */
+
+.bottom-note {
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 9px;
+    color: #64748b;
+}
+
+.bottom-note i {
+    color: #0f766e;
+    font-size: 9px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .page-container {
+        width: 94%;
+        height: auto;
+        margin: 0 auto;
+        padding-top: 12px;
+        padding-bottom: 15px;
+    }
+
+    .header-actions {
+        height: 28px;
+        justify-content: flex-end;
+    }
+
+    .alert {
+        width: 100%;
+    }
+
+    .form-card {
+        padding: 9px;
+    }
+
+    .contract-info {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .bottom-note {
+        padding-bottom: 10px;
+    }
+
+}

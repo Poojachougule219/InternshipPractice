@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Version History</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/Version/version-history.css}">
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <div class="top-bar">
+
+        <div></div>
+
+        <a th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+           class="back-link">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Contract
+
+        </a>
+
+    </div>
+
+
+    <div class="page-title">
+
+        <h1>Version History</h1>
+
+        <p>View and manage previous versions of this document</p>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-header">
+
+            <div class="summary-icon">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+
+            <h2>Document Information</h2>
+
+        </div>
+
+
+        <div class="summary-grid">
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-file"></i>
+                    Document
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${document.documentName}">
+
+                    Sample Document
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+                    File Name
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${document.fileName}">
+
+                    sample document.pdf
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-hashtag"></i>
+                    Contract Number
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${contract.contractNumber}">
+
+                    CON-001
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+
+                    <i class="fa-solid fa-file-circle-check"></i>
+                    Total Versions
+
+                </div>
+
+                <div class="info-value"
+                     th:text="${#lists.size(versions)}">
+
+                    0
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="version-card">
+
+        <div class="section-header">
+
+            <div class="section-header-left">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <h2>Document Versions</h2>
+
+            </div>
+
+            <div class="version-count"
+                 th:text="${#lists.size(versions)} + ' Version(s)'">
+
+                0 Version(s)
+
+            </div>
+
+        </div>
+
+
+        <div th:if="${versions != null and !versions.isEmpty()}"
+             class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>Version</th>
+                    <th>Change Description</th>
+                    <th>Status</th>
+                    <th>Created By</th>
+                    <th>Created Date</th>
+                    <th>Action</th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                <tr th:each="version : ${versions}">
+
+                    <td>
+
+                        <span class="version-number"
+                              th:text="'v' + ${version.versionNumber}">
+
+                            v1
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="version-description"
+                             th:text="${version.changeDescription != null and !#strings.isEmpty(version.changeDescription)
+                             ? version.changeDescription
+                             : 'No change description available'}">
+
+                            Approved contract modification
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="status-badge status-current"
+                              th:if="${version.status != null and version.status.equalsIgnoreCase('CURRENT')}">
+
+                            <i class="fa-solid fa-circle-check"></i>
+                            CURRENT
+
+                        </span>
+
+
+                        <span class="status-badge status-previous"
+                              th:if="${version.status != null and version.status.equalsIgnoreCase('PREVIOUS')}">
+
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            PREVIOUS
+
+                        </span>
+
+
+                        <span class="status-badge status-default"
+                              th:if="${version.status == null or
+                              (!version.status.equalsIgnoreCase('CURRENT') and
+                               !version.status.equalsIgnoreCase('PREVIOUS'))}"
+                              th:text="${version.status != null ? version.status : 'N/A'}">
+
+                            N/A
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span th:if="${version.createdBy != null}"
+                              th:text="${version.createdBy.username}">
+
+                            Manager
+
+                        </span>
+
+                        <span th:if="${version.createdBy == null}">
+                            —
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span th:if="${version.createdAt != null}"
+                              th:text="${#temporals.format(version.createdAt, 'dd MMM yyyy, hh:mm a')}">
+
+                            09 Sep 2026, 06:30 PM
+
+                        </span>
+
+                        <span th:if="${version.createdAt == null}">
+                            —
+                        </span>
+
+                    </td>
+
+
+                    <td class="action-cell">
+
+                        <a th:href="@{/contract/versions/view/{id}(id=${version.id})}"
+                           class="view-button">
+
+                            <i class="fa-solid fa-eye"></i>
+                            View
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="empty-state"
+             th:if="${versions == null or versions.isEmpty()}">
+
+            <div class="empty-icon">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+            </div>
+
+            <h3>No Versions Available</h3>
+
+            <p>
+                No version history has been created for this document yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="bottom-actions">
+
+        <a th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+           class="back-button">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Contract Details
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

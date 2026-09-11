@@ -1,0 +1,1443 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HTML / BODY
+   ========================================================= */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background: #f1f5f9;
+
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body {
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   PAGE CONTAINER
+   ========================================================= */
+
+.page-container {
+    width: 100%;
+    height: 100vh;
+
+    padding: 20px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN CONTRACT SECTION
+   ========================================================= */
+
+.contracts-section {
+    width: 100%;
+    height: calc(100vh - 40px);
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(15, 23, 42, 0.06);
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.section-header {
+    width: 100%;
+
+    min-height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.section-title {
+    min-width: 0;
+}
+
+
+.section-title h1 {
+    margin: 0;
+
+    color: #1e293b;
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+.section-title p {
+    margin-top: 4px;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   HEADER ACTIONS
+   ========================================================= */
+
+.header-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   COMMON BUTTON
+   ========================================================= */
+
+.btn {
+    height: 34px;
+
+    padding: 0 13px;
+
+    border-radius: 7px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
+}
+
+
+.btn i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ADD BUTTON
+   ========================================================= */
+
+.add-btn {
+    background: #0f766e;
+
+    color: #ffffff;
+
+    border: 1px solid #0f766e;
+}
+
+
+.add-btn:hover {
+    background: #115e59;
+
+    border-color: #115e59;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DASHBOARD BUTTON
+   ========================================================= */
+
+.dashboard-btn {
+    background: #1e293b;
+
+    color: #ffffff;
+
+    border: 1px solid #1e293b;
+}
+
+
+.dashboard-btn:hover {
+    background: #334155;
+
+    border-color: #334155;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SUCCESS / ERROR ALERT MESSAGE
+   ========================================================= */
+
+.alert-message {
+    width: 100%;
+
+    min-height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 12px;
+
+    margin-bottom: 10px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    box-sizing: border-box;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+   ========================================================= */
+
+.success-message {
+    background: #ecfdf5;
+
+    border: 1px solid #a7f3d0;
+
+    color: #047857;
+}
+
+
+.success-message i {
+    color: #059669;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.error-message {
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    color: #b91c1c;
+}
+
+
+.error-message i {
+    color: #dc2626;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SEARCH SECTION
+   ========================================================= */
+
+.search-section {
+    width: 100%;
+
+    flex-shrink: 0;
+
+    margin-bottom: 12px;
+}
+
+
+.search-controls {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   SEARCH BOX
+   ========================================================= */
+
+.search-box {
+    height: 36px;
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+    background: #f8fafc;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    transition: 0.2s ease;
+}
+
+
+.search-box:focus-within {
+    border-color: #0f766e;
+
+    box-shadow:
+        0 0 0 2px rgba(15, 118, 110, 0.08);
+}
+
+
+.search-box > i {
+    margin-left: 11px;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+.search-box input {
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    padding: 0 35px 0 8px;
+
+    color: #1e293b;
+
+    font-size: 12px;
+}
+
+
+.search-box input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
+
+.clear-search {
+    width: 26px;
+
+    height: 26px;
+
+    position: absolute;
+
+    right: 5px;
+
+    top: 4px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #64748b;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+
+.clear-search:hover {
+    background: #e2e8f0;
+
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   STATUS FILTER
+   ========================================================= */
+
+.status-filter-box {
+    width: 155px;
+
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 0 9px;
+
+    background: #f8fafc;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+}
+
+
+.status-filter-box > i {
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+.status-filter-box select {
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #334155;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SEARCH RESULT
+   ========================================================= */
+
+.search-result {
+    margin-top: 7px;
+
+    min-height: 15px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.search-result span {
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
+
+.table-wrapper {
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.contracts-table {
+    width: 100%;
+
+    height: auto;
+
+    table-layout: fixed;
+
+    border-collapse: collapse;
+
+    border-spacing: 0;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+   ========================================================= */
+
+.contracts-table .id-column {
+    width: 6%;
+}
+
+
+.contracts-table .name-column {
+    width: 19%;
+}
+
+
+.contracts-table .type-column {
+    width: 14%;
+}
+
+
+.contracts-table .document-column {
+    width: 22%;
+}
+
+
+.contracts-table .status-column {
+    width: 12%;
+}
+
+
+.contracts-table .created-column {
+    width: 15%;
+}
+
+
+.contracts-table .action-header {
+    width: 12%;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.contracts-table thead {
+    background: #1e293b;
+}
+
+
+.contracts-table thead th {
+    height: 40px;
+
+    padding: 7px 8px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    white-space: nowrap;
+
+    border: none;
+}
+
+
+.contracts-table thead th:first-child {
+    padding-left: 12px;
+}
+
+
+/* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+.contracts-table tbody tr.contract-row {
+    height: 52px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    transition: background 0.15s ease;
+}
+
+
+.contracts-table tbody tr.contract-row:hover {
+    background: #f8fafc;
+}
+
+
+.contracts-table tbody tr.contract-row:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   TABLE CELLS
+   ========================================================= */
+
+.contracts-table tbody td {
+    padding: 7px 8px;
+
+    color: #334155;
+
+    font-size: 11px;
+
+    vertical-align: middle;
+
+    overflow: hidden;
+}
+
+
+.contracts-table tbody td:first-child {
+    padding-left: 12px;
+
+    color: #64748b;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CONTRACT NAME
+   ========================================================= */
+
+.contract-name {
+    width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.contract-name i {
+    flex-shrink: 0;
+
+    width: 27px;
+
+    height: 27px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    font-size: 11px;
+}
+
+
+.contract-name span {
+    min-width: 0;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: #1e293b;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CONTRACT TYPE
+   ========================================================= */
+
+.contract-type {
+    display: block;
+
+    max-width: 100%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: #475569;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   DOCUMENT
+   ========================================================= */
+
+.document-summary {
+    width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+/* =========================================================
+   DOCUMENT ICON
+   ========================================================= */
+
+.document-icon {
+    width: 28px;
+
+    height: 28px;
+
+    min-width: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   DOCUMENT DETAILS
+   ========================================================= */
+
+.document-details {
+    flex: 1;
+
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+
+.document-name {
+    display: block;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: #334155;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   DOCUMENT ACTIONS
+   DOWNLOAD + DELETE SIDE BY SIDE
+   ========================================================= */
+
+.document-actions {
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    align-items: center !important;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    flex-shrink: 0;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DOCUMENT ACTION ICONS
+   NO BACKGROUND
+   ========================================================= */
+
+.document-action {
+    width: auto !important;
+
+    height: auto !important;
+
+    min-width: 0 !important;
+
+    min-height: 0 !important;
+
+    display: inline-flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    padding: 2px !important;
+
+    margin: 0 !important;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    line-height: 1;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* =========================================================
+   DOWNLOAD ICON
+   ========================================================= */
+
+.download-document-btn {
+    color: #334155 !important;
+
+    font-size: 12px !important;
+}
+
+
+.download-document-btn:hover {
+    color: #0f766e !important;
+
+    background: transparent !important;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DELETE ICON
+   SMALL + RED
+   ========================================================= */
+
+.delete-document-btn {
+    color: #dc2626 !important;
+
+    font-size: 10px !important;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    padding: 2px !important;
+}
+
+
+.delete-document-btn:hover {
+    color: #b91c1c !important;
+
+    background: transparent !important;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   DELETE DOCUMENT FORM
+   KEEP INLINE
+   ========================================================= */
+
+.delete-document-form {
+    display: inline-flex !important;
+
+    flex-direction: row !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    background: transparent !important;
+}
+
+
+/* =========================================================
+   NO DOCUMENT
+   ========================================================= */
+
+.no-document {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+}
+
+
+.no-document i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    min-width: 72px;
+
+    padding: 5px 7px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.status i {
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.status-active {
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+
+/* =========================================================
+   DRAFT
+   ========================================================= */
+
+.status-draft {
+    background: #fef3c7;
+
+    color: #a16207;
+}
+
+
+/* =========================================================
+   EXPIRED
+   ========================================================= */
+
+.status-expired {
+    background: #dbeafe;
+
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   TERMINATED
+   ========================================================= */
+
+.status-terminated {
+    background: #fee2e2;
+
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   OTHER
+   ========================================================= */
+
+.status-other {
+    background: #e2e8f0;
+
+    color: #475569;
+}
+
+
+/* =========================================================
+   CREATED AT
+   ========================================================= */
+
+.created-column {
+    color: #64748b !important;
+
+    font-size: 10px !important;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ACTION CELL
+   ========================================================= */
+
+.action-cell {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    height: 52px;
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+   ========================================================= */
+
+.action-btn {
+    width: 28px;
+
+    height: 28px;
+
+    min-width: 28px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================================
+   VIEW
+   ========================================================= */
+
+.view-btn {
+    background: #eef2ff;
+
+    color: #4f46e5;
+}
+
+
+.view-btn:hover {
+    background: #4f46e5;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   EDIT
+   ========================================================= */
+
+.edit-btn {
+    background: #f3e8ff;
+
+    color: #9333ea;
+}
+
+
+.edit-btn:hover {
+    background: #9333ea;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DELETE CONTRACT
+   ========================================================= */
+
+.delete-btn {
+    background: #fee2e2;
+
+    color: #dc2626;
+}
+
+
+.delete-btn:hover {
+    background: #dc2626;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DELETE FORM
+   ========================================================= */
+
+.delete-form {
+    margin: 0;
+
+    padding: 0;
+
+    display: inline-flex;
+}
+
+
+/* =========================================================
+   EMPTY MESSAGE
+   ========================================================= */
+
+.empty-message {
+    height: 150px;
+
+    text-align: center !important;
+
+    vertical-align: middle !important;
+
+    color: #64748b;
+
+    padding: 20px !important;
+}
+
+
+.empty-message > div {
+    margin-bottom: 8px;
+}
+
+
+.search-empty-icon {
+    width: 38px;
+
+    height: 38px;
+
+    margin: 0 auto 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+.empty-message strong {
+    display: block;
+
+    color: #334155;
+
+    font-size: 13px;
+
+    margin-bottom: 4px;
+}
+
+
+.empty-message span {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - SMALLER DESKTOP
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .page-container {
+        padding: 15px;
+    }
+
+    .contracts-section {
+        height: calc(100vh - 30px);
+
+        padding: 14px;
+    }
+
+    .section-title h1 {
+        font-size: 21px;
+    }
+
+    .contracts-table thead th {
+        font-size: 10px;
+
+        padding: 6px;
+    }
+
+    .contracts-table tbody td {
+        font-size: 10px;
+
+        padding: 6px;
+    }
+
+    .contracts-table .document-column {
+        width: 20%;
+    }
+
+    .contracts-table .name-column {
+        width: 18%;
+    }
+
+    .contracts-table .type-column {
+        width: 13%;
+    }
+
+    .contracts-table .created-column {
+        width: 14%;
+    }
+
+    .contracts-table .action-header {
+        width: 13%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .section-header {
+        min-height: 55px;
+    }
+
+    .section-title h1 {
+        font-size: 19px;
+    }
+
+    .section-title p {
+        font-size: 11px;
+    }
+
+    .btn {
+        padding: 0 10px;
+
+        font-size: 11px;
+    }
+
+    .status-filter-box {
+        width: 135px;
+    }
+
+    .contracts-table .document-column {
+        width: 19%;
+    }
+
+    .document-icon {
+        width: 24px;
+
+        height: 24px;
+
+        min-width: 24px;
+    }
+
+    .document-action {
+        font-size: 11px !important;
+    }
+
+    .delete-document-btn {
+        font-size: 9px !important;
+    }
+
+    .document-actions {
+        gap: 5px;
+    }
+
+    .action-btn {
+        width: 25px;
+
+        height: 25px;
+
+        min-width: 25px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    html,
+    body {
+        overflow: auto;
+    }
+
+    .page-container {
+        height: auto;
+
+        min-height: 100vh;
+
+        padding: 10px;
+
+        overflow: visible;
+    }
+
+    .contracts-section {
+        height: auto;
+
+        min-height: calc(100vh - 20px);
+
+        overflow: visible;
+    }
+
+    .section-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .btn {
+        flex: 1;
+    }
+
+    .search-controls {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .status-filter-box {
+        width: 100%;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .contracts-table {
+        min-width: 900px;
+
+        table-layout: fixed;
+    }
+
+    .document-actions {
+        flex-direction: row !important;
+
+        display: flex !important;
+    }
+}

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Upload Document</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+	<link rel="stylesheet" th:href="@{/css/Document/document-upload.css}">
+
+</head>
+
+<body>
+
+	<div class="upload-page">
+
+		<!-- ================= PAGE HEADER ================= -->
+
+		<div class="page-header">
+
+			<div class="header-left">
+
+				<div class="header-icon">
+
+					<i class="fa-solid fa-file-arrow-up"></i>
+
+				</div>
+
+				<div>
+
+					<h1>Upload Document</h1>
+
+					<p>Add a PDF document to this contract</p>
+
+				</div>
+
+			</div>
+
+
+			<a th:href="@{/contract/documents/{contractId}(contractId=${contract.id})}" class="back-btn">
+
+				<i class="fa-solid fa-arrow-left"></i>
+
+				Back to Documents
+
+			</a>
+
+		</div>
+
+
+		<!-- ================= CONTRACT INFORMATION ================= -->
+
+		<div class="contract-card">
+
+			<div class="contract-icon">
+
+				<i class="fa-solid fa-file-signature"></i>
+
+			</div>
+
+			<div class="contract-info">
+
+				<span class="info-label">
+					CONTRACT
+				</span>
+
+				<h2 th:text="${contract.contractNumber}">
+					Contract Number
+				</h2>
+
+				<p th:if="${contract.title != null}" th:text="${contract.title}">
+					Contract Title
+				</p>
+
+			</div>
+
+			<div class="contract-id">
+
+				<span>ID</span>
+
+				<strong th:text="${contract.id}">
+					1
+				</strong>
+
+			</div>
+
+		</div>
+
+
+		<!-- ================= ALERTS ================= -->
+
+		<div class="alert success-alert" th:if="${successMessage != null}">
+
+			<i class="fa-solid fa-circle-check"></i>
+
+			<span th:text="${successMessage}">
+				Document uploaded successfully.
+			</span>
+
+		</div>
+
+
+		<div class="alert error-alert" th:if="${errorMessage != null}">
+
+			<i class="fa-solid fa-circle-exclamation"></i>
+
+			<span th:text="${errorMessage}">
+				Unable to upload document.
+			</span>
+
+		</div>
+
+
+		<!-- ================= UPLOAD FORM ================= -->
+
+		<div class="form-card">
+
+			<div class="form-header">
+
+				<div class="form-header-icon">
+
+					<i class="fa-solid fa-cloud-arrow-up"></i>
+
+				</div>
+
+				<div>
+
+					<h2>Document Information</h2>
+
+					<p>
+						Enter the document details and select a PDF file.
+					</p>
+
+				</div>
+
+			</div>
+
+
+			<form th:action="@{/contract/documents/upload}" method="post" enctype="multipart/form-data"
+				class="upload-form">
+
+
+				<!-- Contract ID -->
+
+				<input type="hidden" name="contractId" th:value="${contract.id}">
+
+
+				<!-- Document Name -->
+
+				<div class="form-group">
+
+					<label for="documentName">
+
+						<i class="fa-solid fa-tag"></i>
+
+						Document Name
+
+						<span class="required">*</span>
+
+					</label>
+
+					<input type="text" id="documentName" name="documentName" placeholder="Enter document name"
+						maxlength="150" required>
+
+					<small>
+						Give this document a meaningful name.
+					</small>
+
+				</div>
+
+
+				<!-- File Upload -->
+
+				<div class="form-group">
+
+					<label for="file">
+
+						<i class="fa-solid fa-file-pdf"></i>
+
+						PDF Document
+
+						<span class="required">*</span>
+
+					</label>
+
+
+					<div class="file-upload-area">
+
+						<input type="file" id="file" name="file" accept=".pdf,application/pdf" required>
+
+
+						<label for="file" class="file-label">
+
+							<div class="file-icon">
+
+								<i class="fa-solid fa-file-pdf"></i>
+
+							</div>
+
+
+							<div class="file-text">
+
+								<strong id="file-name">
+									Choose PDF file
+								</strong>
+
+								<span>
+									Click here to select a PDF document
+								</span>
+
+							</div>
+
+
+							<div class="browse-icon">
+
+								<i class="fa-solid fa-folder-open"></i>
+
+							</div>
+
+						</label>
+
+					</div>
+
+
+					<small>
+						Only PDF files are allowed. Maximum file size: 10 MB.
+					</small>
+
+				</div>
+
+
+				<!-- Upload Information -->
+
+				<div class="upload-info">
+
+
+					<div class="info-item">
+
+						<i class="fa-solid fa-file-pdf"></i>
+
+						<div>
+
+							<strong>PDF Only</strong>
+
+							<span>
+								Upload PDF documents only.
+							</span>
+
+						</div>
+
+					</div>
+
+
+					<div class="info-item">
+
+						<i class="fa-solid fa-hard-drive"></i>
+
+						<div>
+
+							<strong>Maximum Size</strong>
+
+							<span>
+								File size must not exceed 10 MB.
+							</span>
+
+						</div>
+
+					</div>
+
+
+					<div class="info-item">
+
+						<i class="fa-solid fa-shield-halved"></i>
+
+						<div>
+
+							<strong>Secure Storage</strong>
+
+							<span>
+								Your document is stored securely.
+							</span>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<!-- Form Actions -->
+
+				<div class="form-actions">
+
+					<button type="submit" class="upload-btn">
+
+						<i class="fa-solid fa-cloud-arrow-up"></i>
+
+						Upload Document
+
+					</button>
+
+					<a th:href="@{/contract/documents/{contractId}(contractId=${contract.id})}" class="cancel-btn">
+
+						<i class="fa-solid fa-xmark"></i>
+
+						Cancel
+
+					</a>
+
+
+
+
+				</div>
+
+			</form>
+
+		</div>
+
+
+		<!-- ================= BOTTOM NAVIGATION ================= -->
+
+		<div class="bottom-navigation">
+
+			<a th:href="@{/contract/contracts/view/{id}(id=${contract.id})}">
+
+				<i class="fa-solid fa-file-signature"></i>
+
+				View Contract
+
+			</a>
+
+			<span class="separator">|</span>
+
+			<a th:href="@{/contract/documents/{contractId}(contractId=${contract.id})}">
+
+				<i class="fa-solid fa-folder-open"></i>
+
+				All Documents
+
+			</a>
+
+		</div>
+
+	</div>
+
+
+	<!-- ================= FILE NAME SCRIPT ================= -->
+
+	<script>
+
+		const fileInput = document.getElementById("file");
+
+		const fileName = document.getElementById("file-name");
+
+		if (fileInput) {
+
+			fileInput.addEventListener("change", function () {
+
+				if (this.files && this.files.length > 0) {
+
+					fileName.textContent = this.files[0].name;
+
+				} else {
+
+					fileName.textContent = "Choose PDF file";
+
+				}
+
+			});
+
+		}
+
+	</script>
+
+</body>
+
+</html>

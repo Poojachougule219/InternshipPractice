@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Register | Legal Contract Document Modification System</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Common/register.css}">
+
+
+</head>
+
+<body>
+
+<div class="register-container">
+
+
+<div class="register-card">
+
+    <!-- Left Legal Section -->
+    <section class="legal-section">
+
+        <div class="legal-content">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+
+            <h1>
+                Legal Contract<br>
+                <span>Document Modification</span>
+            </h1>
+
+            <p class="legal-description">
+                Create your account to manage contracts, documents,
+                clauses and modification requests securely.
+            </p>
+
+            <div class="legal-features">
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+
+                    <div>
+                        <strong>Contract Management</strong>
+                        <span>Organize and manage legal contracts</span>
+                    </div>
+
+                </div>
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+
+                    <div>
+                        <strong>Document Modification</strong>
+                        <span>Submit and track contract changes</span>
+                    </div>
+
+                </div>
+
+                <div class="feature-item">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+                        <strong>Secure Workflow</strong>
+                        <span>Review and approve modifications securely</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="legal-decoration decoration-one"></div>
+
+        <div class="legal-decoration decoration-two"></div>
+
+
+        <div class="document-illustration">
+
+            <div class="document-paper">
+
+                <div class="paper-top">
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="paper-title"></div>
+
+                <div class="paper-line long"></div>
+                <div class="paper-line medium"></div>
+                <div class="paper-line long"></div>
+
+                <div class="paper-section">
+                    <div class="paper-line short"></div>
+                    <div class="paper-line long"></div>
+                    <div class="paper-line medium"></div>
+                </div>
+
+                <div class="signature-area">
+                    <div class="signature-line"></div>
+                    <i class="fa-solid fa-pen"></i>
+                </div>
+
+            </div>
+
+            <div class="approval-stamp">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Right Registration Section -->
+    <section class="register-section">
+
+        <div class="register-content">
+
+            <div class="register-heading">
+
+                <div class="small-icon">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+
+                <div>
+                    <h2>Create Your Account</h2>
+                    <p>Register to access the legal contract system</p>
+                </div>
+
+            </div>
+
+
+            <!-- Error -->
+            <div th:if="${error}"
+                 class="error-message">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <span th:text="${error}">
+                    Registration error.
+                </span>
+
+            </div>
+
+
+            <!-- Registration Form -->
+            <form th:action="@{/register}"
+                  th:object="${user}"
+                  method="post">
+
+
+                <!-- Full Name + Username -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            <i class="fa-solid fa-user"></i>
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-id-card input-icon"></i>
+
+                            <input type="text"
+                                   id="fullName"
+                                   th:field="*{fullName}"
+                                   placeholder="Enter your full name"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="username">
+                            <i class="fa-solid fa-at"></i>
+                            Username
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-user input-icon"></i>
+
+                            <input type="text"
+                                   id="username"
+                                   th:field="*{username}"
+                                   placeholder="Enter username"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email + Role -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            <i class="fa-solid fa-envelope"></i>
+                            Email
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-envelope input-icon"></i>
+
+                            <input type="email"
+                                   id="email"
+                                   th:field="*{email}"
+                                   placeholder="Enter email address"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="role">
+                            <i class="fa-solid fa-user-shield"></i>
+                            Role
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-briefcase input-icon"></i>
+
+                            <select id="role"
+                                    th:field="*{role}"
+                                    required>
+
+                                <option value="">
+                                    -- Select Role --
+                                </option>
+
+                                <option th:each="role : ${roles}"
+                                        th:value="${role.name}"
+                                        th:text="${role.name}">
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password + Confirm Password -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            <i class="fa-solid fa-lock"></i>
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock input-icon"></i>
+
+                            <input type="password"
+                                   id="password"
+                                   th:field="*{password}"
+                                   placeholder="Enter password"
+                                   required>
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    data-target="password"
+                                    aria-label="Show password">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            <i class="fa-solid fa-lock"></i>
+                            Confirm Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock input-icon"></i>
+
+                            <input type="password"
+                                   id="confirmPassword"
+                                   th:field="*{confirmPassword}"
+                                   placeholder="Confirm your password"
+                                   required>
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    data-target="confirmPassword"
+                                    aria-label="Show password">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Create Account Button -->
+                <div class="button-area">
+
+                    <button type="submit"
+                            class="register-button">
+
+                        <span>Create Account</span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- Login Link -->
+            <div class="login-link">
+
+                <span>
+                    Already have an account?
+                </span>
+
+                <a th:href="@{/login}">
+                    Login
+                </a>
+
+            </div>
+
+
+            <div class="security-note">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Your account information is securely protected.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+</div>
+
+<script>
+
+document.querySelectorAll(".password-toggle").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        const targetId = this.getAttribute("data-target");
+
+        const passwordInput =
+            document.getElementById(targetId);
+
+        const icon =
+            this.querySelector("i");
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+
+            this.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        } else {
+
+            passwordInput.type = "password";
+
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+
+            this.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

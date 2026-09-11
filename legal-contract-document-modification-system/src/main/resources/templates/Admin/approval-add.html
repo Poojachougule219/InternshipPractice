@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Approval</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/Admin/approval-add.css}">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- =====================================================
+         APPROVAL ADD SECTION
+    ====================================================== -->
+
+    <div class="approval-add-section">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h1>Create Approval</h1>
+
+                <p>
+                    Create a new approval request for a contract modification
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM
+        ================================================== -->
+
+        <form th:action="@{/admin/approvals/add}"
+              th:object="${approval}"
+              method="post"
+              class="approval-form">
+
+            <!-- =================================================
+                 CONTRACT + MODIFICATION
+            ================================================== -->
+
+            <div class="form-row">
+
+                <!-- CONTRACT -->
+
+                <div class="form-group">
+
+                    <label for="contract">
+                        Contract
+                    </label>
+
+                    <select id="contract"
+                            name="contractId"
+                            required>
+
+                        <option value="">
+                            Select contract
+                        </option>
+
+                        <option th:each="contract : ${contracts}"
+                                th:value="${contract.id}"
+                                th:text="${contract.contractNumber + ' - ' + contract.title}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- MODIFICATION -->
+
+                <div class="form-group">
+
+                    <label for="modification">
+                        Modification
+                    </label>
+
+                    <select id="modification"
+                            name="modificationId"
+                            required>
+
+                        <option value="">
+                            Select modification
+                        </option>
+
+                        <option th:each="modification : ${modifications}"
+                                th:value="${modification.id}"
+                                th:text="${'Modification #' + modification.id}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 APPROVER
+            ================================================== -->
+
+            <div class="form-group">
+
+                <label for="approver">
+                    Approver
+                </label>
+
+                <select id="approver"
+                        name="approverId"
+                        required>
+
+                    <option value="">
+                        Select approver
+                    </option>
+
+                    <option th:each="user : ${approvers}"
+                            th:value="${user.id}"
+                            th:text="${user.fullName + ' (' + user.username + ')'}">
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATUS
+            ================================================== -->
+
+            <div class="form-group">
+
+                <label>
+                    Status
+                </label>
+
+                <div class="status-display">
+
+                    <span class="pending-badge">
+                        PENDING
+                    </span>
+
+                </div>
+
+                <small class="field-help">
+
+                    New approval requests always start with PENDING status.
+                    They can be approved or rejected from the Approvals page.
+
+                </small>
+
+            </div>
+
+
+            <!-- =================================================
+                 HIDDEN STATUS
+            ================================================== -->
+
+            <input type="hidden"
+                   name="status"
+                   value="PENDING">
+
+
+            <!-- =================================================
+                 COMMENTS
+            ================================================== -->
+
+            <div class="form-group">
+
+                <label for="comments">
+                    Comments
+                </label>
+
+                <textarea id="comments"
+                          name="comments"
+                          placeholder="Enter approval comments"></textarea>
+
+            </div>
+
+
+            <!-- =================================================
+                 FORM ACTIONS
+            ================================================== -->
+
+            <div class="form-actions">
+
+                <button type="submit"
+                        class="btn create-btn">
+
+                    <span class="btn-icon">✓</span>
+
+                    Create Approval
+
+                </button>
+
+
+                <a th:href="@{/admin/approvals}"
+                   class="btn cancel-btn">
+
+                    <span class="btn-icon">✕</span>
+
+                    Cancel
+
+                </a>
+
+
+                <a th:href="@{/admin/dashboard}"
+                   class="btn dashboard-btn">
+
+                    <span class="btn-icon">⌂</span>
+
+                    Dashboard
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

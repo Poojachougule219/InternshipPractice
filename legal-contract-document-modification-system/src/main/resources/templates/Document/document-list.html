@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Documents</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Document/document-list.css}">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<div class="page-header">
+
+    <div class="header-actions">
+
+        <a th:if="${contract != null}"
+           th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+           class="btn btn-secondary">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Contract
+
+        </a>
+
+        <a th:if="${contract != null}"
+           th:href="@{/contract/documents/upload/{id}(id=${contract.id})}"
+           class="btn btn-primary">
+
+            <i class="fa-solid fa-upload"></i>
+            Upload Document
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="alert alert-success"
+     th:if="${successMessage}">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span th:text="${successMessage}">
+        Document uploaded successfully.
+    </span>
+
+</div>
+
+
+<div class="alert alert-error"
+     th:if="${errorMessage}">
+
+    <i class="fa-solid fa-circle-exclamation"></i>
+
+    <span th:text="${errorMessage}">
+        Unable to process document.
+    </span>
+
+</div>
+
+
+<div class="summary-card"
+     th:if="${contract != null}">
+
+    <div class="summary-item">
+
+        <div class="summary-icon">
+            <i class="fa-solid fa-hashtag"></i>
+        </div>
+
+        <div class="summary-content">
+
+            <span class="summary-label">
+                Contract ID
+            </span>
+
+            <span class="summary-value"
+                  th:text="${contract.id}">
+                1
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-item">
+
+        <div class="summary-icon">
+            <i class="fa-solid fa-file-signature"></i>
+        </div>
+
+        <div class="summary-content">
+
+            <span class="summary-label">
+                Contract Number
+            </span>
+
+            <span class="summary-value"
+                  th:text="${contract.contractNumber}">
+                CNT-001
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-item">
+
+        <div class="summary-icon">
+            <i class="fa-solid fa-file-lines"></i>
+        </div>
+
+        <div class="summary-content">
+
+            <span class="summary-label">
+                Total Documents
+            </span>
+
+            <span class="summary-value"
+                  th:text="${documents != null ? #lists.size(documents) : 0}">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="content-card">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+
+                <i class="fa-solid fa-folder-open"></i>
+                Documents
+
+            </h2>
+
+            <p>
+                All documents associated with this contract
+            </p>
+
+        </div>
+
+        <span class="document-count"
+              th:text="${documents != null ? #lists.size(documents) : 0}">
+            0
+        </span>
+
+    </div>
+
+
+    <div class="document-list"
+         th:if="${documents != null and !#lists.isEmpty(documents)}">
+
+        <div class="document-card"
+             th:each="document : ${documents}">
+
+            <div class="document-icon">
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+            </div>
+
+
+            <div class="document-information">
+
+                <div class="document-title-row">
+
+                    <div>
+
+                        <h3 th:text="${document.documentName}">
+                            Contract Document
+                        </h3>
+
+                        <span class="file-name"
+                              th:text="${document.fileName}">
+                            contract.pdf
+                        </span>
+
+                    </div>
+
+
+                    <span class="status-badge"
+                          th:text="${document.status != null ? document.status : 'UPLOADED'}"
+                          th:classappend="${document.status != null and document.status.equalsIgnoreCase('UPLOADED')}
+                                ? ' status-uploaded'
+                                : ' status-inactive'">
+
+                        UPLOADED
+
+                    </span>
+
+                </div>
+
+
+                <div class="document-meta">
+
+                    <span>
+
+                        <i class="fa-solid fa-file"></i>
+
+                        <strong>Type:</strong>
+
+                        <span th:text="${document.fileType != null ? document.fileType : 'PDF'}">
+                            application/pdf
+                        </span>
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="fa-solid fa-database"></i>
+
+                        <strong>Size:</strong>
+
+                        <span th:if="${document.fileSize != null}"
+                              th:text="${#numbers.formatDecimal(document.fileSize / 1024.0 / 1024.0, 1, 2) + ' MB'}">
+                            1.25 MB
+                        </span>
+
+                        <span th:unless="${document.fileSize != null}">
+                            Not available
+                        </span>
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <strong>Uploaded:</strong>
+
+                        <span th:if="${document.uploadedAt != null}"
+                              th:text="${#temporals.format(document.uploadedAt, 'dd MMM yyyy, hh:mm a')}">
+                            07 Sep 2026, 04:30 PM
+                        </span>
+
+                        <span th:unless="${document.uploadedAt != null}">
+                            Not available
+                        </span>
+
+                    </span>
+
+
+                    <span th:if="${document.uploadedBy != null}">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <strong>Uploaded By:</strong>
+
+                        <span th:text="${document.uploadedBy.username}">
+                            admin
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="document-actions">
+
+
+                <a th:href="@{/contract/documents/view/{id}(id=${document.id})}"
+                   class="action-btn view-btn"
+                   title="View Document"
+                   target="_blank">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </a>
+
+
+                <a th:href="@{/contract/documents/download/{id}(id=${document.id})}"
+                   class="action-btn download-btn"
+                   title="Download Document">
+
+                    <i class="fa-solid fa-download"></i>
+
+                </a>
+
+
+                <a th:href="@{/contract/versions/document/{id}(id=${document.id})}"
+                   class="action-btn version-btn"
+                   title="Version History">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                </a>
+
+
+                <form th:action="@{/contract/documents/delete/{id}(id=${document.id})}"
+                      method="post"
+                      class="delete-form"
+                      onsubmit="return confirm('Are you sure you want to delete this document?');">
+
+                    <button type="submit"
+                            class="action-btn delete-btn"
+                            title="Delete Document">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="empty-state"
+         th:if="${documents == null or #lists.isEmpty(documents)}">
+
+        <div class="empty-icon">
+
+            <i class="fa-solid fa-folder-open"></i>
+
+        </div>
+
+        <h3>
+            No Documents Found
+        </h3>
+
+        <p>
+            No documents have been uploaded for this contract yet.
+        </p>
+
+        <a th:if="${contract != null}"
+           th:href="@{/contract/documents/upload/{id}(id=${contract.id})}"
+           class="btn btn-primary">
+
+            <i class="fa-solid fa-upload"></i>
+            Upload First Document
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="bottom-actions"
+     th:if="${contract != null}">
+
+    <a th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+       class="back-link">
+
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Contract Details
+
+    </a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

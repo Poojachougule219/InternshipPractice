@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Modification Request</title>
+    <link rel="stylesheet" href="/css/Modification/modification-view.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<div class="view-header">
+
+    <a href="/contract/modifications" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Modification Requests
+    </a>
+
+    <div class="view-title-row">
+
+        <div class="view-title">
+
+            <div class="view-title-icon">
+                <i class="fa-solid fa-file-signature"></i>
+            </div>
+
+            <div>
+                <h1>Modification Request</h1>
+                <p>Review modification request details</p>
+            </div>
+
+        </div>
+
+        <div>
+
+            <span class="large-status pending"
+                  th:if="${modification.status == null or modification.status == 'PENDING'}">
+                <i class="fa-solid fa-clock"></i>
+                PENDING
+            </span>
+
+            <span class="large-status approved"
+                  th:if="${modification.status == 'APPROVED'}">
+                <i class="fa-solid fa-circle-check"></i>
+                APPROVED
+            </span>
+
+            <span class="large-status rejected"
+                  th:if="${modification.status == 'REJECTED'}">
+                <i class="fa-solid fa-circle-xmark"></i>
+                REJECTED
+            </span>
+
+            <span class="large-status other-status"
+                  th:if="${modification.status != null and modification.status != 'PENDING' and modification.status != 'APPROVED' and modification.status != 'REJECTED'}"
+                  th:text="${modification.status}">
+                STATUS
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="view-grid">
+
+    <div class="details-card">
+
+        <div class="card-heading">
+            <div class="card-heading-icon">
+                <i class="fa-solid fa-file-contract"></i>
+            </div>
+
+            <div>
+                <h2>Contract Information</h2>
+                <p>Contract associated with this request</p>
+            </div>
+        </div>
+
+        <div class="details-list">
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    <i class="fa-solid fa-hashtag"></i>
+                    Contract Number
+                </div>
+
+                <div class="detail-value"
+                     th:if="${modification.contract != null}"
+                     th:text="${modification.contract.contractNumber}">
+                    CTR-001
+                </div>
+
+                <div class="detail-value muted"
+                     th:if="${modification.contract == null}">
+                    Not Available
+                </div>
+
+            </div>
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    <i class="fa-solid fa-heading"></i>
+                    Contract Title
+                </div>
+
+                <div class="detail-value"
+                     th:if="${modification.contract != null}"
+                     th:text="${modification.contract.title}">
+                    Employment Agreement
+                </div>
+
+                <div class="detail-value muted"
+                     th:if="${modification.contract == null}">
+                    Not Available
+                </div>
+
+            </div>
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Modification Type
+                </div>
+
+                <div class="detail-value">
+
+                    <span class="type-badge"
+                          th:if="${modification.clause == null}">
+                        <i class="fa-solid fa-file-contract"></i>
+                        Entire Contract
+                    </span>
+
+                    <span class="type-badge clause-type"
+                          th:if="${modification.clause != null}">
+                        <i class="fa-solid fa-list-check"></i>
+                        Specific Clause
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="detail-row"
+                 th:if="${modification.clause != null}">
+
+                <div class="detail-label">
+                    <i class="fa-solid fa-list-ol"></i>
+                    Clause
+                </div>
+
+                <div class="detail-value">
+
+                    <div class="view-clause">
+
+                        <strong
+                            th:text="${modification.clause.title}">
+                            Payment Terms
+                        </strong>
+
+                        <span
+                            th:text="${modification.clause.clauseNumber}">
+                            1
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    <i class="fa-solid fa-user"></i>
+                    Modified By
+                </div>
+
+                <div class="detail-value"
+                     th:if="${modification.modifiedBy != null}"
+                     th:text="${modification.modifiedBy.username}">
+                    admin
+                </div>
+
+                <div class="detail-value muted"
+                     th:if="${modification.modifiedBy == null}">
+                    Not Available
+                </div>
+
+            </div>
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Submitted At
+                </div>
+
+                <div class="detail-value"
+                     th:if="${modification.modifiedAt != null}"
+                     th:text="${#temporals.format(modification.modifiedAt, 'dd MMMM yyyy, HH:mm')}">
+                    08 September 2026, 11:00
+                </div>
+
+                <div class="detail-value muted"
+                     th:if="${modification.modifiedAt == null}">
+                    Not Available
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="details-card">
+
+        <div class="card-heading">
+
+            <div class="card-heading-icon">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+
+            <div>
+                <h2>Reason</h2>
+                <p>Reason for requesting the modification</p>
+            </div>
+
+        </div>
+
+        <div class="reason-display"
+             th:if="${modification.reason != null and !#strings.isEmpty(modification.reason)}"
+             th:text="${modification.reason}">
+            Reason for modification
+        </div>
+
+        <div class="empty-detail"
+             th:if="${modification.reason == null or #strings.isEmpty(modification.reason)}">
+            No reason or description was provided.
+        </div>
+
+    </div>
+
+</div>
+
+<div class="content-card comparison-card">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Modification Comparison</h2>
+            <p>Compare the original value with the proposed modification</p>
+        </div>
+
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="comparison-panel original-panel">
+
+            <div class="comparison-heading">
+
+                <div class="comparison-icon">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+
+                <div>
+                    <h3>Original Value</h3>
+                    <span>Current contract or clause content</span>
+                </div>
+
+            </div>
+
+            <div class="content-display"
+                 th:if="${modification.oldContent != null and !#strings.isEmpty(modification.oldContent)}"
+                 th:text="${modification.oldContent}">
+                Original content
+            </div>
+
+            <div class="empty-detail"
+                 th:if="${modification.oldContent == null or #strings.isEmpty(modification.oldContent)}">
+                No original value provided.
+            </div>
+
+        </div>
+
+        <div class="comparison-panel proposed-panel">
+
+            <div class="comparison-heading">
+
+                <div class="comparison-icon">
+                    <i class="fa-solid fa-file-pen"></i>
+                </div>
+
+                <div>
+                    <h3>Proposed Modification</h3>
+                    <span>Requested replacement content</span>
+                </div>
+
+            </div>
+
+            <div class="content-display"
+                 th:if="${modification.newContent != null and !#strings.isEmpty(modification.newContent)}"
+                 th:text="${modification.newContent}">
+                Proposed content
+            </div>
+
+            <div class="empty-detail"
+                 th:if="${modification.newContent == null or #strings.isEmpty(modification.newContent)}">
+                No proposed modification provided.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="bottom-actions">
+
+    <a href="/contract/modifications"
+       class="back-button">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Requests
+    </a>
+
+    <a th:if="${modification.contract != null}"
+       th:href="@{/contract/contracts/view/{id}(id=${modification.contract.id})}"
+       class="secondary-button">
+        <i class="fa-solid fa-file-contract"></i>
+        View Contract
+    </a>
+
+    <a th:href="@{/contract/modifications/delete/{id}(id=${modification.id})}"
+       class="delete-button"
+       onclick="return confirm('Are you sure you want to delete this modification request?');">
+        <i class="fa-solid fa-trash"></i>
+        Delete Request
+    </a>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

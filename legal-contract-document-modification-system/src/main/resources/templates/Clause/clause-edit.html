@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Clause</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Clause Edit CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/Clause/clause-edit.css}">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- =====================================================
+         BACK TO CLAUSES
+    ====================================================== -->
+
+    <div class="header-actions">
+
+        <a th:if="${contract != null}"
+           th:href="@{/contract/clauses/{id}(id=${contract.id})}"
+           class="btn btn-secondary">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Clauses
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         ERROR MESSAGE
+    ====================================================== -->
+
+    <div class="alert alert-error" th:if="${errorMessage}">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <span th:text="${errorMessage}">
+            Error message
+        </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         FORM CARD
+    ====================================================== -->
+
+    <div class="form-card">
+
+        <!-- =================================================
+             CLAUSE INFORMATION HEADER
+        ================================================== -->
+
+        <div class="form-header">
+
+            <div class="form-header-icon">
+
+                <i class="fa-solid fa-file-signature"></i>
+
+            </div>
+
+            <div>
+
+                <h2>Clause Information</h2>
+
+                <p>
+                    Update the details of the existing clause.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTRACT INFORMATION
+        ================================================== -->
+
+        <div class="contract-info"
+             th:if="${contract != null}">
+
+            <!-- Contract ID -->
+
+            <div class="info-item">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-hashtag"></i>
+
+                    Contract ID
+
+                </span>
+
+                <span class="info-value"
+                      th:text="${contract.id}">
+
+                    1
+
+                </span>
+
+            </div>
+
+
+            <!-- Contract Number -->
+
+            <div class="info-item">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-file-signature"></i>
+
+                    Contract Number
+
+                </span>
+
+                <span class="info-value"
+                      th:text="${contract.contractNumber}">
+
+                    CNT-001
+
+                </span>
+
+            </div>
+
+
+            <!-- Contract Title -->
+
+            <div class="info-item contract-title">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-file-contract"></i>
+
+                    Contract
+
+                </span>
+
+                <span class="info-value"
+                      th:text="${contract.title}">
+
+                    Contract Title
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             EDIT CLAUSE FORM
+        ================================================== -->
+
+        <form th:action="@{/contract/clauses/save}"
+              method="post"
+              th:object="${clause}">
+
+            <!-- Clause ID -->
+            <input type="hidden"
+                   name="id"
+                   th:field="*{id}">
+
+            <!-- Contract ID -->
+            <input type="hidden"
+                   name="contractId"
+                   th:value="${contract.id}">
+
+
+            <!-- =================================================
+                 BASIC INFORMATION
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <span>Basic Information</span>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- Clause Number -->
+
+                    <div class="form-group">
+
+                        <label for="clauseNumber">
+
+                            Clause Number
+
+                            <span class="required">*</span>
+
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-list-ol"></i>
+
+                            <input type="text"
+                                   id="clauseNumber"
+                                   name="clauseNumber"
+                                   th:field="*{clauseNumber}"
+                                   placeholder="e.g. 1"
+                                   required>
+
+                        </div>
+
+                        <small>
+                            Enter the order number of the clause.
+                        </small>
+
+                    </div>
+
+
+                    <!-- Clause Type -->
+
+                    <div class="form-group">
+
+                        <label for="clauseType">
+                            Clause Type
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-tag"></i>
+
+                            <select id="clauseType"
+                                    name="clauseType"
+                                    th:field="*{clauseType}">
+
+                                <option value="">
+                                    Select Clause Type
+                                </option>
+
+                                <option value="Payment">
+                                    Payment
+                                </option>
+
+                                <option value="Confidentiality">
+                                    Confidentiality
+                                </option>
+
+                                <option value="Termination">
+                                    Termination
+                                </option>
+
+                                <option value="Responsibilities">
+                                    Responsibilities
+                                </option>
+
+                                <option value="General">
+                                    General
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Clause Title -->
+
+                    <div class="form-group full-width">
+
+                        <label for="title">
+
+                            Clause Title
+
+                            <span class="required">*</span>
+
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-heading"></i>
+
+                            <input type="text"
+                                   id="title"
+                                   name="title"
+                                   th:field="*{title}"
+                                   placeholder="e.g. Payment Terms"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CLAUSE CONTENT
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-align-left"></i>
+
+                    <span>Clause Content</span>
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label for="content">
+
+                        Content
+
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <textarea id="content"
+                              name="content"
+                              th:field="*{content}"
+                              rows="8"
+                              placeholder="Enter the complete clause content..."
+                              required></textarea>
+
+                    <small>
+                        Enter the complete text of the clause.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DOCUMENT & STATUS
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-sliders"></i>
+
+                    <span>Additional Information</span>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- Document -->
+
+                    <div class="form-group">
+
+                        <label for="documentId">
+                            Related Document
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                            <select id="documentId"
+                                    name="documentId">
+
+                                <option value="">
+                                    No Document
+                                </option>
+
+                                <option th:if="${documents != null}"
+                                        th:each="document : ${documents}"
+                                        th:value="${document.id}"
+                                        th:text="${document.documentName}"
+                                        th:selected="${clause.document != null and clause.document.id == document.id}">
+
+                                    Document
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <small>
+                            Optional. Select the uploaded document related to this clause.
+                        </small>
+
+                    </div>
+
+
+                    <!-- Status -->
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-toggle-on"></i>
+
+                            <select id="status"
+                                    name="status"
+                                    th:field="*{status}">
+
+                                <option value="ACTIVE">
+                                    ACTIVE
+                                </option>
+
+                                <option value="INACTIVE">
+                                    INACTIVE
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FORM ACTIONS
+            ================================================== -->
+
+            <div class="form-actions">
+
+                <button type="submit"
+                        class="btn btn-save">
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Update Clause
+
+                </button>
+
+
+                <a th:if="${contract != null}"
+                   th:href="@{/contract/clauses/{id}(id=${contract.id})}"
+                   class="btn btn-cancel">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM NOTE
+    ====================================================== -->
+
+    <div class="bottom-note">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        <span>
+            Clauses are maintained in their assigned order within the contract.
+        </span>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

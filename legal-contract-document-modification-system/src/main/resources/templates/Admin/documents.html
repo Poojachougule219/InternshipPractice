@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Documents</title>
+
+	<link rel="stylesheet" th:href="@{/css/Admin/documents.css}">
+
+
+</head>
+
+<body>
+
+	<div class="page-container">
+
+
+		<!-- =====================================================
+     DOCUMENTS SECTION
+====================================================== -->
+
+		<div class="documents-section">
+
+
+			<!-- =================================================
+         DOCUMENTS HEADER
+    ================================================== -->
+
+			<div class="section-header">
+
+				<div class="section-title">
+
+					<h1>Documents</h1>
+
+					<p>
+						View and manage contract documents in the system
+					</p>
+
+				</div>
+
+
+				<!-- =================================================
+             BUTTONS
+        ================================================== -->
+
+				<div class="header-actions">
+
+					<a th:href="@{/admin/documents/add}" class="btn add-btn">
+						<span class="btn-icon">+</span>
+						Upload Document
+					</a>
+
+					<!-- DASHBOARD -->
+
+					<a th:href="@{/admin/dashboard}" class="btn dashboard-btn">
+
+						<span class="btn-icon">⌂</span>
+
+						Dashboard
+
+					</a>
+
+				</div>
+
+			</div>
+
+
+			<!-- =================================================
+         TABLE
+    ================================================== -->
+
+			<div class="table-wrapper">
+
+				<table class="documents-table">
+
+					<thead>
+
+						<tr>
+
+							<th>ID</th>
+
+							<th>Document Name</th>
+
+							<th>File Name</th>
+
+							<th>Contract</th>
+
+							<th>Uploaded By</th>
+
+							<th>File Type</th>
+
+							<th>File Size</th>
+
+							<th>Status</th>
+
+							<th>Uploaded At</th>
+
+						</tr>
+
+					</thead>
+
+
+					<tbody>
+
+
+						<!-- =================================================
+                     DOCUMENT ROWS
+                ================================================== -->
+
+						<tr th:each="document : ${documents}">
+
+
+							<!-- ID -->
+
+							<td th:text="${document.id}">
+
+								1
+
+							</td>
+
+
+							<!-- DOCUMENT NAME -->
+
+							<td th:text="${document.documentName}">
+
+								Employment Contract
+
+							</td>
+
+
+							<!-- FILE NAME -->
+
+							<td th:text="${document.fileName}">
+
+								employment.pdf
+
+							</td>
+
+
+							<!-- CONTRACT -->
+
+							<td th:text="${document.contract != null
+                        ? document.contract.title
+                        : 'N/A'}">
+
+								Employment Agreement
+
+							</td>
+
+
+							<!-- UPLOADED BY -->
+
+							<td th:text="${document.uploadedBy != null
+                        ? document.uploadedBy.username
+                        : 'N/A'}">
+
+								admin
+
+							</td>
+
+
+							<!-- FILE TYPE -->
+
+							<td th:text="${document.fileType}">
+
+								PDF
+
+							</td>
+
+
+							<!-- FILE SIZE -->
+
+							<td th:text="${document.fileSize}">
+
+								1024 KB
+
+							</td>
+
+
+							<!-- STATUS -->
+
+							<td>
+
+								<span class="status" th:classappend="${document.status == 'ACTIVE'
+                              ? ' status-active'
+                              : document.status == 'INACTIVE'
+                              ? ' status-inactive'
+                              : ' status-other'}" th:text="${document.status}">
+
+									ACTIVE
+
+								</span>
+
+							</td>
+
+
+							<!-- UPLOADED AT -->
+
+							<td th:text="${document.uploadedAt != null
+                        ? #temporals.format(document.uploadedAt, 'dd-MM-yyyy HH:mm')
+                        : '-'}">
+
+								31-08-2026 09:26
+
+							</td>
+
+						</tr>
+
+
+						<!-- =================================================
+                     NO DOCUMENTS
+                ================================================== -->
+
+						<tr th:if="${documents == null or #lists.isEmpty(documents)}">
+
+							<td colspan="9" class="empty-message">
+
+								No documents found.
+
+							</td>
+
+						</tr>
+
+
+					</tbody>
+
+				</table>
+
+			</div>
+
+		</div>
+
+
+	</div>
+
+</body>
+
+</html>

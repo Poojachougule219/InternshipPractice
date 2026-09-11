@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Document Details</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Document/document-view.css}">
+
+
+</head>
+
+<body>
+
+<div class="document-page">
+
+
+<!-- =====================================================
+     PAGE HEADER
+     ===================================================== -->
+
+<div class="page-header">
+
+    <div class="header-left">
+
+        <div class="header-icon">
+            <i class="fa-solid fa-file-pdf"></i>
+        </div>
+
+        <div class="header-content">
+
+            <h1>Document Details</h1>
+
+            <p>
+                View information and preview the uploaded document
+            </p>
+
+        </div>
+
+    </div>
+
+    <a th:href="@{/contract/documents/{contractId}(contractId=${document.contract.id})}"
+       class="back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Documents
+
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     DOCUMENT INFORMATION
+     ===================================================== -->
+
+<div class="document-layout">
+
+    <!-- =================================================
+         LEFT SIDE - DOCUMENT INFORMATION
+         ================================================= -->
+
+    <div class="details-card">
+
+        <div class="card-header">
+
+            <div class="card-header-icon">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+
+            <div>
+
+                <h2>Document Information</h2>
+
+                <p>
+                    Details of the uploaded document
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="document-main">
+
+            <div class="pdf-icon-large">
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+            </div>
+
+            <div class="document-title">
+
+                <h2 th:text="${document.documentName}">
+                    Contract Document
+                </h2>
+
+                <p th:text="${document.fileName}">
+                    contract.pdf
+                </p>
+
+            </div>
+
+            <span class="status-badge"
+                  th:classappend="${document.status == 'UPLOADED'} ? ' uploaded' : ' inactive'"
+                  th:text="${document.status}">
+                UPLOADED
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             DETAILS
+             ================================================= -->
+
+        <div class="details-list">
+
+            <!-- File Name -->
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+
+                    <i class="fa-solid fa-file"></i>
+
+                    <span>File Name</span>
+
+                </div>
+
+                <div class="detail-value"
+                     th:text="${document.fileName}">
+                    contract.pdf
+                </div>
+
+            </div>
+
+
+            <!-- File Type -->
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+
+                    <i class="fa-solid fa-file-code"></i>
+
+                    <span>File Type</span>
+
+                </div>
+
+                <div class="detail-value"
+                     th:text="${document.fileType}">
+                    application/pdf
+                </div>
+
+            </div>
+
+
+            <!-- File Size -->
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+
+                    <i class="fa-solid fa-hard-drive"></i>
+
+                    <span>File Size</span>
+
+                </div>
+
+                <div class="detail-value"
+                     th:if="${document.fileSize != null}"
+                     th:text="${#numbers.formatDecimal(document.fileSize / 1048576.0, 1, 2) + ' MB'}">
+                    1.25 MB
+                </div>
+
+                <div class="detail-value"
+                     th:if="${document.fileSize == null}">
+                    Not available
+                </div>
+
+            </div>
+
+
+            <!-- Uploaded Date -->
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    <span>Uploaded Date</span>
+
+                </div>
+
+                <div class="detail-value"
+                     th:if="${document.uploadedAt != null}"
+                     th:text="${#temporals.format(document.uploadedAt, 'dd MMM yyyy, hh:mm a')}">
+                    07 Sep 2026, 04:30 PM
+                </div>
+
+                <div class="detail-value"
+                     th:if="${document.uploadedAt == null}">
+                    Not available
+                </div>
+
+            </div>
+
+
+            <!-- Uploaded By -->
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <span>Uploaded By</span>
+
+                </div>
+
+                <div class="detail-value"
+                     th:if="${document.uploadedBy != null}"
+                     th:text="${document.uploadedBy.username}">
+                    admin
+                </div>
+
+                <div class="detail-value"
+                     th:if="${document.uploadedBy == null}">
+                    Not available
+                </div>
+
+            </div>
+
+
+            <!-- Document ID -->
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+
+                    <i class="fa-solid fa-hashtag"></i>
+
+                    <span>Document ID</span>
+
+                </div>
+
+                <div class="detail-value"
+                     th:text="${document.id}">
+                    1
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTRACT INFORMATION
+             ================================================= -->
+
+        <div class="contract-section">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-file-signature"></i>
+
+                <span>Associated Contract</span>
+
+            </div>
+
+
+            <div class="contract-box">
+
+                <div class="contract-box-icon">
+
+                    <i class="fa-solid fa-file-contract"></i>
+
+                </div>
+
+                <div class="contract-box-content">
+
+                    <span class="contract-label">
+                        CONTRACT NUMBER
+                    </span>
+
+                    <strong th:text="${document.contract.contractNumber}">
+                        CNT-001
+                    </strong>
+
+                    <span class="contract-title"
+                          th:if="${document.contract.title != null}"
+                          th:text="${document.contract.title}">
+                        Employment Agreement
+                    </span>
+
+                </div>
+
+                <a th:href="@{/contract/contracts/view/{id}(id=${document.contract.id})}"
+                   class="contract-view-btn">
+
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                    View Contract
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ACTION BUTTONS
+             ================================================= -->
+
+        <div class="action-buttons">
+
+            <a th:href="@{/contract/documents/view/{id}(id=${document.id})}"
+               target="_blank"
+               class="action-btn view-btn">
+
+                <i class="fa-solid fa-eye"></i>
+
+                Open PDF
+
+            </a>
+
+
+            <a th:href="@{/contract/documents/download/{id}(id=${document.id})}"
+               class="action-btn download-btn">
+
+                <i class="fa-solid fa-download"></i>
+
+                Download
+
+            </a>
+
+
+            <form th:action="@{/contract/documents/delete/{id}(id=${document.id})}"
+                  method="post"
+                  class="delete-form"
+                  onsubmit="return confirm('Are you sure you want to delete this document?');">
+
+                <button type="submit"
+                        class="action-btn delete-btn">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Delete
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         RIGHT SIDE - PDF PREVIEW
+         ================================================= -->
+
+    <div class="preview-card">
+
+        <div class="preview-header">
+
+            <div class="preview-title">
+
+                <div class="preview-icon">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>Document Preview</h2>
+
+                    <p th:text="${document.fileName}">
+                        contract.pdf
+                    </p>
+
+                </div>
+
+            </div>
+
+            <a th:href="@{/contract/documents/download/{id}(id=${document.id})}"
+               class="preview-download"
+               title="Download Document">
+
+                <i class="fa-solid fa-download"></i>
+
+            </a>
+
+        </div>
+
+
+        <div class="pdf-container">
+
+            <iframe th:src="@{/contract/documents/view/{id}(id=${document.id})}"
+                    title="PDF Document Preview">
+            </iframe>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+     ===================================================== -->
+
+<div class="bottom-navigation">
+
+    <a th:href="@{/contract/documents/{contractId}(contractId=${document.contract.id})}">
+
+        <i class="fa-solid fa-folder-open"></i>
+
+        All Documents
+
+    </a>
+
+    <span class="separator">|</span>
+
+    <a th:href="@{/contract/contracts/view/{id}(id=${document.contract.id})}">
+
+        <i class="fa-solid fa-file-signature"></i>
+
+        Contract Details
+
+    </a>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

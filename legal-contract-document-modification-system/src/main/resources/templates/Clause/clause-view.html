@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>View Clause</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Clause View CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/Clause/clause-view.css}">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- =====================================================
+         HEADER ACTIONS
+    ====================================================== -->
+
+    <div class="header-actions">
+
+        <a th:if="${contract != null}"
+           th:href="@{/contract/clauses/{id}(id=${contract.id})}"
+           class="btn btn-secondary">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Clauses
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         ERROR MESSAGE
+    ====================================================== -->
+
+    <div class="alert alert-error"
+         th:if="${errorMessage}">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <span th:text="${errorMessage}">
+            Error message
+        </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN VIEW CARD
+    ====================================================== -->
+
+    <div class="form-card">
+
+
+        <!-- =================================================
+             CLAUSE INFORMATION HEADER
+        ================================================== -->
+
+        <div class="form-header">
+
+            <div class="form-header-icon">
+
+                <i class="fa-solid fa-file-signature"></i>
+
+            </div>
+
+            <div>
+
+                <h2>Clause Information</h2>
+
+                <p>
+                    View the details of this contract clause.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTRACT INFORMATION
+        ================================================== -->
+
+        <div class="contract-info"
+             th:if="${contract != null}">
+
+
+            <!-- Contract ID -->
+
+            <div class="info-item">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-hashtag"></i>
+                    Contract ID
+
+                </span>
+
+                <span class="info-value"
+                      th:text="${contract.id}">
+
+                    1
+
+                </span>
+
+            </div>
+
+
+            <!-- Contract Number -->
+
+            <div class="info-item">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-file-signature"></i>
+                    Contract Number
+
+                </span>
+
+                <span class="info-value"
+                      th:text="${contract.contractNumber}">
+
+                    CNT-001
+
+                </span>
+
+            </div>
+
+
+            <!-- Contract Title -->
+
+            <div class="info-item contract-title">
+
+                <span class="info-label">
+
+                    <i class="fa-solid fa-file-contract"></i>
+                    Contract
+
+                </span>
+
+                <span class="info-value"
+                      th:text="${contract.title}">
+
+                    Contract Title
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             BASIC INFORMATION
+        ================================================== -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span>Basic Information</span>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- Clause Number -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        Clause Number
+
+                    </label>
+
+                    <div class="view-value">
+
+                        <i class="fa-solid fa-list-ol"></i>
+
+                        <span th:text="${clause.clauseNumber}">
+                            1
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Clause Type -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        Clause Type
+
+                    </label>
+
+                    <div class="view-value">
+
+                        <i class="fa-solid fa-tag"></i>
+
+                        <span th:text="${clause.clauseType != null and !#strings.isEmpty(clause.clauseType)
+                                ? clause.clauseType : 'Not specified'}">
+
+                            Payment
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Clause Title -->
+
+                <div class="form-group full-width">
+
+                    <label>
+
+                        Clause Title
+
+                    </label>
+
+                    <div class="view-value">
+
+                        <i class="fa-solid fa-heading"></i>
+
+                        <span th:text="${clause.title}">
+                            Payment Terms
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CLAUSE CONTENT
+        ================================================== -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-align-left"></i>
+
+                <span>Clause Content</span>
+
+            </div>
+
+
+            <div class="form-group full-width">
+
+                <label>
+                    Content
+                </label>
+
+                <div class="content-value"
+                     th:text="${clause.content}">
+
+                    Enter the complete clause content here.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ADDITIONAL INFORMATION
+        ================================================== -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-sliders"></i>
+
+                <span>Additional Information</span>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- Related Document -->
+
+                <div class="form-group">
+
+                    <label>
+                        Related Document
+                    </label>
+
+                    <div class="view-value">
+
+                        <i class="fa-solid fa-file-pdf"></i>
+
+                        <span th:if="${clause.document != null}"
+                              th:text="${clause.document.documentName}">
+
+                            Document.pdf
+
+                        </span>
+
+                        <span th:if="${clause.document == null}">
+                            No Document
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <div class="view-value status-value">
+
+                        <i class="fa-solid fa-toggle-on"></i>
+
+                        <span th:text="${clause.status}">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM ACTIONS
+        ================================================== -->
+
+        <div class="form-actions">
+
+
+            <!-- Back -->
+
+            <a th:if="${contract != null}"
+               th:href="@{/contract/clauses/{id}(id=${contract.id})}"
+               class="btn btn-cancel">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back
+
+            </a>
+
+
+            <!-- Edit -->
+
+            <a th:href="@{/contract/clauses/edit/{id}(id=${clause.id})}"
+               class="btn btn-edit">
+
+                <i class="fa-solid fa-pen"></i>
+
+                Edit Clause
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM NOTE
+    ====================================================== -->
+
+    <div class="bottom-note">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        <span>
+            This page displays the current information maintained for this clause.
+        </span>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

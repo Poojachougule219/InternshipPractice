@@ -1,0 +1,414 @@
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   PAGE CONTAINER
+========================================================= */
+
+.page-container {
+    width: 90%;
+    max-width: 900px;
+
+    /* GAP FROM BROWSER TOP */
+    margin: 55px auto 25px auto;
+}
+
+
+/* =========================================================
+   APPROVAL ADD SECTION
+========================================================= */
+
+.approval-add-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+    padding: 14px 17px;
+
+    background: #1e293b;
+
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title h1 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #ffffff;
+
+    margin-bottom: 3px;
+}
+
+
+.section-title p {
+    font-size: 12px;
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.approval-form {
+    width: 100%;
+}
+
+
+/* =========================================================
+   FORM ROW
+========================================================= */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.form-group label {
+    margin-bottom: 5px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #334155;
+}
+
+
+/* =========================================================
+   INPUT / SELECT / TEXTAREA
+========================================================= */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 9px 11px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    font-size: 12px;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.form-group select {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   DISABLED STATUS
+========================================================= */
+
+.form-group select:disabled {
+    background: #f8fafc;
+    color: #475569;
+
+    cursor: not-allowed;
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+    border-color: #0f766e;
+
+    box-shadow:
+        0 0 0 3px rgba(15, 118, 110, 0.10);
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.form-group textarea {
+
+    resize: none;
+
+    min-height: 85px;
+}
+
+
+/* =========================================================
+   FIELD HELP
+========================================================= */
+
+.field-help {
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.form-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 4px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid #e2e8f0;
+}
+
+
+/* =========================================================
+   COMMON BUTTON
+========================================================= */
+
+.btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    min-width: 125px;
+
+    padding: 9px 14px;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    border: none;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================================
+   BUTTON ICON
+========================================================= */
+
+.btn-icon {
+
+    font-size: 14px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   CREATE APPROVAL
+========================================================= */
+
+.create-btn {
+
+    background: #0f766e;
+
+    color: #ffffff;
+}
+
+
+.create-btn:hover {
+
+    background: #115e59;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CANCEL
+========================================================= */
+
+.cancel-btn {
+
+    background: #e2e8f0;
+
+    color: #334155;
+}
+
+
+.cancel-btn:hover {
+
+    background: #cbd5e1;
+
+    color: #0f172a;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard-btn {
+
+    background: #334155;
+
+    color: #ffffff;
+}
+
+
+.dashboard-btn:hover {
+
+    background: #1e293b;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .page-container {
+
+        width: 94%;
+
+        margin: 25px auto 20px auto;
+    }
+
+
+    .approval-add-section {
+
+        padding: 16px;
+    }
+
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .form-actions {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .btn {
+
+        width: 100%;
+    }
+}

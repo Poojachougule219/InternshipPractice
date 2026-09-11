@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Document</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/Contract/document-upload.css}">
+
+</head>
+
+<body>
+
+<div class="content-container">
+
+    <div class="upload-card">
+
+        <!-- ================================================= -->
+        <!-- CARD HEADER -->
+        <!-- ================================================= -->
+
+        <div class="card-header">
+
+            <div class="card-heading">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-file-arrow-up"></i>
+                </div>
+
+                <div class="heading-text">
+                    <h2>Upload Document</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- SUCCESS MESSAGE -->
+        <!-- ================================================= -->
+
+        <div class="message-container"
+             th:if="${successMessage}">
+
+            <div class="message success-message">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span th:text="${successMessage}">
+                    Document uploaded successfully.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ERROR MESSAGE -->
+        <!-- ================================================= -->
+
+        <div class="message-container"
+             th:if="${errorMessage}">
+
+            <div class="message error-message">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <span th:text="${errorMessage}">
+                    Unable to upload document.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- DOCUMENT ALREADY EXISTS -->
+        <!-- ================================================= -->
+
+        <div class="existing-document-container"
+             th:if="${documentAlreadyUploaded}">
+
+            <div class="existing-document-box">
+
+                <div class="existing-icon">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                </div>
+
+
+                <div class="existing-document-content">
+
+                    <h3>
+                        PDF Already Uploaded
+                    </h3>
+
+                    <p>
+                        A PDF document is already uploaded
+                        for this contract.
+                    </p>
+
+
+                    <!-- Existing document name -->
+
+                    <div class="existing-document-details"
+                         th:if="${existingDocument != null}">
+
+                        <div class="detail-item">
+
+                            <i class="fa-solid fa-file-lines"></i>
+
+                            <span>
+
+                                <strong>Document:</strong>
+
+                                <span
+                                    th:text="${existingDocument.documentName}">
+                                    Document Name
+                                </span>
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                            <span>
+
+                                <strong>File:</strong>
+
+                                <span
+                                    th:text="${existingDocument.fileName}">
+                                    document.pdf
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="existing-warning">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span>
+                            Please delete the existing document
+                            before uploading a new PDF.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- EXISTING DOCUMENT FOOTER -->
+            <!-- ================================================= -->
+
+            <div class="form-footer">
+
+                <a th:href="@{/contract/contracts/view/{id}(id=${contract.id})}"
+                   class="footer-btn cancel-btn">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Contract
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- UPLOAD FORM -->
+        <!-- Only displayed when no document exists -->
+        <!-- ================================================= -->
+
+        <form th:if="${!documentAlreadyUploaded}"
+              th:action="@{/contract/contracts/{id}/documents/upload(id=${contract.id})}"
+              method="post"
+              enctype="multipart/form-data">
+
+
+            <div class="form-grid">
+
+
+                <!-- ================================================= -->
+                <!-- DOCUMENT NAME -->
+                <!-- ================================================= -->
+
+                <div class="form-group">
+
+                    <label for="documentName">
+
+                        <span class="label-icon">
+
+                            <i class="fa-solid fa-file-signature"></i>
+
+                        </span>
+
+                        Document Name
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-file-signature field-icon"></i>
+
+                        <input type="text"
+                               id="documentName"
+                               name="documentName"
+                               placeholder="Enter document name"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- PDF FILE -->
+                <!-- ================================================= -->
+
+                <div class="form-group">
+
+                    <label for="file">
+
+                        <span class="label-icon">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                        </span>
+
+                        Upload PDF
+
+                    </label>
+
+
+                    <div class="input-wrapper file-wrapper">
+
+                        <i class="fa-solid fa-file-pdf field-icon"></i>
+
+                        <input type="file"
+                               id="file"
+                               name="file"
+                               accept="application/pdf,.pdf"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- CONTRACT INFO -->
+                <!-- ================================================= -->
+
+                <div class="contract-info">
+
+                    <i class="fa-solid fa-file-contract"></i>
+
+                    <span>
+
+                        Contract:
+
+                        <strong th:text="${contract.contractNumber}">
+                            Contract Number
+                        </strong>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- FORM FOOTER -->
+            <!-- ================================================= -->
+
+            <div class="form-footer">
+
+
+                <!-- UPLOAD BUTTON -->
+
+                <button type="submit"
+                        class="footer-btn upload-btn">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    Upload
+
+                </button>
+
+
+                <!-- CANCEL -->
+
+                <a th:href="@{/contract/contracts}"
+                   class="footer-btn cancel-btn">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- PDF VALIDATION -->
+<!-- ========================================================= -->
+
+<script>
+
+    const fileInput =
+        document.getElementById("file");
+
+    if (fileInput) {
+
+        fileInput.addEventListener(
+            "change",
+            function () {
+
+                const file =
+                    this.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+                const fileName =
+                    file.name.toLowerCase();
+
+                if (!fileName.endsWith(".pdf")) {
+
+                    alert(
+                        "Please select a PDF file."
+                    );
+
+                    this.value = "";
+                }
+
+            }
+        );
+
+    }
+
+</script>
+
+
+<!-- ========================================================= -->
+<!-- AUTO HIDE MESSAGES -->
+<!-- ========================================================= -->
+
+<script>
+
+    setTimeout(function () {
+
+        const messages =
+            document.querySelectorAll(
+                ".message-container"
+            );
+
+        messages.forEach(function (message) {
+
+            message.style.transition =
+                "opacity 0.4s ease";
+
+            message.style.opacity = "0";
+
+            setTimeout(function () {
+
+                message.remove();
+
+            }, 400);
+
+        });
+
+    }, 5000);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Edit Contract</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Contract/contract-edit.css}">
+
+
+</head>
+
+<body>
+
+<div class="content-container">
+
+
+<div class="edit-card">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="card-header">
+
+        <div class="card-heading">
+
+            <div class="card-icon">
+                <i class="fa-solid fa-file-signature"></i>
+            </div>
+
+            <div class="heading-text">
+                <h2>Edit Contract</h2>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SUCCESS MESSAGE ================= -->
+
+    <div class="message success-message"
+         th:if="${successMessage}">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span th:text="${successMessage}">
+            Operation completed successfully.
+        </span>
+
+    </div>
+
+
+    <!-- ================= ERROR MESSAGE ================= -->
+
+    <div class="message error-message"
+         th:if="${errorMessage}">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <span th:text="${errorMessage}">
+            Something went wrong.
+        </span>
+
+    </div>
+
+
+    <!-- ================= EDIT FORM ================= -->
+
+    <form id="contractForm"
+          th:action="@{/contract/contracts/update/{id}(id=${contract.id})}"
+          method="post">
+
+
+        <div class="form-grid">
+
+
+            <!-- CONTRACT NUMBER -->
+
+            <div class="form-group contract-number">
+
+                <label for="contractNumber">
+
+                    <span class="label-icon">
+                        <i class="fa-solid fa-barcode"></i>
+                    </span>
+
+                    Contract Number
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-barcode field-icon"></i>
+
+                    <input type="text"
+                           id="contractNumber"
+                           name="contractNumber"
+                           th:value="${contract.contractNumber}"
+                           placeholder="Enter contract number"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTRACT TITLE -->
+
+            <div class="form-group title">
+
+                <label for="title">
+
+                    <span class="label-icon">
+                        <i class="fa-solid fa-heading"></i>
+                    </span>
+
+                    Contract Title
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-heading field-icon"></i>
+
+                    <input type="text"
+                           id="title"
+                           name="title"
+                           th:value="${contract.title}"
+                           placeholder="Enter contract title"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTRACT TYPE -->
+
+            <div class="form-group type">
+
+                <label for="contractType">
+
+                    <span class="label-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </span>
+
+                    Contract Type
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-layer-group field-icon"></i>
+
+                    <select id="contractType"
+                            name="contractType"
+                            required>
+
+                        <option value="">
+                            Select contract type
+                        </option>
+
+                        <option value="SERVICE"
+                                th:selected="${contract.contractType == 'SERVICE'}">
+                            Service Agreement
+                        </option>
+
+                        <option value="EMPLOYMENT"
+                                th:selected="${contract.contractType == 'EMPLOYMENT'}">
+                            Employment Agreement
+                        </option>
+
+                        <option value="NDA"
+                                th:selected="${contract.contractType == 'NDA'}">
+                            NDA
+                        </option>
+
+                        <option value="VENDOR"
+                                th:selected="${contract.contractType == 'VENDOR'}">
+                            Vendor Agreement
+                        </option>
+
+                        <option value="LEASE"
+                                th:selected="${contract.contractType == 'LEASE'}">
+                            Lease Agreement
+                        </option>
+
+                        <option value="OTHER"
+                                th:selected="${contract.contractType == 'OTHER'}">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="form-group status">
+
+                <label for="status">
+
+                    <span class="label-icon">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                    </span>
+
+                    Status
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-circle-half-stroke field-icon"></i>
+
+                    <select id="status"
+                            name="status"
+                            required>
+
+                        <option value="DRAFT"
+                                th:selected="${contract.status == 'DRAFT'}">
+                            Draft
+                        </option>
+
+                        <option value="ACTIVE"
+                                th:selected="${contract.status == 'ACTIVE'}">
+                            Active
+                        </option>
+
+                        <option value="EXPIRED"
+                                th:selected="${contract.status == 'EXPIRED'}">
+                            Expired
+                        </option>
+
+                        <option value="TERMINATED"
+                                th:selected="${contract.status == 'TERMINATED'}">
+                            Terminated
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group description-group">
+
+                <label for="description">
+
+                    <span class="label-icon">
+                        <i class="fa-solid fa-align-left"></i>
+                    </span>
+
+                    Description
+
+                </label>
+
+                <div class="textarea-wrapper">
+
+                    <i class="fa-solid fa-align-left field-icon"></i>
+
+                    <textarea id="description"
+                              name="description"
+                              placeholder="Enter contract description"
+                              rows="3"
+                              th:text="${contract.description}"></textarea>
+
+                </div>
+
+            </div>
+
+
+            <!-- START DATE -->
+
+            <div class="form-group start-date">
+
+                <label for="startDate">
+
+                    <span class="label-icon">
+                        <i class="fa-solid fa-calendar-plus"></i>
+                    </span>
+
+                    Start Date
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-calendar-plus field-icon"></i>
+
+                    <input type="date"
+                           id="startDate"
+                           name="startDate"
+                           th:value="${contract.startDate}"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <!-- END DATE -->
+
+            <div class="form-group end-date">
+
+                <label for="endDate">
+
+                    <span class="label-icon">
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                    </span>
+
+                    End Date
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-calendar-xmark field-icon"></i>
+
+                    <input type="date"
+                           id="endDate"
+                           name="endDate"
+                           th:value="${contract.endDate}"
+                           required>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= FOOTER BUTTONS ================= -->
+
+        <div class="form-footer">
+
+            <!-- UPDATE -->
+
+            <button type="button"
+                    class="footer-btn update-btn"
+                    onclick="submitContractForm()">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Update Contract
+
+            </button>
+
+
+            <!-- CANCEL -> CONTRACTS TABLE -->
+
+            <a th:href="@{/contract/contracts}"
+               class="footer-btn cancel-btn">
+
+                <i class="fa-solid fa-xmark"></i>
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</div>
+
+<!-- ================= VALIDATION ================= -->
+
+<script>
+
+    function submitContractForm() {
+
+        const form =
+            document.getElementById("contractForm");
+
+        const startDate =
+            document.getElementById("startDate").value;
+
+        const endDate =
+            document.getElementById("endDate").value;
+
+
+        /* Browser validation */
+
+        if (!form.checkValidity()) {
+
+            form.reportValidity();
+
+            return;
+        }
+
+
+        /* Date validation */
+
+        if (startDate && endDate) {
+
+            const start =
+                new Date(startDate);
+
+            const end =
+                new Date(endDate);
+
+
+            if (end < start) {
+
+                alert(
+                    "End date cannot be earlier than start date."
+                );
+
+                return;
+            }
+
+        }
+
+
+        /* Submit update */
+
+        form.submit();
+
+    }
+
+</script>
+
+</body>
+
+</html>

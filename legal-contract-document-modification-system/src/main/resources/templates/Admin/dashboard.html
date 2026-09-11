@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      th:href="@{/css/Admin/dashboard.css}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+
+<body>
+
+<header class="top-header">
+
+
+<div class="header-left">
+
+    <div class="brand-icon">
+        <i class="fa-solid fa-shield-halved"></i>
+    </div>
+
+    <div class="brand-text">
+        <span class="brand-title">
+            Legal Contract Management
+        </span>
+
+        <span class="brand-subtitle">
+            Administration & User Management
+        </span>
+    </div>
+
+</div>
+
+<div class="header-right">
+
+    <div class="header-user">
+
+        <div class="user-avatar">
+
+            <img th:if="${user != null and user.profilePhoto != null}"
+                 th:src="@{'/admin/profile/photo/' + ${user.id}}"
+                 alt="Profile Photo">
+
+            <div th:unless="${user != null and user.profilePhoto != null}"
+                 class="default-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+        </div>
+
+        <div class="user-details">
+
+            <span class="user-name"
+                  th:text="${username}">
+                Admin
+            </span>
+
+            <span class="user-role">
+                Administrator
+            </span>
+
+        </div>
+
+    </div>
+
+    <form th:action="@{/logout}"
+          method="post">
+
+        <button type="submit"
+                class="header-logout"
+                title="Logout">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+        </button>
+
+    </form>
+
+</div>
+
+
+</header>
+
+<aside class="sidebar">
+
+
+<nav class="sidebar-nav">
+
+    <div class="nav-section">
+
+        <div class="nav-section-title">
+            MAIN MENU
+        </div>
+
+        <a th:href="@{/admin/dashboard}"
+           class="nav-item active">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <span>
+                Dashboard
+            </span>
+
+        </a>
+
+        <a th:href="@{/admin/users}"
+           class="nav-item">
+
+            <i class="fa-solid fa-users"></i>
+
+            <span>
+                Users
+            </span>
+
+        </a>
+
+        <a th:href="@{/admin/roles}"
+           class="nav-item">
+
+            <i class="fa-solid fa-user-shield"></i>
+
+            <span>
+                Roles
+            </span>
+
+        </a>
+
+        <a th:href="@{/admin/profile}"
+           class="nav-item">
+
+            <i class="fa-solid fa-user"></i>
+
+            <span>
+                Profile
+            </span>
+
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a th:href="@{/admin/audit-logs}"
+           class="nav-item">
+
+            <i class="fa-solid fa-clock-rotate-left"></i>
+
+            <span>
+                Audit Logs
+            </span>
+
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="sidebar-bottom">
+
+    <form th:action="@{/logout}"
+          method="post">
+
+        <button type="submit"
+                class="logout-item">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>
+                Logout
+            </span>
+
+        </button>
+
+    </form>
+
+</div>
+
+
+</aside>
+
+<main class="main-content">
+
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Dashboard
+        </h1>
+
+        <p>
+            Overview of your system administration activities
+        </p>
+
+    </div>
+
+    <div class="date-display">
+
+        <i class="fa-regular fa-calendar"></i>
+
+        <span th:text="${#temporals.format(#temporals.createNow(), 'dd MMM yyyy')}">
+            09 Sep 2026
+        </span>
+
+    </div>
+
+</div>
+
+<div class="welcome-card">
+
+    <div class="welcome-content">
+
+        <div class="welcome-icon">
+            <i class="fa-solid fa-hand-wave"></i>
+        </div>
+
+        <div>
+
+            <h2>
+                Welcome back,
+
+                <span th:text="${username}">
+                    Admin
+                </span>
+
+            </h2>
+
+            <p>
+                Manage users, roles and system administration from one place.
+            </p>
+
+        </div>
+
+    </div>
+
+    <a th:href="@{/admin/users/add}"
+       class="welcome-action">
+
+        <i class="fa-solid fa-user-plus"></i>
+
+        Add User
+
+    </a>
+
+</div>
+
+<div class="stats-grid">
+
+    <a th:href="@{/admin/users}"
+       class="stat-card">
+
+        <div class="stat-icon total">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-label">
+                Total Users
+            </span>
+
+            <strong class="stat-value"
+                    th:text="${userCount != null ? userCount : 0}">
+                0
+            </strong>
+
+            <span class="stat-description">
+                View all users
+            </span>
+
+        </div>
+
+    </a>
+
+    <a th:href="@{/admin/users?role=ADMIN}"
+       class="stat-card">
+
+        <div class="stat-icon admin">
+            <i class="fa-solid fa-user-shield"></i>
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-label">
+                Administrators
+            </span>
+
+            <strong class="stat-value"
+                    th:text="${adminCount != null ? adminCount : 0}">
+                0
+            </strong>
+
+            <span class="stat-description">
+                View administrators
+            </span>
+
+        </div>
+
+    </a>
+
+    <a th:href="@{/admin/users?role=REVIEWER}"
+       class="stat-card">
+
+        <div class="stat-icon reviewer">
+            <i class="fa-solid fa-user-pen"></i>
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-label">
+                Reviewers
+            </span>
+
+            <strong class="stat-value"
+                    th:text="${reviewerCount != null ? reviewerCount : 0}">
+                0
+            </strong>
+
+            <span class="stat-description">
+                View reviewers
+            </span>
+
+        </div>
+
+    </a>
+
+    <a th:href="@{/admin/users?role=MANAGER}"
+       class="stat-card">
+
+        <div class="stat-icon manager">
+            <i class="fa-solid fa-user-tie"></i>
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-label">
+                Managers
+            </span>
+
+            <strong class="stat-value"
+                    th:text="${managerCount != null ? managerCount : 0}">
+                0
+            </strong>
+
+            <span class="stat-description">
+                View managers
+            </span>
+
+        </div>
+
+    </a>
+
+</div>
+
+<div class="charts-grid">
+
+    <div class="dashboard-card chart-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    User Distribution
+                </h3>
+
+                <p>
+                    Distribution of users by role
+                </p>
+
+            </div>
+
+            <div class="card-header-icon">
+                <i class="fa-solid fa-chart-pie"></i>
+            </div>
+
+        </div>
+
+        <div class="user-chart-container">
+            <canvas id="userDistributionChart"></canvas>
+        </div>
+
+    </div>
+
+    <div class="dashboard-card chart-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Administration Overview
+                </h3>
+
+                <p>
+                    Current system administration summary
+                </p>
+
+            </div>
+
+            <div class="card-header-icon">
+                <i class="fa-solid fa-chart-column"></i>
+            </div>
+
+        </div>
+
+        <div class="admin-overview">
+
+            <div class="overview-stat">
+
+                <div class="overview-icon users-overview">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Users
+                    </span>
+
+                    <strong th:text="${userCount != null ? userCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="overview-stat">
+
+                <div class="overview-icon roles-overview">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Administrators
+                    </span>
+
+                    <strong th:text="${adminCount != null ? adminCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="overview-stat">
+
+                <div class="overview-icon reviewer-overview">
+                    <i class="fa-solid fa-user-pen"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Reviewers
+                    </span>
+
+                    <strong th:text="${reviewerCount != null ? reviewerCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="overview-stat">
+
+                <div class="overview-icon manager-overview">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Managers
+                    </span>
+
+                    <strong th:text="${managerCount != null ? managerCount : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="bottom-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Quick Actions
+                </h3>
+
+                <p>
+                    Common administration actions
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="quick-actions">
+
+            <a th:href="@{/admin/users/add}"
+               class="quick-action">
+
+                <div class="quick-action-icon">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Add New User
+                    </strong>
+
+                    <span>
+                        Create a new system user
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+            <a th:href="@{/admin/users}"
+               class="quick-action">
+
+                <div class="quick-action-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Manage Users
+                    </strong>
+
+                    <span>
+                        View and manage system users
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+            <a th:href="@{/admin/roles}"
+               class="quick-action">
+
+                <div class="quick-action-icon">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Manage Roles
+                    </strong>
+
+                    <span>
+                        View and manage user roles
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+            <a th:href="@{/admin/audit-logs}"
+               class="quick-action">
+
+                <div class="quick-action-icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        View Audit Logs
+                    </strong>
+
+                    <span>
+                        Monitor system activities
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Administration Overview
+                </h3>
+
+                <p>
+                    System management summary
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="overview-list">
+
+            <div class="overview-row">
+
+                <span class="overview-label">
+
+                    <span class="overview-dot total-dot"></span>
+
+                    Total Users
+
+                </span>
+
+                <strong th:text="${userCount != null ? userCount : 0}">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="overview-row">
+
+                <span class="overview-label">
+
+                    <span class="overview-dot admin-dot"></span>
+
+                    Administrators
+
+                </span>
+
+                <strong th:text="${adminCount != null ? adminCount : 0}">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="overview-row">
+
+                <span class="overview-label">
+
+                    <span class="overview-dot reviewer-dot"></span>
+
+                    Reviewers
+
+                </span>
+
+                <strong th:text="${reviewerCount != null ? reviewerCount : 0}">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="overview-row">
+
+                <span class="overview-label">
+
+                    <span class="overview-dot manager-dot"></span>
+
+                    Managers
+
+                </span>
+
+                <strong th:text="${managerCount != null ? managerCount : 0}">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="overview-row">
+
+                <span class="overview-label">
+
+                    <span class="overview-dot audit-dot"></span>
+
+                    Audit Monitoring
+
+                </span>
+
+                <strong>
+                    Active
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</main>
+
+<script th:inline="javascript">
+
+    const adminCount =
+        /*[[${adminCount != null ? adminCount : 0}]]*/ 0;
+
+    const reviewerCount =
+        /*[[${reviewerCount != null ? reviewerCount : 0}]]*/ 0;
+
+    const managerCount =
+        /*[[${managerCount != null ? managerCount : 0}]]*/ 0;
+
+    const userDistributionCanvas =
+        document.getElementById("userDistributionChart");
+
+    if (userDistributionCanvas) {
+
+        new Chart(
+            userDistributionCanvas,
+            {
+                type: "doughnut",
+
+                data: {
+
+                    labels: [
+                        "Administrators",
+                        "Reviewers",
+                        "Managers"
+                    ],
+
+                    datasets: [
+                        {
+                            data: [
+                                adminCount,
+                                reviewerCount,
+                                managerCount
+                            ],
+
+                            backgroundColor: [
+                                "#64748b",
+                                "#0f766e",
+                                "#d97706"
+                            ],
+
+                            hoverBackgroundColor: [
+                                "#475569",
+                                "#115e59",
+                                "#b45309"
+                            ],
+
+                            borderWidth: 3,
+                            borderColor: "#ffffff"
+                        }
+                    ]
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    cutout: "65%",
+
+                    plugins: {
+
+                        legend: {
+
+                            position: "bottom",
+
+                            labels: {
+
+                                padding: 16,
+
+                                usePointStyle: true,
+
+                                font: {
+                                    size: 10
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        );
+    }
+
+</script>
+
+</body>
+</html>

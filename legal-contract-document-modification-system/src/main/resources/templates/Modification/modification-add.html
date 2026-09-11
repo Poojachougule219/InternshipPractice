@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Modification Request</title>
+
+<link rel="stylesheet" href="/css/Modification/modification-add.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+
+<div class="form-header">
+
+    <a href="/contract/modifications" class="back-link">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Modification Requests
+
+    </a>
+
+    <div class="form-title">
+
+        <div class="form-title-icon">
+
+            <i class="fa-solid fa-pen-to-square"></i>
+
+        </div>
+
+        <div>
+
+            <h1>New Modification Request</h1>
+
+            <p>Submit a request to modify a contract or specific clause</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="form-card">
+
+    <div class="form-introduction">
+
+        <div class="introduction-icon">
+
+            <i class="fa-solid fa-file-signature"></i>
+
+        </div>
+
+        <div>
+
+            <h2>Modification Details</h2>
+
+            <p>
+                Select the contract and specify whether the request applies
+                to the entire contract or a specific clause.
+            </p>
+
+        </div>
+
+    </div>
+
+    <form th:action="@{/contract/modifications/save}"
+          th:object="${modification}"
+          method="post"
+          id="modificationForm">
+
+        <div class="form-grid">
+
+            <div class="form-group full-width">
+
+                <label for="contractSelect">
+
+                    <span class="label-icon">
+
+                        <i class="fa-solid fa-file-contract"></i>
+
+                    </span>
+
+                    Contract
+
+                    <span class="required">*</span>
+
+                </label>
+
+                <select id="contractSelect"
+                        name="contractId"
+                        required>
+
+                    <option value="">Select Contract</option>
+
+                    <option th:each="contract : ${contracts}"
+                            th:value="${contract.id}"
+                            th:selected="${modification.contract != null and modification.contract.id == contract.id}"
+                            th:text="${contract.contractNumber + ' - ' + contract.title}">
+
+                        CTR-001 - Employment Agreement
+
+                    </option>
+
+                </select>
+
+                <small>
+                    Select the contract for which the modification is requested.
+                </small>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label>
+
+                    <span class="label-icon">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                    </span>
+
+                    Modification Type
+
+                    <span class="required">*</span>
+
+                </label>
+
+                <div class="type-selection">
+
+                    <label class="type-option">
+
+                        <input type="radio"
+                               name="modificationType"
+                               value="CONTRACT"
+                               th:checked="${modification.modificationType == null or modification.modificationType == 'CONTRACT'}"
+                               onchange="handleModificationType()">
+
+                        <span class="type-option-content">
+
+                            <span class="type-option-icon contract-icon">
+
+                                <i class="fa-solid fa-file-contract"></i>
+
+                            </span>
+
+                            <span>
+
+                                <strong>Entire Contract</strong>
+
+                                <small>
+                                    Request a change to the complete contract.
+                                </small>
+
+                            </span>
+
+                        </span>
+
+                    </label>
+
+                    <label class="type-option">
+
+                        <input type="radio"
+                               name="modificationType"
+                               value="CLAUSE"
+                               th:checked="${modification.modificationType == 'CLAUSE'}"
+                               onchange="handleModificationType()">
+
+                        <span class="type-option-content">
+
+                            <span class="type-option-icon clause-icon">
+
+                                <i class="fa-solid fa-list-check"></i>
+
+                            </span>
+
+                            <span>
+
+                                <strong>Specific Clause</strong>
+
+                                <small>
+                                    Request a change to one particular clause.
+                                </small>
+
+                            </span>
+
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="form-group full-width"
+                 id="clauseSection"
+                 th:style="${modification.modificationType == 'CLAUSE'} ? 'display:block;' : 'display:none;'">
+
+                <label for="clauseSelect">
+
+                    <span class="label-icon">
+
+                        <i class="fa-solid fa-list-ol"></i>
+
+                    </span>
+
+                    Select Clause
+
+                    <span class="required">*</span>
+
+                </label>
+
+                <select id="clauseSelect"
+                        name="clauseId"
+                        th:required="${modification.modificationType == 'CLAUSE'}">
+
+                    <option value="">Select Clause</option>
+
+                    <option th:if="${clauses != null}"
+                            th:each="clause : ${clauses}"
+                            th:value="${clause.id}"
+                            th:selected="${modification.clause != null and modification.clause.id == clause.id}"
+                            th:text="${clause.clauseNumber + ' - ' + clause.title}">
+
+                        1 - Payment Terms
+
+                    </option>
+
+                </select>
+
+                <small>
+                    Only clauses belonging to the selected contract are displayed.
+                </small>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label for="oldContent">
+
+                    <span class="label-icon">
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                    </span>
+
+                    Original Value
+
+                    <span class="required">*</span>
+
+                </label>
+
+                <textarea id="oldContent"
+                          th:field="*{oldContent}"
+                          rows="7"
+                          required
+                          placeholder="Enter the current contract or clause content..."></textarea>
+
+                <small>
+                    Enter the existing text that you want to modify.
+                </small>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label for="newContent">
+
+                    <span class="label-icon proposed-icon">
+
+                        <i class="fa-solid fa-file-pen"></i>
+
+                    </span>
+
+                    Proposed Modification
+
+                    <span class="required">*</span>
+
+                </label>
+
+                <textarea id="newContent"
+                          th:field="*{newContent}"
+                          rows="7"
+                          required
+                          placeholder="Enter the proposed new contract or clause content..."></textarea>
+
+                <small>
+                    Enter the complete proposed replacement text.
+                </small>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label for="reason">
+
+                    <span class="label-icon reason-icon">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                    </span>
+
+                    Reason / Description
+
+                    <span class="required">*</span>
+
+                </label>
+
+                <textarea id="reason"
+                          th:field="*{reason}"
+                          rows="5"
+                          required
+                          placeholder="Explain why this modification is required..."></textarea>
+
+                <small>
+                    Provide a clear reason or description for the requested modification.
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="status-information">
+
+            <div class="status-information-icon">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+            <div>
+
+                <strong>Initial Status: PENDING</strong>
+
+                <p>
+                    Your modification request will be submitted with
+                    <strong>PENDING</strong> status for review.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+
+            <a href="/contract/modifications"
+               class="cancel-button">
+
+                <i class="fa-solid fa-xmark"></i>
+
+                Cancel
+
+            </a>
+
+            <button type="submit"
+                    class="submit-button">
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Submit Modification Request
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</div>
+
+<script>
+
+    const contractSelect =
+        document.getElementById("contractSelect");
+
+    const clauseSelect =
+        document.getElementById("clauseSelect");
+
+    const clauseSection =
+        document.getElementById("clauseSection");
+
+    function getSelectedModificationType() {
+
+        const selected =
+            document.querySelector(
+                'input[name="modificationType"]:checked'
+            );
+
+        return selected
+            ? selected.value
+            : "CONTRACT";
+    }
+
+    function handleModificationType() {
+
+        const selectedType =
+            getSelectedModificationType();
+
+        if (selectedType === "CLAUSE") {
+
+            clauseSection.style.display = "block";
+
+            clauseSelect.required = true;
+
+            if (contractSelect.value) {
+
+                loadClauses(contractSelect.value);
+
+            } else {
+
+                clauseSelect.innerHTML =
+                    '<option value="">Select Contract First</option>';
+
+            }
+
+        } else {
+
+            clauseSection.style.display = "none";
+
+            clauseSelect.required = false;
+
+            clauseSelect.value = "";
+
+        }
+    }
+
+    contractSelect.addEventListener(
+        "change",
+        function () {
+
+            const contractId =
+                this.value;
+
+            if (!contractId) {
+
+                clauseSelect.innerHTML =
+                    '<option value="">Select Clause</option>';
+
+                return;
+            }
+
+            const selectedType =
+                getSelectedModificationType();
+
+            if (selectedType === "CLAUSE") {
+
+                loadClauses(contractId);
+
+            }
+
+        }
+    );
+
+    function loadClauses(contractId) {
+
+        clauseSelect.innerHTML =
+            '<option value="">Loading clauses...</option>';
+
+        const url =
+            "/contract/modifications/contract/"
+            + encodeURIComponent(contractId)
+            + "/clauses";
+
+        console.log(
+            "Loading clauses from:",
+            url
+        );
+
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        })
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load clauses. HTTP status: "
+                    + response.status
+                );
+
+            }
+
+            return response.json();
+
+        })
+        .then(clauses => {
+
+            console.log(
+                "Clauses received:",
+                clauses
+            );
+
+            clauseSelect.innerHTML =
+                '<option value="">Select Clause</option>';
+
+            if (
+                !Array.isArray(clauses)
+                || clauses.length === 0
+            ) {
+
+                clauseSelect.innerHTML =
+                    '<option value="">No clauses available</option>';
+
+                return;
+
+            }
+
+            clauses.forEach(clause => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value =
+                    clause.id;
+
+                const number =
+                    clause.clauseNumber !== null
+                    && clause.clauseNumber !== undefined
+                    && clause.clauseNumber !== ""
+                        ? clause.clauseNumber + " - "
+                        : "";
+
+                const title =
+                    clause.title
+                        ? clause.title
+                        : "Untitled Clause";
+
+                option.textContent =
+                    number + title;
+
+                clauseSelect.appendChild(option);
+
+            });
+
+        })
+        .catch(error => {
+
+            console.error(
+                "Clause loading error:",
+                error
+            );
+
+            clauseSelect.innerHTML =
+                '<option value="">Unable to load clauses</option>';
+
+        });
+
+    }
+
+    document.getElementById("modificationForm")
+        .addEventListener(
+            "submit",
+            function (event) {
+
+                const contractId =
+                    contractSelect.value;
+
+                if (!contractId) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Please select a contract."
+                    );
+
+                    return;
+
+                }
+
+                const selectedType =
+                    getSelectedModificationType();
+
+                if (
+                    selectedType === "CLAUSE"
+                    && !clauseSelect.value
+                ) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Please select a clause."
+                    );
+
+                    return;
+
+                }
+
+            }
+        );
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const selectedType =
+                document.querySelector(
+                    'input[name="modificationType"]:checked'
+                );
+
+            if (selectedType) {
+
+                handleModificationType();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>

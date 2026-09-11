@@ -1,0 +1,964 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f1f5f9;
+    color: #263238;
+}
+
+body {
+    display: block;
+}
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.content-container {
+    width: 100%;
+    height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 85px 20px 20px;
+    overflow: hidden;
+}
+
+/* =========================================================
+   UPLOAD CARD
+   ========================================================= */
+
+.upload-card {
+    width: 820px;
+    max-width: 88%;
+    min-height: 350px;
+    height: auto;
+    margin: 10px auto 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.06),
+        0 2px 6px rgba(15, 23, 42, 0.03);
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.card-header {
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    padding: 8px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: linear-gradient(
+        135deg,
+        #1e293b,
+        #334155
+    );
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.card-heading h2 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 650;
+}
+
+/* =========================================================
+   SUCCESS / ERROR MESSAGES
+   ========================================================= */
+
+.message-container {
+    width: calc(100% - 50px);
+    margin: 12px auto 0;
+    flex-shrink: 0;
+}
+
+.message {
+    width: 100%;
+    min-height: 34px;
+    padding: 7px 12px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: 7px;
+    font-size: 9px;
+    line-height: 14px;
+    font-weight: 600;
+}
+
+.message i {
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.success-message {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+}
+
+.success-message i {
+    color: #16a34a;
+}
+
+.error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+.error-message i {
+    color: #dc2626;
+}
+
+/* =========================================================
+   EXISTING DOCUMENT CONTAINER
+   ========================================================= */
+
+.existing-document-container {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* =========================================================
+   EXISTING DOCUMENT BOX
+   ========================================================= */
+
+.existing-document-box {
+    width: calc(100% - 50px);
+    margin: 16px auto 10px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border: 1px solid #fecaca;
+    border-radius: 9px;
+    background: #fffafa;
+}
+
+/* =========================================================
+   EXISTING DOCUMENT ICON
+   ========================================================= */
+
+.existing-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    font-size: 17px;
+}
+
+/* =========================================================
+   EXISTING DOCUMENT CONTENT
+   ========================================================= */
+
+.existing-document-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.existing-document-content h3 {
+    margin: 0 0 4px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.existing-document-content p {
+    margin: 0 0 10px;
+    color: #64748b;
+    font-size: 9px;
+    line-height: 14px;
+    font-weight: 500;
+}
+
+/* =========================================================
+   EXISTING DOCUMENT DETAILS
+   ========================================================= */
+
+.existing-document-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 24px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 500;
+}
+
+.detail-item i {
+    width: 15px;
+    text-align: center;
+    color: #dc2626;
+    font-size: 9px;
+}
+
+.detail-item strong {
+    color: #475569;
+    font-weight: 650;
+    margin-right: 3px;
+}
+
+/* =========================================================
+   EXISTING DOCUMENT WARNING
+   ========================================================= */
+
+.existing-warning {
+    width: 100%;
+    min-height: 30px;
+    margin-top: 9px;
+    padding: 6px 9px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border-radius: 5px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+    font-size: 8px;
+    line-height: 12px;
+    font-weight: 600;
+}
+
+.existing-warning i {
+    color: #d97706;
+    font-size: 10px;
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+form {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0;
+    row-gap: 8px;
+    padding: 18px 0 10px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.form-group {
+    width: 100%;
+    min-width: 0;
+}
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 4px;
+    padding-left: 25px;
+    padding-right: 10px;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 650;
+    color: #475569;
+}
+
+.label-icon {
+    width: 21px;
+    height: 21px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 6px;
+    font-size: 8px;
+}
+
+/* Document name icon */
+
+.form-group:nth-child(1) .label-icon {
+    background: #f5f3ff;
+    color: #8b5cf6;
+    border-left: 3px solid #8b5cf6;
+}
+
+/* PDF icon */
+
+.form-group:nth-child(2) .label-icon {
+    background: #fef2f2;
+    color: #dc2626;
+    border-left: 3px solid #dc2626;
+}
+
+/* =========================================================
+   INPUT WRAPPER
+   ========================================================= */
+
+.input-wrapper {
+    width: 100%;
+    max-width: 100%;
+    height: 32px;
+    position: relative;
+}
+
+.input-wrapper input {
+    display: block;
+    width: 100%;
+    height: 32px;
+    padding: 0 12px 0 38px;
+    border: 1px solid #dbe2ea;
+    border-radius: 6px;
+    background: #f8fafc;
+    color: #334155;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-wrapper input::placeholder {
+    color: #94a3b8;
+}
+
+.input-wrapper input:focus {
+    border-color: #64748b;
+    box-shadow:
+        0 0 0 2px rgba(100, 116, 139, 0.08);
+    background: #ffffff;
+}
+
+/* =========================================================
+   FILE INPUT
+   ========================================================= */
+
+.input-wrapper input[type="file"] {
+    padding: 5px 10px 5px 38px;
+    cursor: pointer;
+    font-size: 9px;
+}
+
+.input-wrapper input[type="file"]::-webkit-file-upload-button {
+    height: 22px;
+    margin-right: 8px;
+    padding: 0 9px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #475569;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.input-wrapper input[type="file"]::-webkit-file-upload-button:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+
+/* =========================================================
+   FIELD ICON
+   ========================================================= */
+
+.field-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    font-size: 9px;
+    pointer-events: none;
+}
+
+.form-group:nth-child(1) .field-icon {
+    color: #8b5cf6;
+}
+
+.form-group:nth-child(2) .field-icon {
+    color: #dc2626;
+}
+
+/* =========================================================
+   CONTRACT INFO
+   ========================================================= */
+
+.contract-info {
+    grid-column: 1 / -1;
+    width: calc(100% - 50px);
+    height: 34px;
+    margin: 3px auto 0;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 500;
+}
+
+.contract-info i {
+    color: #0f766e;
+    font-size: 11px;
+}
+
+.contract-info strong {
+    color: #334155;
+    font-weight: 650;
+}
+
+/* =========================================================
+   FORM FOOTER
+   ========================================================= */
+
+.form-footer {
+    width: 100%;
+    height: 45px;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 6px 25px;
+    border-top: 1px solid #e8edf2;
+    background: #fafbfc;
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   FOOTER BUTTON
+   ========================================================= */
+
+.footer-btn {
+    min-width: 100px;
+    height: 29px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* =========================================================
+   UPLOAD BUTTON
+   ========================================================= */
+
+.upload-btn {
+    background: #334155;
+    color: #ffffff;
+    border: 1px solid #334155;
+}
+
+.upload-btn:hover {
+    background: #1e293b;
+    border-color: #1e293b;
+}
+
+/* =========================================================
+   CANCEL / BACK BUTTON
+   ========================================================= */
+
+.cancel-btn {
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+.cancel-btn:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: #334155;
+}
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .content-container {
+        padding: 5px 15px 15px;
+    }
+
+    .upload-card {
+        width: 800px;
+        max-width: 90%;
+        min-height: 340px;
+        margin-top: 8px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 0;
+        row-gap: 7px;
+        padding: 15px 0 9px;
+    }
+
+    .form-group label {
+        padding-left: 18px;
+        padding-right: 8px;
+    }
+
+    .contract-info {
+        width: calc(100% - 36px);
+    }
+
+    .message-container {
+        width: calc(100% - 36px);
+    }
+
+    .existing-document-box {
+        width: calc(100% - 36px);
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .content-container {
+        width: 100%;
+        height: 100vh;
+        padding: 5px 8px 8px;
+    }
+
+    .upload-card {
+        width: 100%;
+        max-width: 96%;
+        min-height: 350px;
+        margin: 10px auto 0;
+        border-radius: 10px;
+    }
+
+    .card-header {
+        height: 45px;
+        min-height: 45px;
+    }
+
+    .card-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 10px;
+    }
+
+    .card-heading {
+        gap: 8px;
+    }
+
+    .card-heading h2 {
+        font-size: 14px;
+    }
+
+    /* Messages */
+
+    .message-container {
+        width: calc(100% - 30px);
+        margin-top: 9px;
+    }
+
+    .message {
+        min-height: 31px;
+        padding: 6px 9px;
+        gap: 7px;
+        font-size: 8px;
+        line-height: 12px;
+    }
+
+    .message i {
+        font-size: 10px;
+    }
+
+    /* Existing document */
+
+    .existing-document-box {
+        width: calc(100% - 30px);
+        margin: 12px auto 8px;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .existing-icon {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        font-size: 14px;
+    }
+
+    .existing-document-content h3 {
+        font-size: 11px;
+    }
+
+    .existing-document-content p {
+        font-size: 8px;
+        line-height: 12px;
+        margin-bottom: 7px;
+    }
+
+    .existing-document-details {
+        gap: 4px;
+    }
+
+    .detail-item {
+        min-height: 21px;
+        padding: 3px 6px;
+        font-size: 7px;
+    }
+
+    .detail-item i {
+        font-size: 8px;
+    }
+
+    .existing-warning {
+        min-height: 27px;
+        margin-top: 7px;
+        padding: 5px 7px;
+        font-size: 7px;
+        line-height: 10px;
+    }
+
+    .existing-warning i {
+        font-size: 9px;
+    }
+
+    /* Form */
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        row-gap: 7px;
+        padding: 15px 15px 8px;
+        overflow: hidden;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    .form-group label {
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 2px;
+        font-size: 9px;
+    }
+
+    .label-icon {
+        width: 19px;
+        height: 19px;
+        font-size: 8px;
+    }
+
+    .input-wrapper {
+        height: 28px;
+    }
+
+    .input-wrapper input {
+        height: 28px;
+        font-size: 9px;
+        padding-left: 34px;
+    }
+
+    .input-wrapper input[type="file"] {
+        padding: 4px 7px 4px 34px;
+        font-size: 8px;
+    }
+
+    .input-wrapper input[type="file"]::-webkit-file-upload-button {
+        height: 20px;
+        font-size: 8px;
+        margin-right: 5px;
+    }
+
+    .field-icon {
+        left: 12px;
+        font-size: 8px;
+    }
+
+    .contract-info {
+        width: 100%;
+        height: 31px;
+        margin-top: 3px;
+        font-size: 8px;
+    }
+
+    .form-footer {
+        height: 43px;
+        min-height: 43px;
+        padding: 6px 15px;
+    }
+
+    .footer-btn {
+        flex: 1;
+        min-width: 0;
+        height: 27px;
+        font-size: 8px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    .content-container {
+        padding: 3px 5px 5px;
+    }
+
+    .upload-card {
+        width: 100%;
+        max-width: 98%;
+        min-height: 335px;
+        margin-top: 7px;
+        border-radius: 8px;
+    }
+
+    .card-header {
+        height: 40px;
+        min-height: 40px;
+    }
+
+    .card-icon {
+        width: 25px;
+        height: 25px;
+        font-size: 8px;
+    }
+
+    .card-heading {
+        gap: 7px;
+    }
+
+    .card-heading h2 {
+        font-size: 12px;
+    }
+
+    /* Messages */
+
+    .message-container {
+        width: calc(100% - 20px);
+        margin-top: 7px;
+    }
+
+    .message {
+        min-height: 28px;
+        padding: 5px 7px;
+        gap: 6px;
+        font-size: 7px;
+        line-height: 10px;
+    }
+
+    .message i {
+        font-size: 9px;
+    }
+
+    /* Existing document */
+
+    .existing-document-box {
+        width: calc(100% - 20px);
+        margin: 9px auto 6px;
+        padding: 9px;
+        gap: 8px;
+    }
+
+    .existing-icon {
+        width: 29px;
+        height: 29px;
+        min-width: 29px;
+        font-size: 12px;
+    }
+
+    .existing-document-content h3 {
+        font-size: 9px;
+        margin-bottom: 3px;
+    }
+
+    .existing-document-content p {
+        font-size: 7px;
+        line-height: 10px;
+        margin-bottom: 5px;
+    }
+
+    .existing-document-details {
+        gap: 3px;
+    }
+
+    .detail-item {
+        min-height: 19px;
+        padding: 3px 5px;
+        font-size: 6.5px;
+    }
+
+    .detail-item i {
+        font-size: 7px;
+    }
+
+    .existing-warning {
+        min-height: 24px;
+        margin-top: 5px;
+        padding: 4px 5px;
+        font-size: 6.5px;
+        line-height: 9px;
+    }
+
+    .existing-warning i {
+        font-size: 8px;
+    }
+
+    /* Form */
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        row-gap: 5px;
+        padding: 10px 10px 6px;
+    }
+
+    .form-group label {
+        font-size: 8px;
+        gap: 5px;
+        margin-bottom: 1px;
+    }
+
+    .label-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 7px;
+    }
+
+    .input-wrapper {
+        height: 26px;
+    }
+
+    .input-wrapper input {
+        height: 26px;
+        font-size: 8px;
+        padding-left: 30px;
+    }
+
+    .input-wrapper input[type="file"] {
+        padding: 3px 5px 3px 30px;
+        font-size: 7px;
+    }
+
+    .input-wrapper input[type="file"]::-webkit-file-upload-button {
+        height: 19px;
+        padding: 0 7px;
+        font-size: 7px;
+    }
+
+    .field-icon {
+        left: 10px;
+        font-size: 7px;
+    }
+
+    .contract-info {
+        height: 29px;
+        font-size: 7px;
+        padding: 0 8px;
+    }
+
+    .contract-info i {
+        font-size: 9px;
+    }
+
+    .form-footer {
+        height: 38px;
+        min-height: 38px;
+        padding: 5px 10px;
+    }
+
+    .footer-btn {
+        height: 25px;
+        font-size: 8px;
+    }
+}
