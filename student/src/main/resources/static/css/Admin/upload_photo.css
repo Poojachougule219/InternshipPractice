@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+
+body{
+
+    min-height:100vh;
+
+    background:#f1f5f9;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.upload-card{
+
+    width:400px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+
+
+.upload-card h2{
+
+    color:#0f766e;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.preview img{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid #14b8a6;
+
+    margin-bottom:20px;
+
+}
+
+
+
+input[type="file"]{
+
+    width:100%;
+
+    padding:10px;
+
+    margin:15px 0;
+
+}
+
+
+
+button{
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#0f766e;
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+
+
+button:hover{
+
+    background:#115e59;
+
+}
+
+
+
+.back-btn{
+
+    display:block;
+
+    margin-top:15px;
+
+    color:#475569;
+
+    text-decoration:none;
+
+}

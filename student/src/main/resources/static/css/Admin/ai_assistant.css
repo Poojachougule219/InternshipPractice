@@ -1,0 +1,1310 @@
+/* =========================================================
+   AI ASSISTANT PAGE
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    width: 240px;
+    min-width: 240px;
+    height: 100vh;
+
+    background: #0f172a;
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 22px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo h2 {
+    margin: 0;
+
+    font-size: 19px;
+    font-weight: 600;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.menu {
+    list-style: none;
+
+    padding: 15px 10px;
+    margin: 0;
+
+    flex: 1;
+
+    overflow-y: auto;
+}
+
+.menu li {
+    margin-bottom: 5px;
+}
+
+.menu li a {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.menu li a i {
+    width: 20px;
+
+    text-align: center;
+
+    font-size: 15px;
+}
+
+.menu li a:hover {
+    background: #1e293b;
+    color: #ffffff;
+}
+
+.menu li.active a {
+    background: #334155;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+    padding: 15px 18px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    text-align: center;
+
+    flex-shrink: 0;
+}
+
+.sidebar-footer p {
+    margin: 0 0 4px;
+
+    color: #cbd5e1;
+
+    font-size: 11px;
+}
+
+.sidebar-footer small {
+    color: #64748b;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #f1f5f9;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar {
+    height: 80px;
+
+    min-height: 80px;
+
+    background: #1e293b;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.12);
+
+    position: relative;
+
+    z-index: 20;
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+.welcome h1 {
+    margin: 0;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    color: #ffffff;
+}
+
+.welcome p {
+    margin: 4px 0 0;
+
+    font-size: 12px;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   HEADER RIGHT
+   ========================================================= */
+
+.header-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   NOTIFICATION
+   ========================================================= */
+
+.notification {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: #cbd5e1;
+
+    transition: background 0.2s ease;
+}
+
+.notification:hover {
+    background: #334155;
+
+    color: #ffffff;
+}
+
+.notification i {
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   USER MENU
+   ========================================================= */
+
+.user-menu {
+    position: relative;
+}
+
+
+/* =========================================================
+   PROFILE BUTTON
+   ========================================================= */
+
+.profile-button {
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    padding: 5px 7px;
+
+    border-radius: 8px;
+}
+
+.profile-button:hover {
+    background: #334155;
+}
+
+
+/* =========================================================
+   PROFILE IMAGE
+   ========================================================= */
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid #cbd5e1;
+
+    background: #475569;
+}
+
+
+/* =========================================================
+   PROFILE TEXT
+   ========================================================= */
+
+.profile-text {
+    text-align: left;
+
+    min-width: 100px;
+}
+
+.profile-text h4 {
+    margin: 0;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #ffffff;
+}
+
+.profile-text small {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   PROFILE ARROW
+   ========================================================= */
+
+.profile-arrow {
+    font-size: 11px;
+
+    color: #cbd5e1;
+
+    margin-left: 3px;
+}
+
+
+/* =========================================================
+   PROFILE DROPDOWN
+   ========================================================= */
+
+.profile-dropdown {
+    display: none;
+
+    position: absolute;
+
+    right: 0;
+
+    top: 53px;
+
+    width: 180px;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.18);
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+
+/* =========================================================
+   DROPDOWN ITEM
+   ========================================================= */
+
+.dropdown-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 15px;
+
+    color: #334155;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+.dropdown-item:hover {
+    background: #f1f5f9;
+
+    color: #1e293b;
+}
+
+.dropdown-item i {
+    width: 18px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   AI SECTION
+   ========================================================= */
+
+.ai-section {
+    flex: 1;
+
+    min-height: 0;
+
+    width: 100%;
+
+    padding: 15px 25px 20px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN AI CONTAINER
+   ========================================================= */
+
+.ai-container {
+    width: 100%;
+
+    max-width: 1000px;
+
+    height: 100%;
+
+    margin: 0 auto;
+
+    padding: 0;
+}
+
+
+/* =========================================================
+   AI CARD
+   ========================================================= */
+
+.ai-card {
+    width: 100%;
+
+    height: 100%;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.08);
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   AI HEADER
+   ========================================================= */
+
+.ai-header {
+    background: #1e293b;
+
+    color: #ffffff;
+
+    padding: 18px 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    flex-shrink: 0;
+}
+
+.ai-header-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   AI ICON
+   ========================================================= */
+
+.ai-icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 12px;
+
+    background: #334155;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   AI HEADER TEXT
+   ========================================================= */
+
+.ai-header-text h2 {
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    color: #ffffff;
+}
+
+.ai-header-text p {
+    margin: 4px 0 0;
+
+    font-size: 13px;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   ONLINE STATUS
+   ========================================================= */
+
+.ai-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 13px;
+
+    color: #cbd5e1;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+}
+
+
+/* =========================================================
+   CHAT AREA
+   ========================================================= */
+
+.chat-area {
+    flex: 1;
+
+    min-height: 0;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   WELCOME MESSAGE
+   ========================================================= */
+
+.ai-welcome {
+    max-width: 650px;
+
+    margin: 40px auto;
+
+    text-align: center;
+}
+
+.ai-welcome-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #e2e8f0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    color: #334155;
+}
+
+.ai-welcome h3 {
+    margin: 0 0 8px;
+
+    font-size: 22px;
+
+    color: #1e293b;
+}
+
+.ai-welcome p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.message {
+    display: flex;
+
+    width: 100%;
+
+    margin-bottom: 18px;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message.ai {
+    justify-content: flex-start;
+}
+
+
+/* =========================================================
+   MESSAGE CONTENT
+   ========================================================= */
+
+.message-content {
+    max-width: 75%;
+
+    padding: 13px 17px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    word-wrap: break-word;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================================
+   USER MESSAGE
+   ========================================================= */
+
+.message.user .message-content {
+    background: #334155;
+
+    color: #ffffff;
+
+    border-bottom-right-radius: 4px;
+}
+
+
+/* =========================================================
+   AI MESSAGE
+   ========================================================= */
+
+.message.ai .message-content {
+    background: #ffffff;
+
+    color: #334155;
+
+    border: 1px solid #e2e8f0;
+
+    border-bottom-left-radius: 4px;
+}
+
+
+/* =========================================================
+   CODE
+   ========================================================= */
+
+.message-content code {
+    background: #e2e8f0;
+
+    color: #334155;
+
+    padding: 2px 5px;
+
+    border-radius: 4px;
+
+    font-family: Consolas, monospace;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MESSAGE TIME
+   ========================================================= */
+
+.message-time {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   TYPING INDICATOR
+   ========================================================= */
+
+.typing-indicator {
+    display: none;
+
+    align-items: center;
+
+    gap: 5px;
+
+    width: fit-content;
+
+    margin: 0 25px 12px;
+
+    padding: 12px 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 14px;
+
+    border-bottom-left-radius: 4px;
+
+    flex-shrink: 0;
+}
+
+.typing-indicator span {
+    width: 7px;
+    height: 7px;
+
+    background: #64748b;
+
+    border-radius: 50%;
+
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+
+@keyframes typing {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+
+    30% {
+        transform: translateY(-5px);
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================================
+   INPUT AREA
+   ========================================================= */
+
+.ai-input-area {
+    padding: 16px 20px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e2e8f0;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   INPUT WRAPPER
+   ========================================================= */
+
+.ai-input-wrapper {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #f8fafc;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 12px;
+
+    padding: 6px 8px 6px 14px;
+
+    transition: border-color 0.2s ease;
+}
+
+.ai-input-wrapper:focus-within {
+    border-color: #64748b;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.ai-input {
+    flex: 1;
+
+    width: 100%;
+
+    min-height: 42px;
+
+    max-height: 120px;
+
+    resize: none;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    font-size: 14px;
+
+    color: #1e293b;
+
+    padding: 10px 0;
+}
+
+.ai-input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   SEND BUTTON
+   ========================================================= */
+
+.send-btn {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #1e293b;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+
+    transition: all 0.2s ease;
+}
+
+.send-btn:hover {
+    background: #334155;
+
+    transform: translateY(-1px);
+}
+
+.send-btn:disabled {
+    background: #94a3b8;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   INPUT FOOTER
+   ========================================================= */
+
+.ai-input-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 7px;
+
+    padding: 0 3px;
+}
+
+.ai-input-footer small {
+    font-size: 11px;
+
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   CLEAR CHAT BUTTON
+   ========================================================= */
+
+.clear-chat-btn {
+    border: none;
+
+    background: transparent;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    padding: 4px 7px;
+
+    transition: color 0.2s ease;
+}
+
+.clear-chat-btn:hover {
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.ai-error {
+    color: #b91c1c !important;
+
+    background: #fef2f2 !important;
+
+    border: 1px solid #fecaca !important;
+
+    padding: 10px 14px !important;
+
+    border-radius: 8px !important;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.chat-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-area::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+
+    border-radius: 10px;
+}
+
+.chat-area::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* =========================================================
+   SIDEBAR SCROLLBAR
+   ========================================================= */
+
+.menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.menu::-webkit-scrollbar-thumb {
+    background: #334155;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 220px;
+
+        min-width: 220px;
+    }
+
+    .ai-section {
+        padding: 15px 20px 20px;
+    }
+
+    .ai-container {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 768px
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 70px;
+
+        min-width: 70px;
+    }
+
+    .logo {
+        justify-content: center;
+
+        padding: 0;
+    }
+
+    .logo h2 {
+        font-size: 0;
+    }
+
+    .logo h2::before {
+        content: "S";
+
+        font-size: 22px;
+
+        font-weight: 700;
+    }
+
+    .menu {
+        padding: 15px 8px;
+    }
+
+    .menu li a {
+        justify-content: center;
+
+        padding: 12px 8px;
+    }
+
+    .menu li a span {
+        display: none;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .topbar {
+        height: 70px;
+
+        min-height: 70px;
+
+        padding: 0 15px;
+    }
+
+    .welcome h1 {
+        font-size: 18px;
+    }
+
+    .welcome p {
+        display: none;
+    }
+
+    .profile-text {
+        display: none;
+    }
+
+    .profile-arrow {
+        display: none;
+    }
+
+    .header-right {
+        gap: 8px;
+    }
+
+    .ai-section {
+        padding: 10px;
+    }
+
+    .ai-header {
+        padding: 15px;
+    }
+
+    .ai-header-text h2 {
+        font-size: 18px;
+    }
+
+    .ai-header-text p {
+        font-size: 12px;
+    }
+
+    .ai-status {
+        display: none;
+    }
+
+    .chat-area {
+        padding: 18px;
+    }
+
+    .message-content {
+        max-width: 88%;
+    }
+
+    .typing-indicator {
+        margin-left: 18px;
+
+        margin-right: 18px;
+    }
+
+    .ai-input-area {
+        padding: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .topbar {
+        height: 60px;
+
+        min-height: 60px;
+
+        padding: 0 12px;
+    }
+
+    .welcome h1 {
+        font-size: 17px;
+    }
+
+    .notification {
+        display: none;
+    }
+
+    .ai-section {
+        height: calc(100vh - 60px);
+
+        padding: 0;
+    }
+
+    .ai-card {
+        border-radius: 0;
+    }
+
+    .ai-header {
+        padding: 13px;
+    }
+
+    .ai-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 18px;
+    }
+
+    .ai-header-text h2 {
+        font-size: 17px;
+    }
+
+    .ai-header-text p {
+        display: none;
+    }
+
+    .chat-area {
+        padding: 14px;
+    }
+
+    .message-content {
+        max-width: 92%;
+    }
+
+    .typing-indicator {
+        margin-left: 14px;
+
+        margin-right: 14px;
+    }
+
+    .ai-input-area {
+        padding: 10px;
+    }
+
+    .ai-input-footer small {
+        font-size: 10px;
+    }
+
+    .clear-chat-btn {
+        font-size: 11px;
+    }
+
+}

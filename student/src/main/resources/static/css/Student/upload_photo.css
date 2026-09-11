@@ -1,0 +1,367 @@
+/* =========================================
+   STUDENT UPLOAD PHOTO PAGE
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #f8fafc;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+   Equal top and bottom gap
+========================================= */
+
+.upload-container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 20px;
+}
+
+
+/* =========================================
+   UPLOAD CARD
+========================================= */
+
+.upload-card {
+    width: 520px;
+    max-width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+
+    padding: 25px 30px;
+
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+
+    text-align: center;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.upload-header {
+    margin-bottom: 15px;
+}
+
+.upload-header h2 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+.upload-header h2 i {
+    margin-right: 7px;
+    color: #475569;
+}
+
+.upload-header p {
+    margin: 5px 0 0;
+
+    font-size: 13px;
+    color: #64748b;
+}
+
+
+/* =========================================
+   PROFILE PHOTO
+========================================= */
+
+.photo-preview {
+    margin: 10px 0;
+}
+
+.profile-image {
+    width: 105px;
+    height: 105px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 4px solid #ffffff;
+
+    outline: 2px solid #cbd5e1;
+
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.20);
+}
+
+
+/* =========================================
+   STUDENT NAME
+========================================= */
+
+.student-name {
+    margin-bottom: 18px;
+}
+
+.student-name h4 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #1e293b;
+}
+
+.student-name p {
+    margin: 3px 0 0;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   SUCCESS / ERROR MESSAGE
+========================================= */
+
+.message {
+    margin: 0 0 15px;
+
+    padding: 9px 12px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    text-align: left;
+}
+
+.message i {
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   UPLOAD SECTION
+========================================= */
+
+.upload-section {
+    text-align: left;
+
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.upload-section .form-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #334155;
+}
+
+.upload-section .form-control {
+    height: 42px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    color: #334155;
+
+    background: #ffffff;
+}
+
+.upload-section .form-control:focus {
+    border-color: #64748b;
+
+    box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.12);
+}
+
+.form-text {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 11px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   BUTTON AREA
+========================================= */
+
+.button-area {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+
+/* =========================================
+   COMMON BUTTON
+========================================= */
+
+.button-area button,
+.button-area a {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    min-height: 38px;
+
+    padding: 8px 16px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================
+   UPLOAD PHOTO
+   MUTED TEAL
+========================================= */
+
+.upload-btn {
+    background: #0f766e;
+
+    color: #ffffff;
+}
+
+.upload-btn:hover {
+    background: #115e59;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 10px rgba(15, 118, 110, 0.25);
+}
+
+
+/* =========================================
+   BACK TO PROFILE
+   SOFT LAVENDER
+========================================= */
+
+.back-btn {
+    background: #7c6f9f;
+
+    color: #ffffff;
+}
+
+.back-btn:hover {
+    background: #665a86;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 10px rgba(124, 111, 159, 0.25);
+}
+
+
+/* =========================================
+   DASHBOARD
+   WARM BROWN
+========================================= */
+
+.dashboard-btn {
+    background: #8b6f47;
+
+    color: #ffffff;
+}
+
+.dashboard-btn:hover {
+    background: #735b3a;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 10px rgba(139, 111, 71, 0.25);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+
+    .upload-container {
+        min-height: 100vh;
+
+        padding: 20px 15px;
+    }
+
+    .upload-card {
+        width: 100%;
+
+        padding: 22px 18px;
+    }
+
+    .upload-header h2 {
+        font-size: 21px;
+    }
+
+    .profile-image {
+        width: 95px;
+        height: 95px;
+    }
+
+    .button-area {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .button-area button,
+    .button-area a {
+        width: 100%;
+    }
+}
